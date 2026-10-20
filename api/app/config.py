@@ -24,6 +24,12 @@ class Settings(BaseSettings):
     llm_reasoning_effort: str = Field(default="low", description="Reasoning effort for gpt-5.x")
     llm_timeout_seconds: float = Field(default=45.0, description="Per-call timeout")
 
+    # Speech-to-text (voice input)
+    transcribe_model: str = Field(default="gpt-4o-mini-transcribe", description="~$0.003/min")
+    max_audio_bytes: int = Field(default=5_000_000, description="Largest clip accepted")
+    min_audio_bytes: int = Field(default=1_000, description="Smaller clips are empty")
+    voice_rate_limit: str = Field(default="10/minute", description="Per-IP limit on voice")
+
     # Cost safety
     daily_llm_call_cap: int = Field(default=2000, description="Max LLM calls per UTC day")
     rate_limit: str = Field(default="40/minute", description="Per-IP limit on LLM endpoints")

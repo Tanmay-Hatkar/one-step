@@ -7,6 +7,7 @@ from sqlalchemy.orm import sessionmaker
 from app.config import settings
 from app.db import init_db, make_engine, make_session_factory
 from app.llm.client import OpenAILLMClient
+from app.llm.transcriber import OpenAITranscriber
 from app.repositories.dish_repository import DishRepository
 from app.repositories.eval_repository import EvalResultsRepository
 from app.repositories.llm_repository import LLMCacheRepository, LLMUsageRepository
@@ -16,6 +17,7 @@ from app.services.graph_service import GraphService
 from app.services.llm_gateway import LLMGateway
 from app.services.repertoire_service import RepertoireService
 from app.services.share_service import ShareService
+from app.services.speech_service import SpeechService
 
 
 @lru_cache
@@ -70,3 +72,20 @@ def get_eval_repository() -> EvalResultsRepository:
 def get_share_service() -> ShareService:
     """Shared kitchen snapshots."""
     return ShareService(ShareRepository(get_session_factory(), settings.share_id_bytes))
+
+
+@lru_cache
+def get_speech_service() -> SpeechService:
+    """Voice input: speech-to-text within the shared daily budget."""
+    transcriber = OpenAITranscriber(
+        api_key=settings.openai_api_key,
+        model=settings.transcribe_model,
+        timeout=settings.llm_timeout_seconds,
+    )
+    return SpeechService(
+        transcriber,
+        get_gateway(),
+        min_bytes=settings.min_audio_bytes,
+        max_bytes=settings.max_audio_bytes,
+        max_chars=settings.max_repertoire_text_chars,
+    )

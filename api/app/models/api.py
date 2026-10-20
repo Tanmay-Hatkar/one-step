@@ -19,6 +19,12 @@ class ParseRepertoireResponse(BaseModel):
     dishes: list[UserDish]
 
 
+class TranscribeResponse(BaseModel):
+    """What the user said, ready to drop into the repertoire box."""
+
+    text: str
+
+
 class Diet(BaseModel):
     """Hard diet rules. Enforced in code — a dish that breaks one is never shown."""
 

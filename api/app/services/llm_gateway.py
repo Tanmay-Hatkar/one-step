@@ -59,14 +59,19 @@ class LLMGateway:
             except ValidationError:
                 logger.warning("Stale cache entry for %s; refreshing", task)
 
-        self._check_cap()
+        self.check_cap()
         result = await self._client.parse(instructions=instructions, prompt=prompt, schema=schema)
-        self._usage.record_call()
+        self.record_call()
         self._cache.put(key, task, self._client.model, result.model_dump_json())
         return result
 
-    def _check_cap(self) -> None:
-        """Fail closed: if usage can't be read, don't spend."""
+    def check_cap(self) -> None:
+        """Raise DailyCapExceeded if today's budget is spent.
+
+        Fails closed: if usage can't be read, don't spend.
+
+        Public so other paid calls (speech-to-text) share the same daily budget.
+        """
         try:
             calls = self._usage.calls_today()
         except SQLAlchemyError as exc:
@@ -75,6 +80,10 @@ class LLMGateway:
         if calls >= self._daily_cap:
             logger.warning("Daily LLM cap reached (%d)", self._daily_cap)
             raise DailyCapExceeded(f"Daily limit of {self._daily_cap} calls reached")
+
+    def record_call(self) -> None:
+        """Count one paid call against today's budget."""
+        self._usage.record_call()
 
     def _key(self, task: str, instructions: str, prompt: str) -> str:
         """Stable cache key over everything that affects the output."""
