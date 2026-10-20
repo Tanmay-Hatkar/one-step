@@ -2,7 +2,7 @@
 
 Usage:
     uv run python -m evals.run            # all suites
-    uv run python -m evals.run parse      # one suite: parse | diff | e2e
+    uv run python -m evals.run parse      # one suite: parse | diff | e2e | diet
 
 Responses are cached in evals/.cache.db, keyed by prompt, so re-runs are free until a
 prompt or model changes. Exits non-zero if the overall pass rate is below threshold.
@@ -22,7 +22,8 @@ from app.models.dish import UserDish
 from app.repositories.dish_repository import DishRepository
 from app.repositories.llm_repository import LLMCacheRepository, LLMUsageRepository
 from app.services.cousin_service import CousinService
-from app.services.graph_service import GraphService
+from app.services.diet import ALLERGEN_KEYWORDS, ingredient_allergens, is_meat_ingredient
+from app.services.graph_service import DietRule, GraphService
 from app.services.ingredients import pantry_of
 from app.services.llm_gateway import LLMGateway
 from app.services.repertoire_service import RepertoireService
@@ -128,6 +129,49 @@ async def run_e2e(repertoire: RepertoireService, graph: GraphService) -> list[di
     return await asyncio.gather(*(one(c) for c in END_TO_END_CASES))
 
 
+def run_diet(graph: GraphService, dishes: DishRepository) -> list[dict]:
+    """Diet suite (code only, no LLM): each rule, swept over many kitchens, no violations.
+
+    Kitchens are the fixed anchors plus every catalog dish cooked as a one-dish kitchen.
+    For each, cousins, tonight's picks and the map are checked against both the dish's
+    allergen tags and its ingredients.
+    """
+    kitchens = [[UserDish.model_validate(a)] for a in ANCHORS.values()]
+    kitchens += [
+        [UserDish.model_validate({**d.model_dump(), "notes": "", "matched_dish_id": d.id})]
+        for d in dishes.all()
+    ]
+    rules: list[tuple[str, DietRule]] = [("vegetarian", DietRule(vegetarian=True))]
+    rules += [(f"no_{a}", DietRule(avoid=frozenset({a}))) for a in ALLERGEN_KEYWORDS]
+    results = []
+    for rule_id, rule in rules:
+        checked = 0
+        bad: set[str] = set()
+        for kitchen in kitchens:
+            tonight = graph.pick_tonight(kitchen, rule)
+            mapped, _ = graph.neighbourhood(kitchen, rule)
+            shown = {d.id: d for d, _ in graph.find_cousins(kitchen, 8, rule)}
+            shown.update({d.id: d for d, _ in mapped})
+            shown.update({p[0].id: p[0] for p in (tonight.one_step, tonight.stretch) if p})
+            checked += len(shown)
+            bad |= {d.name for d in shown.values() if _violates(d, rule)}
+        detail = f"{checked} suggestions over {len(kitchens)} kitchens; violations: {sorted(bad)}"
+        results.append({"id": rule_id, "checks": [("no_violations", not bad, detail)]})
+    return results
+
+
+def _violates(dish, rule: DietRule) -> bool:
+    """True if a shown dish breaks the rule by its tags or by any ingredient."""
+    if rule.vegetarian and (
+        not dish.vegetarian or any(is_meat_ingredient(i) for i in dish.key_ingredients)
+    ):
+        return True
+    found = set(dish.allergens)
+    for ingredient in dish.key_ingredients:
+        found |= ingredient_allergens(ingredient)
+    return bool(found & rule.avoid)
+
+
 def summarize(suites: dict[str, list[dict]]) -> dict:
     """Print a readable report and return the JSON summary."""
     total = passed = 0
@@ -165,7 +209,7 @@ async def main() -> int:
     """Run the requested suites, write results, return the exit code."""
     logging.basicConfig(level=logging.INFO, format="%(message)s")
     logging.getLogger("httpx").setLevel(logging.WARNING)
-    wanted = set(sys.argv[1:]) or {"parse", "diff", "e2e"}
+    wanted = set(sys.argv[1:]) or {"parse", "diff", "e2e", "diet"}
     repertoire, cousins, graph, dishes = build_services()
     suites: dict[str, list[dict]] = {}
     if "parse" in wanted:
@@ -174,6 +218,8 @@ async def main() -> int:
         suites["diff"] = await run_diff(cousins, graph, dishes)
     if "e2e" in wanted:
         suites["e2e"] = await run_e2e(repertoire, graph)
+    if "diet" in wanted:
+        suites["diet"] = run_diet(graph, dishes)
     report = summarize(suites)
     RESULTS_PATH.parent.mkdir(parents=True, exist_ok=True)
     RESULTS_PATH.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n")

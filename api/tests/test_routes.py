@@ -115,3 +115,54 @@ def test_cousins_rejects_unknown_allergen(client, chicken_and_rice) -> None:
         json={"repertoire": [chicken_and_rice.model_dump()], "diet": {"avoid": ["kryptonite"]}},
     )
     assert response.status_code == 422
+
+
+def _service(catalog, settings, make_gateway) -> CousinService:
+    def responder(schema, prompt):
+        return schema(changes=["Add dried lime."], keep_line="Keep the rice.")
+
+    return CousinService(GraphService(catalog, settings), make_gateway(FakeLLMClient(responder)))
+
+
+def test_map_ok(client, catalog, chicken_and_rice, settings, make_gateway) -> None:
+    service = _service(catalog, settings, make_gateway)
+    client.app_ref.dependency_overrides[get_cousin_service] = lambda: service
+    body = client.post("/api/map", json={"repertoire": [chicken_and_rice.model_dump()]}).json()
+    assert body["catalog_size"] == len(catalog)
+    assert body["kitchen"][0]["name"] == "Chicken leg with rice"
+    assert body["cousins"] and "diff" not in body["cousins"][0]  # no LLM on the map
+
+
+def test_one_cousin_ok_and_404(client, catalog, chicken_and_rice, settings, make_gateway) -> None:
+    service = _service(catalog, settings, make_gateway)
+    client.app_ref.dependency_overrides[get_cousin_service] = lambda: service
+    repertoire = [chicken_and_rice.model_dump()]
+    ok = client.post("/api/cousin", json={"repertoire": repertoire, "dish_id": "kabsa"})
+    assert ok.status_code == 200 and ok.json()["diff"]["changes"] == ["Add dried lime."]
+    missing = client.post("/api/cousin", json={"repertoire": repertoire, "dish_id": "nope"})
+    assert missing.status_code == 404
+
+
+def test_evals_endpoint(client) -> None:
+    from app.deps import get_eval_repository
+
+    class Repo:
+        def __init__(self, results):
+            self.results = results
+
+        def latest(self):
+            return self.results
+
+    client.app_ref.dependency_overrides[get_eval_repository] = lambda: Repo({"pass_rate": 1.0})
+    assert client.get("/api/evals").json() == {"pass_rate": 1.0}
+    client.app_ref.dependency_overrides[get_eval_repository] = lambda: Repo(None)
+    assert client.get("/api/evals").status_code == 404
+
+
+def test_eval_repository_reads_file(tmp_path) -> None:
+    from app.repositories.eval_repository import EvalResultsRepository
+
+    path = tmp_path / "latest.json"
+    assert EvalResultsRepository(path).latest() is None
+    path.write_text('{"passed": 3}')
+    assert EvalResultsRepository(path).latest() == {"passed": 3}

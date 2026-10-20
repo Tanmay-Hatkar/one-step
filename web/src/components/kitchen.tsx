@@ -6,12 +6,14 @@ import { useEffect, useState } from "react";
 import { CousinCard } from "@/components/cousin-card";
 import { DietPicker, dietSummary } from "@/components/diet-picker";
 import { Hero } from "@/components/hero";
+import { KitchenMap } from "@/components/kitchen-map";
 import { LoadingCards } from "@/components/loading-cards";
 import { RepertoireSummary } from "@/components/repertoire-summary";
 import { StartForm } from "@/components/start-form";
 import { Tonight } from "@/components/tonight";
 import { Button } from "@/components/ui/button";
 import { getStats } from "@/lib/api";
+import { repertoireOf } from "@/lib/kitchen";
 import type { DishStats } from "@/lib/types";
 import { useKitchen } from "@/lib/use-kitchen";
 import { cn } from "@/lib/utils";
@@ -19,6 +21,7 @@ import { cn } from "@/lib/utils";
 export function Kitchen() {
   const k = useKitchen();
   const [stats, setStats] = useState<DishStats | null>(null);
+  const [view, setView] = useState<"suggestions" | "map">("suggestions");
 
   useEffect(() => {
     getStats().then(setStats).catch(() => setStats(null));
@@ -104,6 +107,7 @@ export function Kitchen() {
           cooked={k.cooked}
           onEdit={k.edit}
           onRemoveCooked={k.removeCooked}
+          shareable={repertoireOf(k.dishes, k.cooked)}
         />
         <details className="group rounded-xl border bg-card px-4 py-3">
           <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-sm">
@@ -131,7 +135,38 @@ export function Kitchen() {
         </div>
       )}
 
-      <div className={cn("space-y-10 transition-opacity", k.updating && "opacity-60")}>
+      <div role="tablist" aria-label="View" className="grid grid-cols-2 rounded-xl bg-muted p-1">
+        {(["suggestions", "map"] as const).map((v) => (
+          <button
+            key={v}
+            type="button"
+            role="tab"
+            aria-selected={view === v}
+            onClick={() => setView(v)}
+            className={cn(
+              "h-9 rounded-lg text-sm font-medium transition-colors",
+              "focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none",
+              view === v ? "bg-card text-foreground shadow-sm" : "text-muted-foreground",
+            )}
+          >
+            {v === "suggestions" ? "Suggestions" : "Map"}
+          </button>
+        ))}
+      </div>
+
+      {view === "map" && (
+        <KitchenMap
+          repertoire={repertoireOf(k.dishes, k.cooked)}
+          diet={k.prefs.diet}
+          isCooked={isCooked}
+          onCooked={k.markCooked}
+        />
+      )}
+
+      <div
+        hidden={view !== "suggestions"}
+        className={cn("space-y-10 transition-opacity", k.updating && "opacity-60")}
+      >
         <Tonight
           picks={k.tonight}
           minutes={k.prefs.minutes}

@@ -1,4 +1,13 @@
-import type { Cousin, Diet, DishStats, TonightPicks, UserDish } from "./types";
+import type {
+  Cousin,
+  Diet,
+  DishStats,
+  EvalResults,
+  KitchenMap,
+  SharedKitchen,
+  TonightPicks,
+  UserDish,
+} from "./types";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
@@ -73,4 +82,43 @@ export async function getTonight(
 /** Catalog size, for the landing line. */
 export async function getStats(): Promise<DishStats> {
   return request<DishStats>("/api/dishes/stats");
+}
+
+/** Your kitchen with its closest cousins, for the map (no written diffs). */
+export async function getMap(repertoire: UserDish[], diet: Diet): Promise<KitchenMap> {
+  return request<KitchenMap>("/api/map", {
+    method: "POST",
+    body: JSON.stringify({ repertoire, diet }),
+  });
+}
+
+/** One dish written as a diff from your kitchen (a tap on the map). */
+export async function getCousin(
+  repertoire: UserDish[],
+  dishId: string,
+  diet: Diet,
+): Promise<Cousin> {
+  return request<Cousin>("/api/cousin", {
+    method: "POST",
+    body: JSON.stringify({ repertoire, dish_id: dishId, diet }),
+  });
+}
+
+/** Save a read-only snapshot of a kitchen; returns its id. */
+export async function createShare(dishes: UserDish[]): Promise<string> {
+  const body = await request<{ id: string }>("/api/shares", {
+    method: "POST",
+    body: JSON.stringify({ dishes }),
+  });
+  return body.id;
+}
+
+/** Open a shared kitchen. */
+export async function getShare(id: string): Promise<SharedKitchen> {
+  return request<SharedKitchen>(`/api/shares/${encodeURIComponent(id)}`);
+}
+
+/** The latest public eval results. */
+export async function getEvals(): Promise<EvalResults> {
+  return request<EvalResults>("/api/evals");
 }

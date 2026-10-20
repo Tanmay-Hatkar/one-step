@@ -1,6 +1,6 @@
 {
   "model": "gpt-5.4-mini",
-  "run_at": "2026-10-20T17:25:48.271740+00:00",
+  "run_at": "2026-10-20T19:23:30.288963+00:00",
   "suites": {
     "parse": {
       "passed": 47,
@@ -724,9 +724,115 @@
           ]
         }
       ]
+    },
+    "diet": {
+      "passed": 10,
+      "total": 10,
+      "results": [
+        {
+          "id": "vegetarian",
+          "checks": [
+            {
+              "name": "no_violations",
+              "passed": true,
+              "detail": "1324 suggestions over 152 kitchens; violations: []"
+            }
+          ]
+        },
+        {
+          "id": "no_dairy",
+          "checks": [
+            {
+              "name": "no_violations",
+              "passed": true,
+              "detail": "1262 suggestions over 152 kitchens; violations: []"
+            }
+          ]
+        },
+        {
+          "id": "no_egg",
+          "checks": [
+            {
+              "name": "no_violations",
+              "passed": true,
+              "detail": "1277 suggestions over 152 kitchens; violations: []"
+            }
+          ]
+        },
+        {
+          "id": "no_gluten",
+          "checks": [
+            {
+              "name": "no_violations",
+              "passed": true,
+              "detail": "1294 suggestions over 152 kitchens; violations: []"
+            }
+          ]
+        },
+        {
+          "id": "no_peanut",
+          "checks": [
+            {
+              "name": "no_violations",
+              "passed": true,
+              "detail": "1278 suggestions over 152 kitchens; violations: []"
+            }
+          ]
+        },
+        {
+          "id": "no_tree_nut",
+          "checks": [
+            {
+              "name": "no_violations",
+              "passed": true,
+              "detail": "1275 suggestions over 152 kitchens; violations: []"
+            }
+          ]
+        },
+        {
+          "id": "no_soy",
+          "checks": [
+            {
+              "name": "no_violations",
+              "passed": true,
+              "detail": "1287 suggestions over 152 kitchens; violations: []"
+            }
+          ]
+        },
+        {
+          "id": "no_fish",
+          "checks": [
+            {
+              "name": "no_violations",
+              "passed": true,
+              "detail": "1280 suggestions over 152 kitchens; violations: []"
+            }
+          ]
+        },
+        {
+          "id": "no_shellfish",
+          "checks": [
+            {
+              "name": "no_violations",
+              "passed": true,
+              "detail": "1273 suggestions over 152 kitchens; violations: []"
+            }
+          ]
+        },
+        {
+          "id": "no_sesame",
+          "checks": [
+            {
+              "name": "no_violations",
+              "passed": true,
+              "detail": "1283 suggestions over 152 kitchens; violations: []"
+            }
+          ]
+        }
+      ]
     }
   },
-  "passed": 99,
-  "total": 99,
+  "passed": 109,
+  "total": 109,
   "pass_rate": 1.0
 }

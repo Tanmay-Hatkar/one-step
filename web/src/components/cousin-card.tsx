@@ -25,7 +25,8 @@ export function CousinCard({
   label?: string;
   defaultOpen?: boolean;
   cooked: boolean;
-  onCooked: () => void;
+  /** Omit for read-only views (e.g. someone else's shared kitchen). */
+  onCooked?: () => void;
   /** Shown as "Not tonight" when set. */
   onSkip?: () => void;
 }) {
@@ -111,6 +112,7 @@ export function CousinCard({
             </p>
           )}
           <div className="flex flex-wrap gap-2 pt-1">
+            {onCooked && (
             <Button
               variant={cooked ? "secondary" : "default"}
               onClick={onCooked}
@@ -120,6 +122,7 @@ export function CousinCard({
               {cooked ? <Check aria-hidden /> : <CookingPot aria-hidden />}
               {cooked ? "In your kitchen" : "I cooked this"}
             </Button>
+            )}
             {onSkip && (
               <Button variant="ghost" onClick={onSkip} className="h-9 text-muted-foreground">
                 <X aria-hidden />

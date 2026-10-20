@@ -1,5 +1,6 @@
 import { Check, Pencil, X } from "lucide-react";
 
+import { ShareButton } from "@/components/share-button";
 import { Button } from "@/components/ui/button";
 import { techniqueLabel } from "@/lib/labels";
 import type { CookedDish } from "@/lib/storage";
@@ -10,11 +11,14 @@ export function RepertoireSummary({
   cooked,
   onEdit,
   onRemoveCooked,
+  shareable,
 }: {
   dishes: UserDish[];
   cooked: CookedDish[];
   onEdit: () => void;
   onRemoveCooked: (id: string) => void;
+  /** Everything in the kitchen (own + cooked), for the share link. */
+  shareable: UserDish[];
 }) {
   return (
     <section aria-labelledby="your-kitchen" className="space-y-3">
@@ -22,10 +26,13 @@ export function RepertoireSummary({
         <h2 id="your-kitchen" className="text-sm font-medium text-muted-foreground">
           Your kitchen
         </h2>
-        <Button variant="ghost" size="sm" onClick={onEdit}>
-          <Pencil aria-hidden />
-          Edit
-        </Button>
+        <div className="flex items-start gap-1">
+          <ShareButton dishes={shareable} />
+          <Button variant="ghost" size="sm" onClick={onEdit}>
+            <Pencil aria-hidden />
+            Edit
+          </Button>
+        </div>
       </div>
       <ul className="flex flex-wrap gap-2">
         {dishes.map((dish) => (

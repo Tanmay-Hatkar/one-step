@@ -84,3 +84,48 @@ export interface TonightPicks {
   one_step: Cousin | null;
   stretch: Cousin | null;
 }
+
+export interface MapCousin {
+  dish: Dish;
+  delta: Delta;
+}
+
+export interface KitchenMap {
+  kitchen: UserDish[];
+  cousins: MapCousin[];
+  one_step_count: number;
+  catalog_size: number;
+}
+
+export interface SharedKitchen {
+  dishes: UserDish[];
+  created_at: string;
+}
+
+export interface EvalCheck {
+  name: string;
+  passed: boolean;
+  detail: string;
+}
+
+export interface EvalCase {
+  id: string;
+  checks: EvalCheck[];
+  sample?: DiffText;
+  cousins?: string[];
+}
+
+export interface EvalSuite {
+  passed: number;
+  total: number;
+  results: EvalCase[];
+}
+
+export interface EvalResults {
+  model: string;
+  run_at: string;
+  passed: number;
+  total: number;
+  pass_rate: number;
+  suites: Record<string, EvalSuite>;
+}

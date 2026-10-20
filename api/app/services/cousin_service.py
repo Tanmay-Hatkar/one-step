@@ -7,7 +7,7 @@ from pydantic import BaseModel, Field
 
 from app.llm.client import LLMError
 from app.llm.prompts import WRITE_DIFF_INSTRUCTIONS, build_diff_prompt
-from app.models.api import Cousin, Diet, DiffText, TonightResponse
+from app.models.api import Cousin, Diet, DiffText, MapCousin, MapResponse, TonightResponse
 from app.models.dish import Delta, Dish, UserDish
 from app.models.labels import technique_label
 from app.services.diet import text_mentions_allergen
@@ -117,6 +117,43 @@ class CousinService:
             one_step=next(written) if picks.one_step else None,
             stretch=next(written) if picks.stretch else None,
         )
+
+    def map(self, repertoire: list[UserDish], diet: Diet | None = None) -> MapResponse:
+        """The user's kitchen with its closest cousins, for drawing. No LLM calls.
+
+        Args:
+            repertoire: The user's dishes.
+            diet: Hard diet rule.
+
+        Returns:
+            Kitchen, cousins (without diffs) and how many dishes are one step away.
+        """
+        pairs, one_step_count = self._graph.neighbourhood(repertoire, to_rule(diet or Diet()))
+        return MapResponse(
+            kitchen=repertoire,
+            cousins=[MapCousin(dish=d, delta=x) for d, x in pairs],
+            one_step_count=one_step_count,
+            catalog_size=self._graph.catalog_size,
+        )
+
+    async def one(
+        self, repertoire: list[UserDish], dish_id: str, diet: Diet | None = None
+    ) -> Cousin | None:
+        """Write up one dish relative to the user's kitchen (a tap on the map).
+
+        Args:
+            repertoire: The user's dishes.
+            dish_id: Catalog id.
+            diet: Hard diet rule.
+
+        Returns:
+            The cousin with its diff, or None if it can't be shown.
+        """
+        diet = diet or Diet()
+        pair = self._graph.cousin_for(repertoire, dish_id, to_rule(diet))
+        if pair is None:
+            return None
+        return (await self._write_all(repertoire, [pair], diet))[0]
 
     async def _write_all(
         self, repertoire: list[UserDish], pairs: list[tuple[Dish, Delta]], diet: Diet

@@ -79,6 +79,11 @@ class GraphService:
         self._settings = settings
         self._w = weights or ScoreWeights()
 
+    @property
+    def catalog_size(self) -> int:
+        """How many dishes are in the catalog."""
+        return len(self._dishes)
+
     def compute_delta(
         self, anchor: UserDish, dish: Dish, pantry: set[str], equipment: set[str]
     ) -> Delta:
@@ -221,18 +226,77 @@ class GraphService:
         for dish in self._dishes:
             if dish.id in known or not allows(dish, diet.vegetarian, diet.avoid):
                 continue
-            best = max(
-                (
-                    (self.compute_delta(a, dish, pantry, equipment), a.source == "described")
-                    for a in repertoire
-                ),
-                key=self._anchor_preference,
-            )[0]
+            best = self._best_delta(repertoire, dish, pantry, equipment)
             if self._is_new_enough(best):
                 scored.append((dish, best))
 
         scored.sort(key=lambda pair: pair[1].score, reverse=True)
         return scored
+
+    def neighbourhood(
+        self, repertoire: list[UserDish], diet: DietRule | None = None
+    ) -> tuple[list[tuple[Dish, Delta]], int]:
+        """The map: each of the user's dishes with its closest cousins.
+
+        Every candidate is attached to its best anchor; each anchor keeps its
+        `map_cousins_per_dish` closest, capped at `map_max_cousins` overall.
+
+        Args:
+            repertoire: The user's dishes.
+            diet: Hard diet rule.
+
+        Returns:
+            (cousins best first, how many catalog dishes are one step away).
+        """
+        ranked = self._ranked(repertoire, diet or DietRule())
+        per_anchor: Counter[str] = Counter()
+        picked: list[tuple[Dish, Delta]] = []
+        for dish, delta in ranked:
+            if per_anchor[delta.anchor_name] >= self._settings.map_cousins_per_dish:
+                continue
+            per_anchor[delta.anchor_name] += 1
+            picked.append((dish, delta))
+            if len(picked) == self._settings.map_max_cousins:
+                break
+        return picked, sum(1 for _, d in ranked if d.is_one_step)
+
+    def cousin_for(
+        self, repertoire: list[UserDish], dish_id: str, diet: DietRule | None = None
+    ) -> tuple[Dish, Delta] | None:
+        """One specific catalog dish relative to the user's kitchen (a tap on the map).
+
+        Args:
+            repertoire: The user's dishes.
+            dish_id: Catalog id.
+            diet: Hard diet rule.
+
+        Returns:
+            (dish, delta), or None if unknown, already cooked, or not allowed by the diet.
+        """
+        diet = diet or DietRule()
+        dish = next((d for d in self._dishes if d.id == dish_id), None)
+        if (
+            dish is None
+            or not repertoire
+            or dish.id in self._known_ids(repertoire)
+            or not allows(dish, diet.vegetarian, diet.avoid)
+        ):
+            return None
+        pantry = pantry_of([d.key_ingredients for d in repertoire])
+        equipment = {e for d in repertoire for e in d.equipment}
+        return dish, self._best_delta(repertoire, dish, pantry, equipment)
+
+    def _best_delta(
+        self, repertoire: list[UserDish], dish: Dish, pantry: set[str], equipment: set[str]
+    ) -> Delta:
+        """The delta against whichever of the user's dishes this one should be compared to."""
+        return max(
+            (
+                (self.compute_delta(a, dish, pantry, equipment), a.source == "described")
+                for a in repertoire
+            ),
+            key=self._anchor_preference,
+        )[0]
 
     @staticmethod
     def _anchor_preference(pair: tuple[Delta, bool]) -> tuple[bool, bool, float]:

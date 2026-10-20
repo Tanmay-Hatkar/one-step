@@ -8,11 +8,14 @@ from app.config import settings
 from app.db import init_db, make_engine, make_session_factory
 from app.llm.client import OpenAILLMClient
 from app.repositories.dish_repository import DishRepository
+from app.repositories.eval_repository import EvalResultsRepository
 from app.repositories.llm_repository import LLMCacheRepository, LLMUsageRepository
+from app.repositories.share_repository import ShareRepository
 from app.services.cousin_service import CousinService
 from app.services.graph_service import GraphService
 from app.services.llm_gateway import LLMGateway
 from app.services.repertoire_service import RepertoireService
+from app.services.share_service import ShareService
 
 
 @lru_cache
@@ -56,3 +59,14 @@ def get_cousin_service() -> CousinService:
     """Cousin search + diff writing service."""
     graph = GraphService(get_dish_repository().all(), settings)
     return CousinService(graph, get_gateway())
+
+
+@lru_cache
+def get_eval_repository() -> EvalResultsRepository:
+    """The latest eval results, loaded once."""
+    return EvalResultsRepository(settings.eval_results_path)
+
+
+def get_share_service() -> ShareService:
+    """Shared kitchen snapshots."""
+    return ShareService(ShareRepository(get_session_factory(), settings.share_id_bytes))

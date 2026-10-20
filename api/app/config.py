@@ -42,6 +42,17 @@ class Settings(BaseSettings):
     default_cousin_count: int = Field(default=5)
     max_cousin_count: int = Field(default=8)
 
+    # Map
+    map_cousins_per_dish: int = Field(default=8, description="Cousins drawn around each dish")
+    map_max_cousins: int = Field(default=40, description="Most cousins on one map")
+
+    # Sharing
+    share_rate_limit: str = Field(default="10/minute", description="Per-IP limit on new links")
+    share_id_bytes: int = Field(default=6, description="Random bytes in a share id (8 chars)")
+
+    # Evals
+    eval_results_path: Path = Field(default=API_ROOT / "evals" / "results" / "latest.json")
+
     # Graph tuning — what counts as "one step"
     one_step_max_new_techniques: int = Field(default=1)
     one_step_max_new_ingredients: int = Field(default=6)
