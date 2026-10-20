@@ -1,9 +1,9 @@
 """HTTP routes. Thin: validate, call a service, translate errors to status codes."""
 
 import logging
-from typing import Any
+from typing import Annotated, Any
 
-from fastapi import APIRouter, Depends, HTTPException, Path, Request, status
+from fastapi import APIRouter, Depends, File, HTTPException, Path, Request, UploadFile, status
 
 from app.config import settings
 from app.deps import (
@@ -12,6 +12,7 @@ from app.deps import (
     get_eval_repository,
     get_repertoire_service,
     get_share_service,
+    get_speech_service,
 )
 from app.limiter import limiter
 from app.llm.client import LLMError
@@ -29,6 +30,7 @@ from app.models.api import (
     ShareResponse,
     TonightRequest,
     TonightResponse,
+    TranscribeResponse,
 )
 from app.repositories.dish_repository import DishRepository
 from app.repositories.eval_repository import EvalResultsRepository
@@ -37,12 +39,15 @@ from app.services.cousin_service import CousinService
 from app.services.llm_gateway import DailyCapExceeded
 from app.services.repertoire_service import NoDishesFound, RepertoireService
 from app.services.share_service import ShareService
+from app.services.speech_service import AudioRejected, NothingHeard, SpeechService
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api")
 
 BUSY_MESSAGE = "One Step is resting for today — too many people cooking. Try again tomorrow."
 LLM_DOWN_MESSAGE = "Couldn't reach the kitchen brain just now. Please try again."
+NOTHING_HEARD_MESSAGE = "I didn't catch any words. Try again a little closer to the mic."
+BAD_AUDIO_MESSAGE = "That recording didn't work. Try again, or type it instead."
 SHARE_DOWN_MESSAGE = "Couldn't save or open shared kitchens just now. Please try again."
 
 
@@ -65,6 +70,29 @@ async def parse_repertoire(
     except LLMError as exc:
         raise HTTPException(status.HTTP_502_BAD_GATEWAY, LLM_DOWN_MESSAGE) from exc
     return ParseRepertoireResponse(dishes=dishes)
+
+
+@router.post("/transcribe", response_model=TranscribeResponse)
+@limiter.limit(settings.voice_rate_limit)
+async def transcribe(
+    request: Request,
+    audio: Annotated[UploadFile, File()],
+    service: SpeechService = Depends(get_speech_service),
+) -> TranscribeResponse:
+    """Voice input: turn a short recording into text for the repertoire box."""
+    try:
+        # Read one byte past the limit so an oversized clip is rejected without buffering it all.
+        clip = await audio.read(settings.max_audio_bytes + 1)
+        text = await service.transcribe(clip, audio.content_type)
+    except AudioRejected as exc:
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, BAD_AUDIO_MESSAGE) from exc
+    except NothingHeard as exc:
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, NOTHING_HEARD_MESSAGE) from exc
+    except DailyCapExceeded as exc:
+        raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, BUSY_MESSAGE) from exc
+    except LLMError as exc:
+        raise HTTPException(status.HTTP_502_BAD_GATEWAY, LLM_DOWN_MESSAGE) from exc
+    return TranscribeResponse(text=text)
 
 
 @router.post("/cousins", response_model=CousinsResponse)

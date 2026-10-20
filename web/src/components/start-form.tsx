@@ -3,6 +3,7 @@ import { ArrowRight, ChevronDown, Plus, Sparkles } from "lucide-react";
 import { DietPicker, dietSummary } from "@/components/diet-picker";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { VoiceInput } from "@/components/voice-input";
 import type { Diet } from "@/lib/types";
 
 const EXAMPLE =
@@ -43,6 +44,8 @@ export function StartForm({
     const joined = text.trim() ? `${text.trim()} ${starter}` : starter;
     onText(joined.slice(0, MAX_CHARS));
   }
+  // Talking again adds to what's there, like tapping another starter.
+  const addSpoken = addStarter;
 
   return (
     <section aria-labelledby="ask" className="space-y-4">
@@ -53,10 +56,11 @@ export function StartForm({
         id="repertoire"
         value={text}
         onChange={(e) => onText(e.target.value.slice(0, MAX_CHARS))}
-        placeholder="Describe a dish or two the way you'd tell a friend — what goes in, how you cook it."
+        placeholder="Describe a dish or two the way you'd tell a friend — what goes in, how you cook it. Or tap the mic and just say it."
         className="min-h-32 bg-card text-base"
         disabled={busy}
       />
+      <VoiceInput onText={addSpoken} disabled={busy} />
       <div className="space-y-2">
         <p className="text-xs text-muted-foreground">Or tap to add one:</p>
         <div className="flex flex-wrap gap-2">

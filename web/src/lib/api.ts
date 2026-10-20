@@ -25,7 +25,11 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   try {
     response = await fetch(`${API_URL}${path}`, {
       ...init,
-      headers: { "Content-Type": "application/json", ...init?.headers },
+      // A FormData body sets its own multipart Content-Type.
+      headers:
+        init?.body instanceof FormData
+          ? init.headers
+          : { "Content-Type": "application/json", ...init?.headers },
     });
   } catch {
     throw new ApiError("Can't reach One Step right now. Check your connection.");
@@ -51,6 +55,14 @@ export async function parseRepertoire(text: string): Promise<UserDish[]> {
     body: JSON.stringify({ text }),
   });
   return body.dishes;
+}
+
+/** Voice input: turn a recording into text for the repertoire box. */
+export async function transcribe(clip: Blob): Promise<string> {
+  const form = new FormData();
+  form.append("audio", clip, "clip");
+  const body = await request<{ text: string }>("/api/transcribe", { method: "POST", body: form });
+  return body.text;
 }
 
 /** Dishes one step away from the user's repertoire, each written as a diff. */

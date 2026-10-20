@@ -22,6 +22,9 @@ chicken with broth rice leads you to kabsa, maqluba, arroz con pollo, jambalaya 
      free text               into structured parts       finds cousins           (headline in code)
 ```
 
+- **Say it out loud** — tap the mic and describe your cooking; `gpt-4o-mini-transcribe`
+  (with a hint for words like *jeera* and *tadka*) puts it in the box to check before
+  sending. About $0.003 a minute, inside the same daily cap. Hidden where recording isn't supported.
 - **Dish graph** — 150 home dishes from 10 regions, each broken into parts on a closed
   vocabulary (family, technique, equipment, flavor, allergens). Distance is plain code.
 - **Tonight** — pick your time; get something familiar, one step away, and a stretch.
@@ -48,7 +51,7 @@ cp .env.example .env                       # add OPENAI_API_KEY
 
 cd api && uv sync
 uv run uvicorn app.main:app --reload       # http://localhost:8000
-uv run pytest                              # 101 tests, no network
+uv run pytest                              # 115 tests, no network
 uv run python -m evals.run                 # live evals
 
 cd ../web && npm install && npm run dev    # http://localhost:3000
