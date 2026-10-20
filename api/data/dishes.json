@@ -1,0 +1,6245 @@
+[
+  {
+    "family": "curry_and_stew",
+    "protein": "beef",
+    "starch": "none",
+    "techniques": [
+      "spice_paste",
+      "sear",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop",
+      "blender"
+    ],
+    "flavor": [
+      "chili_heat",
+      "garlic_ginger",
+      "fish_sauce",
+      "coconut",
+      "fresh_herbs",
+      "sweet"
+    ],
+    "key_ingredients": [
+      "beef chuck",
+      "coconut milk",
+      "rendang paste",
+      "lemongrass",
+      "galangal",
+      "garlic",
+      "shallot",
+      "makrut lime leaf",
+      "tamarind",
+      "palm sugar"
+    ],
+    "effort": "weekend",
+    "id": "beef_rendang",
+    "name": "Beef Rendang",
+    "cuisine": "Indonesian",
+    "region": "Southeast Asia",
+    "time_minutes": 180,
+    "allergens": [
+      "fish"
+    ],
+    "vegetarian": false,
+    "summary": "Beef rendang is an Indonesian dry curry of beef slowly cooked with coconut milk, chiles, aromatics, and spices until deeply concentrated."
+  },
+  {
+    "family": "curry_and_stew",
+    "protein": "chicken",
+    "starch": "none",
+    "techniques": [
+      "marinate",
+      "spice_paste",
+      "sear",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop",
+      "blender"
+    ],
+    "flavor": [
+      "warm_spices",
+      "cumin_coriander",
+      "chili_heat",
+      "garlic_ginger",
+      "tomato_base",
+      "yogurt",
+      "butter_cream"
+    ],
+    "key_ingredients": [
+      "chicken thigh",
+      "yogurt",
+      "tomato",
+      "cream",
+      "butter",
+      "garam masala",
+      "fenugreek leaf",
+      "ginger",
+      "garlic",
+      "chili powder"
+    ],
+    "effort": "weeknight",
+    "id": "butter_chicken",
+    "name": "Butter Chicken",
+    "cuisine": "Indian",
+    "region": "South Asia",
+    "time_minutes": 60,
+    "allergens": [
+      "dairy"
+    ],
+    "vegetarian": false,
+    "summary": "Butter chicken is a North Indian chicken curry in a creamy tomato-butter sauce scented with garam masala and fenugreek."
+  },
+  {
+    "family": "curry_and_stew",
+    "protein": "chicken",
+    "starch": "none",
+    "techniques": [
+      "marinate",
+      "sear",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "garlic_ginger",
+      "soy_umami",
+      "vinegar_sour"
+    ],
+    "key_ingredients": [
+      "chicken thigh",
+      "soy sauce",
+      "cane vinegar",
+      "garlic",
+      "bay leaf",
+      "brown sugar",
+      "chili",
+      "onion"
+    ],
+    "effort": "weeknight",
+    "id": "chicken_adobo",
+    "name": "Chicken Adobo",
+    "cuisine": "Filipino",
+    "region": "Southeast Asia",
+    "time_minutes": 55,
+    "allergens": [
+      "soy"
+    ],
+    "vegetarian": false,
+    "summary": "Chicken adobo is a Filipino stew of chicken simmered in vinegar, soy sauce, garlic, and bay leaf until savory and tangy."
+  },
+  {
+    "family": "curry_and_stew",
+    "protein": "chicken",
+    "starch": "none",
+    "techniques": [
+      "temper_spices",
+      "sear",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "warm_spices",
+      "cumin_coriander",
+      "chili_heat",
+      "garlic_ginger",
+      "onion_base",
+      "tomato_base"
+    ],
+    "key_ingredients": [
+      "chicken thigh",
+      "onion",
+      "tomato",
+      "ginger",
+      "garlic",
+      "cumin",
+      "coriander",
+      "turmeric",
+      "chili powder",
+      "garam masala"
+    ],
+    "effort": "weeknight",
+    "id": "chicken_curry_home_style",
+    "name": "Chicken Curry (Home Style)",
+    "cuisine": "Indian",
+    "region": "South Asia",
+    "time_minutes": 55,
+    "allergens": [],
+    "vegetarian": false,
+    "summary": "Home-style chicken curry is a simple everyday Indian stew of chicken simmered with onions, tomatoes, ginger-garlic, and ground spices."
+  },
+  {
+    "family": "curry_and_stew",
+    "protein": "chicken",
+    "starch": "none",
+    "techniques": [
+      "marinate",
+      "spice_paste",
+      "sear",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop",
+      "blender"
+    ],
+    "flavor": [
+      "warm_spices",
+      "garlic_ginger",
+      "onion_base",
+      "yogurt",
+      "butter_cream"
+    ],
+    "key_ingredients": [
+      "chicken thigh",
+      "yogurt",
+      "onion",
+      "cashew",
+      "cream",
+      "ginger",
+      "garlic",
+      "cardamom",
+      "cinnamon",
+      "garam masala"
+    ],
+    "effort": "weekend",
+    "id": "chicken_korma",
+    "name": "Chicken Korma",
+    "cuisine": "Mughlai Indian",
+    "region": "South Asia",
+    "time_minutes": 75,
+    "allergens": [
+      "dairy",
+      "tree_nut"
+    ],
+    "vegetarian": false,
+    "summary": "Chicken korma is a mild, rich Mughlai-style curry of chicken braised in a yogurt, onion, and nut-based sauce."
+  },
+  {
+    "family": "curry_and_stew",
+    "protein": "chicken",
+    "starch": "none",
+    "techniques": [
+      "sear",
+      "braise",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "warm_spices",
+      "cumin_coriander",
+      "onion_base",
+      "citrus",
+      "fresh_herbs",
+      "sweet"
+    ],
+    "key_ingredients": [
+      "chicken thigh",
+      "onion",
+      "preserved lemon",
+      "green olive",
+      "ginger",
+      "saffron",
+      "cumin",
+      "coriander",
+      "cilantro",
+      "parsley"
+    ],
+    "effort": "weekend",
+    "id": "chicken_tagine",
+    "name": "Chicken Tagine",
+    "cuisine": "Moroccan",
+    "region": "Africa",
+    "time_minutes": 90,
+    "allergens": [],
+    "vegetarian": false,
+    "summary": "Chicken tagine is a Moroccan braise of chicken with onions, spices, preserved lemon, olives, and herbs."
+  },
+  {
+    "family": "curry_and_stew",
+    "protein": "beef",
+    "starch": "none",
+    "techniques": [
+      "sear",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "chili_heat",
+      "onion_base",
+      "tomato_base",
+      "smoky"
+    ],
+    "key_ingredients": [
+      "ground beef",
+      "kidney bean",
+      "onion",
+      "garlic",
+      "tomato",
+      "chili powder",
+      "cumin",
+      "oregano",
+      "beef stock",
+      "jalapeño"
+    ],
+    "effort": "weeknight",
+    "id": "chili_con_carne",
+    "name": "Chili con Carne",
+    "cuisine": "Tex-Mex",
+    "region": "North America",
+    "time_minutes": 60,
+    "allergens": [],
+    "vegetarian": false,
+    "summary": "Chili con carne is a hearty Tex-Mex beef and chile stew often made with tomatoes and beans in home kitchens."
+  },
+  {
+    "family": "curry_and_stew",
+    "protein": "chicken",
+    "starch": "none",
+    "techniques": [
+      "sear",
+      "braise",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "onion_base",
+      "fresh_herbs",
+      "butter_cream"
+    ],
+    "key_ingredients": [
+      "chicken thigh",
+      "red wine",
+      "bacon",
+      "mushroom",
+      "pearl onion",
+      "carrot",
+      "garlic",
+      "thyme",
+      "bay leaf",
+      "chicken stock"
+    ],
+    "effort": "weekend",
+    "id": "coq_au_vin",
+    "name": "Coq au Vin",
+    "cuisine": "French",
+    "region": "Europe",
+    "time_minutes": 120,
+    "allergens": [
+      "dairy"
+    ],
+    "vegetarian": false,
+    "summary": "Coq au vin is a French chicken stew braised in red wine with bacon, mushrooms, onions, and herbs."
+  },
+  {
+    "family": "curry_and_stew",
+    "protein": "beef",
+    "starch": "potato",
+    "techniques": [
+      "sear",
+      "braise",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "garlic_ginger",
+      "onion_base",
+      "tomato_base",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "beef chuck",
+      "potato",
+      "carrot",
+      "cabbage",
+      "bell pepper",
+      "onion",
+      "tomato",
+      "garlic",
+      "cumin",
+      "cilantro"
+    ],
+    "effort": "weekend",
+    "id": "dimlama",
+    "name": "Dimlama",
+    "cuisine": "Uzbek",
+    "region": "Central Asia",
+    "time_minutes": 120,
+    "allergens": [],
+    "vegetarian": false,
+    "summary": "Dimlama is a Central Asian layered beef and vegetable stew gently braised until the meat and vegetables are tender."
+  },
+  {
+    "family": "curry_and_stew",
+    "protein": "chicken",
+    "starch": "none",
+    "techniques": [
+      "spice_paste",
+      "sear",
+      "braise",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "warm_spices",
+      "chili_heat",
+      "garlic_ginger",
+      "onion_base",
+      "butter_cream"
+    ],
+    "key_ingredients": [
+      "chicken thigh",
+      "berbere",
+      "onion",
+      "garlic",
+      "ginger",
+      "niter kibbeh",
+      "hard-boiled egg",
+      "tomato paste",
+      "cardamom",
+      "fenugreek"
+    ],
+    "effort": "weekend",
+    "id": "doro_wat",
+    "name": "Doro Wat",
+    "cuisine": "Ethiopian",
+    "region": "Africa",
+    "time_minutes": 120,
+    "allergens": [
+      "dairy",
+      "egg"
+    ],
+    "vegetarian": false,
+    "summary": "Doro wat is an Ethiopian chicken stew simmered with berbere, onions, spiced butter, and hard-boiled eggs."
+  },
+  {
+    "family": "curry_and_stew",
+    "protein": "legumes",
+    "starch": "rice",
+    "techniques": [
+      "boil",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop",
+      "pressure_cooker"
+    ],
+    "flavor": [
+      "smoky",
+      "garlic_ginger",
+      "onion_base"
+    ],
+    "key_ingredients": [
+      "black bean",
+      "pork shoulder",
+      "smoked sausage",
+      "bacon",
+      "onion",
+      "garlic",
+      "bay leaf",
+      "orange",
+      "long-grain rice"
+    ],
+    "effort": "weekend",
+    "id": "feijoada",
+    "name": "Feijoada",
+    "cuisine": "Brazilian",
+    "region": "Latin America",
+    "time_minutes": 180,
+    "allergens": [],
+    "vegetarian": false,
+    "summary": "Feijoada is a Brazilian black bean and pork stew traditionally served with rice and bright accompaniments."
+  },
+  {
+    "family": "curry_and_stew",
+    "protein": "beef",
+    "starch": "potato",
+    "techniques": [
+      "sear",
+      "braise",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "warm_spices",
+      "onion_base",
+      "tomato_base",
+      "smoky"
+    ],
+    "key_ingredients": [
+      "beef chuck",
+      "onion",
+      "paprika",
+      "caraway",
+      "tomato paste",
+      "potato",
+      "carrot",
+      "bell pepper",
+      "beef stock"
+    ],
+    "effort": "weekend",
+    "id": "goulash",
+    "name": "Goulash",
+    "cuisine": "Hungarian",
+    "region": "Europe",
+    "time_minutes": 120,
+    "allergens": [],
+    "vegetarian": false,
+    "summary": "Goulash is a Hungarian paprika-rich beef stew with onions, vegetables, and often potatoes."
+  },
+  {
+    "family": "curry_and_stew",
+    "protein": "lamb_or_goat",
+    "starch": "none",
+    "techniques": [
+      "marinate",
+      "temper_spices",
+      "sear",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "warm_spices",
+      "cumin_coriander",
+      "chili_heat",
+      "garlic_ginger",
+      "onion_base"
+    ],
+    "key_ingredients": [
+      "goat meat",
+      "jamaican curry powder",
+      "scotch bonnet",
+      "onion",
+      "garlic",
+      "ginger",
+      "thyme",
+      "allspice",
+      "potato",
+      "scallion"
+    ],
+    "effort": "weekend",
+    "id": "jamaican_curry_goat",
+    "name": "Jamaican Curry Goat",
+    "cuisine": "Jamaican",
+    "region": "Caribbean",
+    "time_minutes": 150,
+    "allergens": [],
+    "vegetarian": false,
+    "summary": "Jamaican curry goat is a slow-simmered goat stew seasoned with curry powder, Scotch bonnet, thyme, and allspice."
+  },
+  {
+    "family": "curry_and_stew",
+    "protein": "beef",
+    "starch": "rice",
+    "techniques": [
+      "sear",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "warm_spices",
+      "onion_base",
+      "sweet"
+    ],
+    "key_ingredients": [
+      "beef chuck",
+      "japanese curry roux",
+      "onion",
+      "carrot",
+      "potato",
+      "apple",
+      "garlic",
+      "ginger",
+      "short-grain rice"
+    ],
+    "effort": "weeknight",
+    "id": "japanese_curry",
+    "name": "Japanese Curry",
+    "cuisine": "Japanese",
+    "region": "East Asia",
+    "time_minutes": 55,
+    "allergens": [
+      "gluten",
+      "dairy"
+    ],
+    "vegetarian": false,
+    "summary": "Japanese curry is a mild, thick curry stew of meat, onions, carrots, and potatoes served with rice."
+  },
+  {
+    "family": "curry_and_stew",
+    "protein": "legumes",
+    "starch": "none",
+    "techniques": [
+      "temper_spices",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "warm_spices",
+      "cumin_coriander",
+      "chili_heat",
+      "garlic_ginger",
+      "onion_base",
+      "tomato_base"
+    ],
+    "key_ingredients": [
+      "red lentil",
+      "onion",
+      "tomato",
+      "garlic",
+      "ginger",
+      "turmeric",
+      "cumin",
+      "coriander",
+      "green chili",
+      "cilantro"
+    ],
+    "effort": "weeknight",
+    "id": "masoor_dal",
+    "name": "Masoor Dal",
+    "cuisine": "Pakistani",
+    "region": "South Asia",
+    "time_minutes": 40,
+    "allergens": [],
+    "vegetarian": true,
+    "summary": "Masoor dal is a quick South Asian red lentil stew finished with tempered spices and herbs."
+  },
+  {
+    "family": "curry_and_stew",
+    "protein": "chicken",
+    "starch": "none",
+    "techniques": [
+      "spice_paste",
+      "sear",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop",
+      "blender"
+    ],
+    "flavor": [
+      "warm_spices",
+      "chili_heat",
+      "tomato_base",
+      "smoky",
+      "sesame",
+      "sweet"
+    ],
+    "key_ingredients": [
+      "chicken thigh",
+      "dried ancho chili",
+      "dried mulato chili",
+      "tomato",
+      "sesame seed",
+      "almond",
+      "raisin",
+      "cinnamon",
+      "clove",
+      "dark chocolate"
+    ],
+    "effort": "weekend",
+    "id": "mole_poblano",
+    "name": "Mole Poblano",
+    "cuisine": "Mexican",
+    "region": "Latin America",
+    "time_minutes": 150,
+    "allergens": [
+      "tree_nut",
+      "sesame"
+    ],
+    "vegetarian": false,
+    "summary": "Mole poblano is a Mexican chicken dish in a complex chile, seed, nut, spice, and chocolate sauce."
+  },
+  {
+    "family": "curry_and_stew",
+    "protein": "paneer_or_cheese",
+    "starch": "none",
+    "techniques": [
+      "blend_puree",
+      "temper_spices",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop",
+      "blender"
+    ],
+    "flavor": [
+      "cumin_coriander",
+      "chili_heat",
+      "garlic_ginger",
+      "onion_base",
+      "butter_cream"
+    ],
+    "key_ingredients": [
+      "paneer",
+      "spinach",
+      "onion",
+      "tomato",
+      "ginger",
+      "garlic",
+      "cumin",
+      "garam masala",
+      "cream",
+      "green chili"
+    ],
+    "effort": "weeknight",
+    "id": "palak_paneer",
+    "name": "Palak Paneer",
+    "cuisine": "Indian",
+    "region": "South Asia",
+    "time_minutes": 45,
+    "allergens": [
+      "dairy"
+    ],
+    "vegetarian": true,
+    "summary": "Palak paneer is a North Indian curry of paneer cubes simmered in a spiced spinach puree."
+  },
+  {
+    "family": "curry_and_stew",
+    "protein": "lamb_or_goat",
+    "starch": "none",
+    "techniques": [
+      "sear",
+      "braise",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "warm_spices",
+      "chili_heat",
+      "garlic_ginger",
+      "onion_base",
+      "yogurt"
+    ],
+    "key_ingredients": [
+      "lamb shoulder",
+      "yogurt",
+      "onion",
+      "garlic",
+      "ginger",
+      "kashmiri chili",
+      "fennel",
+      "cardamom",
+      "clove",
+      "cinnamon"
+    ],
+    "effort": "weekend",
+    "id": "rogan_josh",
+    "name": "Rogan Josh",
+    "cuisine": "Kashmiri",
+    "region": "South Asia",
+    "time_minutes": 120,
+    "allergens": [
+      "dairy"
+    ],
+    "vegetarian": false,
+    "summary": "Rogan josh is a Kashmiri lamb curry with a deep red chile color and aromatic spices in a slow-braised sauce."
+  },
+  {
+    "family": "curry_and_stew",
+    "protein": "chicken",
+    "starch": "none",
+    "techniques": [
+      "spice_paste",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop",
+      "blender"
+    ],
+    "flavor": [
+      "chili_heat",
+      "garlic_ginger",
+      "fish_sauce",
+      "citrus",
+      "coconut",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "chicken thigh",
+      "green curry paste",
+      "coconut milk",
+      "thai eggplant",
+      "bamboo shoot",
+      "fish sauce",
+      "thai basil",
+      "makrut lime leaf",
+      "palm sugar",
+      "green chili"
+    ],
+    "effort": "weeknight",
+    "id": "thai_green_curry",
+    "name": "Thai Green Curry",
+    "cuisine": "Thai",
+    "region": "Southeast Asia",
+    "time_minutes": 40,
+    "allergens": [
+      "fish"
+    ],
+    "vegetarian": false,
+    "summary": "Thai green curry is a coconut milk curry with chicken, green chiles, herbs, fish sauce, and vegetables."
+  },
+  {
+    "family": "egg_dishes",
+    "protein": "egg",
+    "starch": "bread",
+    "techniques": [
+      "poach",
+      "temper_spices"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "yogurt",
+      "garlic_ginger",
+      "chili_heat",
+      "butter_cream",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "egg",
+      "greek yogurt",
+      "garlic",
+      "butter",
+      "aleppo pepper",
+      "paprika",
+      "dill",
+      "bread"
+    ],
+    "effort": "weeknight",
+    "id": "cilbir",
+    "name": "Çılbır",
+    "cuisine": "Turkish",
+    "region": "Middle East",
+    "time_minutes": 30,
+    "allergens": [
+      "egg",
+      "dairy",
+      "gluten"
+    ],
+    "vegetarian": true,
+    "summary": "Poached eggs are served over garlicky yogurt with spiced melted butter."
+  },
+  {
+    "family": "egg_dishes",
+    "protein": "egg",
+    "starch": "none",
+    "techniques": [
+      "temper_spices",
+      "scramble"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "warm_spices",
+      "cumin_coriander",
+      "chili_heat",
+      "garlic_ginger",
+      "onion_base",
+      "tomato_base",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "egg",
+      "onion",
+      "tomato",
+      "green chili",
+      "ginger",
+      "cilantro",
+      "cumin",
+      "turmeric",
+      "garam masala"
+    ],
+    "effort": "weeknight",
+    "id": "egg_bhurji",
+    "name": "Egg Bhurji",
+    "cuisine": "Indian",
+    "region": "South Asia",
+    "time_minutes": 25,
+    "allergens": [
+      "egg"
+    ],
+    "vegetarian": true,
+    "summary": "A spiced Indian scrambled egg dish cooked with onion, tomato, chilies, and fresh herbs."
+  },
+  {
+    "family": "egg_dishes",
+    "protein": "egg",
+    "starch": "rice",
+    "techniques": [
+      "boil",
+      "temper_spices",
+      "simmer",
+      "plain_rice"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "warm_spices",
+      "cumin_coriander",
+      "chili_heat",
+      "garlic_ginger",
+      "onion_base",
+      "tomato_base"
+    ],
+    "key_ingredients": [
+      "egg",
+      "basmati rice",
+      "onion",
+      "tomato",
+      "ginger",
+      "garlic",
+      "cumin",
+      "coriander",
+      "turmeric",
+      "garam masala"
+    ],
+    "effort": "weeknight",
+    "id": "egg_curry",
+    "name": "Egg Curry",
+    "cuisine": "Indian",
+    "region": "South Asia",
+    "time_minutes": 50,
+    "allergens": [
+      "egg"
+    ],
+    "vegetarian": true,
+    "summary": "Boiled eggs are simmered in a spiced onion-tomato gravy and served with rice."
+  },
+  {
+    "family": "egg_dishes",
+    "protein": "egg",
+    "starch": "none",
+    "techniques": [
+      "pan_fry",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "soy_umami",
+      "onion_base",
+      "garlic_ginger"
+    ],
+    "key_ingredients": [
+      "egg",
+      "bean sprout",
+      "onion",
+      "mushroom",
+      "scallion",
+      "soy sauce",
+      "chicken stock",
+      "cornstarch",
+      "ginger"
+    ],
+    "effort": "weeknight",
+    "id": "egg_foo_young",
+    "name": "Egg Foo Young",
+    "cuisine": "Chinese-American",
+    "region": "North America",
+    "time_minutes": 35,
+    "allergens": [
+      "egg",
+      "soy"
+    ],
+    "vegetarian": false,
+    "summary": "A Chinese-American omelette with vegetables served with a savory brown gravy."
+  },
+  {
+    "family": "egg_dishes",
+    "protein": "egg",
+    "starch": "rice",
+    "techniques": [
+      "plain_rice",
+      "stir_fry"
+    ],
+    "equipment": [
+      "stovetop",
+      "wok"
+    ],
+    "flavor": [
+      "soy_umami",
+      "sesame",
+      "onion_base"
+    ],
+    "key_ingredients": [
+      "egg",
+      "long grain rice",
+      "soy sauce",
+      "scallion",
+      "pea",
+      "carrot",
+      "sesame oil"
+    ],
+    "effort": "weeknight",
+    "id": "egg_fried_rice",
+    "name": "Egg Fried Rice",
+    "cuisine": "Chinese",
+    "region": "East Asia",
+    "time_minutes": 25,
+    "allergens": [
+      "egg",
+      "soy",
+      "sesame"
+    ],
+    "vegetarian": true,
+    "summary": "Cooked rice is stir-fried with egg, vegetables, scallions, and soy seasoning."
+  },
+  {
+    "family": "egg_dishes",
+    "protein": "egg",
+    "starch": "none",
+    "techniques": [
+      "pan_fry",
+      "bake"
+    ],
+    "equipment": [
+      "stovetop",
+      "oven"
+    ],
+    "flavor": [
+      "fresh_herbs",
+      "butter_cream",
+      "onion_base"
+    ],
+    "key_ingredients": [
+      "egg",
+      "parmesan cheese",
+      "milk",
+      "onion",
+      "zucchini",
+      "spinach",
+      "parsley",
+      "basil"
+    ],
+    "effort": "weeknight",
+    "id": "frittata",
+    "name": "Frittata",
+    "cuisine": "Italian",
+    "region": "Europe",
+    "time_minutes": 35,
+    "allergens": [
+      "egg",
+      "dairy"
+    ],
+    "vegetarian": true,
+    "summary": "An Italian open-faced egg dish cooked with vegetables, herbs, and cheese until set."
+  },
+  {
+    "family": "egg_dishes",
+    "protein": "egg",
+    "starch": "rice",
+    "techniques": [
+      "steam",
+      "plain_rice"
+    ],
+    "equipment": [
+      "stovetop",
+      "steamer"
+    ],
+    "flavor": [
+      "soy_umami",
+      "sesame",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "egg",
+      "short grain rice",
+      "scallion",
+      "sesame oil",
+      "soy sauce",
+      "anchovy stock"
+    ],
+    "effort": "weeknight",
+    "id": "gyeran_jjim",
+    "name": "Gyeran-jjim",
+    "cuisine": "Korean",
+    "region": "East Asia",
+    "time_minutes": 25,
+    "allergens": [
+      "egg",
+      "soy",
+      "fish",
+      "sesame"
+    ],
+    "vegetarian": false,
+    "summary": "A Korean steamed egg custard with a soft, fluffy texture and savory seasoning."
+  },
+  {
+    "family": "egg_dishes",
+    "protein": "egg",
+    "starch": "flatbread",
+    "techniques": [
+      "pan_fry",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "tomato_base",
+      "chili_heat",
+      "cumin_coriander",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "egg",
+      "corn tortilla",
+      "tomato",
+      "pinto bean",
+      "onion",
+      "jalapeno",
+      "cilantro",
+      "queso fresco",
+      "cumin"
+    ],
+    "effort": "weeknight",
+    "id": "huevos_rancheros",
+    "name": "Huevos Rancheros",
+    "cuisine": "Mexican",
+    "region": "Latin America",
+    "time_minutes": 35,
+    "allergens": [
+      "egg",
+      "dairy"
+    ],
+    "vegetarian": true,
+    "summary": "Fried eggs are served on tortillas with tomato-chile salsa, beans, and cheese."
+  },
+  {
+    "family": "egg_dishes",
+    "protein": "egg",
+    "starch": "rice",
+    "techniques": [
+      "pan_fry",
+      "plain_rice"
+    ],
+    "equipment": [
+      "stovetop",
+      "wok"
+    ],
+    "flavor": [
+      "fish_sauce",
+      "garlic_ginger",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "egg",
+      "jasmine rice",
+      "fish sauce",
+      "garlic",
+      "scallion",
+      "cilantro"
+    ],
+    "effort": "weeknight",
+    "id": "kai_jeow",
+    "name": "Kai Jeow",
+    "cuisine": "Thai",
+    "region": "Southeast Asia",
+    "time_minutes": 20,
+    "allergens": [
+      "egg",
+      "fish"
+    ],
+    "vegetarian": false,
+    "summary": "A Thai omelette fried until crisp-edged and served simply with rice."
+  },
+  {
+    "family": "egg_dishes",
+    "protein": "egg",
+    "starch": "none",
+    "techniques": [
+      "pan_fry"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "fresh_herbs",
+      "warm_spices",
+      "citrus"
+    ],
+    "key_ingredients": [
+      "egg",
+      "parsley",
+      "cilantro",
+      "dill",
+      "scallion",
+      "walnut",
+      "barberry",
+      "turmeric",
+      "lemon"
+    ],
+    "effort": "weeknight",
+    "id": "kuku_sabzi",
+    "name": "Kuku Sabzi",
+    "cuisine": "Iranian",
+    "region": "Middle East",
+    "time_minutes": 45,
+    "allergens": [
+      "egg",
+      "tree_nut"
+    ],
+    "vegetarian": true,
+    "summary": "A Persian herb-packed egg cake often flavored with turmeric, walnuts, and barberries."
+  },
+  {
+    "family": "egg_dishes",
+    "protein": "egg",
+    "starch": "none",
+    "techniques": [
+      "pan_fry"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "chili_heat",
+      "onion_base",
+      "fresh_herbs",
+      "cumin_coriander"
+    ],
+    "key_ingredients": [
+      "egg",
+      "onion",
+      "green chili",
+      "tomato",
+      "cilantro",
+      "turmeric",
+      "cumin",
+      "coriander"
+    ],
+    "effort": "weeknight",
+    "id": "masala_omelette",
+    "name": "Masala Omelette",
+    "cuisine": "Indian",
+    "region": "South Asia",
+    "time_minutes": 15,
+    "allergens": [
+      "egg"
+    ],
+    "vegetarian": true,
+    "summary": "A quick Indian omelette flavored with chopped onion, chili, cilantro, and ground spices."
+  },
+  {
+    "family": "egg_dishes",
+    "protein": "egg",
+    "starch": "bread",
+    "techniques": [
+      "simmer",
+      "scramble"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "tomato_base",
+      "chili_heat",
+      "onion_base",
+      "fresh_herbs",
+      "butter_cream"
+    ],
+    "key_ingredients": [
+      "egg",
+      "tomato",
+      "green pepper",
+      "onion",
+      "butter",
+      "aleppo pepper",
+      "parsley",
+      "bread"
+    ],
+    "effort": "weeknight",
+    "id": "menemen",
+    "name": "Menemen",
+    "cuisine": "Turkish",
+    "region": "Middle East",
+    "time_minutes": 30,
+    "allergens": [
+      "egg",
+      "dairy",
+      "gluten"
+    ],
+    "vegetarian": true,
+    "summary": "A Turkish soft-scrambled egg dish cooked with tomatoes, peppers, onion, and butter."
+  },
+  {
+    "family": "egg_dishes",
+    "protein": "egg",
+    "starch": "flatbread",
+    "techniques": [
+      "pan_fry",
+      "scramble"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "chili_heat",
+      "tomato_base",
+      "fresh_herbs",
+      "onion_base"
+    ],
+    "key_ingredients": [
+      "egg",
+      "corn tortilla",
+      "onion",
+      "jalapeno",
+      "tomato",
+      "cheddar cheese",
+      "cilantro",
+      "lime"
+    ],
+    "effort": "weeknight",
+    "id": "migas_con_huevo",
+    "name": "Migas con Huevo",
+    "cuisine": "Tex-Mex",
+    "region": "North America",
+    "time_minutes": 25,
+    "allergens": [
+      "egg",
+      "dairy"
+    ],
+    "vegetarian": true,
+    "summary": "Scrambled eggs are cooked with crisp tortilla pieces, chilies, tomato, and cheese."
+  },
+  {
+    "family": "egg_dishes",
+    "protein": "pork",
+    "starch": "bread",
+    "techniques": [
+      "bake"
+    ],
+    "equipment": [
+      "oven"
+    ],
+    "flavor": [
+      "butter_cream",
+      "smoky"
+    ],
+    "key_ingredients": [
+      "egg",
+      "bacon",
+      "gruyere cheese",
+      "cream",
+      "milk",
+      "wheat flour",
+      "butter",
+      "nutmeg"
+    ],
+    "effort": "weekend",
+    "id": "quiche_lorraine",
+    "name": "Quiche Lorraine",
+    "cuisine": "French",
+    "region": "Europe",
+    "time_minutes": 90,
+    "allergens": [
+      "egg",
+      "dairy",
+      "gluten"
+    ],
+    "vegetarian": false,
+    "summary": "A savory French custard tart baked with eggs, cream, cheese, and bacon."
+  },
+  {
+    "family": "egg_dishes",
+    "protein": "fish",
+    "starch": "bread",
+    "techniques": [
+      "pan_fry",
+      "scramble"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "onion_base",
+      "chili_heat",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "egg",
+      "salt cod",
+      "onion",
+      "tomato",
+      "scotch bonnet pepper",
+      "scallion",
+      "thyme",
+      "bread"
+    ],
+    "effort": "weeknight",
+    "id": "saltfish_and_eggs",
+    "name": "Saltfish and Eggs",
+    "cuisine": "Jamaican",
+    "region": "Caribbean",
+    "time_minutes": 35,
+    "allergens": [
+      "egg",
+      "fish",
+      "gluten"
+    ],
+    "vegetarian": false,
+    "summary": "A Jamaican breakfast dish of flaked salt cod sautéed with aromatics and scrambled with eggs."
+  },
+  {
+    "family": "egg_dishes",
+    "protein": "egg",
+    "starch": "bread",
+    "techniques": [
+      "simmer",
+      "poach"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "tomato_base",
+      "chili_heat",
+      "cumin_coriander",
+      "onion_base",
+      "garlic_ginger",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "egg",
+      "tomato",
+      "bell pepper",
+      "onion",
+      "garlic",
+      "cumin",
+      "paprika",
+      "cilantro",
+      "bread"
+    ],
+    "effort": "weeknight",
+    "id": "shakshuka",
+    "name": "Shakshuka",
+    "cuisine": "Tunisian",
+    "region": "Africa",
+    "time_minutes": 40,
+    "allergens": [
+      "egg",
+      "gluten"
+    ],
+    "vegetarian": true,
+    "summary": "Eggs are poached in a spicy tomato and pepper sauce and served with bread."
+  },
+  {
+    "family": "egg_dishes",
+    "protein": "egg",
+    "starch": "bread",
+    "techniques": [
+      "simmer",
+      "scramble"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "tomato_base",
+      "onion_base",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "egg",
+      "tomato",
+      "onion",
+      "garlic",
+      "feta cheese",
+      "oregano",
+      "parsley",
+      "bread"
+    ],
+    "effort": "weeknight",
+    "id": "strapatsada",
+    "name": "Strapatsada",
+    "cuisine": "Greek",
+    "region": "Europe",
+    "time_minutes": 30,
+    "allergens": [
+      "egg",
+      "dairy",
+      "gluten"
+    ],
+    "vegetarian": true,
+    "summary": "Greek eggs are softly scrambled into grated tomato with onion, herbs, and often feta."
+  },
+  {
+    "family": "egg_dishes",
+    "protein": "egg",
+    "starch": "rice",
+    "techniques": [
+      "pan_fry",
+      "wrap_and_roll",
+      "plain_rice"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "soy_umami",
+      "sweet"
+    ],
+    "key_ingredients": [
+      "egg",
+      "short grain rice",
+      "soy sauce",
+      "mirin",
+      "sugar",
+      "dashi"
+    ],
+    "effort": "weeknight",
+    "id": "tamagoyaki",
+    "name": "Tamagoyaki",
+    "cuisine": "Japanese",
+    "region": "East Asia",
+    "time_minutes": 25,
+    "allergens": [
+      "egg",
+      "soy",
+      "fish"
+    ],
+    "vegetarian": false,
+    "summary": "A Japanese rolled omelette made from lightly sweetened, seasoned beaten eggs."
+  },
+  {
+    "family": "egg_dishes",
+    "protein": "egg",
+    "starch": "potato",
+    "techniques": [
+      "pan_fry"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "onion_base"
+    ],
+    "key_ingredients": [
+      "egg",
+      "potato",
+      "onion"
+    ],
+    "effort": "weeknight",
+    "id": "tortilla_espanola",
+    "name": "Tortilla Española",
+    "cuisine": "Spanish",
+    "region": "Europe",
+    "time_minutes": 45,
+    "allergens": [
+      "egg"
+    ],
+    "vegetarian": true,
+    "summary": "A thick Spanish potato and onion omelette cooked slowly until tender and sliceable."
+  },
+  {
+    "family": "flatbread_and_wraps",
+    "protein": "none",
+    "starch": "flatbread",
+    "techniques": [
+      "knead_dough",
+      "temper_spices",
+      "pan_fry"
+    ],
+    "equipment": [
+      "stovetop",
+      "griddle"
+    ],
+    "flavor": [
+      "warm_spices",
+      "cumin_coriander",
+      "chili_heat",
+      "fresh_herbs",
+      "butter_cream"
+    ],
+    "key_ingredients": [
+      "whole wheat flour",
+      "potato",
+      "ghee",
+      "cumin",
+      "coriander",
+      "green chili",
+      "ginger",
+      "cilantro",
+      "amchur"
+    ],
+    "effort": "weeknight",
+    "id": "aloo_paratha",
+    "name": "Aloo Paratha",
+    "cuisine": "Indian",
+    "region": "South Asia",
+    "time_minutes": 50,
+    "allergens": [
+      "gluten",
+      "dairy"
+    ],
+    "vegetarian": true,
+    "summary": "Aloo paratha is a North Indian whole-wheat flatbread stuffed with spiced mashed potato and cooked on a griddle."
+  },
+  {
+    "family": "flatbread_and_wraps",
+    "protein": "chicken",
+    "starch": "flatbread",
+    "techniques": [
+      "knead_dough",
+      "pan_fry",
+      "wrap_and_roll"
+    ],
+    "equipment": [
+      "stovetop",
+      "griddle"
+    ],
+    "flavor": [
+      "garlic_ginger",
+      "citrus",
+      "fresh_herbs",
+      "butter_cream"
+    ],
+    "key_ingredients": [
+      "masarepa",
+      "chicken breast",
+      "avocado",
+      "mayonnaise",
+      "lime",
+      "cilantro",
+      "garlic",
+      "onion"
+    ],
+    "effort": "weeknight",
+    "id": "arepa_reina_pepiada",
+    "name": "Arepa Reina Pepiada",
+    "cuisine": "Venezuelan",
+    "region": "Latin America",
+    "time_minutes": 55,
+    "allergens": [
+      "egg"
+    ],
+    "vegetarian": false,
+    "summary": "Arepa reina pepiada is a split corn arepa filled with shredded chicken, avocado, mayonnaise, lime, and herbs."
+  },
+  {
+    "family": "flatbread_and_wraps",
+    "protein": "legumes",
+    "starch": "flatbread",
+    "techniques": [
+      "knead_dough",
+      "pan_fry",
+      "wrap_and_roll"
+    ],
+    "equipment": [
+      "stovetop",
+      "griddle"
+    ],
+    "flavor": [
+      "butter_cream",
+      "onion_base",
+      "cumin_coriander"
+    ],
+    "key_ingredients": [
+      "wheat flour",
+      "refried bean",
+      "queso fresco",
+      "crema",
+      "avocado",
+      "egg",
+      "onion",
+      "cumin"
+    ],
+    "effort": "weeknight",
+    "id": "baleada",
+    "name": "Baleada",
+    "cuisine": "Honduran",
+    "region": "Latin America",
+    "time_minutes": 45,
+    "allergens": [
+      "gluten",
+      "dairy",
+      "egg"
+    ],
+    "vegetarian": true,
+    "summary": "Baleada is a Honduran flour tortilla folded around refried beans, cheese, crema, and often egg or avocado."
+  },
+  {
+    "family": "flatbread_and_wraps",
+    "protein": "chicken",
+    "starch": "flatbread",
+    "techniques": [
+      "marinate",
+      "sear",
+      "knead_dough",
+      "pan_fry",
+      "wrap_and_roll"
+    ],
+    "equipment": [
+      "stovetop",
+      "griddle"
+    ],
+    "flavor": [
+      "warm_spices",
+      "chili_heat",
+      "garlic_ginger",
+      "onion_base",
+      "tomato_base",
+      "vinegar_sour"
+    ],
+    "key_ingredients": [
+      "chicken thigh",
+      "wheat flour",
+      "egg",
+      "yogurt",
+      "onion",
+      "tomato ketchup",
+      "green chutney",
+      "chili powder",
+      "garam masala",
+      "vinegar"
+    ],
+    "effort": "weeknight",
+    "id": "chicken_frankie",
+    "name": "Chicken Frankie",
+    "cuisine": "Indian",
+    "region": "South Asia",
+    "time_minutes": 60,
+    "allergens": [
+      "gluten",
+      "egg",
+      "dairy"
+    ],
+    "vegetarian": false,
+    "summary": "Chicken frankie is a Mumbai-style roti wrap filled with spiced chicken, egg, onions, chutney, and tangy sauces."
+  },
+  {
+    "family": "flatbread_and_wraps",
+    "protein": "chicken",
+    "starch": "flatbread",
+    "techniques": [
+      "marinate",
+      "sear",
+      "knead_dough",
+      "pan_fry",
+      "wrap_and_roll"
+    ],
+    "equipment": [
+      "stovetop",
+      "griddle"
+    ],
+    "flavor": [
+      "warm_spices",
+      "cumin_coriander",
+      "chili_heat",
+      "garlic_ginger",
+      "onion_base",
+      "yogurt",
+      "citrus",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "chicken thigh",
+      "wheat flour",
+      "egg",
+      "yogurt",
+      "onion",
+      "green chili",
+      "lime",
+      "garam masala",
+      "coriander",
+      "mint chutney"
+    ],
+    "effort": "weeknight",
+    "id": "chicken_kathi_roll",
+    "name": "Chicken Kathi Roll",
+    "cuisine": "Indian",
+    "region": "South Asia",
+    "time_minutes": 60,
+    "allergens": [
+      "gluten",
+      "egg",
+      "dairy"
+    ],
+    "vegetarian": false,
+    "summary": "Chicken kathi roll is a Kolkata-style paratha wrap filled with spiced seared chicken, onions, chilies, and chutney."
+  },
+  {
+    "family": "flatbread_and_wraps",
+    "protein": "chicken",
+    "starch": "flatbread",
+    "techniques": [
+      "sear",
+      "pan_fry",
+      "wrap_and_roll"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "chili_heat",
+      "cumin_coriander",
+      "tomato_base",
+      "fresh_herbs",
+      "butter_cream"
+    ],
+    "key_ingredients": [
+      "flour tortilla",
+      "chicken breast",
+      "cheddar cheese",
+      "monterey jack cheese",
+      "onion",
+      "bell pepper",
+      "tomato salsa",
+      "cumin",
+      "cilantro"
+    ],
+    "effort": "weeknight",
+    "id": "chicken_quesadilla",
+    "name": "Chicken Quesadilla",
+    "cuisine": "Mexican",
+    "region": "Latin America",
+    "time_minutes": 30,
+    "allergens": [
+      "gluten",
+      "dairy"
+    ],
+    "vegetarian": false,
+    "summary": "Chicken quesadilla is a folded tortilla pan-toasted with chicken, melted cheese, and salsa-style seasonings."
+  },
+  {
+    "family": "flatbread_and_wraps",
+    "protein": "chicken",
+    "starch": "flatbread",
+    "techniques": [
+      "marinate",
+      "sear",
+      "wrap_and_roll"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "warm_spices",
+      "chili_heat",
+      "garlic_ginger",
+      "yogurt",
+      "sesame",
+      "citrus",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "chicken thigh",
+      "pita bread",
+      "yogurt",
+      "garlic",
+      "lemon",
+      "cumin",
+      "paprika",
+      "tahini",
+      "cucumber",
+      "tomato"
+    ],
+    "effort": "weeknight",
+    "id": "chicken_shawarma_wrap",
+    "name": "Chicken Shawarma Wrap",
+    "cuisine": "Levantine",
+    "region": "Middle East",
+    "time_minutes": 55,
+    "allergens": [
+      "gluten",
+      "dairy",
+      "sesame"
+    ],
+    "vegetarian": false,
+    "summary": "Chicken shawarma wrap is marinated spiced chicken folded in flatbread with vegetables and tahini or garlic sauce."
+  },
+  {
+    "family": "flatbread_and_wraps",
+    "protein": "chicken",
+    "starch": "flatbread",
+    "techniques": [
+      "sear",
+      "simmer",
+      "wrap_and_roll"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "chili_heat",
+      "cumin_coriander",
+      "garlic_ginger",
+      "tomato_base",
+      "citrus",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "corn tortilla",
+      "chicken thigh",
+      "onion",
+      "garlic",
+      "tomato",
+      "chili powder",
+      "cumin",
+      "lime",
+      "cilantro",
+      "avocado"
+    ],
+    "effort": "weeknight",
+    "id": "chicken_tacos",
+    "name": "Chicken Tacos",
+    "cuisine": "Mexican",
+    "region": "Latin America",
+    "time_minutes": 35,
+    "allergens": [],
+    "vegetarian": false,
+    "summary": "Chicken tacos are warm corn tortillas filled with seasoned chicken and fresh toppings such as onion, cilantro, lime, and salsa."
+  },
+  {
+    "family": "flatbread_and_wraps",
+    "protein": "lamb_or_goat",
+    "starch": "flatbread",
+    "techniques": [
+      "marinate",
+      "grill",
+      "wrap_and_roll"
+    ],
+    "equipment": [
+      "grill"
+    ],
+    "flavor": [
+      "warm_spices",
+      "cumin_coriander",
+      "garlic_ginger",
+      "yogurt",
+      "smoky",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "lamb shoulder",
+      "lavash bread",
+      "yogurt",
+      "garlic",
+      "onion",
+      "cumin",
+      "paprika",
+      "tomato",
+      "lettuce",
+      "chili sauce"
+    ],
+    "effort": "weekend",
+    "id": "doner_kebab",
+    "name": "Doner Kebab",
+    "cuisine": "Turkish",
+    "region": "Middle East",
+    "time_minutes": 120,
+    "allergens": [
+      "gluten",
+      "dairy"
+    ],
+    "vegetarian": false,
+    "summary": "Doner kebab is seasoned lamb cooked until browned and sliced into flatbread with salad and sauce."
+  },
+  {
+    "family": "flatbread_and_wraps",
+    "protein": "legumes",
+    "starch": "flatbread",
+    "techniques": [
+      "blend_puree",
+      "deep_fry",
+      "wrap_and_roll"
+    ],
+    "equipment": [
+      "stovetop",
+      "blender"
+    ],
+    "flavor": [
+      "cumin_coriander",
+      "chili_heat",
+      "garlic_ginger",
+      "sesame",
+      "citrus",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "chickpea",
+      "pita bread",
+      "parsley",
+      "cilantro",
+      "garlic",
+      "cumin",
+      "coriander",
+      "tahini",
+      "lemon",
+      "tomato"
+    ],
+    "effort": "weekend",
+    "id": "falafel_wrap",
+    "name": "Falafel Wrap",
+    "cuisine": "Levantine",
+    "region": "Middle East",
+    "time_minutes": 75,
+    "allergens": [
+      "gluten",
+      "sesame"
+    ],
+    "vegetarian": true,
+    "summary": "Falafel wrap is a pita or flatbread filled with crisp chickpea fritters, vegetables, and tahini sauce."
+  },
+  {
+    "family": "flatbread_and_wraps",
+    "protein": "paneer_or_cheese",
+    "starch": "flatbread",
+    "techniques": [
+      "knead_dough",
+      "pan_fry"
+    ],
+    "equipment": [
+      "stovetop",
+      "griddle"
+    ],
+    "flavor": [
+      "fresh_herbs",
+      "butter_cream",
+      "chili_heat"
+    ],
+    "key_ingredients": [
+      "wheat flour",
+      "feta cheese",
+      "spinach",
+      "onion",
+      "parsley",
+      "dill",
+      "red pepper flake",
+      "yogurt"
+    ],
+    "effort": "weeknight",
+    "id": "gozleme",
+    "name": "Gozleme",
+    "cuisine": "Turkish",
+    "region": "Middle East",
+    "time_minutes": 60,
+    "allergens": [
+      "gluten",
+      "dairy"
+    ],
+    "vegetarian": true,
+    "summary": "Gozleme is a Turkish stuffed flatbread cooked on a griddle, commonly filled at home with spinach, herbs, and feta-like cheese."
+  },
+  {
+    "family": "flatbread_and_wraps",
+    "protein": "pork",
+    "starch": "flatbread",
+    "techniques": [
+      "marinate",
+      "grill",
+      "wrap_and_roll"
+    ],
+    "equipment": [
+      "grill"
+    ],
+    "flavor": [
+      "garlic_ginger",
+      "citrus",
+      "fresh_herbs",
+      "yogurt",
+      "smoky"
+    ],
+    "key_ingredients": [
+      "pork shoulder",
+      "pita bread",
+      "yogurt",
+      "cucumber",
+      "garlic",
+      "lemon",
+      "oregano",
+      "tomato",
+      "red onion"
+    ],
+    "effort": "weeknight",
+    "id": "gyro",
+    "name": "Gyro",
+    "cuisine": "Greek",
+    "region": "Europe",
+    "time_minutes": 65,
+    "allergens": [
+      "gluten",
+      "dairy"
+    ],
+    "vegetarian": false,
+    "summary": "Gyro is a Greek pita wrap filled with seasoned grilled meat, tomato, onion, and tzatziki."
+  },
+  {
+    "family": "flatbread_and_wraps",
+    "protein": "egg",
+    "starch": "flatbread",
+    "techniques": [
+      "blend_puree",
+      "pan_fry",
+      "wrap_and_roll"
+    ],
+    "equipment": [
+      "stovetop",
+      "griddle"
+    ],
+    "flavor": [
+      "soy_umami",
+      "fermented_chili",
+      "sesame",
+      "fresh_herbs",
+      "chili_heat"
+    ],
+    "key_ingredients": [
+      "wheat flour",
+      "mung bean flour",
+      "egg",
+      "scallion",
+      "cilantro",
+      "hoisin sauce",
+      "fermented chili paste",
+      "sesame seed",
+      "fried wonton wrapper"
+    ],
+    "effort": "weeknight",
+    "id": "jianbing",
+    "name": "Jianbing",
+    "cuisine": "Chinese",
+    "region": "East Asia",
+    "time_minutes": 35,
+    "allergens": [
+      "gluten",
+      "egg",
+      "soy",
+      "sesame"
+    ],
+    "vegetarian": false,
+    "summary": "Jianbing is a Chinese breakfast crepe folded around egg, herbs, sauce, and a crisp cracker."
+  },
+  {
+    "family": "flatbread_and_wraps",
+    "protein": "pork",
+    "starch": "flatbread",
+    "techniques": [
+      "stir_fry",
+      "scramble",
+      "wrap_and_roll"
+    ],
+    "equipment": [
+      "stovetop",
+      "wok"
+    ],
+    "flavor": [
+      "soy_umami",
+      "garlic_ginger",
+      "sesame",
+      "sweet"
+    ],
+    "key_ingredients": [
+      "pork tenderloin",
+      "mandarin pancake",
+      "egg",
+      "cabbage",
+      "wood ear mushroom",
+      "scallion",
+      "ginger",
+      "hoisin sauce",
+      "soy sauce"
+    ],
+    "effort": "weeknight",
+    "id": "moo_shu_pork",
+    "name": "Moo Shu Pork",
+    "cuisine": "Chinese",
+    "region": "East Asia",
+    "time_minutes": 45,
+    "allergens": [
+      "gluten",
+      "egg",
+      "soy"
+    ],
+    "vegetarian": false,
+    "summary": "Moo shu pork is a stir-fried pork and vegetable filling served with thin pancakes and hoisin sauce."
+  },
+  {
+    "family": "flatbread_and_wraps",
+    "protein": "pork",
+    "starch": "flatbread",
+    "techniques": [
+      "knead_dough",
+      "pan_fry",
+      "wrap_and_roll"
+    ],
+    "equipment": [
+      "stovetop",
+      "griddle"
+    ],
+    "flavor": [
+      "butter_cream",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "wheat flour",
+      "lard",
+      "prosciutto",
+      "squacquerone cheese",
+      "arugula",
+      "tomato"
+    ],
+    "effort": "weeknight",
+    "id": "piadina",
+    "name": "Piadina",
+    "cuisine": "Italian",
+    "region": "Europe",
+    "time_minutes": 45,
+    "allergens": [
+      "gluten",
+      "dairy"
+    ],
+    "vegetarian": false,
+    "summary": "Piadina is an Italian griddled flatbread folded around fillings such as prosciutto, soft cheese, arugula, and tomato."
+  },
+  {
+    "family": "flatbread_and_wraps",
+    "protein": "legumes",
+    "starch": "flatbread",
+    "techniques": [
+      "knead_dough",
+      "pan_fry"
+    ],
+    "equipment": [
+      "stovetop",
+      "griddle"
+    ],
+    "flavor": [
+      "butter_cream",
+      "onion_base",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "masa harina",
+      "quesillo cheese",
+      "refried bean",
+      "onion",
+      "cilantro",
+      "cabbage curtido",
+      "tomato salsa"
+    ],
+    "effort": "weeknight",
+    "id": "pupusa_de_queso_y_frijol",
+    "name": "Pupusa de Queso y Frijol",
+    "cuisine": "Salvadoran",
+    "region": "Latin America",
+    "time_minutes": 55,
+    "allergens": [
+      "dairy"
+    ],
+    "vegetarian": true,
+    "summary": "Pupusa de queso y frijol is a thick Salvadoran corn flatbread stuffed with cheese and beans, usually served with curtido and salsa."
+  },
+  {
+    "family": "flatbread_and_wraps",
+    "protein": "egg",
+    "starch": "flatbread",
+    "techniques": [
+      "scramble",
+      "pan_fry",
+      "wrap_and_roll"
+    ],
+    "equipment": [
+      "stovetop",
+      "griddle"
+    ],
+    "flavor": [
+      "onion_base",
+      "tomato_base",
+      "fresh_herbs",
+      "chili_heat"
+    ],
+    "key_ingredients": [
+      "chapati",
+      "egg",
+      "tomato",
+      "onion",
+      "cabbage",
+      "cilantro",
+      "green chili"
+    ],
+    "effort": "weeknight",
+    "id": "rolex",
+    "name": "Rolex",
+    "cuisine": "Ugandan",
+    "region": "Africa",
+    "time_minutes": 25,
+    "allergens": [
+      "gluten",
+      "egg"
+    ],
+    "vegetarian": false,
+    "summary": "Rolex is a Ugandan street-food style chapati rolled around an omelet with tomato, onion, cabbage, and chilies."
+  },
+  {
+    "family": "flatbread_and_wraps",
+    "protein": "legumes",
+    "starch": "flatbread",
+    "techniques": [
+      "knead_dough",
+      "pan_fry",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop",
+      "griddle"
+    ],
+    "flavor": [
+      "cumin_coriander",
+      "chili_heat",
+      "garlic_ginger",
+      "coconut",
+      "warm_spices"
+    ],
+    "key_ingredients": [
+      "wheat flour",
+      "ghee",
+      "lentil",
+      "turmeric",
+      "cumin",
+      "curry leaf",
+      "garlic",
+      "ginger",
+      "chili",
+      "coconut milk"
+    ],
+    "effort": "weekend",
+    "id": "roti_canai_with_dhal",
+    "name": "Roti Canai with Dhal",
+    "cuisine": "Malaysian",
+    "region": "Southeast Asia",
+    "time_minutes": 90,
+    "allergens": [
+      "gluten",
+      "dairy"
+    ],
+    "vegetarian": true,
+    "summary": "Roti canai with dhal is a flaky griddled flatbread served with a spiced lentil curry for dipping."
+  },
+  {
+    "family": "flatbread_and_wraps",
+    "protein": "chicken",
+    "starch": "flatbread",
+    "techniques": [
+      "knead_dough",
+      "simmer",
+      "wrap_and_roll"
+    ],
+    "equipment": [
+      "stovetop",
+      "griddle"
+    ],
+    "flavor": [
+      "warm_spices",
+      "cumin_coriander",
+      "chili_heat",
+      "garlic_ginger",
+      "onion_base"
+    ],
+    "key_ingredients": [
+      "wheat flour",
+      "split pea",
+      "chicken thigh",
+      "potato",
+      "onion",
+      "garlic",
+      "curry powder",
+      "cumin",
+      "thyme",
+      "scotch bonnet"
+    ],
+    "effort": "weekend",
+    "id": "trinidad_chicken_roti",
+    "name": "Trinidad Chicken Roti",
+    "cuisine": "Trinidadian",
+    "region": "Caribbean",
+    "time_minutes": 95,
+    "allergens": [
+      "gluten"
+    ],
+    "vegetarian": false,
+    "summary": "Trinidad chicken roti is a dhalpuri flatbread wrapped around curried chicken, potato, and aromatic spices."
+  },
+  {
+    "family": "lentils_and_beans",
+    "protein": "pork",
+    "starch": "none",
+    "techniques": [
+      "sear",
+      "braise",
+      "bake"
+    ],
+    "equipment": [
+      "stovetop",
+      "oven"
+    ],
+    "flavor": [
+      "garlic_ginger",
+      "onion_base",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "white bean",
+      "pork shoulder",
+      "sausage",
+      "duck leg",
+      "bacon",
+      "onion",
+      "carrot",
+      "garlic",
+      "tomato",
+      "thyme",
+      "bay leaf"
+    ],
+    "effort": "weekend",
+    "id": "cassoulet",
+    "name": "Cassoulet",
+    "cuisine": "French",
+    "region": "Europe",
+    "time_minutes": 240,
+    "allergens": [],
+    "vegetarian": false,
+    "summary": "Cassoulet is a southwestern French baked white bean casserole with pork, sausage, and often duck."
+  },
+  {
+    "family": "lentils_and_beans",
+    "protein": "legumes",
+    "starch": "none",
+    "techniques": [
+      "temper_spices",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "warm_spices",
+      "cumin_coriander",
+      "chili_heat",
+      "garlic_ginger",
+      "onion_base",
+      "tomato_base",
+      "citrus"
+    ],
+    "key_ingredients": [
+      "chickpea",
+      "onion",
+      "tomato",
+      "ginger",
+      "garlic",
+      "green chili",
+      "cumin",
+      "coriander",
+      "garam masala",
+      "amchur",
+      "cilantro"
+    ],
+    "effort": "weeknight",
+    "id": "chana_masala",
+    "name": "Chana Masala",
+    "cuisine": "Indian",
+    "region": "South Asia",
+    "time_minutes": 45,
+    "allergens": [],
+    "vegetarian": true,
+    "summary": "Chana masala is a North Indian chickpea curry cooked in a tangy onion-tomato spice base."
+  },
+  {
+    "family": "lentils_and_beans",
+    "protein": "legumes",
+    "starch": "none",
+    "techniques": [
+      "boil",
+      "simmer",
+      "temper_spices"
+    ],
+    "equipment": [
+      "stovetop",
+      "pressure_cooker"
+    ],
+    "flavor": [
+      "warm_spices",
+      "chili_heat",
+      "garlic_ginger",
+      "onion_base",
+      "tomato_base",
+      "butter_cream"
+    ],
+    "key_ingredients": [
+      "whole urad bean",
+      "kidney bean",
+      "butter",
+      "cream",
+      "onion",
+      "tomato",
+      "ginger",
+      "garlic",
+      "kashmiri chili",
+      "garam masala"
+    ],
+    "effort": "weekend",
+    "id": "dal_makhani",
+    "name": "Dal Makhani",
+    "cuisine": "Indian",
+    "region": "South Asia",
+    "time_minutes": 120,
+    "allergens": [
+      "dairy"
+    ],
+    "vegetarian": true,
+    "summary": "Dal makhani is a rich Punjabi black lentil and kidney bean stew slowly simmered with butter and cream."
+  },
+  {
+    "family": "lentils_and_beans",
+    "protein": "legumes",
+    "starch": "none",
+    "techniques": [
+      "boil",
+      "simmer",
+      "temper_spices"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "cumin_coriander",
+      "chili_heat",
+      "garlic_ginger",
+      "onion_base",
+      "tomato_base"
+    ],
+    "key_ingredients": [
+      "yellow lentil",
+      "red lentil",
+      "ghee",
+      "cumin",
+      "garlic",
+      "ginger",
+      "onion",
+      "tomato",
+      "green chili",
+      "cilantro"
+    ],
+    "effort": "weeknight",
+    "id": "dal_tadka",
+    "name": "Dal Tadka",
+    "cuisine": "Indian",
+    "region": "South Asia",
+    "time_minutes": 40,
+    "allergens": [
+      "dairy"
+    ],
+    "vegetarian": true,
+    "summary": "Dal tadka is a comforting Indian lentil stew finished with hot spiced ghee."
+  },
+  {
+    "family": "lentils_and_beans",
+    "protein": "legumes",
+    "starch": "none",
+    "techniques": [
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "onion_base",
+      "tomato_base",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "white bean",
+      "onion",
+      "carrot",
+      "celery",
+      "tomato",
+      "garlic",
+      "bay leaf",
+      "oregano",
+      "parsley"
+    ],
+    "effort": "weeknight",
+    "id": "fasolada",
+    "name": "Fasolada",
+    "cuisine": "Greek",
+    "region": "Europe",
+    "time_minutes": 90,
+    "allergens": [],
+    "vegetarian": true,
+    "summary": "Fasolada is a Greek white bean soup-stew with tomato, vegetables, and herbs."
+  },
+  {
+    "family": "lentils_and_beans",
+    "protein": "legumes",
+    "starch": "none",
+    "techniques": [
+      "boil",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "cumin_coriander",
+      "garlic_ginger",
+      "citrus",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "fava bean",
+      "garlic",
+      "cumin",
+      "lemon",
+      "parsley",
+      "tomato",
+      "red onion",
+      "tahini"
+    ],
+    "effort": "weeknight",
+    "id": "ful_medames",
+    "name": "Ful Medames",
+    "cuisine": "Egyptian",
+    "region": "Africa",
+    "time_minutes": 40,
+    "allergens": [
+      "sesame"
+    ],
+    "vegetarian": true,
+    "summary": "Ful medames is an Egyptian dish of tender fava beans mashed or stewed with garlic, cumin, lemon, and olive oil."
+  },
+  {
+    "family": "lentils_and_beans",
+    "protein": "legumes",
+    "starch": "rice",
+    "techniques": [
+      "plain_rice",
+      "stir_fry"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "onion_base",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "cooked rice",
+      "black bean",
+      "onion",
+      "bell pepper",
+      "garlic",
+      "cilantro",
+      "lizano sauce",
+      "thyme"
+    ],
+    "effort": "weeknight",
+    "id": "gallo_pinto",
+    "name": "Gallo Pinto",
+    "cuisine": "Costa Rican",
+    "region": "Latin America",
+    "time_minutes": 30,
+    "allergens": [],
+    "vegetarian": true,
+    "summary": "Gallo pinto is a Central American skillet dish of cooked rice and beans fried with aromatics and sauce."
+  },
+  {
+    "family": "lentils_and_beans",
+    "protein": "pork",
+    "starch": "none",
+    "techniques": [
+      "simmer",
+      "sear"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "garlic_ginger",
+      "onion_base",
+      "fish_sauce",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "mung bean",
+      "pork belly",
+      "onion",
+      "garlic",
+      "tomato",
+      "fish sauce",
+      "spinach",
+      "malunggay leaf"
+    ],
+    "effort": "weeknight",
+    "id": "ginisang_munggo",
+    "name": "Ginisang Munggo",
+    "cuisine": "Filipino",
+    "region": "Southeast Asia",
+    "time_minutes": 55,
+    "allergens": [
+      "fish"
+    ],
+    "vegetarian": false,
+    "summary": "Ginisang munggo is a Filipino mung bean stew sautéed with garlic, onion, tomato, and usually pork or fish sauce."
+  },
+  {
+    "family": "lentils_and_beans",
+    "protein": "legumes",
+    "starch": "none",
+    "techniques": [
+      "boil",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "onion_base",
+      "tomato_base",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "maize kernel",
+      "kidney bean",
+      "onion",
+      "tomato",
+      "potato",
+      "collard green",
+      "cilantro",
+      "curry powder"
+    ],
+    "effort": "weeknight",
+    "id": "githeri",
+    "name": "Githeri",
+    "cuisine": "Kenyan",
+    "region": "Africa",
+    "time_minutes": 75,
+    "allergens": [],
+    "vegetarian": true,
+    "summary": "Githeri is a Kenyan one-pot dish of maize and beans often stewed with vegetables."
+  },
+  {
+    "family": "lentils_and_beans",
+    "protein": "legumes",
+    "starch": "rice",
+    "techniques": [
+      "rice_in_stock",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "coconut",
+      "garlic_ginger",
+      "fresh_herbs",
+      "chili_heat"
+    ],
+    "key_ingredients": [
+      "long grain rice",
+      "kidney bean",
+      "coconut milk",
+      "scallion",
+      "garlic",
+      "thyme",
+      "allspice",
+      "scotch bonnet chili"
+    ],
+    "effort": "weeknight",
+    "id": "jamaican_rice_and_peas",
+    "name": "Jamaican Rice and Peas",
+    "cuisine": "Jamaican",
+    "region": "Caribbean",
+    "time_minutes": 50,
+    "allergens": [],
+    "vegetarian": true,
+    "summary": "Jamaican rice and peas is rice cooked in coconut milk with beans, scallion, thyme, allspice, and chile."
+  },
+  {
+    "family": "lentils_and_beans",
+    "protein": "legumes",
+    "starch": "rice",
+    "techniques": [
+      "temper_spices",
+      "rice_in_stock",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop",
+      "pressure_cooker"
+    ],
+    "flavor": [
+      "cumin_coriander",
+      "garlic_ginger",
+      "onion_base",
+      "butter_cream"
+    ],
+    "key_ingredients": [
+      "basmati rice",
+      "yellow lentil",
+      "ghee",
+      "cumin",
+      "ginger",
+      "turmeric",
+      "asafoetida",
+      "onion",
+      "green chili",
+      "cilantro"
+    ],
+    "effort": "weeknight",
+    "id": "khichdi",
+    "name": "Khichdi",
+    "cuisine": "Indian",
+    "region": "South Asia",
+    "time_minutes": 35,
+    "allergens": [
+      "dairy"
+    ],
+    "vegetarian": true,
+    "summary": "Khichdi is a soft Indian one-pot rice and lentil dish often seasoned simply with ghee and spices."
+  },
+  {
+    "family": "lentils_and_beans",
+    "protein": "legumes",
+    "starch": "none",
+    "techniques": [
+      "spice_paste",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "warm_spices",
+      "chili_heat",
+      "garlic_ginger",
+      "onion_base"
+    ],
+    "key_ingredients": [
+      "red lentil",
+      "onion",
+      "garlic",
+      "ginger",
+      "berbere",
+      "tomato paste",
+      "niter kibbeh",
+      "cardamom",
+      "cinnamon"
+    ],
+    "effort": "weeknight",
+    "id": "misir_wot",
+    "name": "Misir Wot",
+    "cuisine": "Ethiopian",
+    "region": "Africa",
+    "time_minutes": 45,
+    "allergens": [
+      "dairy"
+    ],
+    "vegetarian": true,
+    "summary": "Misir wot is an Ethiopian red lentil stew simmered with onions, berbere, and spiced butter."
+  },
+  {
+    "family": "lentils_and_beans",
+    "protein": "legumes",
+    "starch": "rice",
+    "techniques": [
+      "simmer",
+      "rice_in_stock",
+      "pan_fry"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "cumin_coriander",
+      "onion_base"
+    ],
+    "key_ingredients": [
+      "brown lentil",
+      "rice",
+      "onion",
+      "cumin",
+      "cinnamon",
+      "allspice",
+      "parsley",
+      "lemon"
+    ],
+    "effort": "weeknight",
+    "id": "mujaddara",
+    "name": "Mujaddara",
+    "cuisine": "Levantine",
+    "region": "Middle East",
+    "time_minutes": 55,
+    "allergens": [],
+    "vegetarian": true,
+    "summary": "Mujaddara is a Levantine lentil and rice pilaf topped with deeply browned onions."
+  },
+  {
+    "family": "lentils_and_beans",
+    "protein": "legumes",
+    "starch": "pasta",
+    "techniques": [
+      "simmer",
+      "boil"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "garlic_ginger",
+      "onion_base",
+      "tomato_base",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "cannellini bean",
+      "small pasta",
+      "onion",
+      "carrot",
+      "celery",
+      "garlic",
+      "tomato",
+      "rosemary",
+      "parmesan cheese"
+    ],
+    "effort": "weeknight",
+    "id": "pasta_e_fagioli",
+    "name": "Pasta e Fagioli",
+    "cuisine": "Italian",
+    "region": "Europe",
+    "time_minutes": 50,
+    "allergens": [
+      "gluten",
+      "dairy"
+    ],
+    "vegetarian": true,
+    "summary": "Pasta e fagioli is an Italian home-style bean and pasta soup thickened by some of the beans."
+  },
+  {
+    "family": "lentils_and_beans",
+    "protein": "legumes",
+    "starch": "none",
+    "techniques": [
+      "temper_spices",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop",
+      "pressure_cooker"
+    ],
+    "flavor": [
+      "warm_spices",
+      "cumin_coriander",
+      "chili_heat",
+      "garlic_ginger",
+      "onion_base",
+      "tomato_base"
+    ],
+    "key_ingredients": [
+      "kidney bean",
+      "onion",
+      "tomato",
+      "ginger",
+      "garlic",
+      "cumin",
+      "coriander",
+      "garam masala",
+      "bay leaf",
+      "cilantro"
+    ],
+    "effort": "weeknight",
+    "id": "rajma",
+    "name": "Rajma",
+    "cuisine": "Indian",
+    "region": "South Asia",
+    "time_minutes": 60,
+    "allergens": [],
+    "vegetarian": true,
+    "summary": "Rajma is a Punjabi-style kidney bean curry simmered until creamy in a spiced onion-tomato gravy."
+  },
+  {
+    "family": "lentils_and_beans",
+    "protein": "pork",
+    "starch": "rice",
+    "techniques": [
+      "simmer",
+      "plain_rice"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "garlic_ginger",
+      "onion_base",
+      "smoky",
+      "chili_heat"
+    ],
+    "key_ingredients": [
+      "red kidney bean",
+      "andouille sausage",
+      "smoked ham hock",
+      "onion",
+      "celery",
+      "bell pepper",
+      "garlic",
+      "bay leaf",
+      "cayenne",
+      "long grain rice"
+    ],
+    "effort": "weekend",
+    "id": "red_beans_and_rice",
+    "name": "Red Beans and Rice",
+    "cuisine": "Louisiana Creole",
+    "region": "North America",
+    "time_minutes": 150,
+    "allergens": [],
+    "vegetarian": false,
+    "summary": "Red beans and rice is a Louisiana dish of creamy slow-simmered red beans served over plain rice."
+  },
+  {
+    "family": "lentils_and_beans",
+    "protein": "legumes",
+    "starch": "rice",
+    "techniques": [
+      "steam"
+    ],
+    "equipment": [
+      "rice_cooker"
+    ],
+    "flavor": [
+      "sesame"
+    ],
+    "key_ingredients": [
+      "glutinous rice",
+      "adzuki bean",
+      "sesame seed"
+    ],
+    "effort": "weeknight",
+    "id": "sekihan",
+    "name": "Sekihan",
+    "cuisine": "Japanese",
+    "region": "East Asia",
+    "time_minutes": 60,
+    "allergens": [
+      "sesame"
+    ],
+    "vegetarian": true,
+    "summary": "Sekihan is Japanese red bean rice made by steaming glutinous rice with adzuki beans."
+  },
+  {
+    "family": "noodles",
+    "protein": "beef",
+    "starch": "wheat_noodles",
+    "techniques": [
+      "sear",
+      "simmer",
+      "boil"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "onion_base",
+      "butter_cream",
+      "vinegar_sour"
+    ],
+    "key_ingredients": [
+      "egg noodle",
+      "beef sirloin",
+      "mushroom",
+      "onion",
+      "beef stock",
+      "sour cream",
+      "mustard",
+      "paprika",
+      "parsley"
+    ],
+    "effort": "weeknight",
+    "id": "beef_stroganoff_with_egg_noodles",
+    "name": "Beef Stroganoff with Egg Noodles",
+    "cuisine": "Russian",
+    "region": "Europe",
+    "time_minutes": 45,
+    "allergens": [
+      "gluten",
+      "egg",
+      "dairy"
+    ],
+    "vegetarian": false,
+    "summary": "Beef stroganoff with egg noodles is a home-style dish of tender beef and mushrooms in a sour cream sauce served over noodles."
+  },
+  {
+    "family": "noodles",
+    "protein": "chicken",
+    "starch": "wheat_noodles",
+    "techniques": [
+      "boil",
+      "stir_fry"
+    ],
+    "equipment": [
+      "stovetop",
+      "wok"
+    ],
+    "flavor": [
+      "soy_umami",
+      "garlic_ginger",
+      "sesame"
+    ],
+    "key_ingredients": [
+      "lo mein noodle",
+      "chicken breast",
+      "cabbage",
+      "carrot",
+      "snow pea",
+      "garlic",
+      "ginger",
+      "soy sauce",
+      "oyster sauce",
+      "sesame oil"
+    ],
+    "effort": "weeknight",
+    "id": "chicken_lo_mein",
+    "name": "Chicken Lo Mein",
+    "cuisine": "Chinese-American",
+    "region": "North America",
+    "time_minutes": 35,
+    "allergens": [
+      "gluten",
+      "soy",
+      "shellfish",
+      "sesame"
+    ],
+    "vegetarian": false,
+    "summary": "Chicken lo mein is a saucy stir-fried wheat noodle dish with sliced chicken, vegetables, soy sauce, and oyster sauce."
+  },
+  {
+    "family": "noodles",
+    "protein": "chicken",
+    "starch": "wheat_noodles",
+    "techniques": [
+      "boil",
+      "stir_fry"
+    ],
+    "equipment": [
+      "stovetop",
+      "wok"
+    ],
+    "flavor": [
+      "soy_umami",
+      "garlic_ginger",
+      "sesame"
+    ],
+    "key_ingredients": [
+      "chow mein noodle",
+      "chicken thigh",
+      "cabbage",
+      "celery",
+      "carrot",
+      "spring onion",
+      "garlic",
+      "soy sauce",
+      "oyster sauce",
+      "sesame oil"
+    ],
+    "effort": "weeknight",
+    "id": "chow_mein",
+    "name": "Chow Mein",
+    "cuisine": "Chinese",
+    "region": "East Asia",
+    "time_minutes": 35,
+    "allergens": [
+      "gluten",
+      "soy",
+      "shellfish",
+      "sesame"
+    ],
+    "vegetarian": false,
+    "summary": "Chow mein is a Chinese stir-fried wheat noodle dish with vegetables and often chicken in a savory soy-based sauce."
+  },
+  {
+    "family": "noodles",
+    "protein": "pork",
+    "starch": "wheat_noodles",
+    "techniques": [
+      "boil",
+      "stir_fry"
+    ],
+    "equipment": [
+      "stovetop",
+      "wok"
+    ],
+    "flavor": [
+      "chili_heat",
+      "sesame",
+      "soy_umami",
+      "garlic_ginger",
+      "vinegar_sour"
+    ],
+    "key_ingredients": [
+      "wheat noodle",
+      "ground pork",
+      "sichuan peppercorn",
+      "chili oil",
+      "sesame paste",
+      "soy sauce",
+      "chinkiang vinegar",
+      "garlic",
+      "ginger",
+      "spring onion"
+    ],
+    "effort": "weeknight",
+    "id": "dan_dan_noodles",
+    "name": "Dan Dan Noodles",
+    "cuisine": "Sichuan Chinese",
+    "region": "East Asia",
+    "time_minutes": 40,
+    "allergens": [
+      "gluten",
+      "soy",
+      "sesame"
+    ],
+    "vegetarian": false,
+    "summary": "Dan dan noodles are Sichuan wheat noodles dressed with spicy sesame-chili sauce, minced pork, and numbing peppercorn."
+  },
+  {
+    "family": "noodles",
+    "protein": "none",
+    "starch": "wheat_noodles",
+    "techniques": [
+      "boil",
+      "stir_fry"
+    ],
+    "equipment": [
+      "stovetop",
+      "wok"
+    ],
+    "flavor": [
+      "soy_umami",
+      "chili_heat",
+      "garlic_ginger",
+      "vinegar_sour",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "hakka noodle",
+      "cabbage",
+      "carrot",
+      "bell pepper",
+      "spring onion",
+      "garlic",
+      "ginger",
+      "soy sauce",
+      "chili sauce",
+      "vinegar"
+    ],
+    "effort": "weeknight",
+    "id": "hakka_noodles",
+    "name": "Hakka Noodles",
+    "cuisine": "Indo-Chinese",
+    "region": "South Asia",
+    "time_minutes": 35,
+    "allergens": [
+      "gluten",
+      "soy"
+    ],
+    "vegetarian": true,
+    "summary": "Hakka noodles are stir-fried wheat noodles with crisp vegetables, soy sauce, and Indo-Chinese seasonings."
+  },
+  {
+    "family": "noodles",
+    "protein": "beef",
+    "starch": "potato",
+    "techniques": [
+      "boil",
+      "stir_fry"
+    ],
+    "equipment": [
+      "stovetop",
+      "wok"
+    ],
+    "flavor": [
+      "soy_umami",
+      "sesame",
+      "garlic_ginger",
+      "sweet"
+    ],
+    "key_ingredients": [
+      "sweet potato noodle",
+      "beef sirloin",
+      "spinach",
+      "carrot",
+      "onion",
+      "shiitake mushroom",
+      "garlic",
+      "soy sauce",
+      "sesame oil",
+      "sesame seed"
+    ],
+    "effort": "weeknight",
+    "id": "japchae",
+    "name": "Japchae",
+    "cuisine": "Korean",
+    "region": "East Asia",
+    "time_minutes": 45,
+    "allergens": [
+      "soy",
+      "sesame"
+    ],
+    "vegetarian": false,
+    "summary": "Japchae is a Korean dish of chewy sweet potato glass noodles stir-fried with vegetables, sesame, soy sauce, and often beef."
+  },
+  {
+    "family": "noodles",
+    "protein": "chicken",
+    "starch": "wheat_noodles",
+    "techniques": [
+      "spice_paste",
+      "simmer",
+      "boil",
+      "deep_fry"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "coconut",
+      "chili_heat",
+      "garlic_ginger",
+      "cumin_coriander",
+      "citrus"
+    ],
+    "key_ingredients": [
+      "egg noodle",
+      "chicken thigh",
+      "coconut milk",
+      "red curry paste",
+      "curry powder",
+      "shallot",
+      "garlic",
+      "ginger",
+      "chicken stock",
+      "lime"
+    ],
+    "effort": "weekend",
+    "id": "khao_soi",
+    "name": "Khao Soi",
+    "cuisine": "Northern Thai",
+    "region": "Southeast Asia",
+    "time_minutes": 75,
+    "allergens": [
+      "gluten",
+      "egg",
+      "fish"
+    ],
+    "vegetarian": false,
+    "summary": "Khao soi is a Northern Thai coconut curry noodle soup with chicken, boiled egg noodles, and crisp fried noodles on top."
+  },
+  {
+    "family": "noodles",
+    "protein": "legumes",
+    "starch": "pasta",
+    "techniques": [
+      "boil",
+      "deep_fry",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "tomato_base",
+      "onion_base",
+      "cumin_coriander",
+      "vinegar_sour",
+      "chili_heat"
+    ],
+    "key_ingredients": [
+      "macaroni",
+      "rice",
+      "brown lentil",
+      "chickpea",
+      "tomato",
+      "onion",
+      "garlic",
+      "cumin",
+      "vinegar",
+      "chili flake"
+    ],
+    "effort": "weekend",
+    "id": "kushari",
+    "name": "Kushari",
+    "cuisine": "Egyptian",
+    "region": "Africa",
+    "time_minutes": 75,
+    "allergens": [
+      "gluten"
+    ],
+    "vegetarian": true,
+    "summary": "Kushari is an Egyptian home dish of pasta, rice, lentils, chickpeas, tomato sauce, and crisp fried onions."
+  },
+  {
+    "family": "noodles",
+    "protein": "lamb_or_goat",
+    "starch": "wheat_noodles",
+    "techniques": [
+      "knead_dough",
+      "simmer",
+      "stir_fry",
+      "boil"
+    ],
+    "equipment": [
+      "stovetop",
+      "wok"
+    ],
+    "flavor": [
+      "cumin_coriander",
+      "garlic_ginger",
+      "tomato_base",
+      "chili_heat"
+    ],
+    "key_ingredients": [
+      "wheat flour",
+      "lamb shoulder",
+      "tomato",
+      "bell pepper",
+      "onion",
+      "garlic",
+      "cumin",
+      "coriander",
+      "radish",
+      "cilantro"
+    ],
+    "effort": "weekend",
+    "id": "lagman",
+    "name": "Lagman",
+    "cuisine": "Uyghur",
+    "region": "Central Asia",
+    "time_minutes": 120,
+    "allergens": [
+      "gluten"
+    ],
+    "vegetarian": false,
+    "summary": "Lagman is a Central Asian hand-pulled noodle dish served with a savory lamb and vegetable sauce or broth."
+  },
+  {
+    "family": "noodles",
+    "protein": "shrimp",
+    "starch": "rice_noodles",
+    "techniques": [
+      "spice_paste",
+      "simmer",
+      "boil"
+    ],
+    "equipment": [
+      "stovetop",
+      "blender"
+    ],
+    "flavor": [
+      "coconut",
+      "chili_heat",
+      "garlic_ginger",
+      "fish_sauce",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "rice noodle",
+      "shrimp",
+      "coconut milk",
+      "dried shrimp",
+      "lemongrass",
+      "galangal",
+      "shallot",
+      "chili paste",
+      "fish sauce",
+      "bean sprout"
+    ],
+    "effort": "weekend",
+    "id": "laksa_lemak",
+    "name": "Laksa Lemak",
+    "cuisine": "Malaysian",
+    "region": "Southeast Asia",
+    "time_minutes": 70,
+    "allergens": [
+      "shellfish",
+      "fish"
+    ],
+    "vegetarian": false,
+    "summary": "Laksa lemak is a coconut-rich Southeast Asian noodle soup with rice noodles, spicy aromatic paste, shrimp, and bean sprouts."
+  },
+  {
+    "family": "noodles",
+    "protein": "egg",
+    "starch": "wheat_noodles",
+    "techniques": [
+      "boil",
+      "stir_fry"
+    ],
+    "equipment": [
+      "stovetop",
+      "wok"
+    ],
+    "flavor": [
+      "soy_umami",
+      "chili_heat",
+      "garlic_ginger",
+      "sweet"
+    ],
+    "key_ingredients": [
+      "yellow noodle",
+      "egg",
+      "cabbage",
+      "tomato",
+      "shallot",
+      "garlic",
+      "kecap manis",
+      "soy sauce",
+      "chili paste",
+      "lime"
+    ],
+    "effort": "weeknight",
+    "id": "mee_goreng",
+    "name": "Mee Goreng",
+    "cuisine": "Indonesian",
+    "region": "Southeast Asia",
+    "time_minutes": 35,
+    "allergens": [
+      "gluten",
+      "egg",
+      "soy"
+    ],
+    "vegetarian": true,
+    "summary": "Mee goreng is an Indonesian-style fried noodle dish seasoned with sweet soy sauce, chili, aromatics, vegetables, and egg."
+  },
+  {
+    "family": "noodles",
+    "protein": "shrimp",
+    "starch": "rice_noodles",
+    "techniques": [
+      "boil",
+      "stir_fry"
+    ],
+    "equipment": [
+      "stovetop",
+      "wok"
+    ],
+    "flavor": [
+      "fish_sauce",
+      "citrus",
+      "chili_heat",
+      "sweet",
+      "garlic_ginger"
+    ],
+    "key_ingredients": [
+      "rice noodle",
+      "shrimp",
+      "egg",
+      "bean sprout",
+      "garlic",
+      "tamarind paste",
+      "fish sauce",
+      "palm sugar",
+      "lime",
+      "peanut"
+    ],
+    "effort": "weeknight",
+    "id": "pad_thai",
+    "name": "Pad Thai",
+    "cuisine": "Thai",
+    "region": "Southeast Asia",
+    "time_minutes": 40,
+    "allergens": [
+      "egg",
+      "fish",
+      "shellfish",
+      "peanut"
+    ],
+    "vegetarian": false,
+    "summary": "Pad Thai is a sweet-sour stir-fried rice noodle dish with shrimp, egg, tamarind, fish sauce, lime, and peanuts."
+  },
+  {
+    "family": "noodles",
+    "protein": "chicken",
+    "starch": "rice_noodles",
+    "techniques": [
+      "boil",
+      "stir_fry"
+    ],
+    "equipment": [
+      "stovetop",
+      "wok"
+    ],
+    "flavor": [
+      "soy_umami",
+      "citrus",
+      "garlic_ginger",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "rice vermicelli",
+      "chicken thigh",
+      "cabbage",
+      "carrot",
+      "green bean",
+      "celery",
+      "onion",
+      "garlic",
+      "soy sauce",
+      "calamansi"
+    ],
+    "effort": "weeknight",
+    "id": "pancit_bihon",
+    "name": "Pancit Bihon",
+    "cuisine": "Filipino",
+    "region": "Southeast Asia",
+    "time_minutes": 45,
+    "allergens": [
+      "soy"
+    ],
+    "vegetarian": false,
+    "summary": "Pancit bihon is a Filipino stir-fried rice vermicelli dish with chicken, vegetables, soy sauce, and calamansi."
+  },
+  {
+    "family": "noodles",
+    "protein": "beef",
+    "starch": "rice_noodles",
+    "techniques": [
+      "simmer",
+      "boil"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "warm_spices",
+      "fish_sauce",
+      "fresh_herbs",
+      "citrus",
+      "onion_base"
+    ],
+    "key_ingredients": [
+      "rice noodle",
+      "beef brisket",
+      "beef bone",
+      "fish sauce",
+      "onion",
+      "ginger",
+      "star anise",
+      "cinnamon",
+      "bean sprout",
+      "lime",
+      "thai basil"
+    ],
+    "effort": "weekend",
+    "id": "pho_bo",
+    "name": "Pho Bo",
+    "cuisine": "Vietnamese",
+    "region": "Southeast Asia",
+    "time_minutes": 180,
+    "allergens": [
+      "fish"
+    ],
+    "vegetarian": false,
+    "summary": "Pho bo is a Vietnamese beef noodle soup with rice noodles, aromatic spiced broth, herbs, bean sprouts, and lime."
+  },
+  {
+    "family": "noodles",
+    "protein": "none",
+    "starch": "wheat_noodles",
+    "techniques": [
+      "boil",
+      "temper_spices",
+      "stir_fry"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "cumin_coriander",
+      "chili_heat",
+      "garlic_ginger",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "vermicelli",
+      "mustard seed",
+      "curry leaf",
+      "green chili",
+      "ginger",
+      "onion",
+      "carrot",
+      "pea",
+      "cashew",
+      "lemon"
+    ],
+    "effort": "weeknight",
+    "id": "sevai_upma",
+    "name": "Sevai Upma",
+    "cuisine": "Indian",
+    "region": "South Asia",
+    "time_minutes": 30,
+    "allergens": [
+      "gluten",
+      "tree_nut"
+    ],
+    "vegetarian": true,
+    "summary": "Sevai upma is a South Indian-style savory vermicelli dish cooked with tempered spices, vegetables, herbs, and lemon."
+  },
+  {
+    "family": "noodles",
+    "protein": "pork",
+    "starch": "wheat_noodles",
+    "techniques": [
+      "simmer",
+      "boil"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "soy_umami",
+      "garlic_ginger",
+      "sesame"
+    ],
+    "key_ingredients": [
+      "ramen noodle",
+      "pork belly",
+      "chicken stock",
+      "soy sauce",
+      "mirin",
+      "garlic",
+      "ginger",
+      "spring onion",
+      "egg",
+      "nori"
+    ],
+    "effort": "weekend",
+    "id": "shoyu_ramen",
+    "name": "Shoyu Ramen",
+    "cuisine": "Japanese",
+    "region": "East Asia",
+    "time_minutes": 120,
+    "allergens": [
+      "gluten",
+      "soy",
+      "egg",
+      "sesame"
+    ],
+    "vegetarian": false,
+    "summary": "Shoyu ramen is a Japanese wheat noodle soup in a soy-seasoned broth with toppings such as pork, egg, scallion, and nori."
+  },
+  {
+    "family": "noodles",
+    "protein": "none",
+    "starch": "pasta",
+    "techniques": [
+      "pan_fry",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "tomato_base",
+      "garlic_ginger",
+      "chili_heat",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "fideo noodle",
+      "tomato",
+      "onion",
+      "garlic",
+      "chicken stock",
+      "chipotle chili",
+      "cilantro",
+      "lime",
+      "crema",
+      "queso fresco"
+    ],
+    "effort": "weeknight",
+    "id": "sopa_seca_de_fideo",
+    "name": "Sopa Seca de Fideo",
+    "cuisine": "Mexican",
+    "region": "Latin America",
+    "time_minutes": 35,
+    "allergens": [
+      "gluten",
+      "dairy"
+    ],
+    "vegetarian": false,
+    "summary": "Sopa seca de fideo is a Mexican dry noodle dish in which toasted thin pasta absorbs a tomato-chile broth."
+  },
+  {
+    "family": "noodles",
+    "protein": "none",
+    "starch": "pasta",
+    "techniques": [
+      "boil",
+      "pan_fry"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "garlic_ginger",
+      "chili_heat",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "spaghetti",
+      "garlic",
+      "red chili flake",
+      "parsley",
+      "parmesan cheese"
+    ],
+    "effort": "weeknight",
+    "id": "spaghetti_aglio_e_olio",
+    "name": "Spaghetti Aglio e Olio",
+    "cuisine": "Italian",
+    "region": "Europe",
+    "time_minutes": 25,
+    "allergens": [
+      "gluten",
+      "dairy"
+    ],
+    "vegetarian": true,
+    "summary": "Spaghetti aglio e olio is an Italian pasta tossed with gently cooked garlic, chili, parsley, and often parmesan."
+  },
+  {
+    "family": "noodles",
+    "protein": "pork",
+    "starch": "pasta",
+    "techniques": [
+      "boil",
+      "pan_fry"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "butter_cream",
+      "soy_umami"
+    ],
+    "key_ingredients": [
+      "spaghetti",
+      "guanciale",
+      "egg",
+      "pecorino romano",
+      "parmesan cheese"
+    ],
+    "effort": "weeknight",
+    "id": "spaghetti_carbonara",
+    "name": "Spaghetti Carbonara",
+    "cuisine": "Italian",
+    "region": "Europe",
+    "time_minutes": 30,
+    "allergens": [
+      "gluten",
+      "egg",
+      "dairy"
+    ],
+    "vegetarian": false,
+    "summary": "Spaghetti carbonara is a Roman pasta dish tossed with egg, cured pork, pecorino, and starchy pasta water to make a creamy sauce."
+  },
+  {
+    "family": "rice_with_protein",
+    "protein": "chicken",
+    "starch": "rice",
+    "techniques": [
+      "sear",
+      "simmer",
+      "rice_in_stock"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "cumin_coriander",
+      "garlic_ginger",
+      "onion_base",
+      "tomato_base",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "chicken thigh",
+      "medium grain rice",
+      "chicken stock",
+      "onion",
+      "garlic",
+      "tomato",
+      "bell pepper",
+      "pea",
+      "cilantro",
+      "saffron"
+    ],
+    "effort": "weeknight",
+    "id": "arroz_con_pollo",
+    "name": "Arroz con Pollo",
+    "cuisine": "Cuban",
+    "region": "Latin America",
+    "time_minutes": 75,
+    "allergens": [],
+    "vegetarian": false,
+    "summary": "Arroz con pollo is a Latin American chicken-and-rice dish simmered with sofrito, stock, and vegetables."
+  },
+  {
+    "family": "rice_with_protein",
+    "protein": "beef",
+    "starch": "rice",
+    "techniques": [
+      "plain_rice",
+      "stir_fry",
+      "pan_fry"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "soy_umami",
+      "sesame",
+      "garlic_ginger",
+      "fermented_chili",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "short grain rice",
+      "beef",
+      "egg",
+      "spinach",
+      "carrot",
+      "zucchini",
+      "bean sprout",
+      "gochujang",
+      "soy sauce",
+      "sesame oil"
+    ],
+    "effort": "weekend",
+    "id": "bibimbap",
+    "name": "Bibimbap",
+    "cuisine": "Korean",
+    "region": "East Asia",
+    "time_minutes": 70,
+    "allergens": [
+      "egg",
+      "soy",
+      "sesame"
+    ],
+    "vegetarian": false,
+    "summary": "Bibimbap is a Korean mixed rice bowl topped with seasoned vegetables, beef, egg, sesame oil, and gochujang."
+  },
+  {
+    "family": "rice_with_protein",
+    "protein": "chicken",
+    "starch": "rice",
+    "techniques": [
+      "marinate",
+      "temper_spices",
+      "simmer",
+      "layered_dum"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "warm_spices",
+      "cumin_coriander",
+      "chili_heat",
+      "garlic_ginger",
+      "onion_base",
+      "yogurt",
+      "fresh_herbs",
+      "saffron"
+    ],
+    "key_ingredients": [
+      "chicken thigh",
+      "basmati rice",
+      "yogurt",
+      "onion",
+      "ginger",
+      "garlic",
+      "biryani masala",
+      "mint",
+      "cilantro",
+      "saffron"
+    ],
+    "effort": "weekend",
+    "id": "chicken_biryani",
+    "name": "Chicken Biryani",
+    "cuisine": "Indian",
+    "region": "South Asia",
+    "time_minutes": 120,
+    "allergens": [
+      "dairy"
+    ],
+    "vegetarian": false,
+    "summary": "Chicken biryani is a layered rice dish of spiced marinated chicken and basmati rice steamed together until fragrant."
+  },
+  {
+    "family": "rice_with_protein",
+    "protein": "chicken",
+    "starch": "rice",
+    "techniques": [
+      "plain_rice",
+      "stir_fry",
+      "scramble"
+    ],
+    "equipment": [
+      "wok",
+      "stovetop"
+    ],
+    "flavor": [
+      "soy_umami",
+      "sesame",
+      "garlic_ginger"
+    ],
+    "key_ingredients": [
+      "cooked rice",
+      "chicken breast",
+      "egg",
+      "soy sauce",
+      "scallion",
+      "garlic",
+      "carrot",
+      "pea",
+      "sesame oil"
+    ],
+    "effort": "weeknight",
+    "id": "chicken_fried_rice",
+    "name": "Chicken Fried Rice",
+    "cuisine": "Chinese",
+    "region": "East Asia",
+    "time_minutes": 30,
+    "allergens": [
+      "egg",
+      "soy",
+      "sesame"
+    ],
+    "vegetarian": false,
+    "summary": "Chicken fried rice is a wok-fried dish of cooked rice, chicken, egg, vegetables, and soy seasoning."
+  },
+  {
+    "family": "rice_with_protein",
+    "protein": "chicken",
+    "starch": "rice",
+    "techniques": [
+      "marinate",
+      "roast",
+      "simmer",
+      "rice_in_stock"
+    ],
+    "equipment": [
+      "stovetop",
+      "oven"
+    ],
+    "flavor": [
+      "warm_spices",
+      "garlic_ginger",
+      "cumin_coriander",
+      "smoky"
+    ],
+    "key_ingredients": [
+      "chicken leg",
+      "basmati rice",
+      "chicken stock",
+      "onion",
+      "garlic",
+      "ginger",
+      "cumin",
+      "cardamom",
+      "cinnamon",
+      "dried lime"
+    ],
+    "effort": "weekend",
+    "id": "chicken_mandi",
+    "name": "Chicken Mandi",
+    "cuisine": "Yemeni",
+    "region": "Middle East",
+    "time_minutes": 150,
+    "allergens": [],
+    "vegetarian": false,
+    "summary": "Chicken mandi is a Yemeni rice dish with spice-marinated roasted chicken served over smoky seasoned rice."
+  },
+  {
+    "family": "rice_with_protein",
+    "protein": "chicken",
+    "starch": "rice",
+    "techniques": [
+      "sear",
+      "simmer",
+      "rice_in_stock"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "coconut",
+      "onion_base",
+      "garlic_ginger",
+      "fresh_herbs",
+      "sweet"
+    ],
+    "key_ingredients": [
+      "chicken thigh",
+      "parboiled rice",
+      "pigeon pea",
+      "coconut milk",
+      "brown sugar",
+      "onion",
+      "garlic",
+      "scallion",
+      "thyme",
+      "carrot"
+    ],
+    "effort": "weeknight",
+    "id": "chicken_pelau",
+    "name": "Chicken Pelau",
+    "cuisine": "Trinidadian",
+    "region": "Caribbean",
+    "time_minutes": 80,
+    "allergens": [],
+    "vegetarian": false,
+    "summary": "Chicken pelau is a Trinidadian one-pot rice dish with browned chicken, pigeon peas, coconut milk, and herbs."
+  },
+  {
+    "family": "rice_with_protein",
+    "protein": "chicken",
+    "starch": "rice",
+    "techniques": [
+      "temper_spices",
+      "sear",
+      "simmer",
+      "rice_in_stock"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "warm_spices",
+      "cumin_coriander",
+      "garlic_ginger",
+      "onion_base",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "chicken thigh",
+      "basmati rice",
+      "chicken stock",
+      "onion",
+      "ginger",
+      "garlic",
+      "cumin",
+      "cardamom",
+      "cinnamon",
+      "bay leaf"
+    ],
+    "effort": "weeknight",
+    "id": "chicken_pulao",
+    "name": "Chicken Pulao",
+    "cuisine": "Pakistani",
+    "region": "South Asia",
+    "time_minutes": 60,
+    "allergens": [],
+    "vegetarian": false,
+    "summary": "Chicken pulao is a one-pot basmati rice dish cooked in aromatic chicken stock with whole spices and tender chicken."
+  },
+  {
+    "family": "rice_with_protein",
+    "protein": "chicken",
+    "starch": "rice",
+    "techniques": [
+      "poach",
+      "rice_in_stock",
+      "blend_puree"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "garlic_ginger",
+      "soy_umami",
+      "sesame",
+      "chili_heat",
+      "citrus"
+    ],
+    "key_ingredients": [
+      "whole chicken",
+      "jasmine rice",
+      "chicken stock",
+      "ginger",
+      "garlic",
+      "scallion",
+      "cucumber",
+      "soy sauce",
+      "sesame oil",
+      "chili"
+    ],
+    "effort": "weeknight",
+    "id": "hainanese_chicken_rice",
+    "name": "Hainanese Chicken Rice",
+    "cuisine": "Singaporean",
+    "region": "Southeast Asia",
+    "time_minutes": 80,
+    "allergens": [
+      "soy",
+      "sesame"
+    ],
+    "vegetarian": false,
+    "summary": "Hainanese chicken rice is poached chicken served with fragrant chicken-fat rice and ginger-chili sauces."
+  },
+  {
+    "family": "rice_with_protein",
+    "protein": "chicken",
+    "starch": "rice",
+    "techniques": [
+      "sear",
+      "simmer",
+      "rice_in_stock"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "smoky",
+      "chili_heat",
+      "onion_base",
+      "garlic_ginger",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "chicken thigh",
+      "andouille sausage",
+      "shrimp",
+      "long grain rice",
+      "chicken stock",
+      "onion",
+      "celery",
+      "bell pepper",
+      "garlic",
+      "cajun seasoning"
+    ],
+    "effort": "weeknight",
+    "id": "jambalaya",
+    "name": "Jambalaya",
+    "cuisine": "Louisiana Creole",
+    "region": "North America",
+    "time_minutes": 75,
+    "allergens": [
+      "shellfish"
+    ],
+    "vegetarian": false,
+    "summary": "Jambalaya is a Louisiana rice dish cooked with chicken, sausage, shrimp, vegetables, and Cajun-Creole seasoning."
+  },
+  {
+    "family": "rice_with_protein",
+    "protein": "chicken",
+    "starch": "rice",
+    "techniques": [
+      "blend_puree",
+      "sear",
+      "simmer",
+      "rice_in_stock"
+    ],
+    "equipment": [
+      "stovetop",
+      "blender"
+    ],
+    "flavor": [
+      "tomato_base",
+      "chili_heat",
+      "onion_base",
+      "garlic_ginger",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "chicken thigh",
+      "long grain rice",
+      "chicken stock",
+      "tomato",
+      "red bell pepper",
+      "scotch bonnet",
+      "onion",
+      "garlic",
+      "ginger",
+      "thyme"
+    ],
+    "effort": "weeknight",
+    "id": "jollof_rice_with_chicken",
+    "name": "Jollof Rice with Chicken",
+    "cuisine": "Nigerian",
+    "region": "Africa",
+    "time_minutes": 85,
+    "allergens": [],
+    "vegetarian": false,
+    "summary": "Jollof rice with chicken is a West African tomato-pepper rice cooked in seasoned stock and served with browned chicken."
+  },
+  {
+    "family": "rice_with_protein",
+    "protein": "chicken",
+    "starch": "rice",
+    "techniques": [
+      "sear",
+      "simmer",
+      "rice_in_stock"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "warm_spices",
+      "tomato_base",
+      "onion_base",
+      "garlic_ginger",
+      "citrus"
+    ],
+    "key_ingredients": [
+      "chicken leg",
+      "basmati rice",
+      "chicken stock",
+      "onion",
+      "tomato",
+      "garlic",
+      "ginger",
+      "kabsa spice",
+      "dried lime",
+      "raisin"
+    ],
+    "effort": "weeknight",
+    "id": "kabsa",
+    "name": "Kabsa",
+    "cuisine": "Saudi",
+    "region": "Middle East",
+    "time_minutes": 90,
+    "allergens": [],
+    "vegetarian": false,
+    "summary": "Kabsa is a Saudi spiced chicken and rice dish in which the rice absorbs a tomato-scented chicken broth."
+  },
+  {
+    "family": "rice_with_protein",
+    "protein": "lamb_or_goat",
+    "starch": "rice",
+    "techniques": [
+      "sear",
+      "braise",
+      "rice_in_stock"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "warm_spices",
+      "cumin_coriander",
+      "onion_base",
+      "sweet"
+    ],
+    "key_ingredients": [
+      "lamb shoulder",
+      "basmati rice",
+      "carrot",
+      "raisin",
+      "onion",
+      "cumin",
+      "cardamom",
+      "almond",
+      "chicken stock"
+    ],
+    "effort": "weekend",
+    "id": "kabuli_palaw",
+    "name": "Kabuli Palaw",
+    "cuisine": "Afghan",
+    "region": "South Asia",
+    "time_minutes": 120,
+    "allergens": [
+      "tree_nut"
+    ],
+    "vegetarian": false,
+    "summary": "Kabuli palaw is Afghan rice cooked with lamb and topped with sweet carrots, raisins, and nuts."
+  },
+  {
+    "family": "rice_with_protein",
+    "protein": "chicken",
+    "starch": "rice",
+    "techniques": [
+      "pan_fry",
+      "sear",
+      "simmer",
+      "rice_in_stock"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "warm_spices",
+      "cumin_coriander",
+      "onion_base",
+      "garlic_ginger"
+    ],
+    "key_ingredients": [
+      "chicken thigh",
+      "basmati rice",
+      "eggplant",
+      "cauliflower",
+      "potato",
+      "onion",
+      "garlic",
+      "allspice",
+      "cinnamon",
+      "chicken stock"
+    ],
+    "effort": "weekend",
+    "id": "maqluba",
+    "name": "Maqluba",
+    "cuisine": "Palestinian",
+    "region": "Middle East",
+    "time_minutes": 110,
+    "allergens": [],
+    "vegetarian": false,
+    "summary": "Maqluba is an upside-down rice pot layered with chicken, fried vegetables, and warm spices."
+  },
+  {
+    "family": "rice_with_protein",
+    "protein": "egg",
+    "starch": "rice",
+    "techniques": [
+      "plain_rice",
+      "spice_paste",
+      "stir_fry",
+      "pan_fry"
+    ],
+    "equipment": [
+      "wok",
+      "stovetop"
+    ],
+    "flavor": [
+      "soy_umami",
+      "fermented_chili",
+      "chili_heat",
+      "garlic_ginger",
+      "sweet"
+    ],
+    "key_ingredients": [
+      "cooked rice",
+      "egg",
+      "chicken",
+      "shallot",
+      "garlic",
+      "chili",
+      "kecap manis",
+      "shrimp paste",
+      "cucumber"
+    ],
+    "effort": "weeknight",
+    "id": "nasi_goreng",
+    "name": "Nasi Goreng",
+    "cuisine": "Indonesian",
+    "region": "Southeast Asia",
+    "time_minutes": 35,
+    "allergens": [
+      "egg",
+      "soy",
+      "shellfish"
+    ],
+    "vegetarian": false,
+    "summary": "Nasi goreng is Indonesian fried rice flavored with kecap manis, chile-shallot paste, and often topped with a fried egg."
+  },
+  {
+    "family": "rice_with_protein",
+    "protein": "chicken",
+    "starch": "rice",
+    "techniques": [
+      "sear",
+      "simmer",
+      "rice_in_stock"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "saffron",
+      "smoky",
+      "garlic_ginger",
+      "tomato_base",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "chicken thigh",
+      "rabbit",
+      "bomba rice",
+      "green bean",
+      "lima bean",
+      "tomato",
+      "garlic",
+      "saffron",
+      "paprika",
+      "rosemary"
+    ],
+    "effort": "weekend",
+    "id": "paella_valenciana",
+    "name": "Paella Valenciana",
+    "cuisine": "Spanish",
+    "region": "Europe",
+    "time_minutes": 85,
+    "allergens": [],
+    "vegetarian": false,
+    "summary": "Paella Valenciana is a Spanish rice dish cooked in a wide pan with chicken, rabbit, beans, saffron, and paprika."
+  },
+  {
+    "family": "rice_with_protein",
+    "protein": "lamb_or_goat",
+    "starch": "rice",
+    "techniques": [
+      "sear",
+      "braise",
+      "rice_in_stock"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "cumin_coriander",
+      "garlic_ginger",
+      "onion_base"
+    ],
+    "key_ingredients": [
+      "lamb shoulder",
+      "short grain rice",
+      "carrot",
+      "onion",
+      "garlic",
+      "cumin",
+      "chickpea",
+      "raisin"
+    ],
+    "effort": "weeknight",
+    "id": "plov",
+    "name": "Plov",
+    "cuisine": "Uzbek",
+    "region": "Central Asia",
+    "time_minutes": 90,
+    "allergens": [],
+    "vegetarian": false,
+    "summary": "Plov is a Central Asian one-pot rice dish cooked with lamb, carrots, onions, and cumin-rich broth."
+  },
+  {
+    "family": "rice_with_protein",
+    "protein": "chicken",
+    "starch": "rice",
+    "techniques": [
+      "rice_in_stock",
+      "steam"
+    ],
+    "equipment": [
+      "rice_cooker"
+    ],
+    "flavor": [
+      "soy_umami",
+      "sweet",
+      "garlic_ginger"
+    ],
+    "key_ingredients": [
+      "chicken thigh",
+      "short grain rice",
+      "dashi",
+      "soy sauce",
+      "mirin",
+      "shiitake mushroom",
+      "carrot",
+      "gobo",
+      "aburaage"
+    ],
+    "effort": "weeknight",
+    "id": "takikomi_gohan",
+    "name": "Takikomi Gohan",
+    "cuisine": "Japanese",
+    "region": "East Asia",
+    "time_minutes": 60,
+    "allergens": [
+      "soy",
+      "fish"
+    ],
+    "vegetarian": false,
+    "summary": "Takikomi gohan is Japanese seasoned rice cooked with chicken, vegetables, mushrooms, soy sauce, and dashi."
+  },
+  {
+    "family": "rice_with_protein",
+    "protein": "fish",
+    "starch": "rice",
+    "techniques": [
+      "spice_paste",
+      "sear",
+      "simmer",
+      "rice_in_stock"
+    ],
+    "equipment": [
+      "stovetop",
+      "blender"
+    ],
+    "flavor": [
+      "tomato_base",
+      "chili_heat",
+      "garlic_ginger",
+      "fresh_herbs",
+      "fish_sauce"
+    ],
+    "key_ingredients": [
+      "white fish",
+      "broken rice",
+      "tomato paste",
+      "onion",
+      "garlic",
+      "parsley",
+      "scotch bonnet",
+      "cabbage",
+      "carrot",
+      "cassava"
+    ],
+    "effort": "weekend",
+    "id": "thieboudienne",
+    "name": "Thieboudienne",
+    "cuisine": "Senegalese",
+    "region": "Africa",
+    "time_minutes": 120,
+    "allergens": [
+      "fish"
+    ],
+    "vegetarian": false,
+    "summary": "Thieboudienne is Senegalese fish and rice cooked in a tomato-rich broth with vegetables and herb-stuffed fish."
+  },
+  {
+    "family": "rice_with_protein",
+    "protein": "chicken",
+    "starch": "rice",
+    "techniques": [
+      "braise",
+      "plain_rice",
+      "steam"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "saffron",
+      "tomato_base",
+      "onion_base",
+      "citrus",
+      "sweet",
+      "butter_cream"
+    ],
+    "key_ingredients": [
+      "chicken leg",
+      "basmati rice",
+      "barberry",
+      "saffron",
+      "onion",
+      "tomato paste",
+      "turmeric",
+      "butter",
+      "sugar",
+      "lemon"
+    ],
+    "effort": "weekend",
+    "id": "zereshk_polo_ba_morgh",
+    "name": "Zereshk Polo ba Morgh",
+    "cuisine": "Iranian",
+    "region": "Middle East",
+    "time_minutes": 100,
+    "allergens": [
+      "dairy"
+    ],
+    "vegetarian": false,
+    "summary": "Zereshk polo ba morgh is Persian saffron rice with tart barberries served alongside tomato-braised chicken."
+  },
+  {
+    "family": "roast_and_grill",
+    "protein": "pork",
+    "starch": "none",
+    "techniques": [
+      "spice_paste",
+      "grill",
+      "roast"
+    ],
+    "equipment": [
+      "grill",
+      "oven"
+    ],
+    "flavor": [
+      "smoky",
+      "sweet",
+      "chili_heat",
+      "vinegar_sour"
+    ],
+    "key_ingredients": [
+      "pork rib",
+      "brown sugar",
+      "paprika",
+      "mustard powder",
+      "garlic powder",
+      "cayenne",
+      "apple cider vinegar",
+      "tomato paste",
+      "molasses"
+    ],
+    "effort": "weekend",
+    "id": "american_barbecue_ribs",
+    "name": "American Barbecue Ribs",
+    "cuisine": "American",
+    "region": "North America",
+    "time_minutes": 240,
+    "allergens": [],
+    "vegetarian": false,
+    "summary": "American barbecue ribs are spice-rubbed pork ribs cooked low and slow and glazed with tangy-sweet sauce."
+  },
+  {
+    "family": "roast_and_grill",
+    "protein": "beef",
+    "starch": "none",
+    "techniques": [
+      "grill",
+      "roast"
+    ],
+    "equipment": [
+      "grill"
+    ],
+    "flavor": [
+      "smoky",
+      "fresh_herbs",
+      "vinegar_sour",
+      "garlic_ginger"
+    ],
+    "key_ingredients": [
+      "beef rib",
+      "beef short rib",
+      "parsley",
+      "garlic",
+      "oregano",
+      "red wine vinegar",
+      "chile flake"
+    ],
+    "effort": "weekend",
+    "id": "argentine_asado",
+    "name": "Argentine Asado",
+    "cuisine": "Argentine",
+    "region": "Latin America",
+    "time_minutes": 180,
+    "allergens": [],
+    "vegetarian": false,
+    "summary": "Argentine asado is beef ribs and cuts slowly grilled over coals and served with chimichurri."
+  },
+  {
+    "family": "roast_and_grill",
+    "protein": "pork",
+    "starch": "none",
+    "techniques": [
+      "marinate",
+      "roast",
+      "grill"
+    ],
+    "equipment": [
+      "oven"
+    ],
+    "flavor": [
+      "soy_umami",
+      "sweet",
+      "garlic_ginger",
+      "warm_spices"
+    ],
+    "key_ingredients": [
+      "pork shoulder",
+      "hoisin sauce",
+      "soy sauce",
+      "honey",
+      "five spice",
+      "red fermented bean curd",
+      "garlic",
+      "ginger",
+      "shaoxing wine"
+    ],
+    "effort": "weeknight",
+    "id": "char_siu",
+    "name": "Char Siu",
+    "cuisine": "Cantonese",
+    "region": "East Asia",
+    "time_minutes": 90,
+    "allergens": [
+      "soy",
+      "gluten",
+      "sesame"
+    ],
+    "vegetarian": false,
+    "summary": "Char siu is Cantonese barbecued pork marinated in a sweet savory red glaze and roasted until lacquered."
+  },
+  {
+    "family": "roast_and_grill",
+    "protein": "chicken",
+    "starch": "none",
+    "techniques": [
+      "marinate",
+      "deep_fry",
+      "temper_spices",
+      "stir_fry"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "chili_heat",
+      "garlic_ginger",
+      "cumin_coriander",
+      "yogurt",
+      "fresh_herbs",
+      "vinegar_sour"
+    ],
+    "key_ingredients": [
+      "chicken thigh",
+      "yogurt",
+      "egg",
+      "rice flour",
+      "cornstarch",
+      "ginger",
+      "garlic",
+      "red chile",
+      "curry leaf",
+      "green chile",
+      "vinegar"
+    ],
+    "effort": "weeknight",
+    "id": "chicken_65",
+    "name": "Chicken 65",
+    "cuisine": "Indian",
+    "region": "South Asia",
+    "time_minutes": 50,
+    "allergens": [
+      "dairy",
+      "egg"
+    ],
+    "vegetarian": false,
+    "summary": "Chicken 65 is a spicy South Indian fried chicken snack tossed with chiles, curry leaves, and aromatics."
+  },
+  {
+    "family": "roast_and_grill",
+    "protein": "chicken",
+    "starch": "rice",
+    "techniques": [
+      "marinate",
+      "grill"
+    ],
+    "equipment": [
+      "grill"
+    ],
+    "flavor": [
+      "citrus",
+      "garlic_ginger",
+      "vinegar_sour",
+      "fresh_herbs",
+      "smoky"
+    ],
+    "key_ingredients": [
+      "chicken leg",
+      "calamansi",
+      "cane vinegar",
+      "garlic",
+      "ginger",
+      "lemongrass",
+      "annatto",
+      "brown sugar",
+      "jasmine rice"
+    ],
+    "effort": "weeknight",
+    "id": "chicken_inasal",
+    "name": "Chicken Inasal",
+    "cuisine": "Filipino",
+    "region": "Southeast Asia",
+    "time_minutes": 80,
+    "allergens": [],
+    "vegetarian": false,
+    "summary": "Chicken inasal is Filipino chicken marinated with calamansi, vinegar, lemongrass, garlic, and annatto, then grilled."
+  },
+  {
+    "family": "roast_and_grill",
+    "protein": "chicken",
+    "starch": "none",
+    "techniques": [
+      "marinate",
+      "spice_paste",
+      "grill",
+      "blend_puree"
+    ],
+    "equipment": [
+      "grill",
+      "blender"
+    ],
+    "flavor": [
+      "cumin_coriander",
+      "garlic_ginger",
+      "coconut",
+      "chili_heat",
+      "soy_umami",
+      "sweet"
+    ],
+    "key_ingredients": [
+      "chicken thigh",
+      "peanut",
+      "coconut milk",
+      "lemongrass",
+      "galangal",
+      "turmeric",
+      "coriander",
+      "cumin",
+      "soy sauce",
+      "palm sugar"
+    ],
+    "effort": "weeknight",
+    "id": "chicken_satay",
+    "name": "Chicken Satay",
+    "cuisine": "Indonesian",
+    "region": "Southeast Asia",
+    "time_minutes": 70,
+    "allergens": [
+      "peanut",
+      "soy",
+      "gluten"
+    ],
+    "vegetarian": false,
+    "summary": "Chicken satay is spiced marinated chicken skewered, grilled, and served with peanut sauce."
+  },
+  {
+    "family": "roast_and_grill",
+    "protein": "chicken",
+    "starch": "flatbread",
+    "techniques": [
+      "marinate",
+      "grill",
+      "wrap_and_roll"
+    ],
+    "equipment": [
+      "grill"
+    ],
+    "flavor": [
+      "citrus",
+      "garlic_ginger",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "chicken breast",
+      "lemon",
+      "garlic",
+      "oregano",
+      "pita",
+      "tomato",
+      "red onion",
+      "cucumber",
+      "yogurt"
+    ],
+    "effort": "weeknight",
+    "id": "chicken_souvlaki",
+    "name": "Chicken Souvlaki",
+    "cuisine": "Greek",
+    "region": "Europe",
+    "time_minutes": 55,
+    "allergens": [
+      "gluten",
+      "dairy"
+    ],
+    "vegetarian": false,
+    "summary": "Chicken souvlaki is lemon-oregano-marinated chicken skewered, grilled, and commonly served with pita and yogurt sauce."
+  },
+  {
+    "family": "roast_and_grill",
+    "protein": "chicken",
+    "starch": "none",
+    "techniques": [
+      "marinate",
+      "spice_paste",
+      "grill"
+    ],
+    "equipment": [
+      "grill"
+    ],
+    "flavor": [
+      "warm_spices",
+      "cumin_coriander",
+      "chili_heat",
+      "garlic_ginger",
+      "yogurt",
+      "citrus"
+    ],
+    "key_ingredients": [
+      "chicken thigh",
+      "yogurt",
+      "lemon",
+      "garlic",
+      "ginger",
+      "kashmiri chili",
+      "garam masala",
+      "cumin",
+      "coriander"
+    ],
+    "effort": "weeknight",
+    "id": "chicken_tikka",
+    "name": "Chicken Tikka",
+    "cuisine": "Indian",
+    "region": "South Asia",
+    "time_minutes": 60,
+    "allergens": [
+      "dairy"
+    ],
+    "vegetarian": false,
+    "summary": "Chicken tikka is boneless chicken marinated in yogurt and spices, skewered, and grilled."
+  },
+  {
+    "family": "roast_and_grill",
+    "protein": "chicken",
+    "starch": "none",
+    "techniques": [
+      "marinate",
+      "grill"
+    ],
+    "equipment": [
+      "grill"
+    ],
+    "flavor": [
+      "fermented_chili",
+      "chili_heat",
+      "garlic_ginger",
+      "soy_umami",
+      "sesame",
+      "sweet"
+    ],
+    "key_ingredients": [
+      "chicken thigh",
+      "gochujang",
+      "soy sauce",
+      "garlic",
+      "ginger",
+      "sesame oil",
+      "rice syrup",
+      "rice vinegar",
+      "scallion"
+    ],
+    "effort": "weeknight",
+    "id": "gochujang_chicken",
+    "name": "Gochujang Chicken",
+    "cuisine": "Korean",
+    "region": "East Asia",
+    "time_minutes": 50,
+    "allergens": [
+      "soy",
+      "gluten",
+      "sesame"
+    ],
+    "vegetarian": false,
+    "summary": "Gochujang chicken is grilled chicken coated in a sweet, spicy Korean fermented chile marinade."
+  },
+  {
+    "family": "roast_and_grill",
+    "protein": "chicken",
+    "starch": "none",
+    "techniques": [
+      "marinate",
+      "spice_paste",
+      "grill"
+    ],
+    "equipment": [
+      "grill",
+      "blender"
+    ],
+    "flavor": [
+      "chili_heat",
+      "garlic_ginger",
+      "fresh_herbs",
+      "citrus",
+      "sweet",
+      "warm_spices",
+      "smoky"
+    ],
+    "key_ingredients": [
+      "chicken thigh",
+      "scotch bonnet chile",
+      "allspice",
+      "thyme",
+      "scallion",
+      "garlic",
+      "ginger",
+      "lime",
+      "brown sugar"
+    ],
+    "effort": "weeknight",
+    "id": "jerk_chicken",
+    "name": "Jerk Chicken",
+    "cuisine": "Jamaican",
+    "region": "Caribbean",
+    "time_minutes": 80,
+    "allergens": [],
+    "vegetarian": false,
+    "summary": "Jerk chicken is chicken marinated with scotch bonnet, allspice, thyme, and aromatics, then grilled smoky and spicy."
+  },
+  {
+    "family": "roast_and_grill",
+    "protein": "lamb_or_goat",
+    "starch": "flatbread",
+    "techniques": [
+      "spice_paste",
+      "grill"
+    ],
+    "equipment": [
+      "grill"
+    ],
+    "flavor": [
+      "cumin_coriander",
+      "garlic_ginger",
+      "onion_base",
+      "fresh_herbs",
+      "chili_heat",
+      "smoky"
+    ],
+    "key_ingredients": [
+      "ground lamb",
+      "onion",
+      "garlic",
+      "parsley",
+      "cumin",
+      "paprika",
+      "sumac",
+      "flatbread",
+      "tomato"
+    ],
+    "effort": "weeknight",
+    "id": "kofta_kebab",
+    "name": "Kofta Kebab",
+    "cuisine": "Turkish",
+    "region": "Middle East",
+    "time_minutes": 50,
+    "allergens": [
+      "gluten"
+    ],
+    "vegetarian": false,
+    "summary": "Kofta kebab is spiced ground lamb or beef shaped onto skewers and grilled."
+  },
+  {
+    "family": "roast_and_grill",
+    "protein": "chicken",
+    "starch": "potato",
+    "techniques": [
+      "marinate",
+      "roast"
+    ],
+    "equipment": [
+      "oven"
+    ],
+    "flavor": [
+      "garlic_ginger",
+      "citrus",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "whole chicken",
+      "lemon",
+      "garlic",
+      "rosemary",
+      "thyme",
+      "parsley",
+      "potato",
+      "onion"
+    ],
+    "effort": "weeknight",
+    "id": "lemon_herb_roast_chicken",
+    "name": "Lemon Herb Roast Chicken",
+    "cuisine": "British",
+    "region": "Europe",
+    "time_minutes": 95,
+    "allergens": [],
+    "vegetarian": false,
+    "summary": "Lemon herb roast chicken is a whole chicken roasted with lemon, garlic, herbs, and often potatoes."
+  },
+  {
+    "family": "roast_and_grill",
+    "protein": "chicken",
+    "starch": "none",
+    "techniques": [
+      "marinate",
+      "spice_paste",
+      "grill",
+      "roast"
+    ],
+    "equipment": [
+      "grill",
+      "oven",
+      "blender"
+    ],
+    "flavor": [
+      "chili_heat",
+      "garlic_ginger",
+      "citrus",
+      "vinegar_sour",
+      "smoky"
+    ],
+    "key_ingredients": [
+      "chicken",
+      "bird chile",
+      "garlic",
+      "lemon",
+      "vinegar",
+      "paprika",
+      "oregano",
+      "bay leaf"
+    ],
+    "effort": "weeknight",
+    "id": "peri_peri_chicken",
+    "name": "Peri-Peri Chicken",
+    "cuisine": "Mozambican-Portuguese",
+    "region": "Africa",
+    "time_minutes": 70,
+    "allergens": [],
+    "vegetarian": false,
+    "summary": "Peri-peri chicken is grilled or roasted chicken basted with a hot garlic-chile vinegar sauce."
+  },
+  {
+    "family": "roast_and_grill",
+    "protein": "chicken",
+    "starch": "none",
+    "techniques": [
+      "marinate",
+      "spice_paste",
+      "grill"
+    ],
+    "equipment": [
+      "grill",
+      "blender"
+    ],
+    "flavor": [
+      "citrus",
+      "chili_heat",
+      "garlic_ginger",
+      "cumin_coriander",
+      "warm_spices",
+      "smoky"
+    ],
+    "key_ingredients": [
+      "chicken thigh",
+      "orange",
+      "lime",
+      "garlic",
+      "achiote",
+      "guajillo chile",
+      "cumin",
+      "oregano",
+      "cinnamon"
+    ],
+    "effort": "weeknight",
+    "id": "pollo_asado",
+    "name": "Pollo Asado",
+    "cuisine": "Mexican",
+    "region": "Latin America",
+    "time_minutes": 75,
+    "allergens": [],
+    "vegetarian": false,
+    "summary": "Pollo asado is citrus-and-achiote-marinated chicken grilled until juicy and lightly charred."
+  },
+  {
+    "family": "roast_and_grill",
+    "protein": "chicken",
+    "starch": "flatbread",
+    "techniques": [
+      "marinate",
+      "grill"
+    ],
+    "equipment": [
+      "grill"
+    ],
+    "flavor": [
+      "garlic_ginger",
+      "citrus",
+      "yogurt",
+      "warm_spices"
+    ],
+    "key_ingredients": [
+      "chicken breast",
+      "yogurt",
+      "lemon",
+      "garlic",
+      "tomato paste",
+      "paprika",
+      "allspice",
+      "flatbread",
+      "pickle"
+    ],
+    "effort": "weeknight",
+    "id": "shish_tawook",
+    "name": "Shish Tawook",
+    "cuisine": "Lebanese",
+    "region": "Middle East",
+    "time_minutes": 60,
+    "allergens": [
+      "dairy",
+      "gluten"
+    ],
+    "vegetarian": false,
+    "summary": "Shish tawook is Lebanese chicken kebab marinated with yogurt, lemon, garlic, and spices, then grilled."
+  },
+  {
+    "family": "roast_and_grill",
+    "protein": "beef",
+    "starch": "none",
+    "techniques": [
+      "spice_paste",
+      "marinate",
+      "grill"
+    ],
+    "equipment": [
+      "grill"
+    ],
+    "flavor": [
+      "chili_heat",
+      "garlic_ginger",
+      "smoky",
+      "warm_spices"
+    ],
+    "key_ingredients": [
+      "beef steak",
+      "peanut",
+      "ginger",
+      "garlic",
+      "cayenne",
+      "paprika",
+      "onion powder",
+      "stock cube"
+    ],
+    "effort": "weeknight",
+    "id": "suya",
+    "name": "Suya",
+    "cuisine": "Nigerian",
+    "region": "Africa",
+    "time_minutes": 55,
+    "allergens": [
+      "peanut"
+    ],
+    "vegetarian": false,
+    "summary": "Suya is Nigerian grilled meat coated in a spicy peanut-based yaji seasoning."
+  },
+  {
+    "family": "roast_and_grill",
+    "protein": "chicken",
+    "starch": "none",
+    "techniques": [
+      "marinate",
+      "spice_paste",
+      "roast",
+      "grill"
+    ],
+    "equipment": [
+      "oven",
+      "grill"
+    ],
+    "flavor": [
+      "warm_spices",
+      "cumin_coriander",
+      "chili_heat",
+      "garlic_ginger",
+      "yogurt",
+      "citrus",
+      "smoky"
+    ],
+    "key_ingredients": [
+      "chicken leg",
+      "yogurt",
+      "lemon",
+      "garlic",
+      "ginger",
+      "kashmiri chili",
+      "garam masala",
+      "cumin",
+      "coriander",
+      "turmeric"
+    ],
+    "effort": "weeknight",
+    "id": "tandoori_chicken",
+    "name": "Tandoori Chicken",
+    "cuisine": "Indian",
+    "region": "South Asia",
+    "time_minutes": 75,
+    "allergens": [
+      "dairy"
+    ],
+    "vegetarian": false,
+    "summary": "Tandoori chicken is yogurt-and-spice-marinated chicken roasted or grilled until smoky and charred."
+  },
+  {
+    "family": "roast_and_grill",
+    "protein": "lamb_or_goat",
+    "starch": "none",
+    "techniques": [
+      "marinate",
+      "grill"
+    ],
+    "equipment": [
+      "grill"
+    ],
+    "flavor": [
+      "cumin_coriander",
+      "chili_heat",
+      "garlic_ginger",
+      "smoky"
+    ],
+    "key_ingredients": [
+      "lamb shoulder",
+      "cumin",
+      "chile flake",
+      "garlic",
+      "onion",
+      "coriander",
+      "sesame seed"
+    ],
+    "effort": "weeknight",
+    "id": "uyghur_lamb_kebab",
+    "name": "Uyghur Lamb Kebab",
+    "cuisine": "Uyghur",
+    "region": "Central Asia",
+    "time_minutes": 60,
+    "allergens": [
+      "sesame"
+    ],
+    "vegetarian": false,
+    "summary": "Uyghur lamb kebab is skewered lamb seasoned with cumin, chile, and aromatics and grilled over high heat."
+  },
+  {
+    "family": "roast_and_grill",
+    "protein": "chicken",
+    "starch": "none",
+    "techniques": [
+      "simmer",
+      "grill"
+    ],
+    "equipment": [
+      "stovetop",
+      "grill"
+    ],
+    "flavor": [
+      "soy_umami",
+      "sweet",
+      "garlic_ginger",
+      "smoky"
+    ],
+    "key_ingredients": [
+      "chicken thigh",
+      "chicken skin",
+      "soy sauce",
+      "mirin",
+      "sake",
+      "sugar",
+      "scallion",
+      "ginger"
+    ],
+    "effort": "weeknight",
+    "id": "yakitori",
+    "name": "Yakitori",
+    "cuisine": "Japanese",
+    "region": "East Asia",
+    "time_minutes": 45,
+    "allergens": [
+      "soy",
+      "gluten"
+    ],
+    "vegetarian": false,
+    "summary": "Yakitori is Japanese skewered chicken grilled over high heat and brushed with savory-sweet tare."
+  },
+  {
+    "family": "soups",
+    "protein": "chicken",
+    "starch": "rice",
+    "techniques": [
+      "poach",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "citrus",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "chicken",
+      "chicken stock",
+      "rice",
+      "egg",
+      "lemon",
+      "carrot",
+      "celery",
+      "onion",
+      "dill"
+    ],
+    "effort": "weeknight",
+    "id": "avgolemono",
+    "name": "Avgolemono",
+    "cuisine": "Greek",
+    "region": "Europe",
+    "time_minutes": 55,
+    "allergens": [
+      "egg"
+    ],
+    "vegetarian": false,
+    "summary": "A Greek chicken and rice soup enriched with a tangy egg-lemon mixture."
+  },
+  {
+    "family": "soups",
+    "protein": "beef",
+    "starch": "potato",
+    "techniques": [
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "tomato_base",
+      "fresh_herbs",
+      "vinegar_sour"
+    ],
+    "key_ingredients": [
+      "beef",
+      "beet",
+      "cabbage",
+      "potato",
+      "carrot",
+      "onion",
+      "tomato paste",
+      "dill",
+      "sour cream",
+      "vinegar"
+    ],
+    "effort": "weekend",
+    "id": "borscht",
+    "name": "Borscht",
+    "cuisine": "Ukrainian",
+    "region": "Europe",
+    "time_minutes": 120,
+    "allergens": [
+      "dairy"
+    ],
+    "vegetarian": false,
+    "summary": "A beet-red Eastern European soup with cabbage, potato, beef, dill, and a sour cream finish."
+  },
+  {
+    "family": "soups",
+    "protein": "chicken",
+    "starch": "none",
+    "techniques": [
+      "simmer",
+      "stir_fry"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "soy_umami",
+      "garlic_ginger",
+      "sweet"
+    ],
+    "key_ingredients": [
+      "chicken breast",
+      "chicken stock",
+      "sweet corn",
+      "egg",
+      "cornstarch",
+      "ginger",
+      "soy sauce",
+      "scallion",
+      "vinegar"
+    ],
+    "effort": "weeknight",
+    "id": "chicken_corn_soup",
+    "name": "Chicken Corn Soup",
+    "cuisine": "Pakistani Chinese",
+    "region": "South Asia",
+    "time_minutes": 35,
+    "allergens": [
+      "egg",
+      "soy"
+    ],
+    "vegetarian": false,
+    "summary": "A thick chicken and sweet corn soup with egg ribbons, popular in Pakistani and Indo-Chinese home cooking."
+  },
+  {
+    "family": "soups",
+    "protein": "chicken",
+    "starch": "none",
+    "techniques": [
+      "poach",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "onion_base",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "chicken thigh",
+      "chicken stock",
+      "carrot",
+      "celery",
+      "onion",
+      "parsley",
+      "bay leaf"
+    ],
+    "effort": "weeknight",
+    "id": "chicken_soup",
+    "name": "Chicken Soup",
+    "cuisine": "American",
+    "region": "North America",
+    "time_minutes": 75,
+    "allergens": [],
+    "vegetarian": false,
+    "summary": "A clear homestyle chicken broth soup with tender chicken, vegetables, and herbs."
+  },
+  {
+    "family": "soups",
+    "protein": "shrimp",
+    "starch": "potato",
+    "techniques": [
+      "simmer",
+      "poach"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "chili_heat",
+      "garlic_ginger",
+      "onion_base",
+      "tomato_base",
+      "fresh_herbs",
+      "butter_cream"
+    ],
+    "key_ingredients": [
+      "shrimp",
+      "potato",
+      "corn",
+      "milk",
+      "queso fresco",
+      "egg",
+      "aji amarillo",
+      "onion",
+      "garlic",
+      "tomato",
+      "cilantro"
+    ],
+    "effort": "weekend",
+    "id": "chupe_de_camarones",
+    "name": "Chupe de Camarones",
+    "cuisine": "Peruvian",
+    "region": "Latin America",
+    "time_minutes": 75,
+    "allergens": [
+      "shellfish",
+      "dairy",
+      "egg"
+    ],
+    "vegetarian": false,
+    "summary": "A Peruvian shrimp chowder with potato, corn, milk, cheese, egg, and aji amarillo."
+  },
+  {
+    "family": "soups",
+    "protein": "lamb_or_goat",
+    "starch": "pasta",
+    "techniques": [
+      "sear",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "warm_spices",
+      "garlic_ginger",
+      "tomato_base",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "lamb",
+      "lentil",
+      "chickpea",
+      "tomato",
+      "onion",
+      "celery",
+      "ginger",
+      "turmeric",
+      "cilantro",
+      "parsley",
+      "vermicelli",
+      "flour"
+    ],
+    "effort": "weekend",
+    "id": "harira",
+    "name": "Harira",
+    "cuisine": "Moroccan",
+    "region": "Africa",
+    "time_minutes": 100,
+    "allergens": [
+      "gluten"
+    ],
+    "vegetarian": false,
+    "summary": "A Moroccan tomato, lentil, chickpea, herb, and meat soup often thickened and finished with vermicelli."
+  },
+  {
+    "family": "soups",
+    "protein": "legumes",
+    "starch": "none",
+    "techniques": [
+      "simmer",
+      "blend_puree"
+    ],
+    "equipment": [
+      "stovetop",
+      "blender"
+    ],
+    "flavor": [
+      "cumin_coriander",
+      "onion_base",
+      "chili_heat",
+      "citrus",
+      "butter_cream"
+    ],
+    "key_ingredients": [
+      "red lentil",
+      "onion",
+      "carrot",
+      "tomato paste",
+      "cumin",
+      "butter",
+      "mint",
+      "paprika",
+      "lemon"
+    ],
+    "effort": "weeknight",
+    "id": "mercimek_corbasi",
+    "name": "Mercimek Corbasi",
+    "cuisine": "Turkish",
+    "region": "Middle East",
+    "time_minutes": 40,
+    "allergens": [
+      "dairy"
+    ],
+    "vegetarian": true,
+    "summary": "A smooth Turkish red lentil soup flavored with cumin and finished with lemon and spiced butter."
+  },
+  {
+    "family": "soups",
+    "protein": "tofu",
+    "starch": "none",
+    "techniques": [
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "soy_umami",
+      "fish_sauce",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "miso",
+      "tofu",
+      "wakame",
+      "scallion",
+      "kombu",
+      "bonito flake"
+    ],
+    "effort": "weeknight",
+    "id": "miso_soup",
+    "name": "Miso Soup",
+    "cuisine": "Japanese",
+    "region": "East Asia",
+    "time_minutes": 20,
+    "allergens": [
+      "soy",
+      "fish"
+    ],
+    "vegetarian": false,
+    "summary": "A Japanese soup of miso dissolved into dashi with tofu, seaweed, and scallion."
+  },
+  {
+    "family": "soups",
+    "protein": "chicken",
+    "starch": "rice",
+    "techniques": [
+      "sear",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "warm_spices",
+      "cumin_coriander",
+      "garlic_ginger",
+      "onion_base",
+      "coconut",
+      "sweet"
+    ],
+    "key_ingredients": [
+      "chicken thigh",
+      "rice",
+      "lentil",
+      "onion",
+      "carrot",
+      "apple",
+      "coconut milk",
+      "curry powder",
+      "ginger",
+      "garlic",
+      "chicken stock"
+    ],
+    "effort": "weeknight",
+    "id": "mulligatawny",
+    "name": "Mulligatawny",
+    "cuisine": "Anglo-Indian",
+    "region": "South Asia",
+    "time_minutes": 60,
+    "allergens": [],
+    "vegetarian": false,
+    "summary": "A curry-spiced Anglo-Indian chicken soup with lentils, rice, vegetables, and often apple or coconut."
+  },
+  {
+    "family": "soups",
+    "protein": "chicken",
+    "starch": "rice_noodles",
+    "techniques": [
+      "simmer",
+      "poach",
+      "boil"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "warm_spices",
+      "garlic_ginger",
+      "onion_base",
+      "fish_sauce",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "chicken",
+      "rice noodle",
+      "ginger",
+      "onion",
+      "star anise",
+      "cinnamon",
+      "fish sauce",
+      "bean sprout",
+      "cilantro",
+      "lime"
+    ],
+    "effort": "weeknight",
+    "id": "pho_ga",
+    "name": "Pho Ga",
+    "cuisine": "Vietnamese",
+    "region": "Southeast Asia",
+    "time_minutes": 90,
+    "allergens": [
+      "fish"
+    ],
+    "vegetarian": false,
+    "summary": "A Vietnamese chicken noodle soup with aromatic spiced broth, rice noodles, herbs, and lime."
+  },
+  {
+    "family": "soups",
+    "protein": "pork",
+    "starch": "none",
+    "techniques": [
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "chili_heat",
+      "garlic_ginger",
+      "onion_base",
+      "citrus",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "pork shoulder",
+      "hominy",
+      "guajillo chili",
+      "ancho chili",
+      "garlic",
+      "onion",
+      "oregano",
+      "cabbage",
+      "radish",
+      "lime"
+    ],
+    "effort": "weekend",
+    "id": "pozole_rojo",
+    "name": "Pozole Rojo",
+    "cuisine": "Mexican",
+    "region": "Latin America",
+    "time_minutes": 150,
+    "allergens": [],
+    "vegetarian": false,
+    "summary": "A Mexican red chile pork and hominy soup served with crisp vegetables, oregano, and lime."
+  },
+  {
+    "family": "soups",
+    "protein": "legumes",
+    "starch": "none",
+    "techniques": [
+      "simmer",
+      "temper_spices"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "chili_heat",
+      "cumin_coriander",
+      "garlic_ginger",
+      "vinegar_sour",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "tamarind",
+      "tomato",
+      "toor dal",
+      "garlic",
+      "cumin",
+      "mustard seed",
+      "curry leaf",
+      "dried chili",
+      "cilantro",
+      "asafoetida"
+    ],
+    "effort": "weeknight",
+    "id": "rasam",
+    "name": "Rasam",
+    "cuisine": "South Indian",
+    "region": "South Asia",
+    "time_minutes": 35,
+    "allergens": [],
+    "vegetarian": true,
+    "summary": "A thin South Indian tamarind and tomato soup seasoned with dal, garlic, spices, and curry leaves."
+  },
+  {
+    "family": "soups",
+    "protein": "legumes",
+    "starch": "bread",
+    "techniques": [
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "onion_base",
+      "tomato_base",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "cannellini bean",
+      "bread",
+      "kale",
+      "cabbage",
+      "carrot",
+      "celery",
+      "onion",
+      "tomato",
+      "garlic",
+      "rosemary"
+    ],
+    "effort": "weeknight",
+    "id": "ribollita",
+    "name": "Ribollita",
+    "cuisine": "Italian",
+    "region": "Europe",
+    "time_minutes": 70,
+    "allergens": [
+      "gluten"
+    ],
+    "vegetarian": true,
+    "summary": "A Tuscan bread, bean, and vegetable soup traditionally reheated until thick and hearty."
+  },
+  {
+    "family": "soups",
+    "protein": "shrimp",
+    "starch": "rice",
+    "techniques": [
+      "sear",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "smoky",
+      "chili_heat",
+      "onion_base",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "shrimp",
+      "andouille sausage",
+      "chicken thigh",
+      "flour",
+      "okra",
+      "onion",
+      "celery",
+      "bell pepper",
+      "garlic",
+      "tomato",
+      "rice"
+    ],
+    "effort": "weekend",
+    "id": "seafood_gumbo",
+    "name": "Seafood Gumbo",
+    "cuisine": "Louisiana Creole",
+    "region": "North America",
+    "time_minutes": 120,
+    "allergens": [
+      "shellfish",
+      "gluten"
+    ],
+    "vegetarian": false,
+    "summary": "A Louisiana stew-like soup with dark roux, shrimp, sausage, okra, aromatics, and rice."
+  },
+  {
+    "family": "soups",
+    "protein": "lamb_or_goat",
+    "starch": "potato",
+    "techniques": [
+      "sear",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "cumin_coriander",
+      "onion_base",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "lamb",
+      "potato",
+      "carrot",
+      "onion",
+      "tomato",
+      "bell pepper",
+      "chickpea",
+      "cumin",
+      "cilantro",
+      "dill"
+    ],
+    "effort": "weekend",
+    "id": "shurpa",
+    "name": "Shurpa",
+    "cuisine": "Uzbek",
+    "region": "Central Asia",
+    "time_minutes": 120,
+    "allergens": [],
+    "vegetarian": false,
+    "summary": "A Central Asian lamb and vegetable soup with potatoes, carrots, chickpeas, cumin, and fresh herbs."
+  },
+  {
+    "family": "soups",
+    "protein": "chicken",
+    "starch": "rice_noodles",
+    "techniques": [
+      "spice_paste",
+      "simmer",
+      "boil"
+    ],
+    "equipment": [
+      "stovetop",
+      "blender"
+    ],
+    "flavor": [
+      "warm_spices",
+      "garlic_ginger",
+      "cumin_coriander",
+      "fresh_herbs",
+      "citrus"
+    ],
+    "key_ingredients": [
+      "chicken",
+      "rice vermicelli",
+      "egg",
+      "turmeric",
+      "galangal",
+      "lemongrass",
+      "candlenut",
+      "garlic",
+      "shallot",
+      "lime",
+      "scallion"
+    ],
+    "effort": "weekend",
+    "id": "soto_ayam",
+    "name": "Soto Ayam",
+    "cuisine": "Indonesian",
+    "region": "Southeast Asia",
+    "time_minutes": 90,
+    "allergens": [
+      "egg",
+      "tree_nut"
+    ],
+    "vegetarian": false,
+    "summary": "An Indonesian yellow chicken soup with turmeric spice paste, rice vermicelli, herbs, lime, and egg."
+  },
+  {
+    "family": "soups",
+    "protein": "chicken",
+    "starch": "none",
+    "techniques": [
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "garlic_ginger",
+      "fish_sauce",
+      "citrus",
+      "coconut",
+      "fresh_herbs",
+      "chili_heat"
+    ],
+    "key_ingredients": [
+      "chicken thigh",
+      "coconut milk",
+      "lemongrass",
+      "galangal",
+      "lime leaf",
+      "fish sauce",
+      "lime",
+      "mushroom",
+      "chili",
+      "cilantro"
+    ],
+    "effort": "weeknight",
+    "id": "tom_kha_gai",
+    "name": "Tom Kha Gai",
+    "cuisine": "Thai",
+    "region": "Southeast Asia",
+    "time_minutes": 40,
+    "allergens": [
+      "fish"
+    ],
+    "vegetarian": false,
+    "summary": "A creamy Thai coconut chicken soup flavored with galangal, lemongrass, lime leaf, and fish sauce."
+  },
+  {
+    "family": "soups",
+    "protein": "shrimp",
+    "starch": "none",
+    "techniques": [
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "chili_heat",
+      "fish_sauce",
+      "citrus",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "shrimp",
+      "lemongrass",
+      "galangal",
+      "lime leaf",
+      "fish sauce",
+      "lime",
+      "chili paste",
+      "mushroom",
+      "cilantro"
+    ],
+    "effort": "weeknight",
+    "id": "tom_yum",
+    "name": "Tom Yum",
+    "cuisine": "Thai",
+    "region": "Southeast Asia",
+    "time_minutes": 35,
+    "allergens": [
+      "fish",
+      "shellfish"
+    ],
+    "vegetarian": false,
+    "summary": "A hot-sour Thai soup scented with lemongrass, galangal, lime leaf, chili, and shrimp."
+  },
+  {
+    "family": "soups",
+    "protein": "pork",
+    "starch": "wheat_noodles",
+    "techniques": [
+      "wrap_and_roll",
+      "boil",
+      "simmer"
+    ],
+    "equipment": [
+      "stovetop"
+    ],
+    "flavor": [
+      "soy_umami",
+      "garlic_ginger",
+      "sesame",
+      "fresh_herbs"
+    ],
+    "key_ingredients": [
+      "ground pork",
+      "shrimp",
+      "wonton wrapper",
+      "bok choy",
+      "scallion",
+      "ginger",
+      "soy sauce",
+      "sesame oil",
+      "chicken stock"
+    ],
+    "effort": "weekend",
+    "id": "wonton_soup",
+    "name": "Wonton Soup",
+    "cuisine": "Chinese",
+    "region": "East Asia",
+    "time_minutes": 70,
+    "allergens": [
+      "gluten",
+      "shellfish",
+      "soy",
+      "sesame"
+    ],
+    "vegetarian": false,
+    "summary": "A Chinese broth soup with hand-filled pork and shrimp wontons, greens, and scallions."
+  }
+]
