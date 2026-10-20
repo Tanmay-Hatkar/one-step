@@ -136,3 +136,11 @@ def test_fallback_diff_reads_naturally(catalog, chicken_and_rice, settings) -> N
 def test_user_dish_schema_requires_parts() -> None:
     with pytest.raises(ValueError):
         UserDish.model_validate({"name": "x"})
+
+
+async def test_openai_client_without_key_raises_llm_error() -> None:
+    from app.llm.client import OpenAILLMClient
+
+    client = OpenAILLMClient(api_key="", model="m", reasoning_effort="low", timeout=1)
+    with pytest.raises(LLMError):
+        await client.parse(instructions="i", prompt="p", schema=Echo)

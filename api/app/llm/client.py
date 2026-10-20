@@ -32,7 +32,10 @@ class OpenAILLMClient:
         """Args: api_key, model, reasoning_effort ('low'|'medium'|'high'), timeout seconds."""
         self.model = model
         self._effort = reasoning_effort
-        self._client = AsyncOpenAI(api_key=api_key, timeout=timeout, max_retries=1)
+        # No key → no client; calls fail with a clean LLMError instead of crashing the app.
+        self._client = (
+            AsyncOpenAI(api_key=api_key, timeout=timeout, max_retries=1) if api_key else None
+        )
 
     async def parse(self, *, instructions: str, prompt: str, schema: type[T]) -> T:
         """Call the model and validate its output.
@@ -48,6 +51,8 @@ class OpenAILLMClient:
         Raises:
             LLMError: On API failure or empty/refused output.
         """
+        if self._client is None:
+            raise LLMError("OPENAI_API_KEY is not configured")
         try:
             response = await self._client.responses.parse(
                 model=self.model,

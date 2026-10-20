@@ -1,5 +1,13 @@
 """Shared fixtures: small hand-built catalog, the founding user's dishes, a fake LLM."""
 
+import os
+import tempfile
+
+# Isolate tests from the developer's .env and local database. Environment variables
+# take precedence over .env in pydantic-settings, and must be set before app imports.
+os.environ["OPENAI_API_KEY"] = ""
+os.environ["DATABASE_URL"] = f"sqlite:///{tempfile.mkdtemp()}/test.db"
+
 from collections.abc import Callable
 from typing import Any, TypeVar
 
