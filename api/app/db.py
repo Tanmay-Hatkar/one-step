@@ -37,6 +37,18 @@ class LLMUsageDay(Base):
     calls: Mapped[int] = mapped_column(Integer, default=0)
 
 
+class SharedKitchen(Base):
+    """A read-only snapshot of someone's kitchen, opened by a short link."""
+
+    __tablename__ = "shared_kitchens"
+
+    id: Mapped[str] = mapped_column(String(16), primary_key=True)
+    payload_json: Mapped[str] = mapped_column(Text)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=lambda: datetime.now(UTC)
+    )
+
+
 def make_engine(database_url: str) -> Engine:
     """Create an engine; normalizes Railway-style postgres:// URLs to psycopg.
 

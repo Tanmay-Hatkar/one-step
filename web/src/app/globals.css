@@ -6,6 +6,7 @@
 
 @theme inline {
   --color-background: var(--background);
+  --color-map-far: var(--map-far);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
   --font-mono: var(--font-geist-mono);
@@ -73,6 +74,9 @@
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
   --radius: 0.625rem;
+  /* Map: "bigger step" nodes. Neutral on purpose (a state, not a category); validated
+     against the primary for normal and colour-blind separation in both modes. */
+  --map-far: oklch(0.48 0.02 60);
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -103,6 +107,7 @@
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.72 0.15 52);
+  --map-far: oklch(0.55 0.02 70);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);

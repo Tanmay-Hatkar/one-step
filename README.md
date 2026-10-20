@@ -28,10 +28,16 @@ chicken with broth rice leads you to kabsa, maqluba, arroz con pollo, jambalaya 
 - **Diet as a hard filter** — vegetarian and 9 allergens, enforced in code. Each dish's
   tagged allergens are cross-checked against its ingredients, and a written diff that
   mentions an avoided allergen is replaced by a template.
+- **Your map** — your dishes in the middle, their cousins around them (one step = solid,
+  bigger step = dashed). Tap a dish to see it written from your kitchen; cook one and the
+  map grows. No LLM call to draw it.
+- **Share a kitchen** — a short `/k/<id>` link to a read-only snapshot anyone can start from.
+- **Public eval page** — `/evals` shows the latest live eval results, including a code-only
+  diet-safety sweep (every rule over 152 kitchens, across suggestions, tonight and the map).
 - **LLM only for language** — parsing your description, and phrasing each difference.
   Cached, rate-limited, capped per day, with a template fallback ([ADR-0003](docs/adr/0003-code-decides-llm-writes.md)).
 - **Evals** — 20 live cases / 99 checks on parsing, diff grounding and end-to-end
-  relevance (`api/evals/`). Current: **99/99**.
+  relevance, plus the diet-safety sweep (`api/evals/`). Current: **109/109**, published at `/evals`.
 
 ## Run it locally
 
@@ -40,7 +46,7 @@ cp .env.example .env                       # add OPENAI_API_KEY
 
 cd api && uv sync
 uv run uvicorn app.main:app --reload       # http://localhost:8000
-uv run pytest                              # 90 tests, no network
+uv run pytest                              # 101 tests, no network
 uv run python -m evals.run                 # live evals
 
 cd ../web && npm install && npm run dev    # http://localhost:3000
@@ -57,5 +63,5 @@ cd ../web && npm install && npm run dev    # http://localhost:3000
 
 ## Roadmap
 
-v0.1 cousins as diffs → v0.2 tonight's pick + diet filter + "I cooked this" (this) → v0.3 the map +
-public eval page → v0.4 substitutions → v1.0 real recipe dataset + fine-tuned parser.
+v0.1 cousins as diffs → v0.2 tonight's pick + diet filter + "I cooked this" → v0.3 the map +
+share links + public eval page (this) → v0.4 substitutions → v1.0 real recipe dataset + fine-tuned parser.

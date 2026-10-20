@@ -206,3 +206,26 @@ def test_own_dish_anchors_when_both_are_one_step(catalog, chicken_and_rice, sett
     found = dict((d.id, x) for d, x in graph.find_cousins([cooked, chicken_and_rice], 10))
     assert found["kabsa"].is_one_step
     assert found["kabsa"].anchor_name == "Chicken leg with rice"
+
+
+def test_neighbourhood_groups_cousins_by_anchor(catalog, chicken_and_rice) -> None:
+    capped = Settings(_env_file=None, map_cousins_per_dish=2)
+    graph = GraphService(catalog, capped)
+    cousins, one_step_count = graph.neighbourhood([chicken_and_rice])
+    assert 0 < len(cousins) <= 2
+    assert all(x.anchor_name == "Chicken leg with rice" for _, x in cousins)
+    assert one_step_count >= 1
+
+
+def test_cousin_for_returns_one_dish_or_none(catalog, chicken_and_rice, settings) -> None:
+    graph = GraphService(catalog, settings)
+    found = graph.cousin_for([chicken_and_rice], "kabsa")
+    assert found is not None and found[0].id == "kabsa" and found[1].is_one_step
+    assert graph.cousin_for([chicken_and_rice], "no_such_dish") is None
+    assert (
+        graph.cousin_for(
+            [chicken_and_rice], "chicken_biryani", DietRule(avoid=frozenset({"dairy"}))
+        )
+        is None
+    )
+    assert graph.cousin_for([], "kabsa") is None

@@ -12,6 +12,10 @@ export default function Home() {
         >
           Tanmay Hatkar
         </a>
+        .{" "}
+        <a href="/evals" className="underline underline-offset-2 hover:text-foreground">
+          How well it works
+        </a>
         . Diet filters check each dish&apos;s ingredients, but suggestions are AI-assisted — always
         check labels for allergies.
       </footer>

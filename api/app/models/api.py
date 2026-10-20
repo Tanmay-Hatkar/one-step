@@ -75,3 +75,53 @@ class TonightResponse(BaseModel):
     familiar: UserDish | None = Field(None, description="One of the user's own dishes")
     one_step: Cousin | None = Field(None, description="A close new dish")
     stretch: Cousin | None = Field(None, description="A bigger leap, no new equipment")
+
+
+class MapRequest(BaseModel):
+    """The user's kitchen and diet; the map is drawn around it."""
+
+    repertoire: list[UserDish] = Field(..., min_length=1, max_length=settings.max_kitchen_dishes)
+    diet: Diet = Field(default_factory=Diet)
+
+
+class MapCousin(BaseModel):
+    """A dish on the map: no written diff yet (that's fetched on tap)."""
+
+    dish: Dish
+    delta: Delta
+
+
+class MapResponse(BaseModel):
+    """Your dishes in the middle, their closest cousins around them."""
+
+    kitchen: list[UserDish]
+    cousins: list[MapCousin]
+    one_step_count: int = Field(..., description="Catalog dishes one step from your kitchen")
+    catalog_size: int
+
+
+class CousinRequest(BaseModel):
+    """Write up one specific dish relative to the user's kitchen (a tap on the map)."""
+
+    repertoire: list[UserDish] = Field(..., min_length=1, max_length=settings.max_kitchen_dishes)
+    dish_id: str = Field(..., pattern=r"^[a-z0-9_]+$", max_length=60)
+    diet: Diet = Field(default_factory=Diet)
+
+
+class ShareRequest(BaseModel):
+    """A kitchen to share: the user's dishes, as they appear in the app."""
+
+    dishes: list[UserDish] = Field(..., min_length=1, max_length=settings.max_kitchen_dishes)
+
+
+class ShareResponse(BaseModel):
+    """The new share id; the web app turns it into a /k/<id> link."""
+
+    id: str
+
+
+class SharedKitchenResponse(BaseModel):
+    """A shared kitchen, read-only."""
+
+    dishes: list[UserDish]
+    created_at: str
