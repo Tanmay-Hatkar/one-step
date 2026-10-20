@@ -1,5 +1,7 @@
 // Readable names for vocabulary ids. Mirrors api/app/models/labels.py.
 
+import type { Allergen } from "./types";
+
 const TECHNIQUES: Record<string, string> = {
   marinate: "marinating",
   spice_paste: "spice paste",
@@ -31,4 +33,23 @@ export function techniqueLabel(id: string): string {
 
 export function equipmentLabel(id: string): string {
   return id.replaceAll("_", " ");
+}
+
+export const ALLERGENS: { id: Allergen; label: string }[] = [
+  { id: "dairy", label: "Dairy" },
+  { id: "egg", label: "Eggs" },
+  { id: "gluten", label: "Gluten" },
+  { id: "peanut", label: "Peanuts" },
+  { id: "tree_nut", label: "Tree nuts" },
+  { id: "soy", label: "Soy" },
+  { id: "fish", label: "Fish" },
+  { id: "shellfish", label: "Shellfish" },
+  { id: "sesame", label: "Sesame" },
+];
+
+export function formatTime(minutes: number): string {
+  if (minutes < 60) return `${minutes} min`;
+  const hours = Math.floor(minutes / 60);
+  const rest = minutes % 60;
+  return rest ? `${hours} h ${rest} min` : `${hours} h`;
 }

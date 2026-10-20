@@ -7,10 +7,12 @@ equipment, ingredients). The LLM only writes up the result.
 
 import logging
 from collections import Counter
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from datetime import date
 
 from app.config import Settings
 from app.models.dish import Delta, Dish, UserDish
+from app.services.diet import allows, user_dish_allows
 from app.services.ingredients import missing_ingredients, normalize, pantry_of
 
 logger = logging.getLogger(__name__)
@@ -21,6 +23,26 @@ ASSUMED_EQUIPMENT: frozenset[str] = frozenset({"stovetop"})
 # Everyday techniques any home cook already does. They still show up in the delta,
 # but they never count as a "new skill" and barely move the score.
 BASIC_TECHNIQUES: frozenset[str] = frozenset({"sear", "pan_fry", "simmer", "boil", "plain_rice"})
+
+# At or under this many minutes, tonight's familiar pick prefers weeknight dishes.
+QUICK_NIGHT_MINUTES = 60
+
+
+@dataclass(frozen=True)
+class DietRule:
+    """Hard diet rule applied to every candidate. Empty = no restriction."""
+
+    vegetarian: bool = False
+    avoid: frozenset[str] = field(default_factory=frozenset)
+
+
+@dataclass(frozen=True)
+class TonightPicks:
+    """Three ways to go tonight; any may be None when nothing fits."""
+
+    familiar: UserDish | None
+    one_step: tuple[Dish, Delta] | None
+    stretch: tuple[Dish, Delta] | None
 
 
 @dataclass(frozen=True)
@@ -82,15 +104,21 @@ class GraphService:
         new_flavors = [f for f in dish.flavor if f not in anchor.flavor]
         shared_flavors = len(dish.flavor) - len(new_flavors)
         new_skills = [t for t in new_tech if t not in BASIC_TECHNIQUES]
+        same_family = anchor.family == dish.family
+        same_protein = anchor.protein == dish.protein
+        same_starch = anchor.starch == dish.starch
+        # Swapping the main protein (chicken → lamb) is a real change, not one step.
+        protein_swap = not same_protein and "none" not in (anchor.protein, dish.protein)
+        # One step keeps the base: the same kind of dish or the same starch (rice ≠ pasta).
+        keeps_base = same_family or same_starch
         is_one_step = (
             len(new_skills) <= self._settings.one_step_max_new_techniques
             and not new_equipment
             and len(new_ingredients) <= self._settings.one_step_max_new_ingredients
+            and not protein_swap
+            and keeps_base
         )
 
-        same_family = anchor.family == dish.family
-        same_protein = anchor.protein == dish.protein
-        same_starch = anchor.starch == dish.starch
         w = self._w
         score = (
             w.same_family * same_family
@@ -120,7 +148,9 @@ class GraphService:
             is_one_step=is_one_step,
         )
 
-    def find_cousins(self, repertoire: list[UserDish], limit: int) -> list[tuple[Dish, Delta]]:
+    def find_cousins(
+        self, repertoire: list[UserDish], limit: int, diet: DietRule | None = None
+    ) -> list[tuple[Dish, Delta]]:
         """Return the closest catalog dishes the user doesn't already cook.
 
         Each candidate is anchored to whichever of the user's dishes it's closest to.
@@ -130,10 +160,57 @@ class GraphService:
         Args:
             repertoire: The user's dishes.
             limit: How many cousins to return.
+            diet: Hard diet rule; dishes that break it are never returned.
 
         Returns:
             (dish, delta) pairs, best first.
         """
+        return self._diversify(self._ranked(repertoire, diet or DietRule()), limit)
+
+    def pick_tonight(
+        self,
+        repertoire: list[UserDish],
+        diet: DietRule | None = None,
+        max_minutes: int | None = None,
+        skip: frozenset[str] = frozenset(),
+        today: date | None = None,
+    ) -> TonightPicks:
+        """Pick a familiar dish, a one-step dish and a stretch for tonight.
+
+        Args:
+            repertoire: The user's dishes.
+            diet: Hard diet rule.
+            max_minutes: Time available tonight; None means any.
+            skip: Catalog ids and user dish names the user said 'not tonight' to.
+            today: Used to rotate the familiar pick day by day (defaults to today).
+
+        Returns:
+            The three picks; any is None when nothing fits.
+        """
+        diet = diet or DietRule()
+        fits = [
+            (dish, delta)
+            for dish, delta in self._ranked(repertoire, diet)
+            if dish.id not in skip and (max_minutes is None or dish.time_minutes <= max_minutes)
+        ]
+        one_step = next(((d, x) for d, x in fits if x.is_one_step), None)
+        stretch_pool = [
+            (d, x)
+            for d, x in fits
+            if not x.is_one_step
+            and not x.new_equipment
+            and len(self._new_skills(x)) <= self._settings.stretch_max_new_techniques
+        ]
+        if one_step:
+            # Prefer a stretch from a different region than the one-step pick.
+            other = [p for p in stretch_pool if p[0].region != one_step[0].region]
+            stretch_pool = other or stretch_pool
+        stretch = stretch_pool[0] if stretch_pool else None
+        familiar = self._familiar(repertoire, diet, max_minutes, skip, today or date.today())
+        return TonightPicks(familiar=familiar, one_step=one_step, stretch=stretch)
+
+    def _ranked(self, repertoire: list[UserDish], diet: DietRule) -> list[tuple[Dish, Delta]]:
+        """Every allowed, genuinely new catalog dish with its best delta, best first."""
         if not repertoire:
             return []
         pantry = pantry_of([d.key_ingredients for d in repertoire])
@@ -142,17 +219,56 @@ class GraphService:
 
         scored: list[tuple[Dish, Delta]] = []
         for dish in self._dishes:
-            if dish.id in known:
+            if dish.id in known or not allows(dish, diet.vegetarian, diet.avoid):
                 continue
             best = max(
-                (self.compute_delta(a, dish, pantry, equipment) for a in repertoire),
-                key=lambda d: d.score,
-            )
+                (
+                    (self.compute_delta(a, dish, pantry, equipment), a.source == "described")
+                    for a in repertoire
+                ),
+                key=self._anchor_preference,
+            )[0]
             if self._is_new_enough(best):
                 scored.append((dish, best))
 
         scored.sort(key=lambda pair: pair[1].score, reverse=True)
-        return self._diversify(scored, limit)
+        return scored
+
+    @staticmethod
+    def _anchor_preference(pair: tuple[Delta, bool]) -> tuple[bool, bool, float]:
+        """Which of the user's dishes to compare a candidate against.
+
+        One step away beats not; then the user's own described dishes beat ones they've
+        cooked from a suggestion (so "your chicken leg with rice, but…" reads naturally
+        and a cooked dish only anchors what it newly unlocks); then the closer score.
+        """
+        delta, described = pair
+        return (delta.is_one_step, described, delta.score)
+
+    @staticmethod
+    def _familiar(
+        repertoire: list[UserDish],
+        diet: DietRule,
+        max_minutes: int | None,
+        skip: frozenset[str],
+        today: date,
+    ) -> UserDish | None:
+        """One of the user's own dishes, rotating daily; quick ones on short nights."""
+        options = [
+            d
+            for d in repertoire
+            if d.name not in skip and user_dish_allows(d, diet.vegetarian, diet.avoid)
+        ]
+        if max_minutes is not None and max_minutes <= QUICK_NIGHT_MINUTES:
+            options = [d for d in options if d.effort == "weeknight"] or options
+        if not options:
+            return None
+        return options[today.toordinal() % len(options)]
+
+    @staticmethod
+    def _new_skills(delta: Delta) -> list[str]:
+        """New techniques that aren't everyday basics."""
+        return [t for t in delta.new_techniques if t not in BASIC_TECHNIQUES]
 
     def _known_ids(self, repertoire: list[UserDish]) -> set[str]:
         """Catalog ids the user already cooks (matched by id or by name)."""

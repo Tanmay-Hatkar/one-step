@@ -84,3 +84,34 @@ def test_cousins_ok(client, catalog, chicken_and_rice, settings, make_gateway) -
 
 def test_cousins_rejects_empty_repertoire(client) -> None:
     assert client.post("/api/cousins", json={"repertoire": []}).status_code == 422
+
+
+def test_tonight_ok(client, catalog, chicken_and_rice, settings, make_gateway) -> None:
+    def responder(schema, prompt):
+        return schema(changes=["Add dried lime."], keep_line="Keep the rice.")
+
+    service = CousinService(GraphService(catalog, settings), make_gateway(FakeLLMClient(responder)))
+    client.app_ref.dependency_overrides[get_cousin_service] = lambda: service
+    response = client.post(
+        "/api/tonight",
+        json={
+            "repertoire": [chicken_and_rice.model_dump()],
+            "max_minutes": 120,
+            "diet": {"vegetarian": False, "avoid": ["dairy"]},
+            "skip": ["kabsa"],
+        },
+    )
+    assert response.status_code == 200
+    body = response.json()
+    assert body["familiar"]["name"] == "Chicken leg with rice"
+    # Kabsa was skipped and the other close dishes have dairy: nothing one step away fits.
+    assert body["one_step"] is None
+    assert body["stretch"]["dish"]["id"] == "plov"
+
+
+def test_cousins_rejects_unknown_allergen(client, chicken_and_rice) -> None:
+    response = client.post(
+        "/api/cousins",
+        json={"repertoire": [chicken_and_rice.model_dump()], "diet": {"avoid": ["kryptonite"]}},
+    )
+    assert response.status_code == 422

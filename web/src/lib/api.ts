@@ -1,4 +1,4 @@
-import type { Cousin, DishStats, UserDish } from "./types";
+import type { Cousin, Diet, DishStats, TonightPicks, UserDish } from "./types";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
@@ -45,12 +45,29 @@ export async function parseRepertoire(text: string): Promise<UserDish[]> {
 }
 
 /** Dishes one step away from the user's repertoire, each written as a diff. */
-export async function findCousins(repertoire: UserDish[], limit = 5): Promise<Cousin[]> {
+export async function findCousins(
+  repertoire: UserDish[],
+  diet: Diet,
+  limit = 6,
+): Promise<Cousin[]> {
   const body = await request<{ cousins: Cousin[] }>("/api/cousins", {
     method: "POST",
-    body: JSON.stringify({ repertoire, limit }),
+    body: JSON.stringify({ repertoire, diet, limit }),
   });
   return body.cousins;
+}
+
+/** A familiar dish, a one-step dish and a stretch that fit tonight. */
+export async function getTonight(
+  repertoire: UserDish[],
+  diet: Diet,
+  maxMinutes: number | null,
+  skip: string[],
+): Promise<TonightPicks> {
+  return request<TonightPicks>("/api/tonight", {
+    method: "POST",
+    body: JSON.stringify({ repertoire, diet, max_minutes: maxMinutes, skip }),
+  });
 }
 
 /** Catalog size, for the landing line. */

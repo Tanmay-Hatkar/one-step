@@ -60,7 +60,9 @@ def dish_repo(tmp_path, catalog) -> DishRepository:
 async def test_repertoire_drops_unknown_matched_ids(
     make_gateway, dish_repo, chicken_and_rice
 ) -> None:
-    fake = chicken_and_rice.model_copy(update={"matched_dish_id": "made_up_dish"})
+    fake = chicken_and_rice.model_copy(
+        update={"matched_dish_id": "made_up_dish", "source": "cooked"}
+    )
     real = chicken_and_rice.model_copy(
         update={"name": "Biryani", "matched_dish_id": "chicken_biryani"}
     )
@@ -71,6 +73,7 @@ async def test_repertoire_drops_unknown_matched_ids(
     service = RepertoireService(make_gateway(FakeLLMClient(responder)), dish_repo, 10)
     dishes = await service.parse("chicken and rice, and biryani")
     assert [d.matched_dish_id for d in dishes] == [None, "chicken_biryani"]
+    assert {d.source for d in dishes} == {"described"}  # the model can't mark dishes cooked
 
 
 async def test_repertoire_with_no_dishes_raises(make_gateway, dish_repo) -> None:
@@ -144,3 +147,35 @@ async def test_openai_client_without_key_raises_llm_error() -> None:
     client = OpenAILLMClient(api_key="", model="m", reasoning_effort="low", timeout=1)
     with pytest.raises(LLMError):
         await client.parse(instructions="i", prompt="p", schema=Echo)
+
+
+async def test_diff_mentioning_avoided_allergen_falls_back(
+    catalog, chicken_and_rice, settings, make_gateway
+) -> None:
+    def responder(schema, prompt):
+        return schema(changes=["Finish with crushed peanuts."], keep_line="Keep the rice.")
+
+    service = CousinService(GraphService(catalog, settings), make_gateway(FakeLLMClient(responder)))
+    kabsa = next(d for d in catalog if d.id == "kabsa")
+    delta = GraphService(catalog, settings).compute_delta(
+        chicken_and_rice, kabsa, set(chicken_and_rice.key_ingredients), {"rice_cooker"}
+    )
+    guarded = await service.write_diff(chicken_and_rice, kabsa, delta, avoid={"peanut"})
+    assert not any("peanut" in c for c in guarded.changes)
+    unguarded = await service.write_diff(chicken_and_rice, kabsa, delta)
+    assert unguarded.changes == ["Finish with crushed peanuts."]
+
+
+async def test_tonight_writes_diffs_for_new_dishes(
+    catalog, chicken_and_rice, settings, make_gateway
+) -> None:
+    def responder(schema, prompt):
+        return schema(changes=["Add dried lime."], keep_line="Keep the rice.")
+
+    client = FakeLLMClient(responder)
+    service = CousinService(GraphService(catalog, settings), make_gateway(client))
+    tonight = await service.tonight([chicken_and_rice])
+    assert tonight.familiar == chicken_and_rice
+    assert tonight.one_step and tonight.one_step.diff.changes == ["Add dried lime."]
+    assert tonight.stretch and tonight.stretch.diff.headline.endswith("but…")
+    assert client.calls == 2  # the familiar dish needs no LLM call

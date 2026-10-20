@@ -1,6 +1,6 @@
 {
   "model": "gpt-5.4-mini",
-  "run_at": "2026-10-20T06:11:53.769152+00:00",
+  "run_at": "2026-10-20T17:25:48.271740+00:00",
   "suites": {
     "parse": {
       "passed": 47,
@@ -622,7 +622,7 @@
             "Maqluba",
             "Arroz con Pollo",
             "Jambalaya",
-            "Plov"
+            "Paella Valenciana"
           ],
           "checks": [
             {
@@ -700,10 +700,10 @@
           "id": "egg_cook",
           "cousins": [
             "Menemen",
-            "Saltfish and Eggs",
             "Migas con Huevo",
             "Strapatsada",
-            "Tortilla Española"
+            "Tortilla Española",
+            "Masala Omelette"
           ],
           "checks": [
             {

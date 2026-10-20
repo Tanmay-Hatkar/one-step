@@ -25,7 +25,7 @@ biryani on weekends.
 1. **Your repertoire, in your words** — described like you'd tell a friend; saved as
    *your version*, broken into parts (protein, starch, flavor base, technique, equipment).
 2. **Recipes as differences** — "Kabsa: your usual rice, but…" plus only what changes.
-3. **Tonight's pick** — comfort / cousin / stretch, from your time and mood. *(v0.2)*
+3. **Tonight's pick** — familiar / one step / stretch, from your time and mood. *(v0.2 ✓)*
 4. **Substitutions by ingredient role** — acid for acid, binder for binder. *(v0.4)*
 5. **A map that grows through dinner** — cook a cousin, unlock its cousins. *(v0.3)*
 
@@ -40,7 +40,7 @@ your repertoire and writes full recipes from scratch.
 | Version | Ships |
 |---|---|
 | v0.1 | Describe your dishes → 5 cousins written as differences. 150-dish seed graph. Live. |
-| v0.2 | Tonight's pick, allergen/diet hard filter, "I cooked this". |
+| v0.2 | Tonight's pick, allergen/diet hard filter, "I cooked this" (on-device). ✓ |
 | v0.3 | The map, shareable link, public eval page. |
 | v0.4 | Substitutions by role, "what I have" chips, technique clips. |
 | v1.0 | Real recipe dataset, fine-tuned parser model, eval dashboard, accounts, launch. |

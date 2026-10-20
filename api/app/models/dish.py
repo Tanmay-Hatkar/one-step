@@ -1,5 +1,7 @@
 """Dish shapes: catalog dishes, the user's own dishes, and the computed difference."""
 
+from typing import Literal
+
 from pydantic import BaseModel, Field
 
 from app.models.vocab import (
@@ -57,6 +59,10 @@ class UserDish(DishParts):
     )
     matched_dish_id: str | None = Field(
         default=None, description="Catalog id when this is a known dish (e.g. 'chicken_biryani')."
+    )
+    source: Literal["described", "cooked"] = Field(
+        default="described",
+        description="'described' = in their own words; 'cooked' = a suggestion they marked cooked",
     )
 
 

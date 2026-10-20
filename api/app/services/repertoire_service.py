@@ -57,8 +57,12 @@ class RepertoireService:
         return dishes
 
     def _clean(self, dish: UserDish) -> UserDish:
-        """Drop a matched id the catalog doesn't know — never trust it blindly."""
+        """Drop a matched id the catalog doesn't know — never trust it blindly.
+
+        Parsed dishes are always 'described' (their own words), whatever the model says.
+        """
+        update: dict[str, object] = {"source": "described"}
         if dish.matched_dish_id and self._dishes.get(dish.matched_dish_id) is None:
             logger.info("Dropping unknown matched_dish_id %r", dish.matched_dish_id)
-            return dish.model_copy(update={"matched_dish_id": None})
-        return dish
+            update["matched_dish_id"] = None
+        return dish.model_copy(update=update)
