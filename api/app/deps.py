@@ -1,0 +1,58 @@
+"""Dependency providers. Built once per process; tests override them via FastAPI."""
+
+from functools import lru_cache
+
+from sqlalchemy.orm import sessionmaker
+
+from app.config import settings
+from app.db import init_db, make_engine, make_session_factory
+from app.llm.client import OpenAILLMClient
+from app.repositories.dish_repository import DishRepository
+from app.repositories.llm_repository import LLMCacheRepository, LLMUsageRepository
+from app.services.cousin_service import CousinService
+from app.services.graph_service import GraphService
+from app.services.llm_gateway import LLMGateway
+from app.services.repertoire_service import RepertoireService
+
+
+@lru_cache
+def get_session_factory() -> sessionmaker:
+    """Engine + tables + session factory, created on first use."""
+    engine = make_engine(settings.database_url)
+    init_db(engine)
+    return make_session_factory(engine)
+
+
+@lru_cache
+def get_dish_repository() -> DishRepository:
+    """The in-memory dish catalog."""
+    return DishRepository(settings.dishes_path)
+
+
+@lru_cache
+def get_gateway() -> LLMGateway:
+    """The cached, capped LLM gateway."""
+    sessions = get_session_factory()
+    client = OpenAILLMClient(
+        api_key=settings.openai_api_key,
+        model=settings.llm_model,
+        reasoning_effort=settings.llm_reasoning_effort,
+        timeout=settings.llm_timeout_seconds,
+    )
+    return LLMGateway(
+        client,
+        LLMCacheRepository(sessions),
+        LLMUsageRepository(sessions),
+        settings.daily_llm_call_cap,
+    )
+
+
+def get_repertoire_service() -> RepertoireService:
+    """Repertoire parsing service."""
+    return RepertoireService(get_gateway(), get_dish_repository(), settings.max_repertoire_dishes)
+
+
+def get_cousin_service() -> CousinService:
+    """Cousin search + diff writing service."""
+    graph = GraphService(get_dish_repository().all(), settings)
+    return CousinService(graph, get_gateway())

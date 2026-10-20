@@ -1,0 +1,9 @@
+# Railway service config for the API (root directory: api/).
+[build]
+builder = "RAILPACK"
+
+[deploy]
+# --proxy-headers so rate limits see the real client IP behind Railway's proxy.
+startCommand = "uv run uvicorn app.main:app --host 0.0.0.0 --port $PORT --proxy-headers --forwarded-allow-ips=*"
+healthcheckPath = "/health"
+restartPolicyType = "ON_FAILURE"

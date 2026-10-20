@@ -1,0 +1,732 @@
+{
+  "model": "gpt-5.4-mini",
+  "run_at": "2026-10-20T06:11:53.769152+00:00",
+  "suites": {
+    "parse": {
+      "passed": 47,
+      "total": 47,
+      "results": [
+        {
+          "id": "founding_user",
+          "checks": [
+            {
+              "name": "dish_count",
+              "passed": true,
+              "detail": "2"
+            },
+            {
+              "name": "dish0.family",
+              "passed": true,
+              "detail": "rice_with_protein vs rice_with_protein"
+            },
+            {
+              "name": "dish0.protein",
+              "passed": true,
+              "detail": "chicken vs chicken"
+            },
+            {
+              "name": "dish0.starch",
+              "passed": true,
+              "detail": "rice vs rice"
+            },
+            {
+              "name": "dish0.technique:marinate",
+              "passed": true,
+              "detail": "['marinate', 'rice_in_stock']"
+            },
+            {
+              "name": "dish0.technique:rice_in_stock",
+              "passed": true,
+              "detail": "['marinate', 'rice_in_stock']"
+            },
+            {
+              "name": "dish0.equipment:rice_cooker",
+              "passed": true,
+              "detail": "['stovetop', 'rice_cooker']"
+            },
+            {
+              "name": "dish0.ingredient:chicken stock",
+              "passed": true,
+              "detail": "['chicken leg', 'rice', 'garlic', 'onion', 'chicken stock', 'cumin', 'coriander', 'turmeric', 'chili powder']"
+            },
+            {
+              "name": "dish0.ingredient:garlic",
+              "passed": true,
+              "detail": "['chicken leg', 'rice', 'garlic', 'onion', 'chicken stock', 'cumin', 'coriander', 'turmeric', 'chili powder']"
+            },
+            {
+              "name": "dish0.ingredient:onion",
+              "passed": true,
+              "detail": "['chicken leg', 'rice', 'garlic', 'onion', 'chicken stock', 'cumin', 'coriander', 'turmeric', 'chili powder']"
+            },
+            {
+              "name": "dish0.matched_dish_id",
+              "passed": true,
+              "detail": "None vs None"
+            },
+            {
+              "name": "dish1.protein",
+              "passed": true,
+              "detail": "chicken vs chicken"
+            },
+            {
+              "name": "dish1.starch",
+              "passed": true,
+              "detail": "rice vs rice"
+            },
+            {
+              "name": "dish1.effort",
+              "passed": true,
+              "detail": "weekend vs weekend"
+            },
+            {
+              "name": "dish1.matched_dish_id",
+              "passed": true,
+              "detail": "chicken_biryani vs chicken_biryani"
+            }
+          ]
+        },
+        {
+          "id": "dal_chawal",
+          "checks": [
+            {
+              "name": "dish_count",
+              "passed": true,
+              "detail": "1"
+            },
+            {
+              "name": "dish0.family",
+              "passed": true,
+              "detail": "lentils_and_beans vs lentils_and_beans"
+            },
+            {
+              "name": "dish0.protein",
+              "passed": true,
+              "detail": "legumes vs legumes"
+            },
+            {
+              "name": "dish0.technique:temper_spices",
+              "passed": true,
+              "detail": "['simmer', 'temper_spices', 'plain_rice']"
+            },
+            {
+              "name": "dish0.equipment:pressure_cooker",
+              "passed": true,
+              "detail": "['pressure_cooker', 'stovetop']"
+            }
+          ]
+        },
+        {
+          "id": "pasta_student",
+          "checks": [
+            {
+              "name": "dish_count",
+              "passed": true,
+              "detail": "1"
+            },
+            {
+              "name": "dish0.family",
+              "passed": true,
+              "detail": "noodles vs noodles"
+            },
+            {
+              "name": "dish0.protein",
+              "passed": true,
+              "detail": "none vs none"
+            },
+            {
+              "name": "dish0.starch",
+              "passed": true,
+              "detail": "pasta vs pasta"
+            },
+            {
+              "name": "dish0.ingredient:garlic",
+              "passed": true,
+              "detail": "['spaghetti', 'garlic', 'olive oil', 'chili flakes', 'tomato sauce']"
+            }
+          ]
+        },
+        {
+          "id": "eggs_breakfast",
+          "checks": [
+            {
+              "name": "dish_count",
+              "passed": true,
+              "detail": "1"
+            },
+            {
+              "name": "dish0.family",
+              "passed": true,
+              "detail": "egg_dishes vs egg_dishes"
+            },
+            {
+              "name": "dish0.protein",
+              "passed": true,
+              "detail": "egg vs egg"
+            },
+            {
+              "name": "dish0.technique:scramble",
+              "passed": true,
+              "detail": "['scramble', 'pan_fry']"
+            }
+          ]
+        },
+        {
+          "id": "stir_fry",
+          "checks": [
+            {
+              "name": "dish_count",
+              "passed": true,
+              "detail": "1"
+            },
+            {
+              "name": "dish0.protein",
+              "passed": true,
+              "detail": "chicken vs chicken"
+            },
+            {
+              "name": "dish0.technique:stir_fry",
+              "passed": true,
+              "detail": "['stir_fry', 'plain_rice']"
+            },
+            {
+              "name": "dish0.equipment:wok",
+              "passed": true,
+              "detail": "['stovetop', 'wok']"
+            },
+            {
+              "name": "dish0.ingredient:soy sauce",
+              "passed": true,
+              "detail": "['chicken', 'soy sauce', 'ginger', 'garlic', 'vegetable', 'jasmine rice']"
+            },
+            {
+              "name": "dish0.ingredient:ginger",
+              "passed": true,
+              "detail": "['chicken', 'soy sauce', 'ginger', 'garlic', 'vegetable', 'jasmine rice']"
+            }
+          ]
+        },
+        {
+          "id": "oven_roast",
+          "checks": [
+            {
+              "name": "dish_count",
+              "passed": true,
+              "detail": "1"
+            },
+            {
+              "name": "dish0.family",
+              "passed": true,
+              "detail": "roast_and_grill vs roast_and_grill"
+            },
+            {
+              "name": "dish0.protein",
+              "passed": true,
+              "detail": "chicken vs chicken"
+            },
+            {
+              "name": "dish0.effort",
+              "passed": true,
+              "detail": "weekend vs weekend"
+            },
+            {
+              "name": "dish0.technique:roast",
+              "passed": true,
+              "detail": "['roast']"
+            },
+            {
+              "name": "dish0.equipment:oven",
+              "passed": true,
+              "detail": "['oven']"
+            }
+          ]
+        },
+        {
+          "id": "two_dishes_casual",
+          "checks": [
+            {
+              "name": "dish_count",
+              "passed": true,
+              "detail": "2"
+            },
+            {
+              "name": "dish0.protein",
+              "passed": true,
+              "detail": "legumes vs legumes"
+            },
+            {
+              "name": "dish1.protein",
+              "passed": true,
+              "detail": "paneer_or_cheese vs paneer_or_cheese"
+            }
+          ]
+        },
+        {
+          "id": "known_dish_by_name",
+          "checks": [
+            {
+              "name": "dish_count",
+              "passed": true,
+              "detail": "1"
+            },
+            {
+              "name": "dish0.family",
+              "passed": true,
+              "detail": "egg_dishes vs egg_dishes"
+            },
+            {
+              "name": "dish0.matched_dish_id",
+              "passed": true,
+              "detail": "shakshuka vs shakshuka"
+            }
+          ]
+        }
+      ]
+    },
+    "diff": {
+      "passed": 40,
+      "total": 40,
+      "results": [
+        {
+          "id": "rice_to_kabsa",
+          "checks": [
+            {
+              "name": "bullet_count",
+              "passed": true,
+              "detail": "4"
+            },
+            {
+              "name": "bullet_length",
+              "passed": true,
+              "detail": "longest 14 words"
+            },
+            {
+              "name": "no_raw_ids",
+              "passed": true,
+              "detail": "Sear the chicken leg first, instead of marinating it. Cook the onion, garlic, to"
+            },
+            {
+              "name": "new_ingredient_coverage",
+              "passed": true,
+              "detail": "5/5"
+            },
+            {
+              "name": "no_foreign_ingredients",
+              "passed": true,
+              "detail": "ok"
+            }
+          ],
+          "sample": {
+            "headline": "Kabsa: your chicken leg with rice, but…",
+            "changes": [
+              "Sear the chicken leg first, instead of marinating it.",
+              "Cook the onion, garlic, tomato, ginger, kabsa spice, and dried lime with the chicken.",
+              "Simmer the chicken in chicken stock until the broth is rich and tomato-scented.",
+              "Cook the basmati rice in stock, then stir in raisins at the end."
+            ],
+            "keep_line": "Keep cooking the rice in stock as before."
+          }
+        },
+        {
+          "id": "rice_to_arroz",
+          "checks": [
+            {
+              "name": "bullet_count",
+              "passed": true,
+              "detail": "5"
+            },
+            {
+              "name": "bullet_length",
+              "passed": true,
+              "detail": "longest 11 words"
+            },
+            {
+              "name": "no_raw_ids",
+              "passed": true,
+              "detail": "Sear the chicken thigh first; skip marinating. Cook the rice in stock instead of"
+            },
+            {
+              "name": "new_ingredient_coverage",
+              "passed": true,
+              "detail": "5/5"
+            },
+            {
+              "name": "no_foreign_ingredients",
+              "passed": true,
+              "detail": "ok"
+            }
+          ],
+          "sample": {
+            "headline": "Arroz con Pollo: your chicken leg with rice, but…",
+            "changes": [
+              "Sear the chicken thigh first; skip marinating.",
+              "Cook the rice in stock instead of your rice-cooker method.",
+              "Build a sofrito with onion, garlic, tomato, bell pepper, and cilantro.",
+              "Simmer chicken and vegetables together, then add peas and saffron.",
+              "Use medium grain rice and your chicken stock; cook until tender."
+            ],
+            "keep_line": "Keep cooking the rice in stock."
+          }
+        },
+        {
+          "id": "rice_to_hainanese",
+          "checks": [
+            {
+              "name": "bullet_count",
+              "passed": true,
+              "detail": "4"
+            },
+            {
+              "name": "bullet_length",
+              "passed": true,
+              "detail": "longest 13 words"
+            },
+            {
+              "name": "no_raw_ids",
+              "passed": true,
+              "detail": "Poach a whole chicken gently instead of marinating and roasting your chicken leg"
+            },
+            {
+              "name": "new_ingredient_coverage",
+              "passed": true,
+              "detail": "6/6"
+            },
+            {
+              "name": "no_foreign_ingredients",
+              "passed": true,
+              "detail": "ok"
+            }
+          ],
+          "sample": {
+            "headline": "Hainanese Chicken Rice: your chicken leg with rice, but…",
+            "changes": [
+              "Poach a whole chicken gently instead of marinating and roasting your chicken leg.",
+              "Cook jasmine rice in stock; add ginger and garlic for the fragrant rice.",
+              "Blend a sauce with ginger, scallion, chili, soy sauce, and sesame oil.",
+              "Serve with sliced cucumber and spoon the poaching juices over the chicken."
+            ],
+            "keep_line": "Keep cooking the rice in stock the way you already do."
+          }
+        },
+        {
+          "id": "rice_to_jollof",
+          "checks": [
+            {
+              "name": "bullet_count",
+              "passed": true,
+              "detail": "4"
+            },
+            {
+              "name": "bullet_length",
+              "passed": true,
+              "detail": "longest 15 words"
+            },
+            {
+              "name": "no_raw_ids",
+              "passed": true,
+              "detail": "Blend tomato, red bell pepper, scotch bonnet, onion, garlic, and ginger into a s"
+            },
+            {
+              "name": "new_ingredient_coverage",
+              "passed": true,
+              "detail": "5/5"
+            },
+            {
+              "name": "no_foreign_ingredients",
+              "passed": true,
+              "detail": "ok"
+            }
+          ],
+          "sample": {
+            "headline": "Jollof Rice with Chicken: your chicken leg with rice, but…",
+            "changes": [
+              "Blend tomato, red bell pepper, scotch bonnet, onion, garlic, and ginger into a smooth sauce.",
+              "Sear the chicken thigh until browned; skip marinating.",
+              "Simmer the sauce with thyme and chicken stock until it darkens and thickens.",
+              "Cook the long grain rice in stock instead of plain water."
+            ],
+            "keep_line": "Keep the rice cooked in stock and serve the chicken alongside it."
+          }
+        },
+        {
+          "id": "rice_to_plov",
+          "checks": [
+            {
+              "name": "bullet_count",
+              "passed": true,
+              "detail": "4"
+            },
+            {
+              "name": "bullet_length",
+              "passed": true,
+              "detail": "longest 12 words"
+            },
+            {
+              "name": "no_raw_ids",
+              "passed": true,
+              "detail": "Replace chicken leg with lamb shoulder, and skip marinating. Sear the lamb, then"
+            },
+            {
+              "name": "new_ingredient_coverage",
+              "passed": true,
+              "detail": "4/4"
+            },
+            {
+              "name": "no_foreign_ingredients",
+              "passed": true,
+              "detail": "ok"
+            }
+          ],
+          "sample": {
+            "headline": "Plov: your chicken leg with rice, but…",
+            "changes": [
+              "Replace chicken leg with lamb shoulder, and skip marinating.",
+              "Sear the lamb, then braise it with onion, garlic, cumin, and carrot.",
+              "Add chickpea and raisin for the plov mix.",
+              "Cook the short grain rice in stock with the lamb and vegetables."
+            ],
+            "keep_line": "Keep cooking the rice in stock until tender."
+          }
+        },
+        {
+          "id": "rice_to_tandoori",
+          "checks": [
+            {
+              "name": "bullet_count",
+              "passed": true,
+              "detail": "4"
+            },
+            {
+              "name": "bullet_length",
+              "passed": true,
+              "detail": "longest 17 words"
+            },
+            {
+              "name": "no_raw_ids",
+              "passed": true,
+              "detail": "Make a spice paste with yogurt, lemon, garlic, ginger, kashmiri chili, garam mas"
+            },
+            {
+              "name": "new_ingredient_coverage",
+              "passed": true,
+              "detail": "4/4"
+            },
+            {
+              "name": "no_foreign_ingredients",
+              "passed": true,
+              "detail": "ok"
+            }
+          ],
+          "sample": {
+            "headline": "Tandoori Chicken: your chicken leg with rice, but…",
+            "changes": [
+              "Make a spice paste with yogurt, lemon, garlic, ginger, kashmiri chili, garam masala, cumin, coriander, and turmeric.",
+              "Marinate the chicken legs in that paste.",
+              "Roast or grill the marinated chicken until smoky and charred.",
+              "Skip cooking the rice in stock."
+            ],
+            "keep_line": "Marinating the chicken legs stays the same."
+          }
+        },
+        {
+          "id": "dal_to_chana",
+          "checks": [
+            {
+              "name": "bullet_count",
+              "passed": true,
+              "detail": "5"
+            },
+            {
+              "name": "bullet_length",
+              "passed": true,
+              "detail": "longest 13 words"
+            },
+            {
+              "name": "no_raw_ids",
+              "passed": true,
+              "detail": "Replace toor dal with chickpeas, and skip the pressure cooker. Bloom cumin in ho"
+            },
+            {
+              "name": "new_ingredient_coverage",
+              "passed": true,
+              "detail": "9/9"
+            },
+            {
+              "name": "no_foreign_ingredients",
+              "passed": true,
+              "detail": "ok"
+            }
+          ],
+          "sample": {
+            "headline": "Chana Masala: your dal tadka, but…",
+            "changes": [
+              "Replace toor dal with chickpeas, and skip the pressure cooker.",
+              "Bloom cumin in hot oil, then add onion, ginger, garlic, and green chili.",
+              "Cook in tomato, coriander, and garam masala until the base softens.",
+              "Simmer the chickpeas in the tangy onion-tomato sauce.",
+              "Finish with amchur and cilantro; keep your ghee."
+            ],
+            "keep_line": "Keep blooming whole spices in hot oil, then serve with rice if you like."
+          }
+        },
+        {
+          "id": "dal_to_khichdi",
+          "checks": [
+            {
+              "name": "bullet_count",
+              "passed": true,
+              "detail": "4"
+            },
+            {
+              "name": "bullet_length",
+              "passed": true,
+              "detail": "longest 12 words"
+            },
+            {
+              "name": "no_raw_ids",
+              "passed": true,
+              "detail": "Replace toor dal with yellow lentil, and cook the rice in stock. Bloom cumin, gi"
+            },
+            {
+              "name": "new_ingredient_coverage",
+              "passed": true,
+              "detail": "6/6"
+            },
+            {
+              "name": "no_foreign_ingredients",
+              "passed": true,
+              "detail": "ok"
+            }
+          ],
+          "sample": {
+            "headline": "Khichdi: your dal tadka, but…",
+            "changes": [
+              "Replace toor dal with yellow lentil, and cook the rice in stock.",
+              "Bloom cumin, ginger, asafoetida, onion, and green chili in hot ghee.",
+              "Simmer the rice and lentil together until soft and creamy.",
+              "Finish with cilantro."
+            ],
+            "keep_line": "Keep the ghee tadka style and the gentle, simple seasoning."
+          }
+        }
+      ]
+    },
+    "e2e": {
+      "passed": 12,
+      "total": 12,
+      "results": [
+        {
+          "id": "founding_user",
+          "cousins": [
+            "Kabsa",
+            "Maqluba",
+            "Arroz con Pollo",
+            "Jambalaya",
+            "Plov"
+          ],
+          "checks": [
+            {
+              "name": "cousin_count",
+              "passed": true,
+              "detail": "5"
+            },
+            {
+              "name": "family_hits",
+              "passed": true,
+              "detail": "5 rice_with_protein"
+            },
+            {
+              "name": "region_spread",
+              "passed": true,
+              "detail": "4 regions"
+            }
+          ]
+        },
+        {
+          "id": "dal_cook",
+          "cousins": [
+            "Jamaican Rice and Peas",
+            "Ful Medames",
+            "Mujaddara",
+            "Gallo Pinto",
+            "Khichdi"
+          ],
+          "checks": [
+            {
+              "name": "cousin_count",
+              "passed": true,
+              "detail": "5"
+            },
+            {
+              "name": "family_hits",
+              "passed": true,
+              "detail": "5 lentils_and_beans"
+            },
+            {
+              "name": "region_spread",
+              "passed": true,
+              "detail": "5 regions"
+            }
+          ]
+        },
+        {
+          "id": "noodle_cook",
+          "cousins": [
+            "Chicken Lo Mein",
+            "Chow Mein",
+            "Dan Dan Noodles",
+            "Pancit Bihon",
+            "Mee Goreng"
+          ],
+          "checks": [
+            {
+              "name": "cousin_count",
+              "passed": true,
+              "detail": "5"
+            },
+            {
+              "name": "family_hits",
+              "passed": true,
+              "detail": "5 noodles"
+            },
+            {
+              "name": "region_spread",
+              "passed": true,
+              "detail": "3 regions"
+            }
+          ]
+        },
+        {
+          "id": "egg_cook",
+          "cousins": [
+            "Menemen",
+            "Saltfish and Eggs",
+            "Migas con Huevo",
+            "Strapatsada",
+            "Tortilla Española"
+          ],
+          "checks": [
+            {
+              "name": "cousin_count",
+              "passed": true,
+              "detail": "5"
+            },
+            {
+              "name": "family_hits",
+              "passed": true,
+              "detail": "5 egg_dishes"
+            },
+            {
+              "name": "region_spread",
+              "passed": true,
+              "detail": "4 regions"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "passed": 99,
+  "total": 99,
+  "pass_rate": 1.0
+}
