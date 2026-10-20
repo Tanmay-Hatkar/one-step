@@ -26,7 +26,7 @@ class Settings(BaseSettings):
 
     # Cost safety
     daily_llm_call_cap: int = Field(default=2000, description="Max LLM calls per UTC day")
-    rate_limit: str = Field(default="20/minute", description="Per-IP limit on LLM endpoints")
+    rate_limit: str = Field(default="40/minute", description="Per-IP limit on LLM endpoints")
 
     # Data
     database_url: str = Field(default=f"sqlite:///{API_ROOT / 'one_step.db'}")
@@ -34,7 +34,11 @@ class Settings(BaseSettings):
 
     # Input limits
     max_repertoire_text_chars: int = Field(default=1500)
-    max_repertoire_dishes: int = Field(default=10)
+    max_repertoire_dishes: int = Field(default=10, description="Dishes parsed from one text")
+    max_kitchen_dishes: int = Field(
+        default=30, description="Dishes per request: parsed ones plus ones marked cooked"
+    )
+    max_skip_ids: int = Field(default=50, description="'Not tonight' skips per request")
     default_cousin_count: int = Field(default=5)
     max_cousin_count: int = Field(default=8)
 
@@ -42,6 +46,9 @@ class Settings(BaseSettings):
     one_step_max_new_techniques: int = Field(default=1)
     one_step_max_new_ingredients: int = Field(default=6)
     max_cousins_per_region: int = Field(default=2)
+    stretch_max_new_techniques: int = Field(
+        default=2, description="A 'stretch' pick may add at most this many new skills"
+    )
 
     # HTTP
     cors_origins: str = Field(default="http://localhost:3000", description="Comma-separated")

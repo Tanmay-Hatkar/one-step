@@ -7,6 +7,7 @@ from pathlib import Path
 from pydantic import ValidationError
 
 from app.models.dish import Dish
+from app.services.diet import with_safe_diet_facts
 
 logger = logging.getLogger(__name__)
 
@@ -29,9 +30,14 @@ class DishRepository:
         """
         try:
             raw = json.loads(path.read_text())
-            self._dishes = [Dish.model_validate(d) for d in raw]
+            generated = [Dish.model_validate(d) for d in raw]
         except (OSError, json.JSONDecodeError, ValidationError) as exc:
             raise DishCatalogError(f"Cannot load dish catalog at {path}: {exc}") from exc
+        # Cross-check allergens and vegetarian status against ingredients (diet filter).
+        self._dishes = [with_safe_diet_facts(d) for d in generated]
+        corrected = sum(a != b for a, b in zip(generated, self._dishes, strict=True))
+        if corrected:
+            logger.info("Diet facts tightened for %d dishes", corrected)
         self._by_id = {d.id: d for d in self._dishes}
         logger.info("Loaded %d dishes", len(self._dishes))
 

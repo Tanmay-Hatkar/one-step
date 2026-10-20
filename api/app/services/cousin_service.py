@@ -7,10 +7,11 @@ from pydantic import BaseModel, Field
 
 from app.llm.client import LLMError
 from app.llm.prompts import WRITE_DIFF_INSTRUCTIONS, build_diff_prompt
-from app.models.api import Cousin, DiffText
+from app.models.api import Cousin, Diet, DiffText, TonightResponse
 from app.models.dish import Delta, Dish, UserDish
 from app.models.labels import technique_label
-from app.services.graph_service import GraphService
+from app.services.diet import text_mentions_allergen
+from app.services.graph_service import DietRule, GraphService
 from app.services.llm_gateway import DailyCapExceeded, LLMGateway
 
 logger = logging.getLogger(__name__)
@@ -57,6 +58,11 @@ def fallback_diff(anchor: UserDish, dish: Dish, delta: Delta) -> DiffText:
     )
 
 
+def to_rule(diet: Diet) -> DietRule:
+    """Convert the request's diet into the graph's hard rule."""
+    return DietRule(vegetarian=diet.vegetarian, avoid=frozenset(diet.avoid))
+
+
 class CousinService:
     """Orchestrates graph search and diff writing."""
 
@@ -65,33 +71,80 @@ class CousinService:
         self._graph = graph
         self._gateway = gateway
 
-    async def find(self, repertoire: list[UserDish], limit: int) -> list[Cousin]:
+    async def find(
+        self, repertoire: list[UserDish], limit: int, diet: Diet | None = None
+    ) -> list[Cousin]:
         """Return cousins with written diffs, closest first.
 
         Args:
             repertoire: The user's dishes.
             limit: How many cousins.
+            diet: Hard diet rule; also guards the written diffs.
 
         Returns:
             Cousins; a diff falls back to a template if the LLM fails for that one.
         """
-        pairs = self._graph.find_cousins(repertoire, limit)
+        diet = diet or Diet()
+        pairs = self._graph.find_cousins(repertoire, limit, to_rule(diet))
+        return await self._write_all(repertoire, pairs, diet)
+
+    async def tonight(
+        self,
+        repertoire: list[UserDish],
+        diet: Diet | None = None,
+        max_minutes: int | None = None,
+        skip: list[str] | None = None,
+    ) -> TonightResponse:
+        """Pick tonight's familiar, one-step and stretch dishes, with diffs for the new ones.
+
+        Args:
+            repertoire: The user's dishes.
+            diet: Hard diet rule.
+            max_minutes: Time available; None means any.
+            skip: Ids or names the user said 'not tonight' to.
+
+        Returns:
+            The three picks; any may be None.
+        """
+        diet = diet or Diet()
+        picks = self._graph.pick_tonight(
+            repertoire, to_rule(diet), max_minutes, frozenset(skip or [])
+        )
+        pairs = [p for p in (picks.one_step, picks.stretch) if p is not None]
+        written = iter(await self._write_all(repertoire, pairs, diet))
+        return TonightResponse(
+            familiar=picks.familiar,
+            one_step=next(written) if picks.one_step else None,
+            stretch=next(written) if picks.stretch else None,
+        )
+
+    async def _write_all(
+        self, repertoire: list[UserDish], pairs: list[tuple[Dish, Delta]], diet: Diet
+    ) -> list[Cousin]:
+        """Write diffs for (dish, delta) pairs in parallel."""
         by_name = {d.name: d for d in repertoire}
+        avoid = set(diet.avoid)
         diffs = await asyncio.gather(
-            *(self.write_diff(by_name[delta.anchor_name], dish, delta) for dish, delta in pairs)
+            *(
+                self.write_diff(by_name[delta.anchor_name], dish, delta, avoid)
+                for dish, delta in pairs
+            )
         )
         return [
             Cousin(dish=dish, delta=delta, diff=diff)
             for (dish, delta), diff in zip(pairs, diffs, strict=True)
         ]
 
-    async def write_diff(self, anchor: UserDish, dish: Dish, delta: Delta) -> DiffText:
+    async def write_diff(
+        self, anchor: UserDish, dish: Dish, delta: Delta, avoid: set[str] | None = None
+    ) -> DiffText:
         """Write one diff with the LLM, falling back to a template on failure.
 
         Args:
             anchor: The user's dish.
             dish: The cousin.
             delta: Their computed difference.
+            avoid: Allergens the user avoids; a diff that mentions one is replaced.
 
         Returns:
             The written diff.
@@ -118,6 +171,9 @@ class CousinService:
             )
         except (LLMError, DailyCapExceeded):
             logger.warning("Diff for %s fell back to template", dish.id)
+            return fallback_diff(anchor, dish, delta)
+        if avoid and text_mentions_allergen(" ".join([*body.changes, body.keep_line]), avoid):
+            logger.warning("Diff for %s mentioned an avoided allergen; using template", dish.id)
             return fallback_diff(anchor, dish, delta)
         return DiffText(
             headline=headline_for(anchor, dish), changes=body.changes[:5], keep_line=body.keep_line

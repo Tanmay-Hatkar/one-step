@@ -17,6 +17,7 @@ export interface UserDish extends DishParts {
   name: string;
   notes: string;
   matched_dish_id: string | null;
+  source?: "described" | "cooked";
 }
 
 export interface Dish extends DishParts {
@@ -60,4 +61,26 @@ export interface Cousin {
 export interface DishStats {
   dishes: number;
   regions: number;
+}
+
+export type Allergen =
+  | "dairy"
+  | "egg"
+  | "gluten"
+  | "peanut"
+  | "tree_nut"
+  | "soy"
+  | "fish"
+  | "shellfish"
+  | "sesame";
+
+export interface Diet {
+  vegetarian: boolean;
+  avoid: Allergen[];
+}
+
+export interface TonightPicks {
+  familiar: UserDish | null;
+  one_step: Cousin | null;
+  stretch: Cousin | null;
 }

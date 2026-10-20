@@ -1,139 +1,163 @@
 "use client";
 
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ChevronDown, CookingPot, Loader2, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { CousinCard } from "@/components/cousin-card";
+import { DietPicker, dietSummary } from "@/components/diet-picker";
+import { Hero } from "@/components/hero";
 import { LoadingCards } from "@/components/loading-cards";
 import { RepertoireSummary } from "@/components/repertoire-summary";
+import { StartForm } from "@/components/start-form";
+import { Tonight } from "@/components/tonight";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { ApiError, findCousins, getStats, parseRepertoire } from "@/lib/api";
-import { loadKitchen, saveKitchen } from "@/lib/storage";
-import type { Cousin, DishStats, UserDish } from "@/lib/types";
-
-const EXAMPLE =
-  "Most nights I make a whole chicken leg marinated in Indian spices, with rice made in " +
-  "the rice cooker with garlic, onion and a chicken broth cube. Some weekends I make a " +
-  "full chicken biryani.";
-
-const MAX_CHARS = 1500;
-
-type Phase = "input" | "reading" | "finding" | "results";
+import { getStats } from "@/lib/api";
+import type { DishStats } from "@/lib/types";
+import { useKitchen } from "@/lib/use-kitchen";
+import { cn } from "@/lib/utils";
 
 export function Kitchen() {
-  const [phase, setPhase] = useState<Phase>("input");
-  const [text, setText] = useState("");
-  const [dishes, setDishes] = useState<UserDish[]>([]);
-  const [cousins, setCousins] = useState<Cousin[]>([]);
-  const [error, setError] = useState<string | null>(null);
+  const k = useKitchen();
   const [stats, setStats] = useState<DishStats | null>(null);
 
   useEffect(() => {
-    // Restoring from localStorage must happen after hydration, in an effect.
-    const saved = loadKitchen();
-    if (saved?.cousins.length) {
-      /* eslint-disable react-hooks/set-state-in-effect */
-      setText(saved.text);
-      setDishes(saved.dishes);
-      setCousins(saved.cousins);
-      setPhase("results");
-      /* eslint-enable react-hooks/set-state-in-effect */
-    }
     getStats().then(setStats).catch(() => setStats(null));
   }, []);
 
-  async function run() {
-    const input = text.trim();
-    if (input.length < 3) {
-      setError("Tell me about a dish or two you cook.");
-      return;
-    }
-    setError(null);
-    try {
-      setPhase("reading");
-      const parsed = await parseRepertoire(input);
-      setDishes(parsed);
-      setPhase("finding");
-      const found = await findCousins(parsed);
-      setCousins(found);
-      setPhase("results");
-      saveKitchen({ text: input, dishes: parsed, cousins: found });
-    } catch (err) {
-      setError(err instanceof ApiError ? err.message : "Something went wrong.");
-      setPhase("input");
-    }
-  }
+  const busy = k.phase === "reading" || k.phase === "finding";
+  const isCooked = (id: string) => k.cooked.some((c) => c.id === id);
+  const tonightIds = new Set(
+    [k.tonight?.one_step?.dish.id, k.tonight?.stretch?.dish.id].filter(Boolean),
+  );
+  const more = k.cousins.filter((c) => !tonightIds.has(c.dish.id));
 
-  const busy = phase === "reading" || phase === "finding";
-
-  return (
-    <div className="space-y-8">
-      {(phase === "input" || busy) && (
-        <section aria-labelledby="ask" className="space-y-3">
-          <label id="ask" htmlFor="repertoire" className="block text-base font-medium">
-            What do you usually cook?
-          </label>
-          <Textarea
-            id="repertoire"
-            value={text}
-            onChange={(e) => setText(e.target.value.slice(0, MAX_CHARS))}
-            placeholder="Describe a dish or two the way you'd tell a friend — what goes in, how you cook it."
-            className="min-h-32 bg-card text-base"
-            disabled={busy}
+  if (k.phase !== "results") {
+    return (
+      <>
+        <Hero />
+        <div className="space-y-8">
+          <StartForm
+            text={k.text}
+            onText={k.setText}
+            diet={k.prefs.diet}
+            onDiet={(diet) => k.setPrefs({ ...k.prefs, diet })}
+            onSubmit={k.submit}
+            busy={busy}
+            error={k.error}
           />
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <Button
-              variant="link"
-              className="h-auto px-0 text-muted-foreground"
-              onClick={() => setText(EXAMPLE)}
-              disabled={busy}
-            >
-              <Sparkles aria-hidden />
-              Try an example
-            </Button>
-            <Button size="lg" onClick={run} disabled={busy} className="px-4">
-              Show me what&apos;s one step away
-              <ArrowRight aria-hidden />
-            </Button>
-          </div>
-          {error && (
-            <p role="alert" className="text-sm text-destructive">
-              {error}
-            </p>
-          )}
           {stats && !busy && (
             <p className="text-xs text-muted-foreground">
               {stats.dishes} home dishes from {stats.regions} regions, connected by how
               they&apos;re cooked.
             </p>
           )}
+          {k.phase === "reading" && <LoadingCards label="Reading your kitchen…" />}
+          {k.phase === "finding" && <LoadingCards label="Finding dishes one step away…" />}
+        </div>
+      </>
+    );
+  }
+
+  return (
+    <div className="space-y-8">
+      <header className="flex items-center justify-between gap-3">
+        <p className="text-sm font-medium tracking-wide text-primary">One Step</p>
+        <p
+          role="status"
+          aria-live="polite"
+          className={cn(
+            "flex items-center gap-1.5 text-xs text-muted-foreground transition-opacity",
+            k.updating ? "opacity-100" : "opacity-0",
+          )}
+        >
+          <Loader2 aria-hidden className="size-3.5 animate-spin" />
+          {k.updating ? "Updating…" : ""}
+        </p>
+      </header>
+
+      {k.notice && (
+        <div
+          role="status"
+          className="flex items-start gap-3 rounded-xl bg-accent px-4 py-3 text-sm text-accent-foreground animate-in fade-in"
+        >
+          <CookingPot aria-hidden className="mt-0.5 size-4 shrink-0" />
+          <p className="flex-1">
+            <span className="font-medium">{k.notice.name}</span> is in your kitchen now. New dishes
+            grow from it.
+          </p>
+          <button
+            type="button"
+            onClick={() => k.removeCooked(k.notice!.id)}
+            className="font-medium underline underline-offset-2"
+          >
+            Undo
+          </button>
+          <button type="button" onClick={k.dismissNotice} aria-label="Dismiss">
+            <X aria-hidden className="size-4" />
+          </button>
+        </div>
+      )}
+
+      <div className="space-y-4">
+        <RepertoireSummary
+          dishes={k.dishes}
+          cooked={k.cooked}
+          onEdit={k.edit}
+          onRemoveCooked={k.removeCooked}
+        />
+        <details className="group rounded-xl border bg-card px-4 py-3">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-sm">
+            <span>
+              <span className="font-medium">Diet &amp; allergies</span>
+              <span className="text-muted-foreground"> · {dietSummary(k.prefs.diet)}</span>
+            </span>
+            <ChevronDown
+              aria-hidden
+              className="size-4 text-muted-foreground transition-transform group-open:rotate-180"
+            />
+          </summary>
+          <div className="pt-3">
+            <DietPicker diet={k.prefs.diet} onChange={(diet) => k.setPrefs({ ...k.prefs, diet })} />
+          </div>
+        </details>
+      </div>
+
+      {k.error && (
+        <div role="alert" className="flex items-center justify-between gap-3 text-sm text-destructive">
+          <span>{k.error}</span>
+          <Button variant="outline" size="sm" onClick={() => k.setPrefs(k.prefs)}>
+            Try again
+          </Button>
+        </div>
+      )}
+
+      <div className={cn("space-y-10 transition-opacity", k.updating && "opacity-60")}>
+        <Tonight
+          picks={k.tonight}
+          minutes={k.prefs.minutes}
+          onMinutes={(minutes) => k.setPrefs({ ...k.prefs, minutes })}
+          isCooked={isCooked}
+          onCooked={k.markCooked}
+          onSkip={k.skipTonight}
+        />
+
+        <section aria-labelledby="more" className="space-y-3">
+          <h2 id="more" className="font-heading text-xl font-semibold tracking-tight">
+            {more.length
+              ? "More dishes you're close to"
+              : "Nothing else close enough — try describing another dish."}
+          </h2>
+          {more.map((cousin, i) => (
+            <CousinCard
+              key={cousin.dish.id}
+              cousin={cousin}
+              index={i}
+              cooked={isCooked(cousin.dish.id)}
+              onCooked={() => k.markCooked(cousin.dish)}
+            />
+          ))}
         </section>
-      )}
-
-      {phase === "reading" && <LoadingCards label="Reading your kitchen…" />}
-      {phase === "finding" && (
-        <>
-          <RepertoireSummary dishes={dishes} onEdit={() => setPhase("input")} />
-          <LoadingCards label="Finding dishes one step away…" />
-        </>
-      )}
-
-      {phase === "results" && (
-        <>
-          <RepertoireSummary dishes={dishes} onEdit={() => setPhase("input")} />
-          <section aria-labelledby="cousins" className="space-y-4">
-            <h2 id="cousins" className="font-heading text-xl font-semibold">
-              {cousins.length
-                ? "You're one step away from…"
-                : "Nothing close enough yet — try describing another dish."}
-            </h2>
-            {cousins.map((cousin, i) => (
-              <CousinCard key={cousin.dish.id} cousin={cousin} index={i} />
-            ))}
-          </section>
-        </>
-      )}
+      </div>
     </div>
   );
 }

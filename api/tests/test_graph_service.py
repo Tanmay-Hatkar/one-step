@@ -1,8 +1,10 @@
 """The dish graph: distance, one-step rules, exclusion and diversity."""
 
+from datetime import date
+
 from app.config import Settings
 from app.models.dish import Dish, UserDish
-from app.services.graph_service import GraphService
+from app.services.graph_service import DietRule, GraphService
 from app.services.ingredients import pantry_of
 
 
@@ -104,3 +106,103 @@ def test_best_anchor_is_used(catalog, chicken_and_rice, settings) -> None:
     )
     assert found["kabsa"].anchor_name == "Chicken leg with rice"
     assert found["pad_thai"].anchor_name == "Hakka noodles"
+
+
+def test_protein_swap_is_not_one_step(catalog, chicken_and_rice, settings) -> None:
+    graph = GraphService(catalog, settings)
+    plov = next(d for d in catalog if d.id == "plov")  # lamb instead of chicken
+    delta = _delta(graph, chicken_and_rice, plov)
+    assert not delta.same_protein
+    assert not delta.is_one_step
+
+
+def test_diet_rule_is_a_hard_filter(catalog, chicken_and_rice, settings) -> None:
+    graph = GraphService(catalog, settings)
+    everything = {d.id for d, _ in graph.find_cousins([chicken_and_rice], limit=10)}
+    no_dairy = {
+        d.id
+        for d, _ in graph.find_cousins(
+            [chicken_and_rice], limit=10, diet=DietRule(avoid=frozenset({"dairy"}))
+        )
+    }
+    assert "tandoori_chicken" in everything
+    assert "tandoori_chicken" not in no_dairy
+    vegetarian = graph.find_cousins([chicken_and_rice], limit=10, diet=DietRule(vegetarian=True))
+    assert vegetarian == []  # every test dish has meat or fish
+
+
+def test_tonight_picks_one_step_and_stretch(catalog, chicken_and_rice, settings) -> None:
+    graph = GraphService(catalog, settings)
+    picks = graph.pick_tonight([chicken_and_rice], today=date(2026, 10, 20))
+    assert picks.familiar == chicken_and_rice
+    assert picks.one_step is not None and picks.one_step[1].is_one_step
+    assert picks.stretch is not None
+    stretch_dish, stretch_delta = picks.stretch
+    assert not stretch_delta.is_one_step
+    assert not stretch_delta.new_equipment  # never needs gear the user lacks
+    assert stretch_dish.id != picks.one_step[0].id
+
+
+def test_tonight_respects_time_and_skips(catalog, chicken_and_rice, settings) -> None:
+    graph = GraphService(catalog, settings)
+    first = graph.pick_tonight([chicken_and_rice])
+    assert first.one_step is not None
+    skipped = graph.pick_tonight([chicken_and_rice], skip=frozenset({first.one_step[0].id}))
+    assert skipped.one_step is None or skipped.one_step[0].id != first.one_step[0].id
+
+    quick = graph.pick_tonight([chicken_and_rice], max_minutes=30)
+    assert quick.one_step is None and quick.stretch is None  # every test dish takes 90 min
+    assert quick.familiar == chicken_and_rice  # your own dish always fits
+
+
+def test_tonight_familiar_rotates_and_prefers_weeknight(
+    catalog, chicken_and_rice, settings
+) -> None:
+    biryani = chicken_and_rice.model_copy(update={"name": "Biryani", "effort": "weekend"})
+    graph = GraphService(catalog, settings)
+    days = {
+        graph.pick_tonight([chicken_and_rice, biryani], today=date(2026, 10, d)).familiar.name
+        for d in (20, 21)
+    }
+    assert days == {"Chicken leg with rice", "Biryani"}
+    for d in (20, 21):
+        quick = graph.pick_tonight(
+            [chicken_and_rice, biryani], max_minutes=45, today=date(2026, 10, d)
+        )
+        assert quick.familiar.name == "Chicken leg with rice"
+    skipped = graph.pick_tonight([chicken_and_rice], skip=frozenset({"Chicken leg with rice"}))
+    assert skipped.familiar is None
+
+
+def test_changing_the_base_is_not_one_step(chicken_and_rice, settings) -> None:
+    from tests.conftest import make_dish
+
+    pasta = make_dish(
+        id="aglio_olio",
+        name="Aglio e Olio",
+        family="noodles",
+        protein="none",
+        starch="pasta",
+        techniques=["boil", "pan_fry"],
+        flavor=["garlic_ginger", "chili_heat"],
+        key_ingredients=["spaghetti", "garlic", "chili flake", "parsley"],
+    )
+    delta = _delta(GraphService([pasta], settings), chicken_and_rice, pasta)
+    assert not delta.same_family and not delta.same_starch
+    assert not delta.is_one_step
+
+
+def test_own_dish_anchors_when_both_are_one_step(catalog, chicken_and_rice, settings) -> None:
+    from tests.conftest import make_dish
+
+    # A cooked dish that is even closer to kabsa than the user's own dish.
+    maqluba = make_dish(
+        id="maqluba", name="Maqluba", techniques=["sear", "simmer", "rice_in_stock"]
+    )
+    cooked = UserDish.model_validate(
+        {**maqluba.model_dump(), "notes": "", "source": "cooked", "matched_dish_id": "maqluba"}
+    )
+    graph = GraphService(catalog, settings)
+    found = dict((d.id, x) for d, x in graph.find_cousins([cooked, chicken_and_rice], 10))
+    assert found["kabsa"].is_one_step
+    assert found["kabsa"].anchor_name == "Chicken leg with rice"

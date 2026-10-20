@@ -13,6 +13,8 @@ from app.models.api import (
     CousinsResponse,
     ParseRepertoireRequest,
     ParseRepertoireResponse,
+    TonightRequest,
+    TonightResponse,
 )
 from app.repositories.dish_repository import DishRepository
 from app.services.cousin_service import CousinService
@@ -55,8 +57,19 @@ async def cousins(
     service: CousinService = Depends(get_cousin_service),
 ) -> CousinsResponse:
     """Dishes one step away from the user's repertoire, each written as a diff."""
-    found = await service.find(body.repertoire, body.limit)
+    found = await service.find(body.repertoire, body.limit, body.diet)
     return CousinsResponse(cousins=found)
+
+
+@router.post("/tonight", response_model=TonightResponse)
+@limiter.limit(settings.rate_limit)
+async def tonight(
+    request: Request,
+    body: TonightRequest,
+    service: CousinService = Depends(get_cousin_service),
+) -> TonightResponse:
+    """A familiar dish, a one-step dish and a stretch that fit tonight's time and diet."""
+    return await service.tonight(body.repertoire, body.diet, body.max_minutes, body.skip)
 
 
 @router.get("/dishes/stats")

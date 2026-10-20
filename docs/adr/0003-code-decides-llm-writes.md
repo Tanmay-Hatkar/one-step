@@ -14,7 +14,7 @@ Each kind of logic lives where it is most reliable:
 | Where | What | Example |
 |---|---|---|
 | Data, at build time | Facts | each dish's parts |
-| Code | Decisions and hard rules | which dishes are cousins, ranking, ingredient matching, headlines, (v0.2) allergen filtering |
+| Code | Decisions and hard rules | which dishes are cousins, ranking, ingredient matching, headlines, diet and allergen filtering, tonight's picks |
 | LLM | Language | parsing "my chicken leg with Indian spices"; writing the change bullets |
 | Evals | Checking the above | `api/evals/` |
 
@@ -30,3 +30,12 @@ cap fails closed.
 - Ranking is unit-tested and tunable (`ScoreWeights`), not prompt-tweaked.
 - The app degrades gracefully: no LLM → still useful results.
 - Prompt changes are evaluated against fixed cases before merging.
+
+## Addendum (v0.2): diet is a hard rule
+
+Diet filtering follows the same split. The catalog's LLM-generated allergen tags are not
+trusted alone: at load time each dish's allergens become *tagged ∪ inferred from
+ingredients* (keyword rules in `services/diet.py`), and a dish is vegetarian only if the
+tag, the protein and every ingredient agree. Filtering happens in the graph, before the
+LLM sees anything. As a last guard, a written diff that mentions an avoided allergen is
+replaced by the template diff.

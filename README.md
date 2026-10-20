@@ -22,6 +22,12 @@ chicken with broth rice leads you to kabsa, maqluba, arroz con pollo, jambalaya 
 
 - **Dish graph** — 150 home dishes from 10 regions, each broken into parts on a closed
   vocabulary (family, technique, equipment, flavor, allergens). Distance is plain code.
+- **Tonight** — pick your time; get something familiar, one step away, and a stretch.
+  "Not tonight" skips a pick; "I cooked this" adds a dish to your kitchen so new cousins
+  grow from it (saved on your device — no accounts yet).
+- **Diet as a hard filter** — vegetarian and 9 allergens, enforced in code. Each dish's
+  tagged allergens are cross-checked against its ingredients, and a written diff that
+  mentions an avoided allergen is replaced by a template.
 - **LLM only for language** — parsing your description, and phrasing each difference.
   Cached, rate-limited, capped per day, with a template fallback ([ADR-0003](docs/adr/0003-code-decides-llm-writes.md)).
 - **Evals** — 20 live cases / 99 checks on parsing, diff grounding and end-to-end
@@ -34,7 +40,7 @@ cp .env.example .env                       # add OPENAI_API_KEY
 
 cd api && uv sync
 uv run uvicorn app.main:app --reload       # http://localhost:8000
-uv run pytest                              # 50 tests, no network
+uv run pytest                              # 90 tests, no network
 uv run python -m evals.run                 # live evals
 
 cd ../web && npm install && npm run dev    # http://localhost:3000
@@ -51,5 +57,5 @@ cd ../web && npm install && npm run dev    # http://localhost:3000
 
 ## Roadmap
 
-v0.1 cousins as diffs (this) → v0.2 tonight's pick + allergen filter → v0.3 the map +
+v0.1 cousins as diffs → v0.2 tonight's pick + diet filter + "I cooked this" (this) → v0.3 the map +
 public eval page → v0.4 substitutions → v1.0 real recipe dataset + fine-tuned parser.
