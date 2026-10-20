@@ -3,6 +3,8 @@
 *Working name.* A cooking agent that learns the dishes you already cook and shows you the
 ones you're **one step away from** — written as only what's different from your version.
 
+**Try it:** https://one-step-six-brown.vercel.app (API on Railway + Postgres, web on Vercel)
+
 > **Kabsa** — *your chicken leg with rice, but…*
 > - Sear the chicken leg first instead of marinating it.
 > - Cook the onion, garlic, tomato, ginger, kabsa spice and dried lime in the pot.
