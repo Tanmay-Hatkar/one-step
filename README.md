@@ -3,7 +3,7 @@
 *Working name.* A cooking agent that learns the dishes you already cook and shows you the
 ones you're **one step away from** — written as only what's different from your version.
 
-**Try it:** https://one-step-six-brown.vercel.app (API on Railway + Postgres, web on Vercel)
+**Try it:** https://one-step-six-brown.vercel.app (API on Railway + Postgres, web on Vercel) · **[How it's built](docs/case-study.md)** · [Evals](https://one-step-six-brown.vercel.app/evals)
 
 > **Kabsa** — *your chicken leg with rice, but…*
 > - Sear the chicken leg first instead of marinating it.
@@ -93,4 +93,5 @@ cd ../web && npm install && npm run dev    # http://localhost:3000
 
 v0.1 cousins as diffs → v0.2 tonight's pick + diet filter + "I cooked this" → v0.3 the map +
 share links + public eval page → v0.4 voice input → v0.5 "what I heard" + smart questions
-→ v0.6 swaps + what I have → v0.7 real recipes + photos → v0.8 model bake-off → v0.9 passkey sign-in (this) → v1.0 launch.
+→ v0.6 swaps + what I have → v0.7 real recipes + photos → v0.8 model bake-off → v0.9 passkey sign-in → **v1.0 launch (this)**: installable app, share previews,
+[case study](docs/case-study.md).

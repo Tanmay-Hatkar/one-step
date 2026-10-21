@@ -33,7 +33,7 @@ async def lifespan(_: FastAPI) -> AsyncIterator[None]:
 
 def create_app() -> FastAPI:
     """Build the app: CORS, rate limiting, routes."""
-    app = FastAPI(title="One Step API", version="0.1.0", lifespan=lifespan)
+    app = FastAPI(title="One Step API", version="1.0.0", lifespan=lifespan)
     app.state.limiter = limiter
     app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
     app.add_middleware(
