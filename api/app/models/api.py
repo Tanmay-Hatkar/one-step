@@ -1,6 +1,6 @@
 """Request and response shapes for the HTTP API."""
 
-from typing import Annotated
+from typing import Annotated, Any
 
 from pydantic import BaseModel, Field, StringConstraints
 
@@ -205,3 +205,44 @@ class DishPageResponse(BaseModel):
 
     dish: Dish
     recipe: Recipe | None = None
+
+
+class PasskeyOptions(BaseModel):
+    """Options to hand to the browser's passkey prompt, and the id to finish with."""
+
+    challenge_id: str
+    options: dict[str, Any]
+
+
+class PasskeyFinish(BaseModel):
+    """The browser's passkey response (WebAuthn JSON), for a challenge we issued."""
+
+    challenge_id: str = Field(..., min_length=8, max_length=64)
+    credential: dict[str, Any]
+
+
+class SessionResponse(BaseModel):
+    """A bearer token for this device. Kept in the browser; sent as Authorization."""
+
+    token: str
+
+
+class Me(BaseModel):
+    """Who's signed in (there's nothing else to know)."""
+
+    signed_in: bool = True
+    has_kitchen: bool
+    kitchen_updated_at: str | None = None
+
+
+class KitchenSync(BaseModel):
+    """The web app's saved kitchen, as-is. Size-checked; re-validated when used."""
+
+    kitchen: dict[str, Any]
+
+
+class KitchenSyncResponse(BaseModel):
+    """The synced kitchen and when it was saved."""
+
+    kitchen: dict[str, Any] | None
+    updated_at: str | None

@@ -12,6 +12,7 @@ from slowapi.errors import RateLimitExceeded
 from app.config import settings
 from app.deps import get_dish_repository, get_session_factory
 from app.limiter import limiter
+from app.routes.account import router as account_router
 from app.routes.api import router
 
 logging.basicConfig(
@@ -38,10 +39,11 @@ def create_app() -> FastAPI:
     app.add_middleware(
         CORSMiddleware,
         allow_origins=settings.cors_origin_list,
-        allow_methods=["GET", "POST"],
-        allow_headers=["Content-Type"],
+        allow_methods=["GET", "POST", "PUT", "DELETE"],
+        allow_headers=["Content-Type", "Authorization"],
     )
     app.include_router(router)
+    app.include_router(account_router)
 
     @app.get("/health")
     async def health() -> dict[str, str]:

@@ -1,6 +1,7 @@
-// Per-device convenience only: remembers your kitchen on this browser (no accounts yet).
-// Every access is guarded — storage can be blocked, full, or unavailable.
+// Remembers your kitchen on this browser; if you've signed in with a passkey, each save is
+// also synced to your account. Every access is guarded — storage can be blocked or full.
 
+import { queueSync } from "./account";
 import type { Cousin, Diet, Have, UserDish } from "./types";
 
 const KEY = "one-step:v2";
@@ -42,25 +43,39 @@ export const DEFAULT_PREFS: Prefs = {
 
 export function loadKitchen(): SavedKitchen | null {
   try {
-    const raw = window.localStorage.getItem(KEY) ?? window.localStorage.getItem(LEGACY_KEY);
+    const raw =
+      window.localStorage.getItem(KEY) ??
+      window.localStorage.getItem(LEGACY_KEY);
     if (!raw) return null;
     const saved = JSON.parse(raw) as Partial<SavedKitchen>;
     // Fill in anything older versions didn't save.
     const prefs = { ...DEFAULT_PREFS, ...saved.prefs };
-    return { ...emptyKitchen(), ...saved, prefs: { ...prefs, have: { ...EMPTY_HAVE, ...prefs.have } } };
+    return {
+      ...emptyKitchen(),
+      ...saved,
+      prefs: { ...prefs, have: { ...EMPTY_HAVE, ...prefs.have } },
+    };
   } catch {
     return null;
   }
 }
 
-export function saveKitchen(kitchen: SavedKitchen): void {
+export function saveKitchen(kitchen: SavedKitchen, { sync = true } = {}): void {
   try {
     window.localStorage.setItem(KEY, JSON.stringify(kitchen));
   } catch {
     // Storage unavailable — the app still works, it just won't remember.
   }
+  if (sync) queueSync(kitchen);
 }
 
 export function emptyKitchen(): SavedKitchen {
-  return { text: "", dishes: [], cooked: [], prefs: DEFAULT_PREFS, cousins: [], dismissed: [] };
+  return {
+    text: "",
+    dishes: [],
+    cooked: [],
+    prefs: DEFAULT_PREFS,
+    cousins: [],
+    dismissed: [],
+  };
 }

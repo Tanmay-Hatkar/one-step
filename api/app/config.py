@@ -69,6 +69,14 @@ class Settings(BaseSettings):
     share_rate_limit: str = Field(default="10/minute", description="Per-IP limit on new links")
     share_id_bytes: int = Field(default=6, description="Random bytes in a share id (8 chars)")
 
+    # Accounts (optional passkey sign-in to sync a kitchen across devices)
+    rp_name: str = Field(default="One Step", description="Shown by the passkey prompt")
+    auth_rate_limit: str = Field(default="20/minute", description="Per-IP limit on sign-in calls")
+    sync_rate_limit: str = Field(default="60/minute", description="Per-IP limit on kitchen sync")
+    auth_challenge_seconds: int = Field(default=300, description="A passkey prompt's lifetime")
+    session_days: int = Field(default=180, description="How long a sign-in lasts")
+    max_synced_kitchen_bytes: int = Field(default=200_000, description="Largest synced kitchen")
+
     # Evals
     eval_results_path: Path = Field(default=API_ROOT / "evals" / "results" / "latest.json")
 

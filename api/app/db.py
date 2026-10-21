@@ -3,7 +3,7 @@
 import logging
 from datetime import UTC, date, datetime
 
-from sqlalchemy import Date, DateTime, Integer, String, Text, create_engine
+from sqlalchemy import Date, DateTime, ForeignKey, Integer, LargeBinary, String, Text, create_engine
 from sqlalchemy.engine import Engine
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, sessionmaker
 
@@ -47,6 +47,68 @@ class SharedKitchen(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )
+
+
+def _now() -> datetime:
+    return datetime.now(UTC)
+
+
+class User(Base):
+    """An account: nothing but an id. No email, no name — a passkey is the only way in."""
+
+    __tablename__ = "users"
+
+    id: Mapped[str] = mapped_column(String(32), primary_key=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
+
+
+class Passkey(Base):
+    """A WebAuthn credential (the public half; the private key never leaves the device)."""
+
+    __tablename__ = "passkeys"
+
+    id: Mapped[str] = mapped_column(
+        String(512), primary_key=True, comment="base64url credential id"
+    )
+    user_id: Mapped[str] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    public_key: Mapped[bytes] = mapped_column(LargeBinary)
+    sign_count: Mapped[int] = mapped_column(Integer, default=0)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
+
+
+class AuthChallenge(Base):
+    """A one-time passkey challenge, used once and then deleted."""
+
+    __tablename__ = "auth_challenges"
+
+    id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    kind: Mapped[str] = mapped_column(String(10), comment="register | login")
+    challenge: Mapped[bytes] = mapped_column(LargeBinary)
+    origin: Mapped[str] = mapped_column(String(200))
+    user_id: Mapped[str | None] = mapped_column(String(32), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
+
+
+class AuthSession(Base):
+    """A sign-in. Only a hash of the bearer token is stored."""
+
+    __tablename__ = "auth_sessions"
+
+    token_hash: Mapped[str] = mapped_column(String(64), primary_key=True)
+    user_id: Mapped[str] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+
+
+class SyncedKitchen(Base):
+    """A signed-in user's kitchen, as the web app saves it."""
+
+    __tablename__ = "synced_kitchens"
+
+    user_id: Mapped[str] = mapped_column(
+        ForeignKey("users.id", ondelete="CASCADE"), primary_key=True
+    )
+    payload_json: Mapped[str] = mapped_column(Text)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
 
 
 def make_engine(database_url: str) -> Engine:
