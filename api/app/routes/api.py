@@ -14,6 +14,7 @@ from app.deps import (
     get_repertoire_service,
     get_share_service,
     get_speech_service,
+    get_technique_repository,
 )
 from app.limiter import limiter
 from app.llm.client import LLMError
@@ -35,9 +36,11 @@ from app.models.api import (
     TonightResponse,
     TranscribeResponse,
 )
+from app.models.technique import TechniqueGuide
 from app.repositories.dish_repository import DishRepository
 from app.repositories.eval_repository import EvalResultsRepository
 from app.repositories.share_repository import ShareStoreError
+from app.repositories.technique_repository import TechniqueRepository
 from app.services.cousin_service import CousinService
 from app.services.llm_gateway import DailyCapExceeded
 from app.services.question_service import QuestionService
@@ -186,6 +189,14 @@ async def get_share(
     if shared is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "That shared kitchen doesn't exist.")
     return shared
+
+
+@router.get("/techniques", response_model=list[TechniqueGuide])
+async def techniques(
+    repo: TechniqueRepository = Depends(get_technique_repository),
+) -> list[TechniqueGuide]:
+    """How-to cards for every technique (static; cache freely)."""
+    return repo.all()
 
 
 @router.get("/evals")

@@ -12,9 +12,10 @@ import { LoadingCards } from "@/components/loading-cards";
 import { RepertoireSummary } from "@/components/repertoire-summary";
 import { StartForm } from "@/components/start-form";
 import { Tonight } from "@/components/tonight";
+import { WhatIHave } from "@/components/what-i-have";
 import { Button } from "@/components/ui/button";
 import { getStats } from "@/lib/api";
-import { repertoireOf } from "@/lib/kitchen";
+import { impliedEquipment, oftenNeeded, repertoireOf } from "@/lib/kitchen";
 import type { DishStats } from "@/lib/types";
 import { useKitchen } from "@/lib/use-kitchen";
 import { cn } from "@/lib/utils";
@@ -141,6 +142,16 @@ export function Kitchen() {
             <DietPicker diet={k.prefs.diet} onChange={(diet) => k.setPrefs({ ...k.prefs, diet })} />
           </div>
         </details>
+        <WhatIHave
+          have={k.prefs.have}
+          implied={impliedEquipment(repertoireOf(k.dishes, k.cooked))}
+          suggested={oftenNeeded(
+            [k.tonight?.one_step, k.tonight?.stretch, ...k.cousins].filter(
+              (c): c is NonNullable<typeof c> => Boolean(c),
+            ),
+          )}
+          onChange={(have) => k.setPrefs({ ...k.prefs, have })}
+        />
       </div>
 
       {k.error && (

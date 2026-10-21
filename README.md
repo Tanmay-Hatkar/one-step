@@ -26,6 +26,13 @@ chicken with broth rice leads you to kabsa, maqluba, arroz con pollo, jambalaya 
   said (solid chips) and what was guessed from vague phrases like "Indian spices" (dashed,
   tap to keep or ×). Then at most 3 quick tap questions, picked by code: each answer is
   simulated on the dish graph and only questions that would change your suggestions are asked.
+- **Swaps from your kitchen** — every ingredient has a role (acid, fat, warm spice…) and
+  stand-ins, generated once and reviewed (`api/data/substitutions.json`). A dish only offers
+  a swap you can make from what you already have, and never one your diet rules out.
+- **What I have** — tools (an oven unlocks oven dishes) and pantry items; one tap adds what
+  your suggestions often need.
+- **How-to cards** — every new skill in a suggestion opens a 4-step guide, the common
+  mistake, and a video search.
 - **Say it out loud** — tap the mic and describe your cooking; `gpt-4o-mini-transcribe`
   (with a hint for words like *jeera* and *tadka*) puts it in the box to check before
   sending. About $0.003 a minute, inside the same daily cap. Hidden where recording isn't supported.
@@ -55,7 +62,7 @@ cp .env.example .env                       # add OPENAI_API_KEY
 
 cd api && uv sync
 uv run uvicorn app.main:app --reload       # http://localhost:8000
-uv run pytest                              # 129 tests, no network
+uv run pytest                              # 139 tests, no network
 uv run python -m evals.run                 # live evals
 
 cd ../web && npm install && npm run dev    # http://localhost:3000
@@ -73,5 +80,5 @@ cd ../web && npm install && npm run dev    # http://localhost:3000
 ## Roadmap
 
 v0.1 cousins as diffs → v0.2 tonight's pick + diet filter + "I cooked this" → v0.3 the map +
-share links + public eval page → v0.4 voice input → v0.5 "what I heard" + smart questions (this)
-→ v0.6 swaps + what I have → v0.7 real recipes + photos → v0.8 fine-tuned parser → v0.9 passkey sign-in → v1.0 launch.
+share links + public eval page → v0.4 voice input → v0.5 "what I heard" + smart questions
+→ v0.6 swaps + what I have (this) → v0.7 real recipes + photos → v0.8 fine-tuned parser → v0.9 passkey sign-in → v1.0 launch.

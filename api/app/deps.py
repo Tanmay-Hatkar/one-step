@@ -12,6 +12,8 @@ from app.repositories.dish_repository import DishRepository
 from app.repositories.eval_repository import EvalResultsRepository
 from app.repositories.llm_repository import LLMCacheRepository, LLMUsageRepository
 from app.repositories.share_repository import ShareRepository
+from app.repositories.substitution_repository import SubstitutionRepository
+from app.repositories.technique_repository import TechniqueRepository
 from app.services.cousin_service import CousinService
 from app.services.graph_service import GraphService
 from app.services.llm_gateway import LLMGateway
@@ -53,6 +55,28 @@ def get_gateway() -> LLMGateway:
     )
 
 
+@lru_cache
+def get_substitution_repository() -> SubstitutionRepository:
+    """Ingredient stand-ins, loaded once."""
+    return SubstitutionRepository(settings.substitutions_path)
+
+
+@lru_cache
+def get_technique_repository() -> TechniqueRepository:
+    """Technique how-to cards, loaded once."""
+    return TechniqueRepository(settings.techniques_path)
+
+
+@lru_cache
+def get_graph() -> GraphService:
+    """The dish graph with substitutions. Stateless after construction, so shared."""
+    return GraphService(
+        get_dish_repository().all(),
+        settings,
+        substitutes=get_substitution_repository().usable(),
+    )
+
+
 def get_repertoire_service() -> RepertoireService:
     """Repertoire parsing service."""
     return RepertoireService(get_gateway(), get_dish_repository(), settings.max_repertoire_dishes)
@@ -60,13 +84,12 @@ def get_repertoire_service() -> RepertoireService:
 
 def get_cousin_service() -> CousinService:
     """Cousin search + diff writing service."""
-    graph = GraphService(get_dish_repository().all(), settings)
-    return CousinService(graph, get_gateway())
+    return CousinService(get_graph(), get_gateway())
 
 
 def get_question_service() -> QuestionService:
     """Follow-up questions (no LLM)."""
-    return QuestionService(GraphService(get_dish_repository().all(), settings), settings)
+    return QuestionService(get_graph(), settings)
 
 
 @lru_cache
