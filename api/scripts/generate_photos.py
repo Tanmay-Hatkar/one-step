@@ -29,7 +29,7 @@ MODEL = "gpt-image-1-mini"
 QUALITY = "low"
 SIZE_PX = 512
 WEBP_QUALITY = 72
-WORKERS = 6
+WORKERS = 3  # new accounts get ~20 images/min
 
 
 def prompt_for(dish: Dish) -> str:
@@ -70,7 +70,7 @@ def main(only: list[str]) -> None:
         d for d in dishes if (d.id in only if only else not (PHOTOS_DIR / f"{d.id}.webp").exists())
     ]
     logger.info("%d dishes, %d photos to make", len(dishes), len(todo))
-    client = OpenAI(api_key=settings.openai_api_key, timeout=180, max_retries=2)
+    client = OpenAI(api_key=settings.openai_api_key, timeout=180, max_retries=8)
     with ThreadPoolExecutor(WORKERS) as pool:
         tokens = list(pool.map(lambda d: generate(client, d), todo))
     made = sum(1 for t in tokens if t)

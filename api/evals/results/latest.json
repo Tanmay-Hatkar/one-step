@@ -1,6 +1,6 @@
 {
   "model": "gpt-5.4-mini",
-  "run_at": "2026-10-21T04:13:45.038497+00:00",
+  "run_at": "2026-10-21T21:56:09.076404+00:00",
   "suites": {
     "parse": {
       "passed": 69,
@@ -32,17 +32,17 @@
             {
               "name": "dish0.technique:marinate",
               "passed": true,
-              "detail": "['marinate', 'rice_in_stock']"
+              "detail": "['marinate', 'plain_rice', 'rice_in_stock']"
             },
             {
               "name": "dish0.technique:rice_in_stock",
               "passed": true,
-              "detail": "['marinate', 'rice_in_stock']"
+              "detail": "['marinate', 'plain_rice', 'rice_in_stock']"
             },
             {
               "name": "dish0.equipment:rice_cooker",
               "passed": true,
-              "detail": "['rice_cooker']"
+              "detail": "['rice_cooker', 'stovetop']"
             },
             {
               "name": "dish0.ingredient:chicken stock",
@@ -82,7 +82,7 @@
             {
               "name": "dish0.has_guesses",
               "passed": true,
-              "detail": "['turmeric', 'cumin', 'coriander', 'chili powder', 'garam masala']"
+              "detail": "['turmeric', 'chili powder', 'cumin', 'garam masala']"
             },
             {
               "name": "dish0.matched_dish_id",
@@ -132,12 +132,12 @@
             {
               "name": "dish0.technique:rice_in_stock",
               "passed": true,
-              "detail": "['pan_fry', 'rice_in_stock', 'marinate']"
+              "detail": "['marinate', 'pan_fry', 'stir_fry', 'rice_in_stock']"
             },
             {
               "name": "dish0.technique:marinate",
               "passed": true,
-              "detail": "['pan_fry', 'rice_in_stock', 'marinate']"
+              "detail": "['marinate', 'pan_fry', 'stir_fry', 'rice_in_stock']"
             },
             {
               "name": "dish0.equipment:rice_cooker",
@@ -147,57 +147,57 @@
             {
               "name": "dish0.ingredient:chicken stock",
               "passed": true,
-              "detail": "['onion', 'garlic', 'rice', 'chicken broth', 'bay leaf', 'chicken leg']"
+              "detail": "['onion', 'garlic', 'rice', 'ghee', 'chicken broth', 'bay leaf', 'chicken leg']"
             },
             {
               "name": "dish0.ingredient:garlic",
               "passed": true,
-              "detail": "['onion', 'garlic', 'rice', 'chicken broth', 'bay leaf', 'chicken leg']"
+              "detail": "['onion', 'garlic', 'rice', 'ghee', 'chicken broth', 'bay leaf', 'chicken leg']"
             },
             {
               "name": "dish0.ingredient:onion",
               "passed": true,
-              "detail": "['onion', 'garlic', 'rice', 'chicken broth', 'bay leaf', 'chicken leg']"
+              "detail": "['onion', 'garlic', 'rice', 'ghee', 'chicken broth', 'bay leaf', 'chicken leg']"
             },
             {
               "name": "dish0.ingredient:bay leaf",
               "passed": true,
-              "detail": "['onion', 'garlic', 'rice', 'chicken broth', 'bay leaf', 'chicken leg']"
+              "detail": "['onion', 'garlic', 'rice', 'ghee', 'chicken broth', 'bay leaf', 'chicken leg']"
             },
             {
               "name": "dish0.not_said:cumin",
               "passed": true,
-              "detail": "['onion', 'garlic', 'rice', 'chicken broth', 'bay leaf', 'chicken leg']"
+              "detail": "['onion', 'garlic', 'rice', 'ghee', 'chicken broth', 'bay leaf', 'chicken leg']"
             },
             {
               "name": "dish0.not_said:cardamom",
               "passed": true,
-              "detail": "['onion', 'garlic', 'rice', 'chicken broth', 'bay leaf', 'chicken leg']"
+              "detail": "['onion', 'garlic', 'rice', 'ghee', 'chicken broth', 'bay leaf', 'chicken leg']"
             },
             {
               "name": "dish0.not_said:clove",
               "passed": true,
-              "detail": "['onion', 'garlic', 'rice', 'chicken broth', 'bay leaf', 'chicken leg']"
+              "detail": "['onion', 'garlic', 'rice', 'ghee', 'chicken broth', 'bay leaf', 'chicken leg']"
             },
             {
               "name": "dish0.not_said:cinnamon",
               "passed": true,
-              "detail": "['onion', 'garlic', 'rice', 'chicken broth', 'bay leaf', 'chicken leg']"
+              "detail": "['onion', 'garlic', 'rice', 'ghee', 'chicken broth', 'bay leaf', 'chicken leg']"
             },
             {
               "name": "dish0.not_said:oil",
               "passed": true,
-              "detail": "['onion', 'garlic', 'rice', 'chicken broth', 'bay leaf', 'chicken leg']"
+              "detail": "['onion', 'garlic', 'rice', 'ghee', 'chicken broth', 'bay leaf', 'chicken leg']"
             },
             {
               "name": "dish0.not_said:water",
               "passed": true,
-              "detail": "['onion', 'garlic', 'rice', 'chicken broth', 'bay leaf', 'chicken leg']"
+              "detail": "['onion', 'garlic', 'rice', 'ghee', 'chicken broth', 'bay leaf', 'chicken leg']"
             },
             {
               "name": "dish0.has_guesses",
               "passed": true,
-              "detail": "['turmeric', 'chili powder', 'cumin', 'garam masala']"
+              "detail": "['turmeric', 'chili powder', 'cumin', 'coriander', 'garam masala']"
             }
           ]
         },
@@ -222,12 +222,12 @@
             {
               "name": "dish0.technique:temper_spices",
               "passed": true,
-              "detail": "['boil', 'temper_spices', 'rice_in_stock']"
+              "detail": "['boil', 'temper_spices', 'simmer', 'plain_rice']"
             },
             {
               "name": "dish0.equipment:pressure_cooker",
               "passed": true,
-              "detail": "['stovetop', 'pressure_cooker']"
+              "detail": "['pressure_cooker', 'stovetop']"
             }
           ]
         },
@@ -312,12 +312,12 @@
             {
               "name": "dish0.ingredient:soy sauce",
               "passed": true,
-              "detail": "['chicken', 'soy sauce', 'ginger', 'garlic', 'vegetables', 'jasmine rice']"
+              "detail": "['chicken', 'soy sauce', 'ginger', 'garlic', 'vegetable', 'jasmine rice']"
             },
             {
               "name": "dish0.ingredient:ginger",
               "passed": true,
-              "detail": "['chicken', 'soy sauce', 'ginger', 'garlic', 'vegetables', 'jasmine rice']"
+              "detail": "['chicken', 'soy sauce', 'ginger', 'garlic', 'vegetable', 'jasmine rice']"
             }
           ]
         },
@@ -733,9 +733,9 @@
         {
           "id": "founding_user",
           "cousins": [
+            "Kabsa",
             "Arroz con Pollo",
             "Jambalaya",
-            "Kabsa",
             "Maqluba",
             "Paella Valenciana"
           ],
@@ -760,11 +760,11 @@
         {
           "id": "dal_cook",
           "cousins": [
-            "Khichdi",
-            "Dal Makhani",
-            "Jamaican Rice and Peas",
-            "Mujaddara",
-            "Ful Medames"
+            "Shiro Wat",
+            "Mesir Wat",
+            "Sindhi Spiced Moong Dal",
+            "Mango and Yellow Split Pea Curry",
+            "Qabuli"
           ],
           "checks": [
             {
@@ -775,12 +775,12 @@
             {
               "name": "family_hits",
               "passed": true,
-              "detail": "5 lentils_and_beans"
+              "detail": "4 lentils_and_beans"
             },
             {
               "name": "region_spread",
               "passed": true,
-              "detail": "4 regions"
+              "detail": "3 regions"
             }
           ]
         },
@@ -789,9 +789,9 @@
           "cousins": [
             "Chicken Lo Mein",
             "Chow Mein",
+            "Cheesy Chicken Pasta",
             "Dan Dan Noodles",
-            "Mee Goreng",
-            "Spaghetti Aglio e Olio"
+            "Mee Goreng"
           ],
           "checks": [
             {
@@ -807,18 +807,18 @@
             {
               "name": "region_spread",
               "passed": true,
-              "detail": "4 regions"
+              "detail": "3 regions"
             }
           ]
         },
         {
           "id": "egg_cook",
           "cousins": [
+            "Nigerian Egg Stew",
             "Migas con Huevo",
             "Menemen",
             "Strapatsada",
-            "Tortilla Española",
-            "Masala Omelette"
+            "Tortilla Española"
           ],
           "checks": [
             {
@@ -850,7 +850,7 @@
             {
               "name": "no_violations",
               "passed": true,
-              "detail": "1447 suggestions and 3617 swaps over 152 kitchens; violations: []"
+              "detail": "7590 suggestions and 20464 swaps over 720 kitchens; violations: []"
             }
           ]
         },
@@ -860,7 +860,7 @@
             {
               "name": "no_violations",
               "passed": true,
-              "detail": "1316 suggestions and 4468 swaps over 152 kitchens; violations: []"
+              "detail": "7674 suggestions and 21047 swaps over 720 kitchens; violations: []"
             }
           ]
         },
@@ -870,7 +870,7 @@
             {
               "name": "no_violations",
               "passed": true,
-              "detail": "1341 suggestions and 4609 swaps over 152 kitchens; violations: []"
+              "detail": "7960 suggestions and 22417 swaps over 720 kitchens; violations: []"
             }
           ]
         },
@@ -880,7 +880,7 @@
             {
               "name": "no_violations",
               "passed": true,
-              "detail": "1365 suggestions and 4283 swaps over 152 kitchens; violations: []"
+              "detail": "7944 suggestions and 21241 swaps over 720 kitchens; violations: []"
             }
           ]
         },
@@ -890,7 +890,7 @@
             {
               "name": "no_violations",
               "passed": true,
-              "detail": "1353 suggestions and 4430 swaps over 152 kitchens; violations: []"
+              "detail": "7968 suggestions and 21730 swaps over 720 kitchens; violations: []"
             }
           ]
         },
@@ -900,7 +900,7 @@
             {
               "name": "no_violations",
               "passed": true,
-              "detail": "1351 suggestions and 4493 swaps over 152 kitchens; violations: []"
+              "detail": "7979 suggestions and 21814 swaps over 720 kitchens; violations: []"
             }
           ]
         },
@@ -910,7 +910,7 @@
             {
               "name": "no_violations",
               "passed": true,
-              "detail": "1357 suggestions and 4225 swaps over 152 kitchens; violations: []"
+              "detail": "8075 suggestions and 20953 swaps over 720 kitchens; violations: []"
             }
           ]
         },
@@ -920,7 +920,7 @@
             {
               "name": "no_violations",
               "passed": true,
-              "detail": "1359 suggestions and 4449 swaps over 152 kitchens; violations: []"
+              "detail": "7932 suggestions and 21711 swaps over 720 kitchens; violations: []"
             }
           ]
         },
@@ -930,7 +930,7 @@
             {
               "name": "no_violations",
               "passed": true,
-              "detail": "1344 suggestions and 4413 swaps over 152 kitchens; violations: []"
+              "detail": "7967 suggestions and 21570 swaps over 720 kitchens; violations: []"
             }
           ]
         },
@@ -940,7 +940,7 @@
             {
               "name": "no_violations",
               "passed": true,
-              "detail": "1344 suggestions and 4536 swaps over 152 kitchens; violations: []"
+              "detail": "8031 suggestions and 21322 swaps over 720 kitchens; violations: []"
             }
           ]
         }

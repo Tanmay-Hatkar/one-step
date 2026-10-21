@@ -36,8 +36,14 @@ chicken with broth rice leads you to kabsa, maqluba, arroz con pollo, jambalaya 
 - **Say it out loud** — tap the mic and describe your cooking; `gpt-4o-mini-transcribe`
   (with a hint for words like *jeera* and *tadka*) puts it in the box to check before
   sending. About $0.003 a minute, inside the same daily cap. Hidden where recording isn't supported.
-- **Dish graph** — 150 home dishes from 10 regions, each broken into parts on a closed
+- **Dish graph** — 718 home dishes from 150+ cuisines, each broken into parts on a closed
   vocabulary (family, technique, equipment, flavor, allergens). Distance is plain code.
+- **Real recipes** — 584 dishes have a full recipe from the [Wikibooks Cookbook](https://en.wikibooks.org/wiki/Cookbook:Table_of_Contents)
+  (CC BY-SA 4.0, credited on each page). An LLM only mapped each recipe onto the vocabulary;
+  the recipe text is kept as written (`api/scripts/import_wikibooks.py`). Each dish has its own
+  page, written from your kitchen when you have one saved.
+- **Dish illustrations** — one AI-generated image per dish (`gpt-image-1-mini`, low quality,
+  ~$0.002 each), labelled as illustrations, not photos of the recipe.
 - **Tonight** — pick your time; get something familiar, one step away, and a stretch.
   "Not tonight" skips a pick; "I cooked this" adds a dish to your kitchen so new cousins
   grow from it (saved on your device — no accounts yet).
@@ -62,7 +68,7 @@ cp .env.example .env                       # add OPENAI_API_KEY
 
 cd api && uv sync
 uv run uvicorn app.main:app --reload       # http://localhost:8000
-uv run pytest                              # 139 tests, no network
+uv run pytest                              # 145 tests, no network
 uv run python -m evals.run                 # live evals
 
 cd ../web && npm install && npm run dev    # http://localhost:3000
@@ -73,7 +79,8 @@ cd ../web && npm install && npm run dev    # http://localhost:3000
 | Path | What |
 |---|---|
 | `api/` | FastAPI backend — graph, LLM gateway, services, tests, evals |
-| `api/data/dishes.json` | The seed dish catalog (reviewed data) |
+| `api/data/dishes.json` | The dish catalog (reviewed data) |
+| `api/data/recipes.json` | Wikibooks recipes with attribution (CC BY-SA 4.0) |
 | `web/` | Next.js mobile-first PWA |
 | `docs/` | [Concept](docs/concept.md) and [decision records](docs/adr/) |
 
@@ -81,4 +88,4 @@ cd ../web && npm install && npm run dev    # http://localhost:3000
 
 v0.1 cousins as diffs → v0.2 tonight's pick + diet filter + "I cooked this" → v0.3 the map +
 share links + public eval page → v0.4 voice input → v0.5 "what I heard" + smart questions
-→ v0.6 swaps + what I have (this) → v0.7 real recipes + photos → v0.8 fine-tuned parser → v0.9 passkey sign-in → v1.0 launch.
+→ v0.6 swaps + what I have → v0.7 real recipes + photos (this) → v0.8 fine-tuned parser → v0.9 passkey sign-in → v1.0 launch.
