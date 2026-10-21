@@ -188,6 +188,7 @@ ANCHORS: dict[str, dict[str, Any]] = {
     },
 }
 
+
 def parse_text(case_id: str) -> str:
     """The text of a parse case, by id (so reordering cases can't break other suites)."""
     return next(c["text"] for c in PARSE_CASES if c["id"] == case_id)
