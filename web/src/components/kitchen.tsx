@@ -3,6 +3,7 @@
 import { ChevronDown, CookingPot, Loader2, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
+import { AccountCard } from "@/components/account-card";
 import { ConfirmKitchen } from "@/components/confirm-kitchen";
 import { CousinCard } from "@/components/cousin-card";
 import { DietPicker, dietSummary } from "@/components/diet-picker";
@@ -26,7 +27,9 @@ export function Kitchen() {
   const [view, setView] = useState<"suggestions" | "map">("suggestions");
 
   useEffect(() => {
-    getStats().then(setStats).catch(() => setStats(null));
+    getStats()
+      .then(setStats)
+      .catch(() => setStats(null));
   }, []);
 
   const busy = k.phase === "reading" || k.phase === "finding";
@@ -67,12 +70,17 @@ export function Kitchen() {
           />
           {stats && !busy && (
             <p className="text-xs text-muted-foreground">
-              {stats.dishes} home dishes from {stats.regions} regions, connected by how
-              they&apos;re cooked.
+              {stats.dishes} home dishes from {stats.regions} regions, connected
+              by how they&apos;re cooked.
             </p>
           )}
-          {k.phase === "reading" && <LoadingCards label="Reading your kitchen…" />}
-          {k.phase === "finding" && <LoadingCards label="Finding dishes one step away…" />}
+          {!busy && <AccountCard variant="start" />}
+          {k.phase === "reading" && (
+            <LoadingCards label="Reading your kitchen…" />
+          )}
+          {k.phase === "finding" && (
+            <LoadingCards label="Finding dishes one step away…" />
+          )}
         </div>
       </>
     );
@@ -81,7 +89,9 @@ export function Kitchen() {
   return (
     <div className="space-y-8">
       <header className="flex items-center justify-between gap-3">
-        <p className="text-sm font-medium tracking-wide text-primary">One Step</p>
+        <p className="text-sm font-medium tracking-wide text-primary">
+          One Step
+        </p>
         <p
           role="status"
           aria-live="polite"
@@ -102,8 +112,8 @@ export function Kitchen() {
         >
           <CookingPot aria-hidden className="mt-0.5 size-4 shrink-0" />
           <p className="flex-1">
-            <span className="font-medium">{k.notice.name}</span> is in your kitchen now. New dishes
-            grow from it.
+            <span className="font-medium">{k.notice.name}</span> is in your
+            kitchen now. New dishes grow from it.
           </p>
           <button
             type="button"
@@ -131,7 +141,10 @@ export function Kitchen() {
           <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-sm">
             <span>
               <span className="font-medium">Diet &amp; allergies</span>
-              <span className="text-muted-foreground"> · {dietSummary(k.prefs.diet)}</span>
+              <span className="text-muted-foreground">
+                {" "}
+                · {dietSummary(k.prefs.diet)}
+              </span>
             </span>
             <ChevronDown
               aria-hidden
@@ -139,7 +152,10 @@ export function Kitchen() {
             />
           </summary>
           <div className="pt-3">
-            <DietPicker diet={k.prefs.diet} onChange={(diet) => k.setPrefs({ ...k.prefs, diet })} />
+            <DietPicker
+              diet={k.prefs.diet}
+              onChange={(diet) => k.setPrefs({ ...k.prefs, diet })}
+            />
           </div>
         </details>
         <WhatIHave
@@ -155,15 +171,26 @@ export function Kitchen() {
       </div>
 
       {k.error && (
-        <div role="alert" className="flex items-center justify-between gap-3 text-sm text-destructive">
+        <div
+          role="alert"
+          className="flex items-center justify-between gap-3 text-sm text-destructive"
+        >
           <span>{k.error}</span>
-          <Button variant="outline" size="sm" onClick={() => k.setPrefs(k.prefs)}>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => k.setPrefs(k.prefs)}
+          >
             Try again
           </Button>
         </div>
       )}
 
-      <div role="tablist" aria-label="View" className="grid grid-cols-2 rounded-xl bg-muted p-1">
+      <div
+        role="tablist"
+        aria-label="View"
+        className="grid grid-cols-2 rounded-xl bg-muted p-1"
+      >
         {(["suggestions", "map"] as const).map((v) => (
           <button
             key={v}
@@ -174,7 +201,9 @@ export function Kitchen() {
             className={cn(
               "h-9 rounded-lg text-sm font-medium transition-colors",
               "focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none",
-              view === v ? "bg-card text-foreground shadow-sm" : "text-muted-foreground",
+              view === v
+                ? "bg-card text-foreground shadow-sm"
+                : "text-muted-foreground",
             )}
           >
             {v === "suggestions" ? "Suggestions" : "Map"}
@@ -194,7 +223,10 @@ export function Kitchen() {
 
       <div
         hidden={view !== "suggestions"}
-        className={cn("space-y-10 transition-opacity", k.updating && "opacity-60")}
+        className={cn(
+          "space-y-10 transition-opacity",
+          k.updating && "opacity-60",
+        )}
       >
         <Tonight
           picks={k.tonight}
@@ -206,7 +238,10 @@ export function Kitchen() {
         />
 
         <section aria-labelledby="more" className="space-y-3">
-          <h2 id="more" className="font-heading text-xl font-semibold tracking-tight">
+          <h2
+            id="more"
+            className="font-heading text-xl font-semibold tracking-tight"
+          >
             {more.length
               ? "More dishes you're close to"
               : "Nothing else close enough — try describing another dish."}
@@ -221,6 +256,8 @@ export function Kitchen() {
             />
           ))}
         </section>
+
+        <AccountCard variant="results" />
       </div>
     </div>
   );

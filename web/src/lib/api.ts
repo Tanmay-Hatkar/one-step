@@ -16,7 +16,14 @@ import type {
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
 /** An error whose message is safe to show the user as-is. */
-export class ApiError extends Error {}
+export class ApiError extends Error {
+  constructor(
+    message: string,
+    readonly status = 0,
+  ) {
+    super(message);
+  }
+}
 
 const FRIENDLY: Record<number, string> = {
   429: "You're going fast! Give it a minute and try again.",
@@ -24,7 +31,7 @@ const FRIENDLY: Record<number, string> = {
   503: "One Step is resting for today. Try again tomorrow.",
 };
 
-async function request<T>(path: string, init?: RequestInit): Promise<T> {
+export async function request<T>(path: string, init?: RequestInit): Promise<T> {
   let response: Response;
   try {
     response = await fetch(`${API_URL}${path}`, {
@@ -36,7 +43,9 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
           : { "Content-Type": "application/json", ...init?.headers },
     });
   } catch {
-    throw new ApiError("Can't reach One Step right now. Check your connection.");
+    throw new ApiError(
+      "Can't reach One Step right now. Check your connection.",
+    );
   }
   if (!response.ok) {
     let detail: unknown;
@@ -46,9 +55,12 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
       detail = undefined;
     }
     const message =
-      typeof detail === "string" ? detail : FRIENDLY[response.status] ?? "Something went wrong.";
-    throw new ApiError(message);
+      typeof detail === "string"
+        ? detail
+        : (FRIENDLY[response.status] ?? "Something went wrong.");
+    throw new ApiError(message, response.status);
   }
+  if (response.status === 204) return undefined as T;
   return (await response.json()) as T;
 }
 
@@ -65,7 +77,10 @@ export async function parseRepertoire(text: string): Promise<UserDish[]> {
 export async function transcribe(clip: Blob): Promise<string> {
   const form = new FormData();
   form.append("audio", clip, "clip");
-  const body = await request<{ text: string }>("/api/transcribe", { method: "POST", body: form });
+  const body = await request<{ text: string }>("/api/transcribe", {
+    method: "POST",
+    body: form,
+  });
   return body.text;
 }
 
@@ -93,7 +108,13 @@ export async function getTonight(
 ): Promise<TonightPicks> {
   return request<TonightPicks>("/api/tonight", {
     method: "POST",
-    body: JSON.stringify({ repertoire, diet, have, max_minutes: maxMinutes, skip }),
+    body: JSON.stringify({
+      repertoire,
+      diet,
+      have,
+      max_minutes: maxMinutes,
+      skip,
+    }),
   });
 }
 
@@ -103,7 +124,11 @@ export async function getStats(): Promise<DishStats> {
 }
 
 /** Your kitchen with its closest cousins, for the map (no written diffs). */
-export async function getMap(repertoire: UserDish[], diet: Diet, have: Have): Promise<KitchenMap> {
+export async function getMap(
+  repertoire: UserDish[],
+  diet: Diet,
+  have: Have,
+): Promise<KitchenMap> {
   return request<KitchenMap>("/api/map", {
     method: "POST",
     body: JSON.stringify({ repertoire, diet, have }),

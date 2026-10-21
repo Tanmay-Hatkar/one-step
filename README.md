@@ -46,7 +46,12 @@ chicken with broth rice leads you to kabsa, maqluba, arroz con pollo, jambalaya 
   ~$0.002 each), labelled as illustrations, not photos of the recipe.
 - **Tonight** — pick your time; get something familiar, one step away, and a stretch.
   "Not tonight" skips a pick; "I cooked this" adds a dish to your kitchen so new cousins
-  grow from it (saved on your device — no accounts yet).
+  grow from it (saved on your device).
+- **Optional passkey sign-in** — "Save with a passkey" keeps your kitchen on all your
+  devices: Face ID, fingerprint or screen lock, no email or password, no third-party auth.
+  The account is a random id; only the public key and your kitchen are stored, sessions by
+  hash. Delete it any time. Signed out, everything still works on the device (WebAuthn via
+  `py_webauthn` + `@simplewebauthn/browser`).
 - **Diet as a hard filter** — vegetarian and 9 allergens, enforced in code. Each dish's
   tagged allergens are cross-checked against its ingredients, and a written diff that
   mentions an avoided allergen is replaced by a template.
@@ -68,7 +73,7 @@ cp .env.example .env                       # add OPENAI_API_KEY
 
 cd api && uv sync
 uv run uvicorn app.main:app --reload       # http://localhost:8000
-uv run pytest                              # 145 tests, no network
+uv run pytest                              # 151 tests, no network
 uv run python -m evals.run                 # live evals
 
 cd ../web && npm install && npm run dev    # http://localhost:3000
@@ -88,4 +93,4 @@ cd ../web && npm install && npm run dev    # http://localhost:3000
 
 v0.1 cousins as diffs → v0.2 tonight's pick + diet filter + "I cooked this" → v0.3 the map +
 share links + public eval page → v0.4 voice input → v0.5 "what I heard" + smart questions
-→ v0.6 swaps + what I have → v0.7 real recipes + photos (this) → v0.8 fine-tuned parser → v0.9 passkey sign-in → v1.0 launch.
+→ v0.6 swaps + what I have → v0.7 real recipes + photos → v0.8 model bake-off → v0.9 passkey sign-in (this) → v1.0 launch.

@@ -8,6 +8,7 @@ from app.config import settings
 from app.db import init_db, make_engine, make_session_factory
 from app.llm.client import OpenAILLMClient
 from app.llm.transcriber import OpenAITranscriber
+from app.repositories.account_repository import AccountRepository
 from app.repositories.dish_repository import DishRepository
 from app.repositories.eval_repository import EvalResultsRepository
 from app.repositories.llm_repository import LLMCacheRepository, LLMUsageRepository
@@ -15,6 +16,7 @@ from app.repositories.recipe_repository import RecipeRepository
 from app.repositories.share_repository import ShareRepository
 from app.repositories.substitution_repository import SubstitutionRepository
 from app.repositories.technique_repository import TechniqueRepository
+from app.services.account_service import AccountService
 from app.services.cousin_service import CousinService
 from app.services.graph_service import GraphService
 from app.services.llm_gateway import LLMGateway
@@ -103,6 +105,11 @@ def get_question_service() -> QuestionService:
 def get_eval_repository() -> EvalResultsRepository:
     """The latest eval results, loaded once."""
     return EvalResultsRepository(settings.eval_results_path)
+
+
+def get_account_service() -> AccountService:
+    """Optional passkey accounts and the synced kitchen."""
+    return AccountService(AccountRepository(get_session_factory()), settings)
 
 
 def get_share_service() -> ShareService:
