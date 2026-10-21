@@ -6,10 +6,11 @@ import { useEffect, useState } from "react";
 
 import { Skeleton } from "@/components/ui/skeleton";
 import { ApiError, getEvals } from "@/lib/api";
-import type { EvalCase, EvalResults, EvalSuite } from "@/lib/types";
+import type { Bakeoff, EvalCase, EvalResults, EvalSuite } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
-const REPO_EVALS = "https://github.com/Tanmay-Hatkar/one-step/tree/main/api/evals";
+const REPO_EVALS =
+  "https://github.com/Tanmay-Hatkar/one-step/tree/main/api/evals";
 
 /** What each suite measures, in plain words. Order is the order they're shown. */
 const SUITES: { id: string; title: string; what: string; usesAI: boolean }[] = [
@@ -50,22 +51,30 @@ export function EvalReport() {
   useEffect(() => {
     getEvals()
       .then(setResults)
-      .catch((err) => setError(err instanceof ApiError ? err.message : "Couldn't load results."));
+      .catch((err) =>
+        setError(
+          err instanceof ApiError ? err.message : "Couldn't load results.",
+        ),
+      );
   }, []);
 
   return (
     <div className="space-y-10">
       <header className="space-y-3">
-        <Link href="/" className="text-sm font-medium tracking-wide text-primary">
+        <Link
+          href="/"
+          className="text-sm font-medium tracking-wide text-primary"
+        >
           One Step
         </Link>
         <h1 className="font-heading text-4xl leading-[1.05] font-semibold tracking-tight">
           How well it works
         </h1>
         <p className="text-muted-foreground">
-          One Step uses AI for language only — reading how you cook and writing what&apos;s
-          different. Everything else, like ranking and diet rules, is plain code. These checks run
-          automatically on every change, against the real model.
+          One Step uses AI for language only — reading how you cook and writing
+          what&apos;s different. Everything else, like ranking and diet rules,
+          is plain code. These checks run automatically on every change, against
+          the real model.
         </p>
       </header>
 
@@ -116,13 +125,18 @@ export function EvalReport() {
             </div>
           </section>
 
+          {results.bakeoff && <BakeoffSection bakeoff={results.bakeoff} />}
+
           {SUITES.filter((s) => results.suites[s.id]).map((s) => (
             <SuiteSection key={s.id} meta={s} suite={results.suites[s.id]} />
           ))}
 
           <p className="text-sm text-muted-foreground">
             The test cases and checks are open source:{" "}
-            <a href={REPO_EVALS} className="underline underline-offset-2 hover:text-foreground">
+            <a
+              href={REPO_EVALS}
+              className="underline underline-offset-2 hover:text-foreground"
+            >
               api/evals
             </a>
             .
@@ -133,15 +147,122 @@ export function EvalReport() {
   );
 }
 
-function SuiteSection({ meta, suite }: { meta: (typeof SUITES)[number]; suite: EvalSuite }) {
+/** "Why this model": the AI checks run on each candidate, with cost and speed. */
+function BakeoffSection({ bakeoff }: { bakeoff: Bakeoff }) {
+  const models = [...bakeoff.models].sort(
+    (a, b) => b.passed - a.passed || a.usd_per_1k_calls - b.usd_per_1k_calls,
+  );
   return (
-    <section id={meta.id} aria-labelledby={`${meta.id}-title`} className="scroll-mt-6 space-y-3">
+    <section
+      id="models"
+      aria-labelledby="models-title"
+      className="scroll-mt-6 space-y-3"
+    >
       <div>
-        <h2 id={`${meta.id}-title`} className="font-heading text-2xl font-semibold tracking-tight">
+        <h2
+          id="models-title"
+          className="font-heading text-2xl font-semibold tracking-tight"
+        >
+          Why this model
+        </h2>
+        <p className="text-sm text-muted-foreground">
+          The same AI checks, run on {bakeoff.models.length} cheap models with
+          no cached answers. {bakeoff.rule} One run each, so a check or two
+          either way is noise.
+        </p>
+      </div>
+      <div className="overflow-hidden rounded-xl border bg-card">
+        <table className="w-full text-left text-sm">
+          <caption className="sr-only">Model comparison</caption>
+          <thead className="text-xs text-muted-foreground">
+            <tr>
+              <th className="px-3 py-2 font-medium">Model</th>
+              <th className="px-2 py-2 text-right font-medium">Checks</th>
+              <th className="px-2 py-2 text-right font-medium">$ / 1k calls</th>
+              <th className="px-3 py-2 text-right font-medium">Sec / call</th>
+            </tr>
+          </thead>
+          <tbody className="tabular-nums">
+            {models.map((m) => {
+              const picked = m.model === bakeoff.pick;
+              return (
+                <tr
+                  key={m.model}
+                  className={cn("border-t", picked && "bg-accent/60")}
+                >
+                  <td className="px-3 py-2">
+                    <code className={cn(picked && "font-semibold")}>
+                      {m.model}
+                    </code>
+                    {picked && (
+                      <span className="block text-xs text-primary">
+                        in use
+                      </span>
+                    )}
+                  </td>
+                  <td className="px-2 py-2 text-right">
+                    {m.passed}/{m.total}
+                  </td>
+                  <td className="px-2 py-2 text-right">
+                    {m.usd_per_1k_calls.toFixed(2)}
+                  </td>
+                  <td className="px-3 py-2 text-right">
+                    {m.seconds_per_call.toFixed(1)}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+      <details className="group rounded-xl border bg-card px-4 py-3 text-sm">
+        <summary className="flex cursor-pointer list-none items-center justify-between">
+          <span className="font-medium">What each model got wrong</span>
+          <ChevronDown
+            aria-hidden
+            className="size-4 text-muted-foreground transition-transform group-open:rotate-180"
+          />
+        </summary>
+        <dl className="space-y-2 pt-3">
+          {models.map((m) => (
+            <div key={m.model}>
+              <dt className="font-mono text-xs">{m.model}</dt>
+              <dd className="text-muted-foreground">
+                {m.failed.length ? m.failed.join("; ") : "Nothing."}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </details>
+    </section>
+  );
+}
+
+function SuiteSection({
+  meta,
+  suite,
+}: {
+  meta: (typeof SUITES)[number];
+  suite: EvalSuite;
+}) {
+  return (
+    <section
+      id={meta.id}
+      aria-labelledby={`${meta.id}-title`}
+      className="scroll-mt-6 space-y-3"
+    >
+      <div>
+        <h2
+          id={`${meta.id}-title`}
+          className="font-heading text-2xl font-semibold tracking-tight"
+        >
           {meta.title}
         </h2>
         <p className="text-sm text-muted-foreground">
-          {meta.what} {meta.usesAI ? "Uses the live model." : "Plain code — no AI involved."}
+          {meta.what}{" "}
+          {meta.usesAI
+            ? "Uses the live model."
+            : "Plain code — no AI involved."}
         </p>
       </div>
       <ul className="divide-y rounded-xl border bg-card">
@@ -161,11 +282,19 @@ function CaseRow({ result }: { result: EvalCase }) {
       <details className="group">
         <summary className="flex cursor-pointer list-none items-center gap-3 px-4 py-3 text-sm">
           {ok ? (
-            <CheckCircle2 aria-label="Passed" className="size-4 shrink-0 text-primary" />
+            <CheckCircle2
+              aria-label="Passed"
+              className="size-4 shrink-0 text-primary"
+            />
           ) : (
-            <XCircle aria-label="Failed" className="size-4 shrink-0 text-destructive" />
+            <XCircle
+              aria-label="Failed"
+              className="size-4 shrink-0 text-destructive"
+            />
           )}
-          <span className="flex-1 font-medium">{result.id.replaceAll("_", " ")}</span>
+          <span className="flex-1 font-medium">
+            {result.id.replaceAll("_", " ")}
+          </span>
           <span className="text-muted-foreground tabular-nums">
             {passed}/{result.checks.length}
           </span>
@@ -186,7 +315,9 @@ function CaseRow({ result }: { result: EvalCase }) {
             </div>
           )}
           {result.cousins && (
-            <p className="text-muted-foreground">Suggested: {result.cousins.join(", ")}</p>
+            <p className="text-muted-foreground">
+              Suggested: {result.cousins.join(", ")}
+            </p>
           )}
           <table className="w-full text-left text-xs">
             <caption className="sr-only">Checks for {result.id}</caption>
@@ -201,10 +332,17 @@ function CaseRow({ result }: { result: EvalCase }) {
               {result.checks.map((c) => (
                 <tr key={c.name} className="border-t align-top">
                   <td className="py-1.5 pr-2 font-mono break-all">{c.name}</td>
-                  <td className={cn("py-1.5 pr-2", c.passed ? "text-foreground" : "text-destructive")}>
+                  <td
+                    className={cn(
+                      "py-1.5 pr-2",
+                      c.passed ? "text-foreground" : "text-destructive",
+                    )}
+                  >
                     {c.passed ? "pass" : "fail"}
                   </td>
-                  <td className="py-1.5 break-words text-muted-foreground">{c.detail}</td>
+                  <td className="py-1.5 break-words text-muted-foreground">
+                    {c.detail}
+                  </td>
                 </tr>
               ))}
             </tbody>
