@@ -143,6 +143,8 @@ export function useKitchen() {
     setError(null);
     setSkip([]);
     setPhase("finding");
+    // Save the checked kitchen first, so nothing is lost if the search fails or is slow.
+    persist({ text, dishes: checked, cooked, prefs: nextPrefs, cousins: [] });
     try {
       const found = await fetchAll(checked, cooked, nextPrefs, []);
       setPhase("results");

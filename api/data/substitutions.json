@@ -1,0 +1,4907 @@
+[
+ {
+  "ingredient": "aburaage",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "achiote",
+  "role": "warm_spice",
+  "substitutes": [
+   {
+    "name": "paprika",
+    "note": "use equal amount"
+   },
+   {
+    "name": "turmeric",
+    "note": "use half as much"
+   },
+   {
+    "name": "chili powder",
+    "note": "use half as much"
+   }
+  ]
+ },
+ {
+  "ingredient": "adzuki bean",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "aji amarillo",
+  "role": "heat",
+  "substitutes": [
+   {
+    "name": "jalapeño",
+    "note": "use equal amount"
+   },
+   {
+    "name": "serrano",
+    "note": "use less"
+   },
+   {
+    "name": "cayenne",
+    "note": "pinch to taste"
+   },
+   {
+    "name": "hot sauce",
+    "note": "add to taste"
+   }
+  ]
+ },
+ {
+  "ingredient": "aleppo pepper",
+  "role": "heat",
+  "substitutes": [
+   {
+    "name": "red pepper flake",
+    "note": "use half as much"
+   },
+   {
+    "name": "paprika",
+    "note": "add cayenne if needed"
+   },
+   {
+    "name": "chili powder",
+    "note": "use equal amount"
+   },
+   {
+    "name": "cayenne",
+    "note": "use a pinch"
+   }
+  ]
+ },
+ {
+  "ingredient": "allspice",
+  "role": "warm_spice",
+  "substitutes": [
+   {
+    "name": "cinnamon",
+    "note": "use half as much"
+   },
+   {
+    "name": "clove",
+    "note": "use very little"
+   },
+   {
+    "name": "nutmeg",
+    "note": "use half as much"
+   },
+   {
+    "name": "pumpkin pie spice",
+    "note": "use equal amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "almond",
+  "role": "garnish",
+  "substitutes": [
+   {
+    "name": "peanut",
+    "note": "use equal amount"
+   },
+   {
+    "name": "walnut",
+    "note": "use equal amount"
+   },
+   {
+    "name": "pecan",
+    "note": "use equal amount"
+   },
+   {
+    "name": "sunflower seed",
+    "note": "use equal amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "amchur",
+  "role": "acid",
+  "substitutes": [
+   {
+    "name": "lemon",
+    "note": "add at the end"
+   },
+   {
+    "name": "lime",
+    "note": "add at the end"
+   },
+   {
+    "name": "tamarind paste",
+    "note": "use less"
+   },
+   {
+    "name": "vinegar",
+    "note": "use sparingly"
+   }
+  ]
+ },
+ {
+  "ingredient": "ancho chili",
+  "role": "heat",
+  "substitutes": [
+   {
+    "name": "chili powder",
+    "note": "use equal amount"
+   },
+   {
+    "name": "paprika",
+    "note": "add cayenne if needed"
+   },
+   {
+    "name": "red pepper flake",
+    "note": "use half as much"
+   },
+   {
+    "name": "cayenne",
+    "note": "use very little"
+   }
+  ]
+ },
+ {
+  "ingredient": "anchovy stock",
+  "role": "umami",
+  "substitutes": [
+   {
+    "name": "fish sauce",
+    "note": "dilute with water"
+   },
+   {
+    "name": "soy sauce",
+    "note": "dilute with water"
+   },
+   {
+    "name": "miso",
+    "note": "dissolve in water"
+   },
+   {
+    "name": "chicken broth",
+    "note": "use equal amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "andouille sausage",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "annatto",
+  "role": "warm_spice",
+  "substitutes": [
+   {
+    "name": "paprika",
+    "note": "use equal amount"
+   },
+   {
+    "name": "turmeric",
+    "note": "use half as much"
+   },
+   {
+    "name": "chili powder",
+    "note": "use half as much"
+   }
+  ]
+ },
+ {
+  "ingredient": "apple",
+  "role": "sweetener",
+  "substitutes": [
+   {
+    "name": "pear",
+    "note": "use equal amount"
+   },
+   {
+    "name": "raisin",
+    "note": "use less"
+   },
+   {
+    "name": "apricot jam",
+    "note": "use less"
+   },
+   {
+    "name": "brown sugar",
+    "note": "use less"
+   }
+  ]
+ },
+ {
+  "ingredient": "apple cider vinegar",
+  "role": "acid",
+  "substitutes": [
+   {
+    "name": "white vinegar",
+    "note": "use slightly less"
+   },
+   {
+    "name": "red wine vinegar",
+    "note": "use equal amount"
+   },
+   {
+    "name": "rice vinegar",
+    "note": "use equal amount"
+   },
+   {
+    "name": "lemon",
+    "note": "use equal amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "arugula",
+  "role": "vegetable",
+  "substitutes": [
+   {
+    "name": "spinach",
+    "note": "use equal amount"
+   },
+   {
+    "name": "watercress",
+    "note": "use equal amount"
+   },
+   {
+    "name": "kale",
+    "note": "slice thinly"
+   },
+   {
+    "name": "lettuce",
+    "note": "use equal amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "asafoetida",
+  "role": "aromatic",
+  "substitutes": [
+   {
+    "name": "garlic",
+    "note": "use minced"
+   },
+   {
+    "name": "onion",
+    "note": "use minced"
+   },
+   {
+    "name": "garlic powder",
+    "note": "use a pinch"
+   },
+   {
+    "name": "onion powder",
+    "note": "use a pinch"
+   }
+  ]
+ },
+ {
+  "ingredient": "avocado",
+  "role": "fat",
+  "substitutes": [
+   {
+    "name": "olive oil",
+    "note": "drizzle to taste"
+   },
+   {
+    "name": "mayonnaise",
+    "note": "use less"
+   },
+   {
+    "name": "sour cream",
+    "note": "use equal amount"
+   },
+   {
+    "name": "plain yogurt",
+    "note": "use equal amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "bacon",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "bamboo shoot",
+  "role": "vegetable",
+  "substitutes": [
+   {
+    "name": "water chestnut",
+    "note": "use equal amount"
+   },
+   {
+    "name": "celery",
+    "note": "slice thinly"
+   },
+   {
+    "name": "carrot",
+    "note": "slice thinly"
+   },
+   {
+    "name": "cabbage",
+    "note": "use equal amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "barberry",
+  "role": "acid",
+  "substitutes": [
+   {
+    "name": "cranberry",
+    "note": "use equal amount"
+   },
+   {
+    "name": "raisin",
+    "note": "add lemon"
+   },
+   {
+    "name": "currant",
+    "note": "add lemon"
+   },
+   {
+    "name": "lemon",
+    "note": "use zest and juice"
+   }
+  ]
+ },
+ {
+  "ingredient": "basil",
+  "role": "herb",
+  "substitutes": [
+   {
+    "name": "parsley",
+    "note": "use equal amount"
+   },
+   {
+    "name": "oregano",
+    "note": "use half as much"
+   },
+   {
+    "name": "mint",
+    "note": "use less"
+   },
+   {
+    "name": "cilantro",
+    "note": "use equal amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "bay leaf",
+  "role": "herb",
+  "substitutes": [
+   {
+    "name": "thyme",
+    "note": "use a pinch"
+   },
+   {
+    "name": "oregano",
+    "note": "use a pinch"
+   },
+   {
+    "name": "rosemary",
+    "note": "use very little"
+   },
+   {
+    "name": "parsley stem",
+    "note": "simmer then remove"
+   }
+  ]
+ },
+ {
+  "ingredient": "bean sprout",
+  "role": "vegetable",
+  "substitutes": [
+   {
+    "name": "cabbage",
+    "note": "slice thinly"
+   },
+   {
+    "name": "carrot",
+    "note": "julienne"
+   },
+   {
+    "name": "snow pea",
+    "note": "slice thinly"
+   },
+   {
+    "name": "celery",
+    "note": "slice thinly"
+   }
+  ]
+ },
+ {
+  "ingredient": "beef",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "beef bone",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "beef brisket",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "beef chuck",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "beef rib",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "beef short rib",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "beef sirloin",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "beef steak",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "beef stock",
+  "role": "liquid",
+  "substitutes": [
+   {
+    "name": "chicken stock",
+    "note": "use same amount"
+   },
+   {
+    "name": "vegetable stock",
+    "note": "use same amount"
+   },
+   {
+    "name": "water",
+    "note": "add extra seasoning"
+   },
+   {
+    "name": "bouillon cube",
+    "note": "dissolve in water"
+   }
+  ]
+ },
+ {
+  "ingredient": "beet",
+  "role": "vegetable",
+  "substitutes": [
+   {
+    "name": "carrot",
+    "note": "use same amount"
+   },
+   {
+    "name": "sweet potato",
+    "note": "use same amount"
+   },
+   {
+    "name": "turnip",
+    "note": "use same amount"
+   },
+   {
+    "name": "red cabbage",
+    "note": "use same amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "bell pepper",
+  "role": "vegetable",
+  "substitutes": [
+   {
+    "name": "poblano pepper",
+    "note": "use same amount"
+   },
+   {
+    "name": "celery",
+    "note": "use same amount"
+   },
+   {
+    "name": "carrot",
+    "note": "use same amount"
+   },
+   {
+    "name": "zucchini",
+    "note": "use same amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "berbere",
+  "role": "warm_spice",
+  "substitutes": [
+   {
+    "name": "chili powder",
+    "note": "use same amount"
+   },
+   {
+    "name": "paprika",
+    "note": "add cayenne"
+   },
+   {
+    "name": "curry powder",
+    "note": "use slightly less"
+   },
+   {
+    "name": "cumin",
+    "note": "add chili flakes"
+   }
+  ]
+ },
+ {
+  "ingredient": "bird chile",
+  "role": "heat",
+  "substitutes": [
+   {
+    "name": "cayenne pepper",
+    "note": "use much less"
+   },
+   {
+    "name": "red pepper flake",
+    "note": "use half as much"
+   },
+   {
+    "name": "jalapeño",
+    "note": "use more"
+   },
+   {
+    "name": "serrano pepper",
+    "note": "use same amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "biryani masala",
+  "role": "warm_spice",
+  "substitutes": [
+   {
+    "name": "garam masala",
+    "note": "use same amount"
+   },
+   {
+    "name": "curry powder",
+    "note": "use same amount"
+   },
+   {
+    "name": "cumin",
+    "note": "add cinnamon"
+   },
+   {
+    "name": "chili powder",
+    "note": "use slightly less"
+   }
+  ]
+ },
+ {
+  "ingredient": "black bean",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "bok choy",
+  "role": "vegetable",
+  "substitutes": [
+   {
+    "name": "cabbage",
+    "note": "use same amount"
+   },
+   {
+    "name": "spinach",
+    "note": "add near end"
+   },
+   {
+    "name": "kale",
+    "note": "cook longer"
+   },
+   {
+    "name": "swiss chard",
+    "note": "use same amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "bonito flake",
+  "role": "umami",
+  "substitutes": [
+   {
+    "name": "soy sauce",
+    "note": "use a splash"
+   },
+   {
+    "name": "fish sauce",
+    "note": "use a few drops"
+   },
+   {
+    "name": "anchovy",
+    "note": "mince finely"
+   },
+   {
+    "name": "miso",
+    "note": "dissolve first"
+   }
+  ]
+ },
+ {
+  "ingredient": "bread",
+  "role": "starch",
+  "substitutes": []
+ },
+ {
+  "ingredient": "brown lentil",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "brown sugar",
+  "role": "sweetener",
+  "substitutes": [
+   {
+    "name": "white sugar",
+    "note": "use same amount"
+   },
+   {
+    "name": "honey",
+    "note": "use slightly less"
+   },
+   {
+    "name": "maple syrup",
+    "note": "use slightly less"
+   },
+   {
+    "name": "molasses",
+    "note": "use much less"
+   }
+  ]
+ },
+ {
+  "ingredient": "butter",
+  "role": "fat",
+  "substitutes": [
+   {
+    "name": "olive oil",
+    "note": "use slightly less"
+   },
+   {
+    "name": "vegetable oil",
+    "note": "use slightly less"
+   },
+   {
+    "name": "margarine",
+    "note": "use same amount"
+   },
+   {
+    "name": "bacon fat",
+    "note": "use slightly less"
+   }
+  ]
+ },
+ {
+  "ingredient": "cabbage",
+  "role": "vegetable",
+  "substitutes": [
+   {
+    "name": "bok choy",
+    "note": "use same amount"
+   },
+   {
+    "name": "kale",
+    "note": "cook longer"
+   },
+   {
+    "name": "brussels sprout",
+    "note": "slice thinly"
+   },
+   {
+    "name": "lettuce",
+    "note": "add near end"
+   }
+  ]
+ },
+ {
+  "ingredient": "cabbage curtido",
+  "role": "acid",
+  "substitutes": [
+   {
+    "name": "sauerkraut",
+    "note": "use same amount"
+   },
+   {
+    "name": "pickled onion",
+    "note": "use same amount"
+   },
+   {
+    "name": "pickle",
+    "note": "chop finely"
+   },
+   {
+    "name": "lime juice",
+    "note": "add at end"
+   }
+  ]
+ },
+ {
+  "ingredient": "cajun seasoning",
+  "role": "warm_spice",
+  "substitutes": [
+   {
+    "name": "chili powder",
+    "note": "use same amount"
+   },
+   {
+    "name": "paprika",
+    "note": "add garlic powder"
+   },
+   {
+    "name": "old bay seasoning",
+    "note": "use slightly less"
+   },
+   {
+    "name": "creole seasoning",
+    "note": "use same amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "calamansi",
+  "role": "acid",
+  "substitutes": [
+   {
+    "name": "lime",
+    "note": "use same amount"
+   },
+   {
+    "name": "lemon",
+    "note": "use same amount"
+   },
+   {
+    "name": "orange",
+    "note": "add lemon juice"
+   },
+   {
+    "name": "white vinegar",
+    "note": "use half as much"
+   }
+  ]
+ },
+ {
+  "ingredient": "candlenut",
+  "role": "thickener",
+  "substitutes": [
+   {
+    "name": "macadamia nut",
+    "note": "use same amount"
+   },
+   {
+    "name": "cashew",
+    "note": "use same amount"
+   },
+   {
+    "name": "almond",
+    "note": "use same amount"
+   },
+   {
+    "name": "peanut butter",
+    "note": "use less"
+   }
+  ]
+ },
+ {
+  "ingredient": "cane vinegar",
+  "role": "acid",
+  "substitutes": [
+   {
+    "name": "white vinegar",
+    "note": "use same amount"
+   },
+   {
+    "name": "apple cider vinegar",
+    "note": "use same amount"
+   },
+   {
+    "name": "rice vinegar",
+    "note": "use same amount"
+   },
+   {
+    "name": "lime juice",
+    "note": "use same amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "cannellini bean",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "caraway",
+  "role": "warm_spice",
+  "substitutes": [
+   {
+    "name": "cumin",
+    "note": "use slightly less"
+   },
+   {
+    "name": "fennel seed",
+    "note": "use equal amount"
+   },
+   {
+    "name": "dill seed",
+    "note": "use equal amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "cardamom",
+  "role": "warm_spice",
+  "substitutes": [
+   {
+    "name": "cinnamon",
+    "note": "use half as much"
+   },
+   {
+    "name": "nutmeg",
+    "note": "use half as much"
+   },
+   {
+    "name": "allspice",
+    "note": "use half as much"
+   },
+   {
+    "name": "clove",
+    "note": "use a pinch"
+   }
+  ]
+ },
+ {
+  "ingredient": "carrot",
+  "role": "vegetable",
+  "substitutes": [
+   {
+    "name": "parsnip",
+    "note": "use equal amount"
+   },
+   {
+    "name": "sweet potato",
+    "note": "dice small"
+   },
+   {
+    "name": "bell pepper",
+    "note": "use equal amount"
+   },
+   {
+    "name": "celery",
+    "note": "use equal amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "cashew",
+  "role": "other",
+  "substitutes": [
+   {
+    "name": "peanut",
+    "note": "use equal amount"
+   },
+   {
+    "name": "almond",
+    "note": "use equal amount"
+   },
+   {
+    "name": "sunflower seed",
+    "note": "use equal amount"
+   },
+   {
+    "name": "walnut",
+    "note": "use equal amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "cassava",
+  "role": "starch",
+  "substitutes": []
+ },
+ {
+  "ingredient": "cauliflower",
+  "role": "vegetable",
+  "substitutes": [
+   {
+    "name": "broccoli",
+    "note": "use equal amount"
+   },
+   {
+    "name": "cabbage",
+    "note": "use equal amount"
+   },
+   {
+    "name": "zucchini",
+    "note": "add near end"
+   },
+   {
+    "name": "potato",
+    "note": "cook longer"
+   }
+  ]
+ },
+ {
+  "ingredient": "cayenne",
+  "role": "heat",
+  "substitutes": [
+   {
+    "name": "chili flake",
+    "note": "use equal amount"
+   },
+   {
+    "name": "hot sauce",
+    "note": "add to taste"
+   },
+   {
+    "name": "chili powder",
+    "note": "use more"
+   },
+   {
+    "name": "black pepper",
+    "note": "use more"
+   }
+  ]
+ },
+ {
+  "ingredient": "celery",
+  "role": "vegetable",
+  "substitutes": [
+   {
+    "name": "carrot",
+    "note": "use equal amount"
+   },
+   {
+    "name": "bell pepper",
+    "note": "use equal amount"
+   },
+   {
+    "name": "fennel",
+    "note": "use equal amount"
+   },
+   {
+    "name": "onion",
+    "note": "use equal amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "chapati",
+  "role": "starch",
+  "substitutes": []
+ },
+ {
+  "ingredient": "cheddar cheese",
+  "role": "dairy",
+  "substitutes": [
+   {
+    "name": "monterey jack",
+    "note": "use equal amount"
+   },
+   {
+    "name": "mozzarella",
+    "note": "use equal amount"
+   },
+   {
+    "name": "parmesan",
+    "note": "use less"
+   },
+   {
+    "name": "cream cheese",
+    "note": "melt gently"
+   }
+  ]
+ },
+ {
+  "ingredient": "chicken",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "chicken stock",
+  "role": "liquid",
+  "substitutes": [
+   {
+    "name": "vegetable stock",
+    "note": "use equal amount"
+   },
+   {
+    "name": "beef stock",
+    "note": "use equal amount"
+   },
+   {
+    "name": "water",
+    "note": "season extra"
+   }
+  ]
+ },
+ {
+  "ingredient": "chickpea",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "chile flake",
+  "role": "heat",
+  "substitutes": [
+   {
+    "name": "cayenne",
+    "note": "use half as much"
+   },
+   {
+    "name": "hot sauce",
+    "note": "add to taste"
+   },
+   {
+    "name": "chili powder",
+    "note": "use more"
+   },
+   {
+    "name": "black pepper",
+    "note": "use more"
+   }
+  ]
+ },
+ {
+  "ingredient": "chili",
+  "role": "heat",
+  "substitutes": [
+   {
+    "name": "chili flake",
+    "note": "add to taste"
+   },
+   {
+    "name": "cayenne",
+    "note": "use sparingly"
+   },
+   {
+    "name": "hot sauce",
+    "note": "add to taste"
+   },
+   {
+    "name": "chili powder",
+    "note": "use more"
+   }
+  ]
+ },
+ {
+  "ingredient": "chili flake",
+  "role": "heat",
+  "substitutes": [
+   {
+    "name": "cayenne",
+    "note": "use half as much"
+   },
+   {
+    "name": "hot sauce",
+    "note": "add to taste"
+   },
+   {
+    "name": "chili powder",
+    "note": "use more"
+   },
+   {
+    "name": "black pepper",
+    "note": "use more"
+   }
+  ]
+ },
+ {
+  "ingredient": "chili oil",
+  "role": "heat",
+  "substitutes": [
+   {
+    "name": "chili flake",
+    "note": "bloom in oil"
+   },
+   {
+    "name": "cayenne",
+    "note": "mix with oil"
+   },
+   {
+    "name": "hot sauce",
+    "note": "add at end"
+   },
+   {
+    "name": "chili paste",
+    "note": "thin with oil"
+   }
+  ]
+ },
+ {
+  "ingredient": "chili paste",
+  "role": "heat",
+  "substitutes": [
+   {
+    "name": "hot sauce",
+    "note": "use less"
+   },
+   {
+    "name": "chili flake",
+    "note": "mix with oil"
+   },
+   {
+    "name": "cayenne",
+    "note": "use sparingly"
+   },
+   {
+    "name": "chili powder",
+    "note": "mix with oil"
+   }
+  ]
+ },
+ {
+  "ingredient": "chili powder",
+  "role": "heat",
+  "substitutes": [
+   {
+    "name": "cayenne",
+    "note": "use less"
+   },
+   {
+    "name": "chili flake",
+    "note": "use equal amount"
+   },
+   {
+    "name": "hot sauce",
+    "note": "add to taste"
+   },
+   {
+    "name": "paprika",
+    "note": "add cayenne"
+   }
+  ]
+ },
+ {
+  "ingredient": "chili sauce",
+  "role": "heat",
+  "substitutes": [
+   {
+    "name": "hot sauce",
+    "note": "use less"
+   },
+   {
+    "name": "chili paste",
+    "note": "thin with vinegar"
+   },
+   {
+    "name": "chili flake",
+    "note": "mix with vinegar"
+   },
+   {
+    "name": "cayenne",
+    "note": "add to taste"
+   }
+  ]
+ },
+ {
+  "ingredient": "chinkiang vinegar",
+  "role": "acid",
+  "substitutes": [
+   {
+    "name": "rice vinegar",
+    "note": "use equal amount"
+   },
+   {
+    "name": "balsamic vinegar",
+    "note": "use slightly less"
+   },
+   {
+    "name": "red wine vinegar",
+    "note": "use equal amount"
+   },
+   {
+    "name": "apple cider vinegar",
+    "note": "use equal amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "chipotle chili",
+  "role": "heat",
+  "substitutes": [
+   {
+    "name": "chili powder",
+    "note": "add smoked paprika"
+   },
+   {
+    "name": "cayenne",
+    "note": "use less"
+   },
+   {
+    "name": "chili flake",
+    "note": "add smoked paprika"
+   },
+   {
+    "name": "hot sauce",
+    "note": "add to taste"
+   }
+  ]
+ },
+ {
+  "ingredient": "chow mein noodle",
+  "role": "starch",
+  "substitutes": []
+ },
+ {
+  "ingredient": "cilantro",
+  "role": "herb",
+  "substitutes": [
+   {
+    "name": "parsley",
+    "note": "use equal amount"
+   },
+   {
+    "name": "basil",
+    "note": "use less"
+   },
+   {
+    "name": "mint",
+    "note": "use less"
+   },
+   {
+    "name": "green onion",
+    "note": "use equal amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "cinnamon",
+  "role": "warm_spice",
+  "substitutes": [
+   {
+    "name": "allspice",
+    "note": "use half as much"
+   },
+   {
+    "name": "nutmeg",
+    "note": "use half as much"
+   },
+   {
+    "name": "pumpkin pie spice",
+    "note": "use equal amount"
+   },
+   {
+    "name": "mace",
+    "note": "use half as much"
+   }
+  ]
+ },
+ {
+  "ingredient": "clove",
+  "role": "warm_spice",
+  "substitutes": [
+   {
+    "name": "allspice",
+    "note": "use equal amount"
+   },
+   {
+    "name": "cinnamon",
+    "note": "use twice as much"
+   },
+   {
+    "name": "nutmeg",
+    "note": "use half as much"
+   },
+   {
+    "name": "pumpkin pie spice",
+    "note": "use equal amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "coconut milk",
+  "role": "liquid",
+  "substitutes": [
+   {
+    "name": "cream",
+    "note": "thin with water"
+   },
+   {
+    "name": "milk",
+    "note": "add a little butter"
+   },
+   {
+    "name": "evaporated milk",
+    "note": "thin if needed"
+   },
+   {
+    "name": "plain yogurt",
+    "note": "thin and add gently"
+   }
+  ]
+ },
+ {
+  "ingredient": "collard green",
+  "role": "vegetable",
+  "substitutes": [
+   {
+    "name": "kale",
+    "note": "use equal amount"
+   },
+   {
+    "name": "mustard green",
+    "note": "use equal amount"
+   },
+   {
+    "name": "spinach",
+    "note": "cook less"
+   },
+   {
+    "name": "swiss chard",
+    "note": "use equal amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "coriander",
+  "role": "warm_spice",
+  "substitutes": [
+   {
+    "name": "cumin",
+    "note": "use half as much"
+   },
+   {
+    "name": "caraway",
+    "note": "use half as much"
+   },
+   {
+    "name": "fennel seed",
+    "note": "use half as much"
+   },
+   {
+    "name": "curry powder",
+    "note": "use equal amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "corn",
+  "role": "vegetable",
+  "substitutes": [
+   {
+    "name": "pea",
+    "note": "use equal amount"
+   },
+   {
+    "name": "bell pepper",
+    "note": "dice small"
+   },
+   {
+    "name": "carrot",
+    "note": "dice small"
+   },
+   {
+    "name": "zucchini",
+    "note": "dice small"
+   }
+  ]
+ },
+ {
+  "ingredient": "corn tortilla",
+  "role": "starch",
+  "substitutes": []
+ },
+ {
+  "ingredient": "cornstarch",
+  "role": "thickener",
+  "substitutes": [
+   {
+    "name": "flour",
+    "note": "use twice as much"
+   },
+   {
+    "name": "arrowroot",
+    "note": "use equal amount"
+   },
+   {
+    "name": "potato starch",
+    "note": "use equal amount"
+   },
+   {
+    "name": "tapioca starch",
+    "note": "use equal amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "cream",
+  "role": "dairy",
+  "substitutes": [
+   {
+    "name": "half-and-half",
+    "note": "use equal amount"
+   },
+   {
+    "name": "milk",
+    "note": "add butter"
+   },
+   {
+    "name": "evaporated milk",
+    "note": "use equal amount"
+   },
+   {
+    "name": "plain yogurt",
+    "note": "add off heat"
+   }
+  ]
+ },
+ {
+  "ingredient": "crema",
+  "role": "dairy",
+  "substitutes": [
+   {
+    "name": "sour cream",
+    "note": "thin with water"
+   },
+   {
+    "name": "plain yogurt",
+    "note": "thin with water"
+   },
+   {
+    "name": "cream",
+    "note": "add lime juice"
+   },
+   {
+    "name": "mayonnaise",
+    "note": "thin with water"
+   }
+  ]
+ },
+ {
+  "ingredient": "cucumber",
+  "role": "vegetable",
+  "substitutes": [
+   {
+    "name": "zucchini",
+    "note": "use raw or cooked"
+   },
+   {
+    "name": "celery",
+    "note": "slice thin"
+   },
+   {
+    "name": "radish",
+    "note": "slice thin"
+   },
+   {
+    "name": "lettuce",
+    "note": "add at end"
+   }
+  ]
+ },
+ {
+  "ingredient": "cumin",
+  "role": "warm_spice",
+  "substitutes": [
+   {
+    "name": "chili powder",
+    "note": "use equal amount"
+   },
+   {
+    "name": "coriander",
+    "note": "use equal amount"
+   },
+   {
+    "name": "caraway",
+    "note": "use half as much"
+   },
+   {
+    "name": "curry powder",
+    "note": "use equal amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "curry leaf",
+  "role": "aromatic",
+  "substitutes": [
+   {
+    "name": "bay leaf",
+    "note": "use one leaf"
+   },
+   {
+    "name": "lime zest",
+    "note": "add at end"
+   },
+   {
+    "name": "lemon zest",
+    "note": "add at end"
+   }
+  ]
+ },
+ {
+  "ingredient": "curry powder",
+  "role": "warm_spice",
+  "substitutes": [
+   {
+    "name": "garam masala",
+    "note": "use less"
+   },
+   {
+    "name": "chili powder",
+    "note": "use equal amount"
+   },
+   {
+    "name": "cumin",
+    "note": "add turmeric if available"
+   },
+   {
+    "name": "turmeric",
+    "note": "add cumin if available"
+   }
+  ]
+ },
+ {
+  "ingredient": "dark chocolate",
+  "role": "other",
+  "substitutes": [
+   {
+    "name": "cocoa powder",
+    "note": "add a little fat"
+   },
+   {
+    "name": "unsweetened chocolate",
+    "note": "use equal amount"
+   },
+   {
+    "name": "semi-sweet chocolate",
+    "note": "reduce sugar"
+   },
+   {
+    "name": "coffee",
+    "note": "use a splash"
+   }
+  ]
+ },
+ {
+  "ingredient": "dashi",
+  "role": "umami",
+  "substitutes": [
+   {
+    "name": "chicken broth",
+    "note": "use equal amount"
+   },
+   {
+    "name": "vegetable broth",
+    "note": "add soy sauce"
+   },
+   {
+    "name": "miso",
+    "note": "dissolve in water"
+   },
+   {
+    "name": "soy sauce",
+    "note": "dilute with water"
+   }
+  ]
+ },
+ {
+  "ingredient": "dill",
+  "role": "herb",
+  "substitutes": [
+   {
+    "name": "parsley",
+    "note": "use equal amount"
+   },
+   {
+    "name": "tarragon",
+    "note": "use half as much"
+   },
+   {
+    "name": "fennel frond",
+    "note": "use equal amount"
+   },
+   {
+    "name": "chive",
+    "note": "use equal amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "duck leg",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "egg",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "egg noodle",
+  "role": "starch",
+  "substitutes": []
+ },
+ {
+  "ingredient": "eggplant",
+  "role": "vegetable",
+  "substitutes": [
+   {
+    "name": "zucchini",
+    "note": "use equal amount"
+   },
+   {
+    "name": "mushroom",
+    "note": "use equal amount"
+   },
+   {
+    "name": "bell pepper",
+    "note": "use equal amount"
+   },
+   {
+    "name": "summer squash",
+    "note": "use equal amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "fava bean",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "fennel",
+  "role": "vegetable",
+  "substitutes": [
+   {
+    "name": "celery",
+    "note": "add fennel seed"
+   },
+   {
+    "name": "onion",
+    "note": "slice thin"
+   },
+   {
+    "name": "leek",
+    "note": "slice thin"
+   },
+   {
+    "name": "bok choy",
+    "note": "use equal amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "fenugreek",
+  "role": "warm_spice",
+  "substitutes": [
+   {
+    "name": "curry powder",
+    "note": "use equal amount"
+   },
+   {
+    "name": "mustard seed",
+    "note": "use half as much"
+   },
+   {
+    "name": "maple syrup",
+    "note": "use a few drops"
+   },
+   {
+    "name": "fennel seed",
+    "note": "use half as much"
+   }
+  ]
+ },
+ {
+  "ingredient": "fenugreek leaf",
+  "role": "herb",
+  "substitutes": [
+   {
+    "name": "celery leaf",
+    "note": "use equal amount"
+   },
+   {
+    "name": "parsley",
+    "note": "use equal amount"
+   },
+   {
+    "name": "mustard green",
+    "note": "use small amount"
+   },
+   {
+    "name": "curry powder",
+    "note": "use a pinch"
+   }
+  ]
+ },
+ {
+  "ingredient": "fermented chili paste",
+  "role": "heat",
+  "substitutes": [
+   {
+    "name": "chili garlic sauce",
+    "note": "use slightly less"
+   },
+   {
+    "name": "sriracha",
+    "note": "use slightly less"
+   },
+   {
+    "name": "hot sauce",
+    "note": "start with half"
+   },
+   {
+    "name": "chili powder",
+    "note": "add salt"
+   }
+  ]
+ },
+ {
+  "ingredient": "feta cheese",
+  "role": "dairy",
+  "substitutes": [
+   {
+    "name": "goat cheese",
+    "note": "use same amount"
+   },
+   {
+    "name": "ricotta salata",
+    "note": "use same amount"
+   },
+   {
+    "name": "queso fresco",
+    "note": "add salt"
+   },
+   {
+    "name": "parmesan",
+    "note": "use less"
+   }
+  ]
+ },
+ {
+  "ingredient": "fideo noodle",
+  "role": "starch",
+  "substitutes": []
+ },
+ {
+  "ingredient": "fish sauce",
+  "role": "umami",
+  "substitutes": [
+   {
+    "name": "soy sauce",
+    "note": "use same amount"
+   },
+   {
+    "name": "worcestershire sauce",
+    "note": "use slightly less"
+   },
+   {
+    "name": "miso paste",
+    "note": "thin with water"
+   },
+   {
+    "name": "anchovy paste",
+    "note": "use a little"
+   }
+  ]
+ },
+ {
+  "ingredient": "five spice",
+  "role": "warm_spice",
+  "substitutes": [
+   {
+    "name": "allspice",
+    "note": "use half as much"
+   },
+   {
+    "name": "cinnamon",
+    "note": "use half as much"
+   },
+   {
+    "name": "garam masala",
+    "note": "use less"
+   },
+   {
+    "name": "pumpkin pie spice",
+    "note": "use less"
+   }
+  ]
+ },
+ {
+  "ingredient": "flatbread",
+  "role": "starch",
+  "substitutes": []
+ },
+ {
+  "ingredient": "flour",
+  "role": "thickener",
+  "substitutes": [
+   {
+    "name": "cornstarch",
+    "note": "use half as much"
+   },
+   {
+    "name": "arrowroot",
+    "note": "use half as much"
+   },
+   {
+    "name": "potato starch",
+    "note": "use half as much"
+   },
+   {
+    "name": "instant mashed potato",
+    "note": "add gradually"
+   }
+  ]
+ },
+ {
+  "ingredient": "flour tortilla",
+  "role": "starch",
+  "substitutes": []
+ },
+ {
+  "ingredient": "fried wonton wrapper",
+  "role": "garnish",
+  "substitutes": [
+   {
+    "name": "tortilla chip",
+    "note": "crush lightly"
+   },
+   {
+    "name": "pita chip",
+    "note": "crush lightly"
+   },
+   {
+    "name": "cracker",
+    "note": "crush lightly"
+   },
+   {
+    "name": "fried onion",
+    "note": "sprinkle on top"
+   }
+  ]
+ },
+ {
+  "ingredient": "galangal",
+  "role": "aromatic",
+  "substitutes": [
+   {
+    "name": "ginger",
+    "note": "use same amount"
+   },
+   {
+    "name": "ginger powder",
+    "note": "use one-third as much"
+   },
+   {
+    "name": "lemongrass",
+    "note": "use same amount"
+   },
+   {
+    "name": "lime zest",
+    "note": "add at the end"
+   }
+  ]
+ },
+ {
+  "ingredient": "garam masala",
+  "role": "warm_spice",
+  "substitutes": [
+   {
+    "name": "curry powder",
+    "note": "use same amount"
+   },
+   {
+    "name": "five spice",
+    "note": "use half as much"
+   },
+   {
+    "name": "cumin",
+    "note": "add cinnamon"
+   },
+   {
+    "name": "pumpkin pie spice",
+    "note": "use less"
+   }
+  ]
+ },
+ {
+  "ingredient": "garlic",
+  "role": "aromatic",
+  "substitutes": [
+   {
+    "name": "onion",
+    "note": "use more"
+   },
+   {
+    "name": "shallot",
+    "note": "use more"
+   },
+   {
+    "name": "chive",
+    "note": "add at the end"
+   }
+  ]
+ },
+ {
+  "ingredient": "ghee",
+  "role": "fat",
+  "substitutes": [
+   {
+    "name": "butter",
+    "note": "use same amount"
+   },
+   {
+    "name": "oil",
+    "note": "use same amount"
+   },
+   {
+    "name": "coconut oil",
+    "note": "use same amount"
+   },
+   {
+    "name": "bacon fat",
+    "note": "use less"
+   }
+  ]
+ },
+ {
+  "ingredient": "ginger",
+  "role": "aromatic",
+  "substitutes": [
+   {
+    "name": "galangal",
+    "note": "use same amount"
+   },
+   {
+    "name": "garlic",
+    "note": "use less"
+   },
+   {
+    "name": "lemon zest",
+    "note": "add at the end"
+   }
+  ]
+ },
+ {
+  "ingredient": "goat meat",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "gobo",
+  "role": "vegetable",
+  "substitutes": [
+   {
+    "name": "carrot",
+    "note": "use same amount"
+   },
+   {
+    "name": "parsnip",
+    "note": "use same amount"
+   },
+   {
+    "name": "celery root",
+    "note": "use same amount"
+   },
+   {
+    "name": "turnip",
+    "note": "use same amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "gochujang",
+  "role": "heat",
+  "substitutes": [
+   {
+    "name": "chili garlic sauce",
+    "note": "add a little sugar"
+   },
+   {
+    "name": "sriracha",
+    "note": "add miso if available"
+   },
+   {
+    "name": "hot sauce",
+    "note": "use less"
+   },
+   {
+    "name": "chili powder",
+    "note": "mix with soy sauce"
+   }
+  ]
+ },
+ {
+  "ingredient": "green bean",
+  "role": "vegetable",
+  "substitutes": [
+   {
+    "name": "snap pea",
+    "note": "use same amount"
+   },
+   {
+    "name": "asparagus",
+    "note": "cut into pieces"
+   },
+   {
+    "name": "broccoli",
+    "note": "cut small"
+   },
+   {
+    "name": "zucchini",
+    "note": "cook less"
+   }
+  ]
+ },
+ {
+  "ingredient": "green chile",
+  "role": "heat",
+  "substitutes": [
+   {
+    "name": "jalapeño",
+    "note": "use same amount"
+   },
+   {
+    "name": "serrano",
+    "note": "use less"
+   },
+   {
+    "name": "poblano",
+    "note": "use more"
+   },
+   {
+    "name": "canned green chile",
+    "note": "drain first"
+   }
+  ]
+ },
+ {
+  "ingredient": "green chili",
+  "role": "heat",
+  "substitutes": [
+   {
+    "name": "jalapeño",
+    "note": "use same amount"
+   },
+   {
+    "name": "serrano",
+    "note": "use less"
+   },
+   {
+    "name": "poblano",
+    "note": "use more"
+   },
+   {
+    "name": "canned green chile",
+    "note": "drain first"
+   }
+  ]
+ },
+ {
+  "ingredient": "green chutney",
+  "role": "herb",
+  "substitutes": [
+   {
+    "name": "cilantro",
+    "note": "add lemon juice"
+   },
+   {
+    "name": "mint",
+    "note": "add lemon juice"
+   },
+   {
+    "name": "pesto",
+    "note": "use less"
+   },
+   {
+    "name": "chimichurri",
+    "note": "use same amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "green curry paste",
+  "role": "aromatic",
+  "substitutes": [
+   {
+    "name": "red curry paste",
+    "note": "use same amount"
+   },
+   {
+    "name": "curry powder",
+    "note": "use less"
+   },
+   {
+    "name": "garlic",
+    "note": "add chile and lime"
+   },
+   {
+    "name": "ginger",
+    "note": "add chile and lime"
+   }
+  ]
+ },
+ {
+  "ingredient": "green olive",
+  "role": "acid",
+  "substitutes": [
+   {
+    "name": "capers",
+    "note": "use less"
+   },
+   {
+    "name": "pickle",
+    "note": "chop finely"
+   },
+   {
+    "name": "pepperoncini",
+    "note": "chop finely"
+   },
+   {
+    "name": "lemon",
+    "note": "add at the end"
+   }
+  ]
+ },
+ {
+  "ingredient": "green pepper",
+  "role": "vegetable",
+  "substitutes": [
+   {
+    "name": "bell pepper",
+    "note": "use same amount"
+   },
+   {
+    "name": "poblano",
+    "note": "use same amount"
+   },
+   {
+    "name": "celery",
+    "note": "use same amount"
+   },
+   {
+    "name": "zucchini",
+    "note": "cook less"
+   }
+  ]
+ },
+ {
+  "ingredient": "gruyere cheese",
+  "role": "dairy",
+  "substitutes": [
+   {
+    "name": "swiss cheese",
+    "note": "use same amount"
+   },
+   {
+    "name": "cheddar cheese",
+    "note": "use same amount"
+   },
+   {
+    "name": "mozzarella cheese",
+    "note": "use same amount"
+   },
+   {
+    "name": "parmesan cheese",
+    "note": "use less"
+   }
+  ]
+ },
+ {
+  "ingredient": "guajillo chile",
+  "role": "heat",
+  "substitutes": [
+   {
+    "name": "chili powder",
+    "note": "use less"
+   },
+   {
+    "name": "ancho chile",
+    "note": "use same amount"
+   },
+   {
+    "name": "paprika",
+    "note": "add cayenne"
+   },
+   {
+    "name": "cayenne pepper",
+    "note": "use much less"
+   }
+  ]
+ },
+ {
+  "ingredient": "guajillo chili",
+  "role": "heat",
+  "substitutes": [
+   {
+    "name": "chili powder",
+    "note": "use less"
+   },
+   {
+    "name": "ancho chile",
+    "note": "use same amount"
+   },
+   {
+    "name": "paprika",
+    "note": "add cayenne"
+   },
+   {
+    "name": "cayenne pepper",
+    "note": "use much less"
+   }
+  ]
+ },
+ {
+  "ingredient": "guanciale",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "hakka noodle",
+  "role": "starch",
+  "substitutes": []
+ },
+ {
+  "ingredient": "hard-boiled egg",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "hoisin sauce",
+  "role": "umami",
+  "substitutes": [
+   {
+    "name": "soy sauce",
+    "note": "add sugar"
+   },
+   {
+    "name": "oyster sauce",
+    "note": "use less"
+   },
+   {
+    "name": "teriyaki sauce",
+    "note": "use same amount"
+   },
+   {
+    "name": "miso paste",
+    "note": "thin with water"
+   }
+  ]
+ },
+ {
+  "ingredient": "hominy",
+  "role": "starch",
+  "substitutes": []
+ },
+ {
+  "ingredient": "honey",
+  "role": "sweetener",
+  "substitutes": [
+   {
+    "name": "sugar",
+    "note": "use less"
+   },
+   {
+    "name": "brown sugar",
+    "note": "use less"
+   },
+   {
+    "name": "maple syrup",
+    "note": "use same amount"
+   },
+   {
+    "name": "corn syrup",
+    "note": "use same amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "jalapeno",
+  "role": "heat",
+  "substitutes": [
+   {
+    "name": "serrano pepper",
+    "note": "use less"
+   },
+   {
+    "name": "cayenne pepper",
+    "note": "use much less"
+   },
+   {
+    "name": "red pepper flakes",
+    "note": "use less"
+   },
+   {
+    "name": "hot sauce",
+    "note": "add to taste"
+   }
+  ]
+ },
+ {
+  "ingredient": "jalapeño",
+  "role": "heat",
+  "substitutes": [
+   {
+    "name": "serrano pepper",
+    "note": "use less"
+   },
+   {
+    "name": "cayenne pepper",
+    "note": "use much less"
+   },
+   {
+    "name": "red pepper flakes",
+    "note": "use less"
+   },
+   {
+    "name": "hot sauce",
+    "note": "add to taste"
+   }
+  ]
+ },
+ {
+  "ingredient": "jamaican curry powder",
+  "role": "warm_spice",
+  "substitutes": [
+   {
+    "name": "curry powder",
+    "note": "add allspice"
+   },
+   {
+    "name": "garam masala",
+    "note": "use less"
+   },
+   {
+    "name": "turmeric",
+    "note": "add cumin"
+   },
+   {
+    "name": "chili powder",
+    "note": "use less"
+   }
+  ]
+ },
+ {
+  "ingredient": "japanese curry roux",
+  "role": "thickener",
+  "substitutes": [
+   {
+    "name": "curry powder",
+    "note": "add flour and butter"
+   },
+   {
+    "name": "flour",
+    "note": "make roux"
+   },
+   {
+    "name": "cornstarch",
+    "note": "slurry first"
+   },
+   {
+    "name": "instant gravy mix",
+    "note": "add curry powder"
+   }
+  ]
+ },
+ {
+  "ingredient": "kabsa spice",
+  "role": "warm_spice",
+  "substitutes": [
+   {
+    "name": "garam masala",
+    "note": "use less"
+   },
+   {
+    "name": "curry powder",
+    "note": "use less"
+   },
+   {
+    "name": "allspice",
+    "note": "add cinnamon"
+   },
+   {
+    "name": "cumin",
+    "note": "add black pepper"
+   }
+  ]
+ },
+ {
+  "ingredient": "kale",
+  "role": "vegetable",
+  "substitutes": [
+   {
+    "name": "spinach",
+    "note": "cook briefly"
+   },
+   {
+    "name": "collard green",
+    "note": "cook longer"
+   },
+   {
+    "name": "swiss chard",
+    "note": "use same amount"
+   },
+   {
+    "name": "cabbage",
+    "note": "slice thin"
+   }
+  ]
+ },
+ {
+  "ingredient": "kashmiri chili",
+  "role": "heat",
+  "substitutes": [
+   {
+    "name": "paprika",
+    "note": "add cayenne"
+   },
+   {
+    "name": "chili powder",
+    "note": "use less"
+   },
+   {
+    "name": "cayenne pepper",
+    "note": "use much less"
+   },
+   {
+    "name": "red pepper flakes",
+    "note": "use less"
+   }
+  ]
+ },
+ {
+  "ingredient": "kecap mani",
+  "role": "umami",
+  "substitutes": [
+   {
+    "name": "soy sauce",
+    "note": "add brown sugar"
+   },
+   {
+    "name": "teriyaki sauce",
+    "note": "use same amount"
+   },
+   {
+    "name": "hoisin sauce",
+    "note": "thin slightly"
+   },
+   {
+    "name": "oyster sauce",
+    "note": "add sugar"
+   }
+  ]
+ },
+ {
+  "ingredient": "kidney bean",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "kombu",
+  "role": "umami",
+  "substitutes": [
+   {
+    "name": "soy sauce",
+    "note": "use a splash"
+   },
+   {
+    "name": "miso paste",
+    "note": "use less"
+   },
+   {
+    "name": "fish sauce",
+    "note": "use few drops"
+   },
+   {
+    "name": "dried mushroom",
+    "note": "steep first"
+   }
+  ]
+ },
+ {
+  "ingredient": "lamb",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "lamb shoulder",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "lard",
+  "role": "fat",
+  "substitutes": [
+   {
+    "name": "vegetable oil",
+    "note": "use same amount"
+   },
+   {
+    "name": "butter",
+    "note": "use same amount"
+   },
+   {
+    "name": "bacon fat",
+    "note": "use same amount"
+   },
+   {
+    "name": "shortening",
+    "note": "use same amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "lavash bread",
+  "role": "starch",
+  "substitutes": []
+ },
+ {
+  "ingredient": "lemon",
+  "role": "acid",
+  "substitutes": [
+   {
+    "name": "lime",
+    "note": "use same amount"
+   },
+   {
+    "name": "white vinegar",
+    "note": "use half as much"
+   },
+   {
+    "name": "apple cider vinegar",
+    "note": "use half as much"
+   },
+   {
+    "name": "rice vinegar",
+    "note": "use half as much"
+   }
+  ]
+ },
+ {
+  "ingredient": "lemongrass",
+  "role": "aromatic",
+  "substitutes": [
+   {
+    "name": "lemon zest",
+    "note": "add at the end"
+   },
+   {
+    "name": "lime zest",
+    "note": "add at the end"
+   },
+   {
+    "name": "ginger",
+    "note": "use less"
+   },
+   {
+    "name": "lemon juice",
+    "note": "add at the end"
+   }
+  ]
+ },
+ {
+  "ingredient": "lentil",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "lettuce",
+  "role": "vegetable",
+  "substitutes": [
+   {
+    "name": "cabbage",
+    "note": "slice thinly"
+   },
+   {
+    "name": "spinach",
+    "note": "use fresh"
+   },
+   {
+    "name": "arugula",
+    "note": "use fresh"
+   },
+   {
+    "name": "kale",
+    "note": "slice thinly"
+   }
+  ]
+ },
+ {
+  "ingredient": "lima bean",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "lime",
+  "role": "acid",
+  "substitutes": [
+   {
+    "name": "lemon",
+    "note": "use equal amount"
+   },
+   {
+    "name": "white vinegar",
+    "note": "use half as much"
+   },
+   {
+    "name": "apple cider vinegar",
+    "note": "use half as much"
+   },
+   {
+    "name": "rice vinegar",
+    "note": "use half as much"
+   }
+  ]
+ },
+ {
+  "ingredient": "lizano sauce",
+  "role": "umami",
+  "substitutes": [
+   {
+    "name": "worcestershire sauce",
+    "note": "use slightly less"
+   },
+   {
+    "name": "soy sauce",
+    "note": "add pinch sugar"
+   },
+   {
+    "name": "steak sauce",
+    "note": "use equal amount"
+   },
+   {
+    "name": "hot sauce",
+    "note": "use less"
+   }
+  ]
+ },
+ {
+  "ingredient": "lo mein noodle",
+  "role": "starch",
+  "substitutes": []
+ },
+ {
+  "ingredient": "macaroni",
+  "role": "starch",
+  "substitutes": []
+ },
+ {
+  "ingredient": "maize kernel",
+  "role": "vegetable",
+  "substitutes": [
+   {
+    "name": "pea",
+    "note": "use equal amount"
+   },
+   {
+    "name": "carrot",
+    "note": "dice small"
+   },
+   {
+    "name": "bell pepper",
+    "note": "dice small"
+   }
+  ]
+ },
+ {
+  "ingredient": "makrut lime leaf",
+  "role": "aromatic",
+  "substitutes": [
+   {
+    "name": "lime zest",
+    "note": "add at the end"
+   },
+   {
+    "name": "lemon zest",
+    "note": "add at the end"
+   },
+   {
+    "name": "bay leaf",
+    "note": "simmer then remove"
+   },
+   {
+    "name": "lemongrass",
+    "note": "bruise before simmering"
+   }
+  ]
+ },
+ {
+  "ingredient": "malunggay leaf",
+  "role": "vegetable",
+  "substitutes": [
+   {
+    "name": "spinach",
+    "note": "add at the end"
+   },
+   {
+    "name": "kale",
+    "note": "slice thinly"
+   },
+   {
+    "name": "collard green",
+    "note": "cook longer"
+   },
+   {
+    "name": "swiss chard",
+    "note": "add near end"
+   }
+  ]
+ },
+ {
+  "ingredient": "mandarin pancake",
+  "role": "starch",
+  "substitutes": []
+ },
+ {
+  "ingredient": "masa harina",
+  "role": "starch",
+  "substitutes": []
+ },
+ {
+  "ingredient": "masarepa",
+  "role": "starch",
+  "substitutes": []
+ },
+ {
+  "ingredient": "mayonnaise",
+  "role": "fat",
+  "substitutes": [
+   {
+    "name": "yogurt",
+    "note": "use equal amount"
+   },
+   {
+    "name": "sour cream",
+    "note": "use equal amount"
+   },
+   {
+    "name": "olive oil",
+    "note": "use less"
+   },
+   {
+    "name": "butter",
+    "note": "melt if needed"
+   }
+  ]
+ },
+ {
+  "ingredient": "milk",
+  "role": "dairy",
+  "substitutes": [
+   {
+    "name": "half-and-half",
+    "note": "thin with water"
+   },
+   {
+    "name": "cream",
+    "note": "thin with water"
+   },
+   {
+    "name": "yogurt",
+    "note": "thin with water"
+   },
+   {
+    "name": "evaporated milk",
+    "note": "thin with water"
+   }
+  ]
+ },
+ {
+  "ingredient": "mint",
+  "role": "herb",
+  "substitutes": [
+   {
+    "name": "basil",
+    "note": "use equal amount"
+   },
+   {
+    "name": "cilantro",
+    "note": "use equal amount"
+   },
+   {
+    "name": "parsley",
+    "note": "use equal amount"
+   },
+   {
+    "name": "dill",
+    "note": "use less"
+   }
+  ]
+ },
+ {
+  "ingredient": "mint chutney",
+  "role": "herb",
+  "substitutes": [
+   {
+    "name": "mint",
+    "note": "chop finely"
+   },
+   {
+    "name": "cilantro",
+    "note": "chop finely"
+   },
+   {
+    "name": "parsley",
+    "note": "add lemon"
+   },
+   {
+    "name": "basil",
+    "note": "chop finely"
+   }
+  ]
+ },
+ {
+  "ingredient": "mirin",
+  "role": "sweetener",
+  "substitutes": [
+   {
+    "name": "sugar",
+    "note": "dissolve in water"
+   },
+   {
+    "name": "honey",
+    "note": "use less"
+   },
+   {
+    "name": "maple syrup",
+    "note": "use less"
+   },
+   {
+    "name": "brown sugar",
+    "note": "dissolve in water"
+   }
+  ]
+ },
+ {
+  "ingredient": "miso",
+  "role": "umami",
+  "substitutes": [
+   {
+    "name": "soy sauce",
+    "note": "use less"
+   },
+   {
+    "name": "fish sauce",
+    "note": "use much less"
+   },
+   {
+    "name": "worcestershire sauce",
+    "note": "use less"
+   },
+   {
+    "name": "bouillon cube",
+    "note": "dissolve first"
+   }
+  ]
+ },
+ {
+  "ingredient": "molasse",
+  "role": "sweetener",
+  "substitutes": [
+   {
+    "name": "brown sugar",
+    "note": "use equal amount"
+   },
+   {
+    "name": "honey",
+    "note": "use less"
+   },
+   {
+    "name": "maple syrup",
+    "note": "use less"
+   },
+   {
+    "name": "sugar",
+    "note": "use less"
+   }
+  ]
+ },
+ {
+  "ingredient": "monterey jack cheese",
+  "role": "dairy",
+  "substitutes": [
+   {
+    "name": "mozzarella",
+    "note": "use equal amount"
+   },
+   {
+    "name": "mild cheddar",
+    "note": "use equal amount"
+   },
+   {
+    "name": "colby cheese",
+    "note": "use equal amount"
+   },
+   {
+    "name": "provolone",
+    "note": "use equal amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "mulato chili",
+  "role": "heat",
+  "substitutes": [
+   {
+    "name": "chili powder",
+    "note": "use less"
+   },
+   {
+    "name": "paprika",
+    "note": "add pinch cayenne"
+   },
+   {
+    "name": "ancho chili powder",
+    "note": "use equal amount"
+   },
+   {
+    "name": "cayenne",
+    "note": "use much less"
+   }
+  ]
+ },
+ {
+  "ingredient": "mung bean",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "mung bean flour",
+  "role": "thickener",
+  "substitutes": [
+   {
+    "name": "cornstarch",
+    "note": "use half as much"
+   },
+   {
+    "name": "all-purpose flour",
+    "note": "use equal amount"
+   },
+   {
+    "name": "rice flour",
+    "note": "use equal amount"
+   },
+   {
+    "name": "potato starch",
+    "note": "use half as much"
+   }
+  ]
+ },
+ {
+  "ingredient": "mushroom",
+  "role": "umami",
+  "substitutes": [
+   {
+    "name": "soy sauce",
+    "note": "use a splash"
+   },
+   {
+    "name": "miso",
+    "note": "use a little"
+   },
+   {
+    "name": "worcestershire sauce",
+    "note": "use a splash"
+   },
+   {
+    "name": "bouillon cube",
+    "note": "dissolve first"
+   }
+  ]
+ },
+ {
+  "ingredient": "mustard",
+  "role": "acid",
+  "substitutes": [
+   {
+    "name": "horseradish",
+    "note": "use less"
+   },
+   {
+    "name": "wasabi",
+    "note": "use very little"
+   },
+   {
+    "name": "mustard powder",
+    "note": "mix with water"
+   },
+   {
+    "name": "hot sauce",
+    "note": "use less"
+   }
+  ]
+ },
+ {
+  "ingredient": "mustard powder",
+  "role": "heat",
+  "substitutes": [
+   {
+    "name": "prepared mustard",
+    "note": "use more"
+   },
+   {
+    "name": "horseradish",
+    "note": "use less"
+   },
+   {
+    "name": "wasabi",
+    "note": "use very little"
+   },
+   {
+    "name": "chili powder",
+    "note": "use less"
+   }
+  ]
+ },
+ {
+  "ingredient": "mustard seed",
+  "role": "warm_spice",
+  "substitutes": [
+   {
+    "name": "cumin seed",
+    "note": ""
+   },
+   {
+    "name": "caraway seed",
+    "note": "use less"
+   },
+   {
+    "name": "fennel seed",
+    "note": "use less"
+   },
+   {
+    "name": "coriander seed",
+    "note": ""
+   }
+  ]
+ },
+ {
+  "ingredient": "niter kibbeh",
+  "role": "fat",
+  "substitutes": [
+   {
+    "name": "butter",
+    "note": "add warm spices"
+   },
+   {
+    "name": "ghee",
+    "note": "add warm spices"
+   },
+   {
+    "name": "oil",
+    "note": "add warm spices"
+   }
+  ]
+ },
+ {
+  "ingredient": "nori",
+  "role": "umami",
+  "substitutes": [
+   {
+    "name": "soy sauce",
+    "note": "use less"
+   },
+   {
+    "name": "fish sauce",
+    "note": "use less"
+   },
+   {
+    "name": "miso",
+    "note": "thin with water"
+   },
+   {
+    "name": "worcestershire sauce",
+    "note": "use less"
+   }
+  ]
+ },
+ {
+  "ingredient": "nutmeg",
+  "role": "warm_spice",
+  "substitutes": [
+   {
+    "name": "mace",
+    "note": "same amount"
+   },
+   {
+    "name": "cinnamon",
+    "note": "use less"
+   },
+   {
+    "name": "allspice",
+    "note": "use less"
+   },
+   {
+    "name": "clove",
+    "note": "use very little"
+   }
+  ]
+ },
+ {
+  "ingredient": "okra",
+  "role": "vegetable",
+  "substitutes": [
+   {
+    "name": "zucchini",
+    "note": ""
+   },
+   {
+    "name": "green bean",
+    "note": ""
+   },
+   {
+    "name": "eggplant",
+    "note": ""
+   },
+   {
+    "name": "asparagus",
+    "note": ""
+   }
+  ]
+ },
+ {
+  "ingredient": "onion",
+  "role": "aromatic",
+  "substitutes": [
+   {
+    "name": "shallot",
+    "note": "same amount"
+   },
+   {
+    "name": "leek",
+    "note": "same amount"
+   },
+   {
+    "name": "scallion",
+    "note": "same amount"
+   },
+   {
+    "name": "onion powder",
+    "note": "use less"
+   }
+  ]
+ },
+ {
+  "ingredient": "onion powder",
+  "role": "aromatic",
+  "substitutes": [
+   {
+    "name": "onion",
+    "note": "use more"
+   },
+   {
+    "name": "shallot",
+    "note": "use more"
+   },
+   {
+    "name": "garlic powder",
+    "note": "use less"
+   },
+   {
+    "name": "scallion",
+    "note": "use more"
+   }
+  ]
+ },
+ {
+  "ingredient": "orange",
+  "role": "acid",
+  "substitutes": [
+   {
+    "name": "lemon",
+    "note": "use less"
+   },
+   {
+    "name": "lime",
+    "note": "use less"
+   },
+   {
+    "name": "orange juice",
+    "note": "same amount"
+   },
+   {
+    "name": "vinegar",
+    "note": "use much less"
+   }
+  ]
+ },
+ {
+  "ingredient": "oregano",
+  "role": "herb",
+  "substitutes": [
+   {
+    "name": "marjoram",
+    "note": "same amount"
+   },
+   {
+    "name": "thyme",
+    "note": "same amount"
+   },
+   {
+    "name": "basil",
+    "note": "same amount"
+   },
+   {
+    "name": "italian seasoning",
+    "note": "same amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "oyster sauce",
+  "role": "umami",
+  "substitutes": [
+   {
+    "name": "soy sauce",
+    "note": "add sugar"
+   },
+   {
+    "name": "hoisin sauce",
+    "note": "use less"
+   },
+   {
+    "name": "fish sauce",
+    "note": "use less"
+   },
+   {
+    "name": "worcestershire sauce",
+    "note": "use less"
+   }
+  ]
+ },
+ {
+  "ingredient": "palm sugar",
+  "role": "sweetener",
+  "substitutes": [
+   {
+    "name": "brown sugar",
+    "note": "same amount"
+   },
+   {
+    "name": "white sugar",
+    "note": "same amount"
+   },
+   {
+    "name": "honey",
+    "note": "use less"
+   },
+   {
+    "name": "maple syrup",
+    "note": "use less"
+   }
+  ]
+ },
+ {
+  "ingredient": "paneer",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "paprika",
+  "role": "warm_spice",
+  "substitutes": [
+   {
+    "name": "chili powder",
+    "note": "use less"
+   },
+   {
+    "name": "cayenne",
+    "note": "use very little"
+   },
+   {
+    "name": "smoked paprika",
+    "note": "same amount"
+   },
+   {
+    "name": "red pepper flake",
+    "note": "use less"
+   }
+  ]
+ },
+ {
+  "ingredient": "parmesan cheese",
+  "role": "umami",
+  "substitutes": [
+   {
+    "name": "pecorino romano",
+    "note": "use less"
+   },
+   {
+    "name": "nutritional yeast",
+    "note": "use less"
+   },
+   {
+    "name": "soy sauce",
+    "note": "use little"
+   },
+   {
+    "name": "miso",
+    "note": "use little"
+   }
+  ]
+ },
+ {
+  "ingredient": "parsley",
+  "role": "herb",
+  "substitutes": [
+   {
+    "name": "cilantro",
+    "note": "same amount"
+   },
+   {
+    "name": "chervil",
+    "note": "same amount"
+   },
+   {
+    "name": "basil",
+    "note": "use less"
+   },
+   {
+    "name": "dill",
+    "note": "use less"
+   }
+  ]
+ },
+ {
+  "ingredient": "pea",
+  "role": "vegetable",
+  "substitutes": [
+   {
+    "name": "corn",
+    "note": "same amount"
+   },
+   {
+    "name": "green bean",
+    "note": "chop small"
+   },
+   {
+    "name": "edamame",
+    "note": "same amount"
+   },
+   {
+    "name": "carrot",
+    "note": "dice small"
+   }
+  ]
+ },
+ {
+  "ingredient": "peanut",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "pecorino romano",
+  "role": "umami",
+  "substitutes": [
+   {
+    "name": "parmesan cheese",
+    "note": "use more"
+   },
+   {
+    "name": "nutritional yeast",
+    "note": "use less"
+   },
+   {
+    "name": "soy sauce",
+    "note": "use little"
+   },
+   {
+    "name": "miso",
+    "note": "use little"
+   }
+  ]
+ },
+ {
+  "ingredient": "pickle",
+  "role": "acid",
+  "substitutes": [
+   {
+    "name": "vinegar",
+    "note": "use less"
+   },
+   {
+    "name": "lemon",
+    "note": "use less"
+   },
+   {
+    "name": "capers",
+    "note": "rinse if salty"
+   },
+   {
+    "name": "olive",
+    "note": "use less"
+   }
+  ]
+ },
+ {
+  "ingredient": "pigeon pea",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "pinto bean",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "pita",
+  "role": "starch",
+  "substitutes": []
+ },
+ {
+  "ingredient": "pita bread",
+  "role": "starch",
+  "substitutes": []
+ },
+ {
+  "ingredient": "pork",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "pork belly",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "pork rib",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "pork shoulder",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "pork tenderloin",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "potato",
+  "role": "starch",
+  "substitutes": []
+ },
+ {
+  "ingredient": "preserved lemon",
+  "role": "acid",
+  "substitutes": [
+   {
+    "name": "lemon",
+    "note": "add extra salt"
+   },
+   {
+    "name": "lemon juice",
+    "note": "add extra salt"
+   },
+   {
+    "name": "white vinegar",
+    "note": "use half as much"
+   },
+   {
+    "name": "red wine vinegar",
+    "note": "use half as much"
+   }
+  ]
+ },
+ {
+  "ingredient": "prosciutto",
+  "role": "umami",
+  "substitutes": [
+   {
+    "name": "bacon",
+    "note": "cook first"
+   },
+   {
+    "name": "ham",
+    "note": "slice thinly"
+   },
+   {
+    "name": "anchovy",
+    "note": "use a little"
+   },
+   {
+    "name": "soy sauce",
+    "note": "use sparingly"
+   }
+  ]
+ },
+ {
+  "ingredient": "quesillo cheese",
+  "role": "dairy",
+  "substitutes": [
+   {
+    "name": "mozzarella",
+    "note": ""
+   },
+   {
+    "name": "monterey jack",
+    "note": ""
+   },
+   {
+    "name": "string cheese",
+    "note": "tear into pieces"
+   },
+   {
+    "name": "queso fresco",
+    "note": "less melty"
+   }
+  ]
+ },
+ {
+  "ingredient": "queso fresco",
+  "role": "dairy",
+  "substitutes": [
+   {
+    "name": "feta",
+    "note": "rinse if salty"
+   },
+   {
+    "name": "cotija",
+    "note": "use less"
+   },
+   {
+    "name": "ricotta",
+    "note": "drain first"
+   },
+   {
+    "name": "mozzarella",
+    "note": "less crumbly"
+   }
+  ]
+ },
+ {
+  "ingredient": "rabbit",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "radish",
+  "role": "vegetable",
+  "substitutes": [
+   {
+    "name": "turnip",
+    "note": "slice thinly"
+   },
+   {
+    "name": "cucumber",
+    "note": "add at the end"
+   },
+   {
+    "name": "carrot",
+    "note": "slice thinly"
+   },
+   {
+    "name": "celery",
+    "note": "slice thinly"
+   }
+  ]
+ },
+ {
+  "ingredient": "raisin",
+  "role": "sweetener",
+  "substitutes": [
+   {
+    "name": "dried cranberry",
+    "note": ""
+   },
+   {
+    "name": "prune",
+    "note": "chop finely"
+   },
+   {
+    "name": "date",
+    "note": "chop finely"
+   },
+   {
+    "name": "brown sugar",
+    "note": "use a little"
+   }
+  ]
+ },
+ {
+  "ingredient": "ramen noodle",
+  "role": "starch",
+  "substitutes": []
+ },
+ {
+  "ingredient": "red bell pepper",
+  "role": "vegetable",
+  "substitutes": [
+   {
+    "name": "green bell pepper",
+    "note": ""
+   },
+   {
+    "name": "yellow bell pepper",
+    "note": ""
+   },
+   {
+    "name": "carrot",
+    "note": "slice thinly"
+   },
+   {
+    "name": "celery",
+    "note": "use less"
+   }
+  ]
+ },
+ {
+  "ingredient": "red chile",
+  "role": "heat",
+  "substitutes": [
+   {
+    "name": "jalapeño",
+    "note": ""
+   },
+   {
+    "name": "serrano",
+    "note": "use less"
+   },
+   {
+    "name": "red chili flake",
+    "note": "use sparingly"
+   },
+   {
+    "name": "cayenne pepper",
+    "note": "use a pinch"
+   }
+  ]
+ },
+ {
+  "ingredient": "red chili flake",
+  "role": "heat",
+  "substitutes": [
+   {
+    "name": "red pepper flake",
+    "note": ""
+   },
+   {
+    "name": "cayenne pepper",
+    "note": "use a pinch"
+   },
+   {
+    "name": "hot sauce",
+    "note": "add at the end"
+   },
+   {
+    "name": "chili powder",
+    "note": "use more"
+   }
+  ]
+ },
+ {
+  "ingredient": "red curry paste",
+  "role": "aromatic",
+  "substitutes": [
+   {
+    "name": "curry powder",
+    "note": "add garlic"
+   },
+   {
+    "name": "chili powder",
+    "note": "add garlic"
+   },
+   {
+    "name": "garlic",
+    "note": "add ginger"
+   },
+   {
+    "name": "ginger",
+    "note": "add garlic"
+   }
+  ]
+ },
+ {
+  "ingredient": "red fermented bean curd",
+  "role": "umami",
+  "substitutes": [
+   {
+    "name": "miso",
+    "note": "use less"
+   },
+   {
+    "name": "soy sauce",
+    "note": "use less"
+   },
+   {
+    "name": "fish sauce",
+    "note": "use sparingly"
+   },
+   {
+    "name": "anchovy",
+    "note": "mash finely"
+   }
+  ]
+ },
+ {
+  "ingredient": "red kidney bean",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "red lentil",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "red pepper flake",
+  "role": "heat",
+  "substitutes": [
+   {
+    "name": "red chili flake",
+    "note": ""
+   },
+   {
+    "name": "cayenne pepper",
+    "note": "use a pinch"
+   },
+   {
+    "name": "hot sauce",
+    "note": "add at the end"
+   },
+   {
+    "name": "chili powder",
+    "note": "use more"
+   }
+  ]
+ },
+ {
+  "ingredient": "red wine",
+  "role": "liquid",
+  "substitutes": [
+   {
+    "name": "beef broth",
+    "note": ""
+   },
+   {
+    "name": "chicken broth",
+    "note": ""
+   },
+   {
+    "name": "vegetable broth",
+    "note": ""
+   },
+   {
+    "name": "water",
+    "note": "add a splash vinegar"
+   }
+  ]
+ },
+ {
+  "ingredient": "red wine vinegar",
+  "role": "acid",
+  "substitutes": [
+   {
+    "name": "white wine vinegar",
+    "note": ""
+   },
+   {
+    "name": "apple cider vinegar",
+    "note": ""
+   },
+   {
+    "name": "white vinegar",
+    "note": "use less"
+   },
+   {
+    "name": "lemon juice",
+    "note": ""
+   }
+  ]
+ },
+ {
+  "ingredient": "refried bean",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "rendang paste",
+  "role": "aromatic",
+  "substitutes": [
+   {
+    "name": "curry paste",
+    "note": "use similar amount"
+   },
+   {
+    "name": "curry powder",
+    "note": "mix with oil"
+   },
+   {
+    "name": "garlic",
+    "note": "add ginger too"
+   },
+   {
+    "name": "ginger",
+    "note": "add garlic too"
+   }
+  ]
+ },
+ {
+  "ingredient": "rice",
+  "role": "starch",
+  "substitutes": []
+ },
+ {
+  "ingredient": "rice flour",
+  "role": "thickener",
+  "substitutes": [
+   {
+    "name": "cornstarch",
+    "note": "use half as much"
+   },
+   {
+    "name": "all-purpose flour",
+    "note": "use slightly more"
+   },
+   {
+    "name": "potato starch",
+    "note": "use half as much"
+   },
+   {
+    "name": "tapioca starch",
+    "note": "use half as much"
+   }
+  ]
+ },
+ {
+  "ingredient": "rice noodle",
+  "role": "starch",
+  "substitutes": []
+ },
+ {
+  "ingredient": "rice syrup",
+  "role": "sweetener",
+  "substitutes": [
+   {
+    "name": "honey",
+    "note": "use slightly less"
+   },
+   {
+    "name": "maple syrup",
+    "note": "use similar amount"
+   },
+   {
+    "name": "corn syrup",
+    "note": "use similar amount"
+   },
+   {
+    "name": "brown sugar",
+    "note": "dissolve first"
+   }
+  ]
+ },
+ {
+  "ingredient": "rice vermicelli",
+  "role": "starch",
+  "substitutes": []
+ },
+ {
+  "ingredient": "rice vinegar",
+  "role": "acid",
+  "substitutes": [
+   {
+    "name": "white vinegar",
+    "note": "use slightly less"
+   },
+   {
+    "name": "apple cider vinegar",
+    "note": "use similar amount"
+   },
+   {
+    "name": "lemon",
+    "note": "use similar amount"
+   },
+   {
+    "name": "lime",
+    "note": "use similar amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "rosemary",
+  "role": "herb",
+  "substitutes": [
+   {
+    "name": "thyme",
+    "note": "use similar amount"
+   },
+   {
+    "name": "oregano",
+    "note": "use slightly less"
+   },
+   {
+    "name": "sage",
+    "note": "use half as much"
+   },
+   {
+    "name": "italian seasoning",
+    "note": "use similar amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "saffron",
+  "role": "warm_spice",
+  "substitutes": [
+   {
+    "name": "turmeric",
+    "note": "use a pinch"
+   },
+   {
+    "name": "paprika",
+    "note": "use a pinch"
+   }
+  ]
+ },
+ {
+  "ingredient": "sake",
+  "role": "liquid",
+  "substitutes": [
+   {
+    "name": "dry white wine",
+    "note": "use similar amount"
+   },
+   {
+    "name": "chicken broth",
+    "note": "use similar amount"
+   },
+   {
+    "name": "water",
+    "note": "use similar amount"
+   },
+   {
+    "name": "apple juice",
+    "note": "use half as much"
+   }
+  ]
+ },
+ {
+  "ingredient": "salt cod",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "sausage",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "scotch bonnet",
+  "role": "heat",
+  "substitutes": [
+   {
+    "name": "habanero",
+    "note": "use similar amount"
+   },
+   {
+    "name": "jalapeño",
+    "note": "use more"
+   },
+   {
+    "name": "serrano",
+    "note": "use more"
+   },
+   {
+    "name": "crushed red pepper",
+    "note": "start with a pinch"
+   }
+  ]
+ },
+ {
+  "ingredient": "scotch bonnet chile",
+  "role": "heat",
+  "substitutes": [
+   {
+    "name": "habanero",
+    "note": "use similar amount"
+   },
+   {
+    "name": "jalapeño",
+    "note": "use more"
+   },
+   {
+    "name": "serrano",
+    "note": "use more"
+   },
+   {
+    "name": "crushed red pepper",
+    "note": "start with a pinch"
+   }
+  ]
+ },
+ {
+  "ingredient": "scotch bonnet chili",
+  "role": "heat",
+  "substitutes": [
+   {
+    "name": "habanero",
+    "note": "use similar amount"
+   },
+   {
+    "name": "jalapeño",
+    "note": "use more"
+   },
+   {
+    "name": "serrano",
+    "note": "use more"
+   },
+   {
+    "name": "crushed red pepper",
+    "note": "start with a pinch"
+   }
+  ]
+ },
+ {
+  "ingredient": "scotch bonnet pepper",
+  "role": "heat",
+  "substitutes": [
+   {
+    "name": "habanero",
+    "note": "use similar amount"
+   },
+   {
+    "name": "jalapeño",
+    "note": "use more"
+   },
+   {
+    "name": "serrano",
+    "note": "use more"
+   },
+   {
+    "name": "crushed red pepper",
+    "note": "start with a pinch"
+   }
+  ]
+ },
+ {
+  "ingredient": "sesame oil",
+  "role": "fat",
+  "substitutes": [
+   {
+    "name": "vegetable oil",
+    "note": "use similar amount"
+   },
+   {
+    "name": "peanut oil",
+    "note": "use similar amount"
+   },
+   {
+    "name": "olive oil",
+    "note": "use similar amount"
+   },
+   {
+    "name": "butter",
+    "note": "use similar amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "sesame paste",
+  "role": "fat",
+  "substitutes": [
+   {
+    "name": "peanut butter",
+    "note": "thin with water"
+   },
+   {
+    "name": "tahini",
+    "note": "use similar amount"
+   },
+   {
+    "name": "almond butter",
+    "note": "thin with water"
+   },
+   {
+    "name": "sunflower seed butter",
+    "note": "thin with water"
+   }
+  ]
+ },
+ {
+  "ingredient": "sesame seed",
+  "role": "garnish",
+  "substitutes": [
+   {
+    "name": "peanut",
+    "note": "chop finely"
+   },
+   {
+    "name": "sunflower seed",
+    "note": "use similar amount"
+   },
+   {
+    "name": "pumpkin seed",
+    "note": "chop finely"
+   },
+   {
+    "name": "almond",
+    "note": "slice or chop"
+   }
+  ]
+ },
+ {
+  "ingredient": "shallot",
+  "role": "aromatic",
+  "substitutes": [
+   {
+    "name": "onion",
+    "note": "use similar amount"
+   },
+   {
+    "name": "green onion",
+    "note": "use similar amount"
+   },
+   {
+    "name": "leek",
+    "note": "use similar amount"
+   },
+   {
+    "name": "garlic",
+    "note": "use less"
+   }
+  ]
+ },
+ {
+  "ingredient": "shaoxing wine",
+  "role": "liquid",
+  "substitutes": [
+   {
+    "name": "dry sherry",
+    "note": "use similar amount"
+   },
+   {
+    "name": "dry white wine",
+    "note": "use similar amount"
+   },
+   {
+    "name": "chicken broth",
+    "note": "use similar amount"
+   },
+   {
+    "name": "water",
+    "note": "use similar amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "shiitake mushroom",
+  "role": "umami",
+  "substitutes": [
+   {
+    "name": "mushroom",
+    "note": "use similar amount"
+   },
+   {
+    "name": "soy sauce",
+    "note": "use a splash"
+   },
+   {
+    "name": "miso",
+    "note": "use a little"
+   },
+   {
+    "name": "worcestershire sauce",
+    "note": "use a splash"
+   }
+  ]
+ },
+ {
+  "ingredient": "shrimp",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "shrimp paste",
+  "role": "umami",
+  "substitutes": [
+   {
+    "name": "fish sauce",
+    "note": "use half as much"
+   },
+   {
+    "name": "soy sauce",
+    "note": "use similar amount"
+   },
+   {
+    "name": "miso",
+    "note": "use similar amount"
+   },
+   {
+    "name": "anchovy",
+    "note": "mash finely"
+   }
+  ]
+ },
+ {
+  "ingredient": "sichuan peppercorn",
+  "role": "warm_spice",
+  "substitutes": [
+   {
+    "name": "black pepper",
+    "note": "use similar amount"
+   },
+   {
+    "name": "coriander seed",
+    "note": "use similar amount"
+   },
+   {
+    "name": "white pepper",
+    "note": "use half as much"
+   },
+   {
+    "name": "lemon zest",
+    "note": "add at the end"
+   }
+  ]
+ },
+ {
+  "ingredient": "small pasta",
+  "role": "starch",
+  "substitutes": []
+ },
+ {
+  "ingredient": "smoked ham hock",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "smoked sausage",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "snow pea",
+  "role": "vegetable",
+  "substitutes": [
+   {
+    "name": "snap pea",
+    "note": "use same amount"
+   },
+   {
+    "name": "green bean",
+    "note": "trim and slice"
+   },
+   {
+    "name": "broccoli",
+    "note": "cut small"
+   },
+   {
+    "name": "bell pepper",
+    "note": "slice thin"
+   }
+  ]
+ },
+ {
+  "ingredient": "sour cream",
+  "role": "dairy",
+  "substitutes": [
+   {
+    "name": "greek yogurt",
+    "note": "use same amount"
+   },
+   {
+    "name": "plain yogurt",
+    "note": "use same amount"
+   },
+   {
+    "name": "cream cheese",
+    "note": "thin with milk"
+   },
+   {
+    "name": "mayonnaise",
+    "note": "use less"
+   }
+  ]
+ },
+ {
+  "ingredient": "soy sauce",
+  "role": "umami",
+  "substitutes": [
+   {
+    "name": "tamari",
+    "note": "use same amount"
+   },
+   {
+    "name": "worcestershire sauce",
+    "note": "use less"
+   },
+   {
+    "name": "fish sauce",
+    "note": "use half as much"
+   },
+   {
+    "name": "miso",
+    "note": "thin with water"
+   }
+  ]
+ },
+ {
+  "ingredient": "spaghetti",
+  "role": "starch",
+  "substitutes": []
+ },
+ {
+  "ingredient": "spinach",
+  "role": "vegetable",
+  "substitutes": [
+   {
+    "name": "kale",
+    "note": "cook longer"
+   },
+   {
+    "name": "swiss chard",
+    "note": "use same amount"
+   },
+   {
+    "name": "arugula",
+    "note": "add at the end"
+   },
+   {
+    "name": "bok choy",
+    "note": "slice thin"
+   }
+  ]
+ },
+ {
+  "ingredient": "split pea",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "squacquerone cheese",
+  "role": "dairy",
+  "substitutes": [
+   {
+    "name": "cream cheese",
+    "note": "soften first"
+   },
+   {
+    "name": "ricotta",
+    "note": "use same amount"
+   },
+   {
+    "name": "mascarpone",
+    "note": "use same amount"
+   },
+   {
+    "name": "mozzarella",
+    "note": "use fresh"
+   }
+  ]
+ },
+ {
+  "ingredient": "star anise",
+  "role": "warm_spice",
+  "substitutes": [
+   {
+    "name": "fennel seed",
+    "note": "use half as much"
+   },
+   {
+    "name": "anise seed",
+    "note": "use half as much"
+   },
+   {
+    "name": "chinese five-spice",
+    "note": "use less"
+   },
+   {
+    "name": "clove",
+    "note": "use very little"
+   }
+  ]
+ },
+ {
+  "ingredient": "sumac",
+  "role": "acid",
+  "substitutes": [
+   {
+    "name": "lemon",
+    "note": "add at the end"
+   },
+   {
+    "name": "lime",
+    "note": "add at the end"
+   },
+   {
+    "name": "red wine vinegar",
+    "note": "use sparingly"
+   },
+   {
+    "name": "white vinegar",
+    "note": "use sparingly"
+   }
+  ]
+ },
+ {
+  "ingredient": "sweet corn",
+  "role": "vegetable",
+  "substitutes": [
+   {
+    "name": "pea",
+    "note": "use same amount"
+   },
+   {
+    "name": "bell pepper",
+    "note": "dice small"
+   },
+   {
+    "name": "carrot",
+    "note": "dice small"
+   },
+   {
+    "name": "zucchini",
+    "note": "dice small"
+   }
+  ]
+ },
+ {
+  "ingredient": "sweet potato noodle",
+  "role": "starch",
+  "substitutes": []
+ },
+ {
+  "ingredient": "tahini",
+  "role": "fat",
+  "substitutes": [
+   {
+    "name": "peanut butter",
+    "note": "thin with water"
+   },
+   {
+    "name": "almond butter",
+    "note": "thin with water"
+   },
+   {
+    "name": "sunflower seed butter",
+    "note": "thin with water"
+   },
+   {
+    "name": "sesame oil",
+    "note": "use less"
+   }
+  ]
+ },
+ {
+  "ingredient": "tamarind",
+  "role": "acid",
+  "substitutes": [
+   {
+    "name": "lime",
+    "note": "add a pinch sugar"
+   },
+   {
+    "name": "lemon",
+    "note": "add a pinch sugar"
+   },
+   {
+    "name": "vinegar",
+    "note": "add a pinch sugar"
+   },
+   {
+    "name": "pomegranate molasses",
+    "note": "use less"
+   }
+  ]
+ },
+ {
+  "ingredient": "tamarind paste",
+  "role": "acid",
+  "substitutes": [
+   {
+    "name": "lime",
+    "note": "add a pinch sugar"
+   },
+   {
+    "name": "lemon",
+    "note": "add a pinch sugar"
+   },
+   {
+    "name": "vinegar",
+    "note": "add a pinch sugar"
+   },
+   {
+    "name": "pomegranate molasses",
+    "note": "use less"
+   }
+  ]
+ },
+ {
+  "ingredient": "thai basil",
+  "role": "herb",
+  "substitutes": [
+   {
+    "name": "basil",
+    "note": "use same amount"
+   },
+   {
+    "name": "mint",
+    "note": "use less"
+   },
+   {
+    "name": "cilantro",
+    "note": "add at the end"
+   },
+   {
+    "name": "parsley",
+    "note": "add at the end"
+   }
+  ]
+ },
+ {
+  "ingredient": "thai eggplant",
+  "role": "vegetable",
+  "substitutes": [
+   {
+    "name": "eggplant",
+    "note": "cut small"
+   },
+   {
+    "name": "zucchini",
+    "note": "cut small"
+   },
+   {
+    "name": "mushroom",
+    "note": "use same amount"
+   },
+   {
+    "name": "green bean",
+    "note": "cut short"
+   }
+  ]
+ },
+ {
+  "ingredient": "thyme",
+  "role": "herb",
+  "substitutes": [
+   {
+    "name": "oregano",
+    "note": "use less"
+   },
+   {
+    "name": "marjoram",
+    "note": "use same amount"
+   },
+   {
+    "name": "rosemary",
+    "note": "use less"
+   },
+   {
+    "name": "italian seasoning",
+    "note": "use same amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "tofu",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "tomato",
+  "role": "vegetable",
+  "substitutes": [
+   {
+    "name": "tomato sauce",
+    "note": "use less liquid"
+   },
+   {
+    "name": "red bell pepper",
+    "note": "roast if possible"
+   },
+   {
+    "name": "zucchini",
+    "note": "add extra acid"
+   }
+  ]
+ },
+ {
+  "ingredient": "tomato ketchup",
+  "role": "other",
+  "substitutes": [
+   {
+    "name": "tomato paste",
+    "note": "add vinegar and sugar"
+   },
+   {
+    "name": "tomato sauce",
+    "note": "add vinegar and sugar"
+   },
+   {
+    "name": "barbecue sauce",
+    "note": "use less"
+   },
+   {
+    "name": "chili sauce",
+    "note": "use same amount"
+   }
+  ]
+ },
+ {
+  "ingredient": "tomato paste",
+  "role": "umami",
+  "substitutes": [
+   {
+    "name": "tomato sauce",
+    "note": "use three times as much"
+   },
+   {
+    "name": "canned tomato",
+    "note": "cook down"
+   },
+   {
+    "name": "tomato ketchup",
+    "note": "use less"
+   },
+   {
+    "name": "miso",
+    "note": "use less"
+   }
+  ]
+ },
+ {
+  "ingredient": "tomato salsa",
+  "role": "garnish",
+  "substitutes": [
+   {
+    "name": "pico de gallo",
+    "note": "use same amount"
+   },
+   {
+    "name": "chopped tomato",
+    "note": "add onion and lime"
+   },
+   {
+    "name": "tomato sauce",
+    "note": "use less"
+   },
+   {
+    "name": "hot sauce",
+    "note": "use sparingly"
+   }
+  ]
+ },
+ {
+  "ingredient": "toor dal",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "turmeric",
+  "role": "warm_spice",
+  "substitutes": [
+   {
+    "name": "curry powder",
+    "note": "use slightly more"
+   },
+   {
+    "name": "ground cumin",
+    "note": "use half as much"
+   },
+   {
+    "name": "ground ginger",
+    "note": "use half as much"
+   }
+  ]
+ },
+ {
+  "ingredient": "urad bean",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "vermicelli",
+  "role": "starch",
+  "substitutes": []
+ },
+ {
+  "ingredient": "vinegar",
+  "role": "acid",
+  "substitutes": [
+   {
+    "name": "lemon",
+    "note": "use equal amount"
+   },
+   {
+    "name": "lime",
+    "note": "use equal amount"
+   },
+   {
+    "name": "pickle juice",
+    "note": "use slightly more"
+   },
+   {
+    "name": "white wine",
+    "note": "use twice as much"
+   }
+  ]
+ },
+ {
+  "ingredient": "wakame",
+  "role": "umami",
+  "substitutes": [
+   {
+    "name": "nori",
+    "note": "tear into pieces"
+   },
+   {
+    "name": "kombu",
+    "note": "simmer, then remove"
+   },
+   {
+    "name": "soy sauce",
+    "note": "use sparingly"
+   },
+   {
+    "name": "miso",
+    "note": "stir in at end"
+   }
+  ]
+ },
+ {
+  "ingredient": "walnut",
+  "role": "garnish",
+  "substitutes": [
+   {
+    "name": "almond",
+    "note": "toast first"
+   },
+   {
+    "name": "pecan",
+    "note": "toast first"
+   },
+   {
+    "name": "peanut",
+    "note": "toast first"
+   },
+   {
+    "name": "sunflower seed",
+    "note": "toast first"
+   }
+  ]
+ },
+ {
+  "ingredient": "wheat flour",
+  "role": "thickener",
+  "substitutes": [
+   {
+    "name": "cornstarch",
+    "note": "use half as much"
+   },
+   {
+    "name": "rice flour",
+    "note": "use equal amount"
+   },
+   {
+    "name": "potato starch",
+    "note": "use half as much"
+   },
+   {
+    "name": "arrowroot",
+    "note": "use half as much"
+   }
+  ]
+ },
+ {
+  "ingredient": "wheat noodle",
+  "role": "starch",
+  "substitutes": []
+ },
+ {
+  "ingredient": "white bean",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "white fish",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "wonton wrapper",
+  "role": "starch",
+  "substitutes": []
+ },
+ {
+  "ingredient": "wood ear mushroom",
+  "role": "vegetable",
+  "substitutes": [
+   {
+    "name": "mushroom",
+    "note": "slice thinly"
+   },
+   {
+    "name": "cabbage",
+    "note": "slice thinly"
+   },
+   {
+    "name": "celery",
+    "note": "slice thinly"
+   },
+   {
+    "name": "bell pepper",
+    "note": "slice thinly"
+   }
+  ]
+ },
+ {
+  "ingredient": "yellow lentil",
+  "role": "protein",
+  "substitutes": []
+ },
+ {
+  "ingredient": "yellow noodle",
+  "role": "starch",
+  "substitutes": []
+ },
+ {
+  "ingredient": "yogurt",
+  "role": "dairy",
+  "substitutes": [
+   {
+    "name": "sour cream",
+    "note": "use equal amount"
+   },
+   {
+    "name": "buttermilk",
+    "note": "use less liquid"
+   },
+   {
+    "name": "milk",
+    "note": "add lemon juice"
+   },
+   {
+    "name": "cream",
+    "note": "thin if needed"
+   }
+  ]
+ },
+ {
+  "ingredient": "zucchini",
+  "role": "vegetable",
+  "substitutes": [
+   {
+    "name": "yellow squash",
+    "note": "use equal amount"
+   },
+   {
+    "name": "eggplant",
+    "note": "cook longer"
+   },
+   {
+    "name": "cucumber",
+    "note": "cook briefly"
+   },
+   {
+    "name": "bell pepper",
+    "note": "use equal amount"
+   }
+  ]
+ }
+]

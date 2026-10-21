@@ -6,6 +6,7 @@ import type {
   Have,
   KitchenMap,
   Question,
+  TechniqueGuide,
   SharedKitchen,
   TonightPicks,
   UserDish,
@@ -147,6 +148,17 @@ export async function createShare(dishes: UserDish[]): Promise<string> {
 /** Open a shared kitchen. */
 export async function getShare(id: string): Promise<SharedKitchen> {
   return request<SharedKitchen>(`/api/shares/${encodeURIComponent(id)}`);
+}
+
+let techniques: Promise<TechniqueGuide[]> | null = null;
+
+/** How-to cards for every technique. Fetched once per page load and shared. */
+export function getTechniques(): Promise<TechniqueGuide[]> {
+  techniques ??= request<TechniqueGuide[]>("/api/techniques").catch((err) => {
+    techniques = null; // let a later call retry
+    throw err;
+  });
+  return techniques;
 }
 
 /** The latest public eval results. */

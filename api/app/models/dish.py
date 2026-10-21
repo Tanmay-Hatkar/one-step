@@ -86,6 +86,14 @@ def ingredients_of(dish: UserDish) -> list[str]:
     return [*dish.key_ingredients, *dish.assumed_ingredients]
 
 
+class Swap(BaseModel):
+    """Something the new dish needs that the user can stand in from their own kitchen."""
+
+    need: str = Field(..., description="Ingredient the dish calls for")
+    use: str = Field(..., description="What the user has that plays the same role")
+    note: str = Field(default="", description="How to use it, e.g. 'use half as much'")
+
+
 class Delta(BaseModel):
     """What changes between one of the user's dishes and a catalog dish. Computed by code."""
 
@@ -95,6 +103,9 @@ class Delta(BaseModel):
     dropped_techniques: list[Technique]
     new_equipment: list[Equipment]
     new_ingredients: list[str]
+    swaps: list[Swap] = Field(
+        default_factory=list, description="New ingredients they can replace with their own"
+    )
     new_flavors: list[Flavor]
     same_protein: bool
     same_starch: bool

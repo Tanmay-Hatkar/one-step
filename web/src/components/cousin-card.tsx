@@ -1,12 +1,13 @@
 "use client";
 
-import { Check, ChevronDown, Clock, CookingPot, Mountain, Wrench, X } from "lucide-react";
+import { ArrowLeftRight, Check, ChevronDown, Clock, CookingPot, Mountain, Wrench, X } from "lucide-react";
 import { useId, useState } from "react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { TechniqueHelp } from "@/components/technique-help";
 import { Card } from "@/components/ui/card";
-import { equipmentLabel, formatTime } from "@/lib/labels";
+import { BASIC_TECHNIQUES, equipmentLabel, formatTime } from "@/lib/labels";
 import type { Cousin } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -34,6 +35,10 @@ export function CousinCard({
   const [open, setOpen] = useState(defaultOpen);
   const bodyId = useId();
   const [, rest] = splitHeadline(diff.headline, dish.name);
+  const swaps = delta.swaps ?? [];
+  const swapped = new Set(swaps.map((s) => s.need));
+  const toBuy = delta.new_ingredients.filter((i) => !swapped.has(i));
+  const newSkills = delta.new_techniques.filter((t) => !BASIC_TECHNIQUES.has(t));
 
   return (
     <Card
@@ -105,11 +110,31 @@ export function CousinCard({
             ))}
           </ul>
           <p className="border-t pt-3 text-sm text-muted-foreground">{diff.keep_line}</p>
-          {delta.new_ingredients.length > 0 && (
+          {toBuy.length > 0 && (
             <p className="text-xs text-muted-foreground">
               <span className="font-medium text-foreground/70">You may need: </span>
-              {delta.new_ingredients.join(", ")}
+              {toBuy.join(", ")}
             </p>
+          )}
+          {swaps.length > 0 && (
+            <ul className="space-y-1 text-xs text-muted-foreground" aria-label="Swaps from your kitchen">
+              {swaps.map((s) => (
+                <li key={s.need} className="flex items-start gap-1.5">
+                  <ArrowLeftRight aria-hidden className="mt-0.5 size-3 shrink-0 text-primary" />
+                  <span>
+                    No {s.need}? Use your <span className="font-medium text-foreground/80">{s.use}</span>
+                    {s.note && ` — ${s.note}`}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
+          {newSkills.length > 0 && (
+            <div className="space-y-1.5">
+              {newSkills.map((t) => (
+                <TechniqueHelp key={t} technique={t} />
+              ))}
+            </div>
           )}
           <div className="flex flex-wrap gap-2 pt-1">
             {onCooked && (

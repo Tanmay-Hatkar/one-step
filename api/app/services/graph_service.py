@@ -7,12 +7,14 @@ equipment, ingredients). The LLM only writes up the result.
 
 import logging
 from collections import Counter
+from collections.abc import Mapping
 from dataclasses import dataclass, field
 from datetime import date
 
 from app.config import Settings
-from app.models.dish import Delta, Dish, UserDish, ingredients_of
-from app.services.diet import allows, user_dish_allows
+from app.models.dish import Delta, Dish, Swap, UserDish, ingredients_of
+from app.models.substitution import Substitute
+from app.services.diet import allows, ingredient_allergens, is_meat_ingredient, user_dish_allows
 from app.services.ingredients import missing_ingredients, normalize, pantry_of
 
 logger = logging.getLogger(__name__)
@@ -69,6 +71,7 @@ class ScoreWeights:
     same_starch: float = 1.5
     shared_flavor: float = 0.3
     new_ingredient: float = -0.35
+    swapped_ingredient: float = -0.1  # you have a stand-in: barely a cost
     new_equipment: float = -2.5
     one_step_bonus: float = 2.0
 
@@ -77,7 +80,11 @@ class GraphService:
     """Finds and ranks 'cousin' dishes relative to a user's repertoire."""
 
     def __init__(
-        self, dishes: list[Dish], settings: Settings, weights: ScoreWeights | None = None
+        self,
+        dishes: list[Dish],
+        settings: Settings,
+        weights: ScoreWeights | None = None,
+        substitutes: Mapping[str, list[Substitute]] | None = None,
     ) -> None:
         """Create the service.
 
@@ -85,10 +92,12 @@ class GraphService:
             dishes: The full catalog.
             settings: App settings (one-step thresholds, diversity caps).
             weights: Optional scoring weights override (used by tests and tuning).
+            substitutes: Normalized ingredient → stand-ins, best first (none = no swaps).
         """
         self._dishes = dishes
         self._settings = settings
         self._w = weights or ScoreWeights()
+        self._substitutes = substitutes or {}
 
     @property
     def catalog_size(self) -> int:
@@ -96,7 +105,12 @@ class GraphService:
         return len(self._dishes)
 
     def compute_delta(
-        self, anchor: UserDish, dish: Dish, pantry: set[str], equipment: set[str]
+        self,
+        anchor: UserDish,
+        dish: Dish,
+        pantry: set[str],
+        equipment: set[str],
+        diet: DietRule | None = None,
     ) -> Delta:
         """Compute what changes between one user dish and one catalog dish.
 
@@ -105,6 +119,7 @@ class GraphService:
             dish: A catalog dish.
             pantry: Normalized ingredients the user has (across their repertoire).
             equipment: Equipment the user has (across their repertoire).
+            diet: Swaps are only offered if the stand-in fits this rule.
 
         Returns:
             The structured difference, with a closeness score.
@@ -117,6 +132,8 @@ class GraphService:
             e for e in dish.equipment if e not in equipment and e not in ASSUMED_EQUIPMENT
         ]
         new_ingredients = missing_ingredients(dish.key_ingredients, pantry)
+        swaps = self._swaps(new_ingredients, pantry, diet or DietRule())
+        still_needed = len(new_ingredients) - len(swaps)
         new_flavors = [f for f in dish.flavor if f not in anchor.flavor]
         shared_flavors = len(dish.flavor) - len(new_flavors)
         new_skills = [t for t in new_tech if t not in BASIC_TECHNIQUES]
@@ -130,7 +147,7 @@ class GraphService:
         is_one_step = (
             len(new_skills) <= self._settings.one_step_max_new_techniques
             and not new_equipment
-            and len(new_ingredients) <= self._settings.one_step_max_new_ingredients
+            and still_needed <= self._settings.one_step_max_new_ingredients
             and not protein_swap
             and keeps_base
         )
@@ -145,7 +162,8 @@ class GraphService:
             + w.same_protein * same_protein
             + w.same_starch * same_starch
             + w.shared_flavor * shared_flavors
-            + w.new_ingredient * len(new_ingredients)
+            + w.new_ingredient * still_needed
+            + w.swapped_ingredient * len(swaps)
             + w.new_equipment * len(new_equipment)
             + w.one_step_bonus * is_one_step
         )
@@ -156,6 +174,7 @@ class GraphService:
             dropped_techniques=dropped,
             new_equipment=new_equipment,
             new_ingredients=new_ingredients,
+            swaps=swaps,
             new_flavors=new_flavors,
             same_protein=same_protein,
             same_starch=same_starch,
@@ -163,6 +182,20 @@ class GraphService:
             score=round(score, 2),
             is_one_step=is_one_step,
         )
+
+    def _swaps(self, needed: list[str], pantry: set[str], diet: DietRule) -> list[Swap]:
+        """For each missing ingredient, the best stand-in the user already has (if any).
+
+        A stand-in must be in their pantry and must fit their diet: no meat for a
+        vegetarian, nothing with an allergen they avoid.
+        """
+        swaps: list[Swap] = []
+        for need in needed:
+            for sub in self._substitutes.get(normalize(need), []):
+                if normalize(sub.name) in pantry and _fits_diet(sub.name, diet):
+                    swaps.append(Swap(need=need, use=sub.name, note=sub.note))
+                    break
+        return swaps
 
     def find_cousins(
         self,
@@ -259,7 +292,7 @@ class GraphService:
         for dish in self._dishes:
             if dish.id in known or not allows(dish, diet.vegetarian, diet.avoid):
                 continue
-            best = self._best_delta(repertoire, dish, pantry, equipment)
+            best = self._best_delta(repertoire, dish, pantry, equipment, diet)
             if self._is_new_enough(best):
                 scored.append((dish, best))
 
@@ -322,15 +355,20 @@ class GraphService:
         ):
             return None
         pantry, equipment = self._resources(repertoire, owned)
-        return dish, self._best_delta(repertoire, dish, pantry, equipment)
+        return dish, self._best_delta(repertoire, dish, pantry, equipment, diet)
 
     def _best_delta(
-        self, repertoire: list[UserDish], dish: Dish, pantry: set[str], equipment: set[str]
+        self,
+        repertoire: list[UserDish],
+        dish: Dish,
+        pantry: set[str],
+        equipment: set[str],
+        diet: DietRule,
     ) -> Delta:
         """The delta against whichever of the user's dishes this one should be compared to."""
         return max(
             (
-                (self.compute_delta(a, dish, pantry, equipment), a.source == "described")
+                (self.compute_delta(a, dish, pantry, equipment, diet), a.source == "described")
                 for a in repertoire
             ),
             key=self._anchor_preference,
@@ -396,3 +434,10 @@ class GraphService:
             if len(picked) == limit:
                 break
         return picked
+
+
+def _fits_diet(ingredient: str, diet: DietRule) -> bool:
+    """May this ingredient be suggested as a stand-in under the diet?"""
+    if diet.vegetarian and is_meat_ingredient(ingredient):
+        return False
+    return not (ingredient_allergens(ingredient) & diet.avoid)

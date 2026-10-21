@@ -49,8 +49,10 @@ def fallback_diff(anchor: UserDish, dish: Dish, delta: Delta) -> DiffText:
         A serviceable, factual DiffText.
     """
     changes: list[str] = []
-    if delta.new_ingredients:
-        changes.append("Add " + ", ".join(delta.new_ingredients[:5]) + ".")
+    swapped = {sw.need for sw in delta.swaps}
+    to_buy = [i for i in delta.new_ingredients if i not in swapped]
+    if to_buy:
+        changes.append("Add " + ", ".join(to_buy[:5]) + ".")
     for technique in delta.new_techniques[:2]:
         phrase = technique_label(technique)
         changes.append("Try " + phrase + ".")

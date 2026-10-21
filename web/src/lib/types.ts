@@ -69,12 +69,28 @@ export interface Delta {
   dropped_techniques: string[];
   new_equipment: string[];
   new_ingredients: string[];
+  /** New ingredients the user can replace with something they have. */
+  swaps?: Swap[];
   new_flavors: string[];
   same_protein: boolean;
   same_starch: boolean;
   same_family: boolean;
   score: number;
   is_one_step: boolean;
+}
+
+export interface Swap {
+  need: string;
+  use: string;
+  note: string;
+}
+
+export interface TechniqueGuide {
+  id: string;
+  title: string;
+  steps: string[];
+  tip: string;
+  watch_query: string;
 }
 
 export interface DiffText {

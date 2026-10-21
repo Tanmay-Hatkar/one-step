@@ -1,0 +1,266 @@
+[
+ {
+  "id": "marinate",
+  "title": "Marinating",
+  "steps": [
+   "Mix salt, acid, oil, and aromatics until evenly combined.",
+   "Coat food on all sides in a shallow dish or bag.",
+   "Refrigerate 30 minutes to overnight, depending on thickness.",
+   "Pat food dry before high-heat cooking for better browning."
+  ],
+  "tip": "Do not over-marinate in strong acid; it can make surfaces mushy, so keep fish and thin cuts brief.",
+  "watch_query": "how to marinate meat properly short video"
+ },
+ {
+  "id": "spice_paste",
+  "title": "Making a spice paste",
+  "steps": [
+   "Toast dry spices briefly until fragrant, if using whole spices.",
+   "Add spices, aromatics, salt, and a little liquid or oil.",
+   "Grind or blend until mostly smooth, scraping sides once or twice.",
+   "Cook paste in oil until darker, glossy, and fragrant."
+  ],
+  "tip": "Avoid adding too much water at first; a loose paste splatters and takes longer to fry off.",
+  "watch_query": "how to make spice paste cooking video"
+ },
+ {
+  "id": "temper_spices",
+  "title": "Blooming whole spices (tadka)",
+  "steps": [
+   "Heat oil or ghee in a small pan until shimmering.",
+   "Add whole spices and stand back from popping seeds.",
+   "Cook until sizzling, fragrant, and slightly darker, 10\u201360 seconds.",
+   "Pour immediately over the dish or add aromatics to stop cooking."
+  ],
+  "tip": "Do not burn the spices; have the next ingredient ready before they hit the hot oil.",
+  "watch_query": "how to temper spices tadka short video"
+ },
+ {
+  "id": "sear",
+  "title": "Searing",
+  "steps": [
+   "Pat food very dry and season just before cooking.",
+   "Heat a heavy pan until oil shimmers and moves easily.",
+   "Lay food away from you; leave it still until browned.",
+   "Turn when it releases easily and sear the next side."
+  ],
+  "tip": "Crowding the pan traps steam, so cook in batches with space between pieces.",
+  "watch_query": "how to sear meat in a pan short video"
+ },
+ {
+  "id": "pan_fry",
+  "title": "Pan-frying",
+  "steps": [
+   "Add enough oil to cover the pan bottom generously.",
+   "Heat until a breadcrumb sizzles on contact.",
+   "Lower food in away from you, without crowding.",
+   "Flip when edges brown; drain on a rack or paper."
+  ],
+  "tip": "If the oil is too cool, food absorbs grease; wait for a steady sizzle before adding more.",
+  "watch_query": "how to pan fry cutlets short video"
+ },
+ {
+  "id": "stir_fry",
+  "title": "Stir-frying",
+  "steps": [
+   "Cut everything small and uniform before heating the pan.",
+   "Heat wok or skillet until oil shimmers and just smokes.",
+   "Add ingredients in batches, tossing constantly over high heat.",
+   "Add sauce near the end; cook until glossy and reduced."
+  ],
+  "tip": "Do not start before prep is complete; stir-frying moves too fast for chopping mid-cook.",
+  "watch_query": "basic stir fry technique short video"
+ },
+ {
+  "id": "deep_fry",
+  "title": "Deep-frying",
+  "steps": [
+   "Fill a deep pot less than halfway with oil.",
+   "Heat to 350\u2013375\u00b0F, or until batter sizzles immediately.",
+   "Lower food gently with tongs or a spider.",
+   "Fry until golden and crisp; drain on a rack."
+  ],
+  "tip": "Never overcrowd or overfill the pot; hot oil can foam up and spill dangerously.",
+  "watch_query": "how to deep fry safely at home video"
+ },
+ {
+  "id": "roast",
+  "title": "Roasting",
+  "steps": [
+   "Heat the oven fully before adding food.",
+   "Coat food lightly with oil, salt, and seasonings.",
+   "Spread in one layer on a hot or sturdy pan.",
+   "Roast until browned outside and tender inside, turning if needed."
+  ],
+  "tip": "Too much food on the tray causes steaming, so leave gaps for dry heat to circulate.",
+  "watch_query": "how to roast vegetables properly short video"
+ },
+ {
+  "id": "grill",
+  "title": "Grilling",
+  "steps": [
+   "Preheat grates until very hot, then clean and oil them.",
+   "Pat food dry and season before placing on the grill.",
+   "Cook over direct heat for char; move to indirect heat to finish.",
+   "Rest meat before slicing so juices settle."
+  ],
+  "tip": "Do not force food off the grate; wait until grill marks form and it releases easily.",
+  "watch_query": "basic grilling technique direct indirect heat video"
+ },
+ {
+  "id": "braise",
+  "title": "Braising",
+  "steps": [
+   "Brown the main ingredient well in a heavy pot.",
+   "Cook aromatics until softened and fragrant.",
+   "Add liquid halfway up the food, scraping browned bits.",
+   "Cover and cook gently until fork-tender."
+  ],
+  "tip": "Do not boil hard; a quiet simmer keeps meat moist and prevents tough, stringy texture.",
+  "watch_query": "how to braise meat basic technique video"
+ },
+ {
+  "id": "simmer",
+  "title": "Simmering",
+  "steps": [
+   "Bring liquid just to a boil first, if needed.",
+   "Reduce heat until small bubbles rise gently.",
+   "Skim foam or fat from the surface when necessary.",
+   "Cook uncovered or covered as the recipe requires."
+  ],
+  "tip": "A simmer is not a rolling boil; lower the heat when bubbles become large and constant.",
+  "watch_query": "simmer vs boil cooking technique video"
+ },
+ {
+  "id": "steam",
+  "title": "Steaming",
+  "steps": [
+   "Add water below the steamer basket, not touching food.",
+   "Bring water to a steady boil before adding food.",
+   "Cover tightly; open lid away from your face.",
+   "Steam until tender, checking water level if cooking long."
+  ],
+  "tip": "Steam burns fast; lift lids away from you and keep hands clear of escaping vapor.",
+  "watch_query": "how to steam vegetables with steamer basket video"
+ },
+ {
+  "id": "boil",
+  "title": "Boiling",
+  "steps": [
+   "Use enough water for food to move freely.",
+   "Salt the water if cooking pasta, grains, or vegetables.",
+   "Bring to large, rolling bubbles over high heat.",
+   "Add food and adjust heat to maintain boiling."
+  ],
+  "tip": "Adding food drops the temperature, so let the water return to a boil before timing closely.",
+  "watch_query": "how to boil pasta properly short video"
+ },
+ {
+  "id": "bake",
+  "title": "Baking",
+  "steps": [
+   "Preheat the oven fully and position racks as needed.",
+   "Measure ingredients accurately, especially flour and leavening.",
+   "Use the specified pan size and prepare it properly.",
+   "Bake until set, browned, or a tester comes out clean."
+  ],
+  "tip": "Opening the oven often drops heat, so check only near the suggested doneness time.",
+  "watch_query": "basic baking techniques for beginners video"
+ },
+ {
+  "id": "rice_in_stock",
+  "title": "Cooking rice in stock",
+  "steps": [
+   "Rinse rice until water runs mostly clear, if using long-grain rice.",
+   "Combine rice, stock, and salt; adjust salt for salty stock.",
+   "Bring to a boil, then cover and reduce heat to low.",
+   "Rest covered 10 minutes, then fluff with a fork."
+  ],
+  "tip": "Do not add full salt before tasting the stock; reduced stock can make rice too salty.",
+  "watch_query": "how to cook rice in chicken stock video"
+ },
+ {
+  "id": "plain_rice",
+  "title": "Cooking plain rice",
+  "steps": [
+   "Rinse rice until the water is mostly clear.",
+   "Add rice and measured water to a tight-lidded pot.",
+   "Bring to a boil, cover, and turn heat to low.",
+   "Cook until water is absorbed; rest covered 10 minutes."
+  ],
+  "tip": "Do not lift the lid during cooking; trapped steam is what finishes the grains evenly.",
+  "watch_query": "how to cook plain white rice on stove video"
+ },
+ {
+  "id": "layered_dum",
+  "title": "Layering and slow-steaming (dum)",
+  "steps": [
+   "Part-cook rice until grains are firm but no longer raw.",
+   "Layer rice with cooked masala, herbs, and fat in a heavy pot.",
+   "Seal the lid with dough or foil to trap steam.",
+   "Cook on very low heat until fragrant and fully steamed."
+  ],
+  "tip": "High heat scorches the bottom before the center steams, so use a heavy pot and low flame.",
+  "watch_query": "dum cooking technique biryani layering video"
+ },
+ {
+  "id": "scramble",
+  "title": "Scrambling eggs",
+  "steps": [
+   "Beat eggs with salt until yolks and whites are fully mixed.",
+   "Melt butter or heat oil over medium-low heat.",
+   "Add eggs and stir slowly with a spatula.",
+   "Remove when softly set; residual heat finishes them."
+  ],
+  "tip": "Do not cook over high heat; eggs turn dry and rubbery before you can stop them.",
+  "watch_query": "how to scramble eggs soft curds video"
+ },
+ {
+  "id": "knead_dough",
+  "title": "Kneading dough",
+  "steps": [
+   "Mix flour and liquid until no dry patches remain.",
+   "Press dough away with your palm, then fold it back.",
+   "Rotate and repeat until smoother and elastic.",
+   "Rest dough if it resists stretching or tears quickly."
+  ],
+  "tip": "Avoid adding lots of flour while kneading; sticky dough often smooths out with time and motion.",
+  "watch_query": "how to knead dough by hand video"
+ },
+ {
+  "id": "wrap_and_roll",
+  "title": "Wrapping and rolling",
+  "steps": [
+   "Place filling slightly off-center on the wrapper or dough.",
+   "Fold the near edge over filling and tuck snugly.",
+   "Fold in sides to seal the ends, if needed.",
+   "Roll firmly without squeezing filling out; seal the edge."
+  ],
+  "tip": "Overfilling causes tears and leaks, so use less filling until your rolls close easily.",
+  "watch_query": "how to wrap and roll spring rolls video"
+ },
+ {
+  "id": "poach",
+  "title": "Poaching",
+  "steps": [
+   "Heat seasoned liquid until barely steaming, not boiling.",
+   "Add delicate food gently, keeping it fully submerged.",
+   "Cook at 160\u2013180\u00b0F with only tiny bubbles.",
+   "Remove when just cooked and still tender."
+  ],
+  "tip": "Boiling is too rough for poaching; keep the liquid quiet to avoid tough or broken food.",
+  "watch_query": "how to poach fish or eggs technique video"
+ },
+ {
+  "id": "blend_puree",
+  "title": "Blending a sauce smooth",
+  "steps": [
+   "Cool hot sauce slightly before blending.",
+   "Fill blender no more than halfway with hot liquid.",
+   "Vent the lid and cover with a towel while blending.",
+   "Blend until smooth, then adjust thickness and seasoning."
+  ],
+  "tip": "Hot liquid expands in a sealed blender, so vent the lid to prevent dangerous splashes.",
+  "watch_query": "how to blend hot soup safely video"
+ }
+]

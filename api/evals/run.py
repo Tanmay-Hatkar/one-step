@@ -21,6 +21,7 @@ from app.llm.client import LLMError, OpenAILLMClient
 from app.models.dish import UserDish
 from app.repositories.dish_repository import DishRepository
 from app.repositories.llm_repository import LLMCacheRepository, LLMUsageRepository
+from app.repositories.substitution_repository import SubstitutionRepository
 from app.services.cousin_service import CousinService
 from app.services.diet import ALLERGEN_KEYWORDS, ingredient_allergens, is_meat_ingredient
 from app.services.graph_service import DietRule, GraphService
@@ -52,7 +53,8 @@ def build_services() -> tuple[RepertoireService, CousinService, GraphService, Di
         client, LLMCacheRepository(sessions), LLMUsageRepository(sessions), daily_cap=10_000
     )
     dishes = DishRepository(settings.dishes_path)
-    graph = GraphService(dishes.all(), settings)
+    swaps = SubstitutionRepository(settings.substitutions_path).usable()
+    graph = GraphService(dishes.all(), settings, substitutes=swaps)
     return (
         RepertoireService(gateway, dishes, settings.max_repertoire_dishes),
         CousinService(graph, gateway),
@@ -134,7 +136,7 @@ def run_diet(graph: GraphService, dishes: DishRepository) -> list[dict]:
 
     Kitchens are the fixed anchors plus every catalog dish cooked as a one-dish kitchen.
     For each, cousins, tonight's picks and the map are checked against both the dish's
-    allergen tags and its ingredients.
+    allergen tags and its ingredients — and every swap offered must fit the rule too.
     """
     kitchens = [[UserDish.model_validate(a)] for a in ANCHORS.values()]
     kitchens += [
@@ -147,15 +149,22 @@ def run_diet(graph: GraphService, dishes: DishRepository) -> list[dict]:
     for rule_id, rule in rules:
         checked = 0
         bad: set[str] = set()
+        swaps_checked = 0
         for kitchen in kitchens:
             tonight = graph.pick_tonight(kitchen, rule)
             mapped, _ = graph.neighbourhood(kitchen, rule)
-            shown = {d.id: d for d, _ in graph.find_cousins(kitchen, 8, rule)}
-            shown.update({d.id: d for d, _ in mapped})
-            shown.update({p[0].id: p[0] for p in (tonight.one_step, tonight.stretch) if p})
+            pairs = graph.find_cousins(kitchen, 8, rule) + mapped
+            pairs += [p for p in (tonight.one_step, tonight.stretch) if p]
+            shown = {d.id: d for d, _ in pairs}
             checked += len(shown)
             bad |= {d.name for d in shown.values() if _violates(d, rule)}
-        detail = f"{checked} suggestions over {len(kitchens)} kitchens; violations: {sorted(bad)}"
+            for _, delta in pairs:
+                swaps_checked += len(delta.swaps)
+                bad |= {f"swap:{s.use}" for s in delta.swaps if _swap_violates(s.use, rule)}
+        detail = (
+            f"{checked} suggestions and {swaps_checked} swaps over {len(kitchens)} kitchens; "
+            f"violations: {sorted(bad)}"
+        )
         results.append({"id": rule_id, "checks": [("no_violations", not bad, detail)]})
     return results
 
@@ -170,6 +179,13 @@ def _violates(dish, rule: DietRule) -> bool:
     for ingredient in dish.key_ingredients:
         found |= ingredient_allergens(ingredient)
     return bool(found & rule.avoid)
+
+
+def _swap_violates(ingredient: str, rule: DietRule) -> bool:
+    """True if a suggested stand-in breaks the rule."""
+    if rule.vegetarian and is_meat_ingredient(ingredient):
+        return True
+    return bool(ingredient_allergens(ingredient) & rule.avoid)
 
 
 def summarize(suites: dict[str, list[dict]]) -> dict:
