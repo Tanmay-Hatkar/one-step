@@ -3,6 +3,7 @@
 import { ChevronDown, CookingPot, Loader2, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
+import { ConfirmKitchen } from "@/components/confirm-kitchen";
 import { CousinCard } from "@/components/cousin-card";
 import { DietPicker, dietSummary } from "@/components/diet-picker";
 import { Hero } from "@/components/hero";
@@ -33,6 +34,21 @@ export function Kitchen() {
     [k.tonight?.one_step?.dish.id, k.tonight?.stretch?.dish.id].filter(Boolean),
   );
   const more = k.cousins.filter((c) => !tonightIds.has(c.dish.id));
+
+  if (k.phase === "confirm") {
+    return (
+      <ConfirmKitchen
+        dishes={k.dishes}
+        cooked={k.cooked}
+        diet={k.prefs.diet}
+        have={k.prefs.have}
+        dismissed={k.dismissed}
+        error={k.error}
+        onConfirm={k.confirmKitchen}
+        onBack={k.edit}
+      />
+    );
+  }
 
   if (k.phase !== "results") {
     return (
@@ -106,6 +122,7 @@ export function Kitchen() {
           dishes={k.dishes}
           cooked={k.cooked}
           onEdit={k.edit}
+          onReview={k.review}
           onRemoveCooked={k.removeCooked}
           shareable={repertoireOf(k.dishes, k.cooked)}
         />
@@ -158,6 +175,7 @@ export function Kitchen() {
         <KitchenMap
           repertoire={repertoireOf(k.dishes, k.cooked)}
           diet={k.prefs.diet}
+          have={k.prefs.have}
           isCooked={isCooked}
           onCooked={k.markCooked}
         />

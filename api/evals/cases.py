@@ -27,6 +27,8 @@ PARSE_CASES: list[dict[str, Any]] = [
                 "techniques": ["marinate", "rice_in_stock"],
                 "equipment": ["rice_cooker"],
                 "ingredients": ["chicken stock", "garlic", "onion"],
+                "not_said": ["turmeric", "garam masala", "oil", "water"],
+                "has_guesses": True,
                 "matched": None,
             },
             {
@@ -35,6 +37,26 @@ PARSE_CASES: list[dict[str, Any]] = [
                 "matched": "chicken_biryani",
                 "effort": "weekend",
             },
+        ],
+    },
+    {
+        "id": "flavoured_rice",
+        "text": "Most nights I make a flavoured rice in the rice cooker. I fry chopped onion "
+        "and a lot of garlic in a little oil or ghee until golden, then add the washed rice and "
+        "stir it for a minute. Then it all goes into the rice cooker with water and a crumbled "
+        "chicken broth cube, sometimes with a bay leaf or a few whole spices. The cooker does "
+        "the rest. I usually eat it with my chicken leg marinated in Indian spices.",
+        "n_dishes": (1, 1),
+        "dishes": [
+            {
+                "protein": "chicken",
+                "starch": "rice",
+                "techniques": ["rice_in_stock", "marinate"],
+                "equipment": ["rice_cooker"],
+                "ingredients": ["chicken stock", "garlic", "onion", "bay leaf"],
+                "not_said": ["cumin", "cardamom", "clove", "cinnamon", "oil", "water"],
+                "has_guesses": True,
+            }
         ],
     },
     {
@@ -166,6 +188,11 @@ ANCHORS: dict[str, dict[str, Any]] = {
     },
 }
 
+def parse_text(case_id: str) -> str:
+    """The text of a parse case, by id (so reordering cases can't break other suites)."""
+    return next(c["text"] for c in PARSE_CASES if c["id"] == case_id)
+
+
 END_TO_END_CASES: list[dict[str, Any]] = [
     {
         "id": "founding_user",
@@ -176,7 +203,7 @@ END_TO_END_CASES: list[dict[str, Any]] = [
     },
     {
         "id": "dal_cook",
-        "text": PARSE_CASES[1]["text"],
+        "text": parse_text("dal_chawal"),
         "expect_family": "lentils_and_beans",
         "min_family_hits": 2,
         "min_regions": 2,
@@ -190,7 +217,7 @@ END_TO_END_CASES: list[dict[str, Any]] = [
     },
     {
         "id": "egg_cook",
-        "text": PARSE_CASES[3]["text"],
+        "text": parse_text("eggs_breakfast"),
         "expect_family": "egg_dishes",
         "min_family_hits": 2,
         "min_regions": 2,

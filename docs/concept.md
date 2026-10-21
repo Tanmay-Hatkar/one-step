@@ -42,6 +42,8 @@ your repertoire and writes full recipes from scratch.
 | v0.1 | Describe your dishes → 5 cousins written as differences. 150-dish seed graph. Live. |
 | v0.2 | Tonight's pick, allergen/diet hard filter, "I cooked this" (on-device). ✓ |
 | v0.3 | The map, shareable link, public eval page. ✓ |
-| v0.4 | Substitutions by role, "what I have" chips, technique clips. |
+| v0.4 | Voice input ✓ |
+| v0.5 | "Here's what I heard": said vs guessed, questions picked by expected change ✓ |
+| v0.6 | Substitutions by role, "what I have" chips, technique how-tos. |
 | v1.0 | Real recipe dataset, fine-tuned parser model, eval dashboard, accounts, launch. |
 | Later | Nutrition balance, native mobile, voice cook mode, fridge photos. |

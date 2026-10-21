@@ -9,7 +9,7 @@ Pure functions, no I/O.
 
 import re
 
-from app.models.dish import Dish, UserDish
+from app.models.dish import Dish, UserDish, ingredients_of
 from app.models.vocab import Allergen
 
 # Keywords that mean an ingredient contains the allergen (singular; plurals match too).
@@ -286,10 +286,10 @@ def user_dish_allows(dish: UserDish, vegetarian: bool, avoid: set[str] | frozens
     """
     if vegetarian and (
         dish.protein not in VEGETARIAN_PROTEINS
-        or any(is_meat_ingredient(i) for i in dish.key_ingredients)
+        or any(is_meat_ingredient(i) for i in ingredients_of(dish))
     ):
         return False
     found: set[str] = set()
-    for ingredient in dish.key_ingredients:
+    for ingredient in ingredients_of(dish):
         found |= ingredient_allergens(ingredient)
     return not (set(avoid) & found)

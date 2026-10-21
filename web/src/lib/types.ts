@@ -18,6 +18,37 @@ export interface UserDish extends DishParts {
   notes: string;
   matched_dish_id: string | null;
   source?: "described" | "cooked";
+  /** Ingredients the app guessed from a vague phrase ("Indian spices"); shown to confirm. */
+  assumed_ingredients?: string[];
+}
+
+/** What the user has beyond what their dishes imply. */
+export interface Have {
+  equipment: string[];
+  ingredients: string[];
+}
+
+/** What an answer to a follow-up question changes. */
+export interface Patch {
+  dish: number | null;
+  add_techniques: string[];
+  protein: string | null;
+  add_equipment: string[];
+}
+
+export interface QuestionOption {
+  label: string;
+  patch: Patch;
+}
+
+export interface Question {
+  id: string;
+  /** The user's dish it's about; null = the kitchen. */
+  about: string | null;
+  text: string;
+  multi: boolean;
+  options: QuestionOption[];
+  why: string;
 }
 
 export interface Dish extends DishParts {

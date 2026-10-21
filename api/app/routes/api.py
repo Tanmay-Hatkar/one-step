@@ -10,6 +10,7 @@ from app.deps import (
     get_cousin_service,
     get_dish_repository,
     get_eval_repository,
+    get_question_service,
     get_repertoire_service,
     get_share_service,
     get_speech_service,
@@ -25,6 +26,8 @@ from app.models.api import (
     MapResponse,
     ParseRepertoireRequest,
     ParseRepertoireResponse,
+    QuestionsRequest,
+    QuestionsResponse,
     SharedKitchenResponse,
     ShareRequest,
     ShareResponse,
@@ -37,6 +40,7 @@ from app.repositories.eval_repository import EvalResultsRepository
 from app.repositories.share_repository import ShareStoreError
 from app.services.cousin_service import CousinService
 from app.services.llm_gateway import DailyCapExceeded
+from app.services.question_service import QuestionService
 from app.services.repertoire_service import NoDishesFound, RepertoireService
 from app.services.share_service import ShareService
 from app.services.speech_service import AudioRejected, NothingHeard, SpeechService
@@ -95,6 +99,18 @@ async def transcribe(
     return TranscribeResponse(text=text)
 
 
+@router.post("/questions", response_model=QuestionsResponse)
+@limiter.limit(settings.rate_limit)
+async def questions(
+    request: Request,
+    body: QuestionsRequest,
+    service: QuestionService = Depends(get_question_service),
+) -> QuestionsResponse:
+    """A few quick questions whose answers would change the suggestions. No LLM calls."""
+    asked = service.ask(body.repertoire, body.diet, body.have, set(body.dismissed))
+    return QuestionsResponse(questions=asked)
+
+
 @router.post("/cousins", response_model=CousinsResponse)
 @limiter.limit(settings.rate_limit)
 async def cousins(
@@ -103,7 +119,7 @@ async def cousins(
     service: CousinService = Depends(get_cousin_service),
 ) -> CousinsResponse:
     """Dishes one step away from the user's repertoire, each written as a diff."""
-    found = await service.find(body.repertoire, body.limit, body.diet)
+    found = await service.find(body.repertoire, body.limit, body.diet, body.have)
     return CousinsResponse(cousins=found)
 
 
@@ -115,7 +131,7 @@ async def tonight(
     service: CousinService = Depends(get_cousin_service),
 ) -> TonightResponse:
     """A familiar dish, a one-step dish and a stretch that fit tonight's time and diet."""
-    return await service.tonight(body.repertoire, body.diet, body.max_minutes, body.skip)
+    return await service.tonight(body.repertoire, body.diet, body.max_minutes, body.skip, body.have)
 
 
 @router.post("/map", response_model=MapResponse)
@@ -126,7 +142,7 @@ async def kitchen_map(
     service: CousinService = Depends(get_cousin_service),
 ) -> MapResponse:
     """Your dishes with their closest cousins, for the map. No LLM calls."""
-    return service.map(body.repertoire, body.diet)
+    return service.map(body.repertoire, body.diet, body.have)
 
 
 @router.post("/cousin", response_model=Cousin)
@@ -137,7 +153,7 @@ async def one_cousin(
     service: CousinService = Depends(get_cousin_service),
 ) -> Cousin:
     """One dish written as a diff from your kitchen (a tap on the map)."""
-    cousin = await service.one(body.repertoire, body.dish_id, body.diet)
+    cousin = await service.one(body.repertoire, body.dish_id, body.diet, body.have)
     if cousin is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "That dish isn't available for you.")
     return cousin

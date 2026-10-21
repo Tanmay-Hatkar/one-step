@@ -3,7 +3,9 @@ import type {
   Diet,
   DishStats,
   EvalResults,
+  Have,
   KitchenMap,
+  Question,
   SharedKitchen,
   TonightPicks,
   UserDish,
@@ -69,11 +71,12 @@ export async function transcribe(clip: Blob): Promise<string> {
 export async function findCousins(
   repertoire: UserDish[],
   diet: Diet,
+  have: Have,
   limit = 6,
 ): Promise<Cousin[]> {
   const body = await request<{ cousins: Cousin[] }>("/api/cousins", {
     method: "POST",
-    body: JSON.stringify({ repertoire, diet, limit }),
+    body: JSON.stringify({ repertoire, diet, have, limit }),
   });
   return body.cousins;
 }
@@ -82,12 +85,13 @@ export async function findCousins(
 export async function getTonight(
   repertoire: UserDish[],
   diet: Diet,
+  have: Have,
   maxMinutes: number | null,
   skip: string[],
 ): Promise<TonightPicks> {
   return request<TonightPicks>("/api/tonight", {
     method: "POST",
-    body: JSON.stringify({ repertoire, diet, max_minutes: maxMinutes, skip }),
+    body: JSON.stringify({ repertoire, diet, have, max_minutes: maxMinutes, skip }),
   });
 }
 
@@ -97,10 +101,10 @@ export async function getStats(): Promise<DishStats> {
 }
 
 /** Your kitchen with its closest cousins, for the map (no written diffs). */
-export async function getMap(repertoire: UserDish[], diet: Diet): Promise<KitchenMap> {
+export async function getMap(repertoire: UserDish[], diet: Diet, have: Have): Promise<KitchenMap> {
   return request<KitchenMap>("/api/map", {
     method: "POST",
-    body: JSON.stringify({ repertoire, diet }),
+    body: JSON.stringify({ repertoire, diet, have }),
   });
 }
 
@@ -109,11 +113,26 @@ export async function getCousin(
   repertoire: UserDish[],
   dishId: string,
   diet: Diet,
+  have: Have,
 ): Promise<Cousin> {
   return request<Cousin>("/api/cousin", {
     method: "POST",
-    body: JSON.stringify({ repertoire, dish_id: dishId, diet }),
+    body: JSON.stringify({ repertoire, dish_id: dishId, diet, have }),
   });
+}
+
+/** A few quick questions whose answers would change the suggestions (often none). */
+export async function getQuestions(
+  repertoire: UserDish[],
+  diet: Diet,
+  have: Have,
+  dismissed: string[],
+): Promise<Question[]> {
+  const body = await request<{ questions: Question[] }>("/api/questions", {
+    method: "POST",
+    body: JSON.stringify({ repertoire, diet, have, dismissed }),
+  });
+  return body.questions;
 }
 
 /** Save a read-only snapshot of a kitchen; returns its id. */

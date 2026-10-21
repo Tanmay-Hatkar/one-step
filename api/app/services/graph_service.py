@@ -11,7 +11,7 @@ from dataclasses import dataclass, field
 from datetime import date
 
 from app.config import Settings
-from app.models.dish import Delta, Dish, UserDish
+from app.models.dish import Delta, Dish, UserDish, ingredients_of
 from app.services.diet import allows, user_dish_allows
 from app.services.ingredients import missing_ingredients, normalize, pantry_of
 
@@ -34,6 +34,17 @@ class DietRule:
 
     vegetarian: bool = False
     avoid: frozenset[str] = field(default_factory=frozenset)
+
+
+@dataclass(frozen=True)
+class Owned:
+    """What the user has beyond what their dishes imply ("what I have")."""
+
+    equipment: frozenset[str] = field(default_factory=frozenset)
+    ingredients: frozenset[str] = field(default_factory=frozenset)
+
+
+NOTHING_EXTRA = Owned()
 
 
 @dataclass(frozen=True)
@@ -154,7 +165,11 @@ class GraphService:
         )
 
     def find_cousins(
-        self, repertoire: list[UserDish], limit: int, diet: DietRule | None = None
+        self,
+        repertoire: list[UserDish],
+        limit: int,
+        diet: DietRule | None = None,
+        owned: Owned = NOTHING_EXTRA,
     ) -> list[tuple[Dish, Delta]]:
         """Return the closest catalog dishes the user doesn't already cook.
 
@@ -166,11 +181,12 @@ class GraphService:
             repertoire: The user's dishes.
             limit: How many cousins to return.
             diet: Hard diet rule; dishes that break it are never returned.
+            owned: Extra equipment and pantry items the user has.
 
         Returns:
             (dish, delta) pairs, best first.
         """
-        return self._diversify(self._ranked(repertoire, diet or DietRule()), limit)
+        return self._diversify(self._ranked(repertoire, diet or DietRule(), owned), limit)
 
     def pick_tonight(
         self,
@@ -179,6 +195,7 @@ class GraphService:
         max_minutes: int | None = None,
         skip: frozenset[str] = frozenset(),
         today: date | None = None,
+        owned: Owned = NOTHING_EXTRA,
     ) -> TonightPicks:
         """Pick a familiar dish, a one-step dish and a stretch for tonight.
 
@@ -188,6 +205,7 @@ class GraphService:
             max_minutes: Time available tonight; None means any.
             skip: Catalog ids and user dish names the user said 'not tonight' to.
             today: Used to rotate the familiar pick day by day (defaults to today).
+            owned: Extra equipment and pantry items the user has.
 
         Returns:
             The three picks; any is None when nothing fits.
@@ -195,7 +213,7 @@ class GraphService:
         diet = diet or DietRule()
         fits = [
             (dish, delta)
-            for dish, delta in self._ranked(repertoire, diet)
+            for dish, delta in self._ranked(repertoire, diet, owned)
             if dish.id not in skip and (max_minutes is None or dish.time_minutes <= max_minutes)
         ]
         one_step = next(((d, x) for d, x in fits if x.is_one_step), None)
@@ -214,12 +232,27 @@ class GraphService:
         familiar = self._familiar(repertoire, diet, max_minutes, skip, today or date.today())
         return TonightPicks(familiar=familiar, one_step=one_step, stretch=stretch)
 
-    def _ranked(self, repertoire: list[UserDish], diet: DietRule) -> list[tuple[Dish, Delta]]:
+    def one_step_ids(
+        self, repertoire: list[UserDish], diet: DietRule | None = None, owned: Owned = NOTHING_EXTRA
+    ) -> set[str]:
+        """Ids of every catalog dish one step from the user's kitchen."""
+        return {
+            d.id for d, x in self._ranked(repertoire, diet or DietRule(), owned) if x.is_one_step
+        }
+
+    def _resources(self, repertoire: list[UserDish], owned: Owned) -> tuple[set[str], set[str]]:
+        """(pantry, equipment) across the user's dishes plus what they told us they have."""
+        pantry = pantry_of([ingredients_of(d) for d in repertoire] + [sorted(owned.ingredients)])
+        equipment = {e for d in repertoire for e in d.equipment} | set(owned.equipment)
+        return pantry, equipment
+
+    def _ranked(
+        self, repertoire: list[UserDish], diet: DietRule, owned: Owned = NOTHING_EXTRA
+    ) -> list[tuple[Dish, Delta]]:
         """Every allowed, genuinely new catalog dish with its best delta, best first."""
         if not repertoire:
             return []
-        pantry = pantry_of([d.key_ingredients for d in repertoire])
-        equipment = {e for d in repertoire for e in d.equipment}
+        pantry, equipment = self._resources(repertoire, owned)
         known = self._known_ids(repertoire)
 
         scored: list[tuple[Dish, Delta]] = []
@@ -234,7 +267,7 @@ class GraphService:
         return scored
 
     def neighbourhood(
-        self, repertoire: list[UserDish], diet: DietRule | None = None
+        self, repertoire: list[UserDish], diet: DietRule | None = None, owned: Owned = NOTHING_EXTRA
     ) -> tuple[list[tuple[Dish, Delta]], int]:
         """The map: each of the user's dishes with its closest cousins.
 
@@ -244,11 +277,12 @@ class GraphService:
         Args:
             repertoire: The user's dishes.
             diet: Hard diet rule.
+            owned: Extra equipment and pantry items the user has.
 
         Returns:
             (cousins best first, how many catalog dishes are one step away).
         """
-        ranked = self._ranked(repertoire, diet or DietRule())
+        ranked = self._ranked(repertoire, diet or DietRule(), owned)
         per_anchor: Counter[str] = Counter()
         picked: list[tuple[Dish, Delta]] = []
         for dish, delta in ranked:
@@ -261,7 +295,11 @@ class GraphService:
         return picked, sum(1 for _, d in ranked if d.is_one_step)
 
     def cousin_for(
-        self, repertoire: list[UserDish], dish_id: str, diet: DietRule | None = None
+        self,
+        repertoire: list[UserDish],
+        dish_id: str,
+        diet: DietRule | None = None,
+        owned: Owned = NOTHING_EXTRA,
     ) -> tuple[Dish, Delta] | None:
         """One specific catalog dish relative to the user's kitchen (a tap on the map).
 
@@ -269,6 +307,7 @@ class GraphService:
             repertoire: The user's dishes.
             dish_id: Catalog id.
             diet: Hard diet rule.
+            owned: Extra equipment and pantry items the user has.
 
         Returns:
             (dish, delta), or None if unknown, already cooked, or not allowed by the diet.
@@ -282,8 +321,7 @@ class GraphService:
             or not allows(dish, diet.vegetarian, diet.avoid)
         ):
             return None
-        pantry = pantry_of([d.key_ingredients for d in repertoire])
-        equipment = {e for d in repertoire for e in d.equipment}
+        pantry, equipment = self._resources(repertoire, owned)
         return dish, self._best_delta(repertoire, dish, pantry, equipment)
 
     def _best_delta(

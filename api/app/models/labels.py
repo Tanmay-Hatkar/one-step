@@ -29,3 +29,22 @@ TECHNIQUE_LABELS: dict[str, str] = {
 def technique_label(technique: str) -> str:
     """Return a readable phrase: 'rice_in_stock' → 'cooking the rice in stock'."""
     return TECHNIQUE_LABELS.get(technique, technique.replace("_", " "))
+
+
+EQUIPMENT_LABELS: dict[str, str] = {
+    "stovetop": "Stovetop",
+    "oven": "Oven",
+    "rice_cooker": "Rice cooker",
+    "grill": "Grill or tandoor",
+    "wok": "Wok",
+    "pressure_cooker": "Pressure cooker",
+    "blender": "Blender or mixer",
+    "griddle": "Griddle or tawa",
+    "steamer": "Steamer",
+    "air_fryer": "Air fryer",
+}
+
+
+def equipment_label(item: str) -> str:
+    """Return a readable name: 'pressure_cooker' → 'Pressure cooker'."""
+    return EQUIPMENT_LABELS.get(item, item.replace("_", " ").capitalize())

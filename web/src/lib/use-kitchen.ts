@@ -11,9 +11,9 @@ import {
   loadKitchen,
   saveKitchen,
 } from "./storage";
-import type { Cousin, Dish, TonightPicks, UserDish } from "./types";
+import type { Cousin, Dish, Have, TonightPicks, UserDish } from "./types";
 
-export type Phase = "input" | "reading" | "finding" | "results";
+export type Phase = "input" | "reading" | "confirm" | "finding" | "results";
 
 /** Wait this long after the last preference change before asking the API again. */
 const PREFS_DEBOUNCE_MS = 400;
@@ -40,14 +40,17 @@ export function useKitchen() {
   const [error, setError] = useState<string | null>(null);
   const [updating, setUpdating] = useState(false);
   const [notice, setNotice] = useState<CookedNotice | null>(null);
+  const [dismissed, setDismissed] = useState<string[]>([]);
 
   // Only the latest request may update the page (preferences can change mid-flight).
   const requestId = useRef(0);
   const debounce = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  // Answered questions are remembered alongside everything else.
+  const dismissedRef = useRef<string[]>([]);
   const persist = useCallback(
     (next: { text: string; dishes: UserDish[]; cooked: CookedDish[]; prefs: Prefs; cousins: Cousin[] }) =>
-      saveKitchen(next),
+      saveKitchen({ ...next, dismissed: dismissedRef.current }),
     [],
   );
 
@@ -57,8 +60,8 @@ export function useKitchen() {
       const id = ++requestId.current;
       const repertoire = repertoireOf(own, done);
       const [found, picks] = await Promise.all([
-        findCousins(repertoire, p.diet),
-        getTonight(repertoire, p.diet, p.minutes, skipped),
+        findCousins(repertoire, p.diet, p.have),
+        getTonight(repertoire, p.diet, p.have, p.minutes, skipped),
       ]);
       if (id !== requestId.current) return null;
       setCousins(found);
@@ -94,7 +97,11 @@ export function useKitchen() {
     setDishes(saved.dishes);
     setCooked(saved.cooked);
     setPrefsState(saved.prefs);
-    if (saved.dishes.length) {
+    setDismissed(saved.dismissed);
+    dismissedRef.current = saved.dismissed;
+    if (saved.dishes.length && !saved.cousins.length) {
+      setPhase("confirm"); // they left while checking what was heard
+    } else if (saved.dishes.length) {
       setCousins(saved.cousins);
       setPhase("results");
       void refresh(saved.dishes, saved.cooked, saved.prefs, [], saved.text);
@@ -114,13 +121,35 @@ export function useKitchen() {
       setPhase("reading");
       const parsed = await parseRepertoire(input);
       setDishes(parsed);
-      setPhase("finding");
-      const found = await fetchAll(parsed, cooked, prefs, []);
-      setPhase("results");
-      if (found) persist({ text: input, dishes: parsed, cooked, prefs, cousins: found });
+      setCousins([]);
+      setTonight(null);
+      // Show what was understood before searching, so guesses can be fixed first.
+      setPhase("confirm");
+      persist({ text: input, dishes: parsed, cooked, prefs, cousins: [] });
     } catch (err) {
       setError(messageOf(err));
       setPhase("input");
+    }
+  }
+
+  /** Accept the checked kitchen (and any answers), then find dishes. */
+  async function confirmKitchen(checked: UserDish[], have: Have, answered: string[]) {
+    const nextPrefs = { ...prefs, have };
+    const nextDismissed = [...new Set([...dismissed, ...answered])];
+    dismissedRef.current = nextDismissed;
+    setDismissed(nextDismissed);
+    setDishes(checked);
+    setPrefsState(nextPrefs);
+    setError(null);
+    setSkip([]);
+    setPhase("finding");
+    try {
+      const found = await fetchAll(checked, cooked, nextPrefs, []);
+      setPhase("results");
+      if (found) persist({ text, dishes: checked, cooked, prefs: nextPrefs, cousins: found });
+    } catch (err) {
+      setError(messageOf(err));
+      setPhase("confirm");
     }
   }
 
@@ -172,8 +201,11 @@ export function useKitchen() {
     error,
     updating,
     notice,
+    dismissed,
     dismissNotice: () => setNotice(null),
     submit,
+    confirmKitchen,
+    review: () => setPhase("confirm"),
     edit: () => setPhase("input"),
     setPrefs,
     markCooked,
