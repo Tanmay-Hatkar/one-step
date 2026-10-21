@@ -11,6 +11,7 @@ from app.llm.transcriber import OpenAITranscriber
 from app.repositories.dish_repository import DishRepository
 from app.repositories.eval_repository import EvalResultsRepository
 from app.repositories.llm_repository import LLMCacheRepository, LLMUsageRepository
+from app.repositories.recipe_repository import RecipeRepository
 from app.repositories.share_repository import ShareRepository
 from app.repositories.substitution_repository import SubstitutionRepository
 from app.repositories.technique_repository import TechniqueRepository
@@ -59,6 +60,12 @@ def get_gateway() -> LLMGateway:
 def get_substitution_repository() -> SubstitutionRepository:
     """Ingredient stand-ins, loaded once."""
     return SubstitutionRepository(settings.substitutions_path)
+
+
+@lru_cache
+def get_recipe_repository() -> RecipeRepository:
+    """Full recipes (Wikibooks Cookbook, CC BY-SA), loaded once."""
+    return RecipeRepository(settings.recipes_path)
 
 
 @lru_cache

@@ -1,6 +1,7 @@
 import type {
   Cousin,
   Diet,
+  DishPage,
   DishStats,
   EvalResults,
   Have,
@@ -148,6 +149,24 @@ export async function createShare(dishes: UserDish[]): Promise<string> {
 /** Open a shared kitchen. */
 export async function getShare(id: string): Promise<SharedKitchen> {
   return request<SharedKitchen>(`/api/shares/${encodeURIComponent(id)}`);
+}
+
+/** One catalog dish with its full recipe (if any). */
+export async function getDishPage(id: string): Promise<DishPage> {
+  return request<DishPage>(`/api/dishes/${encodeURIComponent(id)}`);
+}
+
+let recipeIds: Promise<Set<string>> | null = null;
+
+/** Which dishes have a full recipe. Fetched once per page load and shared. */
+export function getRecipeIds(): Promise<Set<string>> {
+  recipeIds ??= request<string[]>("/api/recipes")
+    .then((ids) => new Set(ids))
+    .catch((err) => {
+      recipeIds = null;
+      throw err;
+    });
+  return recipeIds;
 }
 
 let techniques: Promise<TechniqueGuide[]> | null = null;

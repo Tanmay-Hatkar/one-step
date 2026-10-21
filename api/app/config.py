@@ -37,6 +37,7 @@ class Settings(BaseSettings):
     # Data
     database_url: str = Field(default=f"sqlite:///{API_ROOT / 'one_step.db'}")
     dishes_path: Path = Field(default=API_ROOT / "data" / "dishes.json")
+    recipes_path: Path = Field(default=API_ROOT / "data" / "recipes.json")
     substitutions_path: Path = Field(default=API_ROOT / "data" / "substitutions.json")
     techniques_path: Path = Field(default=API_ROOT / "data" / "techniques.json")
 

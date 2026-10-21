@@ -1,14 +1,27 @@
 "use client";
 
-import { ArrowLeftRight, Check, ChevronDown, Clock, CookingPot, Mountain, Wrench, X } from "lucide-react";
+import {
+  ArrowLeftRight,
+  BookOpen,
+  Check,
+  ChevronDown,
+  Clock,
+  CookingPot,
+  Mountain,
+  Wrench,
+  X,
+} from "lucide-react";
+import Link from "next/link";
 import { useId, useState } from "react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { DishPhoto } from "@/components/dish-photo";
 import { TechniqueHelp } from "@/components/technique-help";
 import { Card } from "@/components/ui/card";
 import { BASIC_TECHNIQUES, equipmentLabel, formatTime } from "@/lib/labels";
 import type { Cousin } from "@/lib/types";
+import { useRecipeIds } from "@/lib/use-recipe-ids";
 import { cn } from "@/lib/utils";
 
 export function CousinCard({
@@ -19,6 +32,7 @@ export function CousinCard({
   cooked,
   onCooked,
   onSkip,
+  showRecipeLink = true,
 }: {
   cousin: Cousin;
   index?: number;
@@ -30,10 +44,13 @@ export function CousinCard({
   onCooked?: () => void;
   /** Shown as "Not tonight" when set. */
   onSkip?: () => void;
+  /** Off on the dish's own page. */
+  showRecipeLink?: boolean;
 }) {
   const { dish, delta, diff } = cousin;
   const [open, setOpen] = useState(defaultOpen);
   const bodyId = useId();
+  const recipeIds = useRecipeIds();
   const [, rest] = splitHeadline(diff.headline, dish.name);
   const swaps = delta.swaps ?? [];
   const swapped = new Set(swaps.map((s) => s.need));
@@ -55,8 +72,14 @@ export function CousinCard({
         {label && (
           <p className="text-xs font-semibold tracking-wide text-primary uppercase">{label}</p>
         )}
-        <div className="flex items-start justify-between gap-3">
-          <div className="min-w-0">
+        <div className="flex items-start gap-3">
+          <DishPhoto
+            id={dish.id}
+            name=""
+            size={64}
+            className="size-14 shrink-0 rounded-xl sm:size-16"
+          />
+          <div className="min-w-0 flex-1">
             <h3 className="font-heading text-2xl leading-tight font-semibold tracking-tight">
               {dish.name}
             </h3>
@@ -137,6 +160,17 @@ export function CousinCard({
             </div>
           )}
           <div className="flex flex-wrap gap-2 pt-1">
+            {showRecipeLink && (
+              <Button
+                variant="outline"
+                nativeButton={false}
+                render={<Link href={`/dish/${dish.id}`} />}
+                className="h-9"
+              >
+                <BookOpen aria-hidden />
+                {recipeIds.has(dish.id) ? "Full recipe" : "About this dish"}
+              </Button>
+            )}
             {onCooked && (
             <Button
               variant={cooked ? "secondary" : "default"}

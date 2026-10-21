@@ -273,6 +273,14 @@ class GraphService:
             d.id for d, x in self._ranked(repertoire, diet or DietRule(), owned) if x.is_one_step
         }
 
+    def overview(
+        self, repertoire: list[UserDish], limit: int, diet: DietRule, owned: Owned = NOTHING_EXTRA
+    ) -> tuple[list[str], set[str]]:
+        """(top `limit` suggestion ids, all one-step ids) from a single ranking pass."""
+        ranked = self._ranked(repertoire, diet, owned)
+        top = [d.id for d, _ in self._diversify(ranked, limit)]
+        return top, {d.id for d, x in ranked if x.is_one_step}
+
     def _resources(self, repertoire: list[UserDish], owned: Owned) -> tuple[set[str], set[str]]:
         """(pantry, equipment) across the user's dishes plus what they told us they have."""
         pantry = pantry_of([ingredients_of(d) for d in repertoire] + [sorted(owned.ingredients)])

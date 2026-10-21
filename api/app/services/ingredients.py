@@ -5,6 +5,8 @@ only works if names line up, so both catalog and user ingredients pass through
 `normalize` before comparison. Pure functions, no I/O.
 """
 
+from functools import lru_cache
+
 # Things every kitchen is assumed to have. Never counted as "new".
 STAPLES: frozenset[str] = frozenset(
     {
@@ -74,6 +76,7 @@ def _singular(word: str) -> str:
     return word
 
 
+@lru_cache(maxsize=16384)
 def normalize(name: str) -> str:
     """Return the canonical comparison key for an ingredient name.
 
