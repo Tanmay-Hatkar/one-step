@@ -38,12 +38,19 @@ RESULTS_PATH = EVALS_DIR / "results" / "latest.json"
 PASS_THRESHOLD = 0.85
 
 
-def build_services() -> tuple[RepertoireService, CousinService, GraphService, DishRepository]:
-    """Real services with a dedicated eval cache and a generous cap."""
-    engine = make_engine(f"sqlite:///{EVALS_DIR / '.cache.db'}")
+def build_services(
+    client: OpenAILLMClient | None = None, cache_url: str = f"sqlite:///{EVALS_DIR / '.cache.db'}"
+) -> tuple[RepertoireService, CousinService, GraphService, DishRepository]:
+    """Real services with a dedicated eval cache and a generous cap.
+
+    Args:
+        client: The model to evaluate; defaults to the app's runtime model.
+        cache_url: Where to cache responses (a fresh file means no cached answers).
+    """
+    engine = make_engine(cache_url)
     init_db(engine)
     sessions = make_session_factory(engine)
-    client = OpenAILLMClient(
+    client = client or OpenAILLMClient(
         settings.openai_api_key,
         settings.llm_model,
         settings.llm_reasoning_effort,

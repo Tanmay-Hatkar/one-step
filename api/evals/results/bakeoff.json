@@ -1,0 +1,214 @@
+{
+  "run_at": "2026-10-21T22:19:04.995738+00:00",
+  "current": "gpt-5.4-mini",
+  "pick": "gpt-5.4-mini",
+  "rule": "Cheapest model that passes at least as many checks as the current one.",
+  "models": [
+    {
+      "model": "gpt-5.4-mini",
+      "reasoning": "low",
+      "suites": {
+        "parse": {
+          "passed": 69,
+          "total": 69
+        },
+        "diff": {
+          "passed": 39,
+          "total": 40
+        },
+        "e2e": {
+          "passed": 12,
+          "total": 12
+        }
+      },
+      "failed": [
+        "diff \u00b7 rice_to_hainanese \u00b7 no_foreign_ingredients"
+      ],
+      "passed": 120,
+      "total": 121,
+      "pass_rate": 0.992,
+      "calls": 18,
+      "usd_per_1k_calls": 1.714,
+      "seconds_per_call": 2.39,
+      "price_per_1m": {
+        "input": 0.75,
+        "output": 4.5
+      }
+    },
+    {
+      "model": "gpt-5.4-nano",
+      "reasoning": "low",
+      "suites": {
+        "parse": {
+          "passed": 66,
+          "total": 69
+        },
+        "diff": {
+          "passed": 37,
+          "total": 40
+        },
+        "e2e": {
+          "passed": 11,
+          "total": 12
+        }
+      },
+      "failed": [
+        "parse \u00b7 founding_user \u00b7 dish0.technique:rice_in_stock",
+        "parse \u00b7 dal_chawal \u00b7 dish0.family",
+        "parse \u00b7 known_dish_by_name \u00b7 dish0.family",
+        "diff \u00b7 rice_to_hainanese \u00b7 no_foreign_ingredients",
+        "diff \u00b7 rice_to_tandoori \u00b7 no_foreign_ingredients",
+        "diff \u00b7 dal_to_chana \u00b7 no_foreign_ingredients",
+        "e2e \u00b7 dal_cook \u00b7 family_hits"
+      ],
+      "passed": 114,
+      "total": 121,
+      "pass_rate": 0.942,
+      "calls": 18,
+      "usd_per_1k_calls": 0.437,
+      "seconds_per_call": 1.89,
+      "price_per_1m": {
+        "input": 0.2,
+        "output": 1.25
+      }
+    },
+    {
+      "model": "gpt-5-mini",
+      "reasoning": "low",
+      "suites": {
+        "parse": {
+          "passed": 67,
+          "total": 69
+        },
+        "diff": {
+          "passed": 40,
+          "total": 40
+        },
+        "e2e": {
+          "passed": 12,
+          "total": 12
+        }
+      },
+      "failed": [
+        "parse \u00b7 dal_chawal \u00b7 dish0.protein",
+        "parse \u00b7 two_dishes_casual \u00b7 dish0.protein"
+      ],
+      "passed": 119,
+      "total": 121,
+      "pass_rate": 0.983,
+      "calls": 18,
+      "usd_per_1k_calls": 2.457,
+      "seconds_per_call": 10.47,
+      "price_per_1m": {
+        "input": 0.25,
+        "output": 2.0
+      }
+    },
+    {
+      "model": "gpt-5-nano",
+      "reasoning": "low",
+      "suites": {
+        "parse": {
+          "passed": 64,
+          "total": 69
+        },
+        "diff": {
+          "passed": 40,
+          "total": 40
+        },
+        "e2e": {
+          "passed": 11,
+          "total": 12
+        }
+      },
+      "failed": [
+        "parse \u00b7 founding_user \u00b7 dish0.family",
+        "parse \u00b7 founding_user \u00b7 dish0.ingredient:chicken stock",
+        "parse \u00b7 founding_user \u00b7 dish1.matched_dish_id",
+        "parse \u00b7 stir_fry \u00b7 dish0.ingredient:soy sauce",
+        "parse \u00b7 known_dish_by_name \u00b7 dish0.family",
+        "e2e \u00b7 founding_user \u00b7 family_hits"
+      ],
+      "passed": 115,
+      "total": 121,
+      "pass_rate": 0.95,
+      "calls": 18,
+      "usd_per_1k_calls": 0.552,
+      "seconds_per_call": 8.49,
+      "price_per_1m": {
+        "input": 0.05,
+        "output": 0.4
+      }
+    },
+    {
+      "model": "gpt-4.1-mini",
+      "reasoning": "none",
+      "suites": {
+        "parse": {
+          "passed": 67,
+          "total": 69
+        },
+        "diff": {
+          "passed": 40,
+          "total": 40
+        },
+        "e2e": {
+          "passed": 12,
+          "total": 12
+        }
+      },
+      "failed": [
+        "parse \u00b7 flavoured_rice \u00b7 dish0.ingredient:bay leaf",
+        "parse \u00b7 two_dishes_casual \u00b7 dish0.protein"
+      ],
+      "passed": 119,
+      "total": 121,
+      "pass_rate": 0.983,
+      "calls": 18,
+      "usd_per_1k_calls": 0.672,
+      "seconds_per_call": 1.72,
+      "price_per_1m": {
+        "input": 0.4,
+        "output": 1.6
+      }
+    },
+    {
+      "model": "gpt-4o-mini",
+      "reasoning": "none",
+      "suites": {
+        "parse": {
+          "passed": 63,
+          "total": 69
+        },
+        "diff": {
+          "passed": 40,
+          "total": 40
+        },
+        "e2e": {
+          "passed": 10,
+          "total": 12
+        }
+      },
+      "failed": [
+        "parse \u00b7 founding_user \u00b7 dish0.family",
+        "parse \u00b7 founding_user \u00b7 dish0.technique:rice_in_stock",
+        "parse \u00b7 dal_chawal \u00b7 dish0.family",
+        "parse \u00b7 dal_chawal \u00b7 dish0.protein",
+        "parse \u00b7 stir_fry \u00b7 dish0.protein",
+        "parse \u00b7 two_dishes_casual \u00b7 dish0.protein",
+        "e2e \u00b7 founding_user \u00b7 family_hits",
+        "e2e \u00b7 dal_cook \u00b7 family_hits"
+      ],
+      "passed": 113,
+      "total": 121,
+      "pass_rate": 0.934,
+      "calls": 18,
+      "usd_per_1k_calls": 0.24,
+      "seconds_per_call": 1.64,
+      "price_per_1m": {
+        "input": 0.15,
+        "output": 0.6
+      }
+    }
+  ]
+}

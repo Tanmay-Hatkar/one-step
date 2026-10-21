@@ -192,4 +192,24 @@ export interface EvalResults {
   total: number;
   pass_rate: number;
   suites: Record<string, EvalSuite>;
+  bakeoff?: Bakeoff | null;
+}
+
+export interface BakeoffModel {
+  model: string;
+  reasoning: string;
+  passed: number;
+  total: number;
+  failed: string[];
+  usd_per_1k_calls: number;
+  seconds_per_call: number;
+}
+
+/** The same AI checks run on several cheap models (evals/bakeoff.py). */
+export interface Bakeoff {
+  run_at: string;
+  current: string;
+  pick: string;
+  rule: string;
+  models: BakeoffModel[];
 }

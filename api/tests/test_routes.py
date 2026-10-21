@@ -165,4 +165,6 @@ def test_eval_repository_reads_file(tmp_path) -> None:
     path = tmp_path / "latest.json"
     assert EvalResultsRepository(path).latest() is None
     path.write_text('{"passed": 3}')
-    assert EvalResultsRepository(path).latest() == {"passed": 3}
+    assert EvalResultsRepository(path).latest() == {"passed": 3, "bakeoff": None}
+    (tmp_path / "bakeoff.json").write_text('{"pick": "gpt-5.4-mini"}')
+    assert EvalResultsRepository(path).latest()["bakeoff"] == {"pick": "gpt-5.4-mini"}
