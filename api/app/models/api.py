@@ -1,10 +1,12 @@
 """Request and response shapes for the HTTP API."""
 
-from pydantic import BaseModel, Field
+from typing import Annotated
+
+from pydantic import BaseModel, Field, StringConstraints
 
 from app.config import settings
 from app.models.dish import Delta, Dish, UserDish
-from app.models.vocab import Allergen
+from app.models.vocab import Allergen, Equipment, Protein, Technique
 
 
 class ParseRepertoireRequest(BaseModel):
@@ -32,12 +34,27 @@ class Diet(BaseModel):
     avoid: list[Allergen] = Field(default_factory=list, max_length=9)
 
 
+IngredientName = Annotated[
+    str, StringConstraints(strip_whitespace=True, min_length=1, max_length=40)
+]
+
+
+class Have(BaseModel):
+    """What the user has beyond what their dishes imply: equipment and pantry items."""
+
+    equipment: list[Equipment] = Field(default_factory=list, max_length=12)
+    ingredients: list[IngredientName] = Field(
+        default_factory=list, max_length=settings.max_pantry_items
+    )
+
+
 class CousinsRequest(BaseModel):
     """The user's repertoire (as returned by parse) and how many cousins they want."""
 
     repertoire: list[UserDish] = Field(..., min_length=1, max_length=settings.max_kitchen_dishes)
     limit: int = Field(default=settings.default_cousin_count, ge=1, le=settings.max_cousin_count)
     diet: Diet = Field(default_factory=Diet)
+    have: Have = Field(default_factory=Have)
 
 
 class DiffText(BaseModel):
@@ -68,6 +85,7 @@ class TonightRequest(BaseModel):
     repertoire: list[UserDish] = Field(..., min_length=1, max_length=settings.max_kitchen_dishes)
     max_minutes: int | None = Field(default=None, ge=10, le=480, description="None = any time")
     diet: Diet = Field(default_factory=Diet)
+    have: Have = Field(default_factory=Have)
     skip: list[str] = Field(
         default_factory=list,
         max_length=settings.max_skip_ids,
@@ -88,6 +106,7 @@ class MapRequest(BaseModel):
 
     repertoire: list[UserDish] = Field(..., min_length=1, max_length=settings.max_kitchen_dishes)
     diet: Diet = Field(default_factory=Diet)
+    have: Have = Field(default_factory=Have)
 
 
 class MapCousin(BaseModel):
@@ -112,6 +131,7 @@ class CousinRequest(BaseModel):
     repertoire: list[UserDish] = Field(..., min_length=1, max_length=settings.max_kitchen_dishes)
     dish_id: str = Field(..., pattern=r"^[a-z0-9_]+$", max_length=60)
     diet: Diet = Field(default_factory=Diet)
+    have: Have = Field(default_factory=Have)
 
 
 class ShareRequest(BaseModel):
@@ -131,3 +151,49 @@ class SharedKitchenResponse(BaseModel):
 
     dishes: list[UserDish]
     created_at: str
+
+
+class Patch(BaseModel):
+    """What an answer changes. Applied by the client; re-validated on the next request."""
+
+    dish: int | None = Field(None, ge=0, description="Index into the repertoire; None = kitchen")
+    add_techniques: list[Technique] = Field(default_factory=list)
+    protein: Protein | None = None
+    add_equipment: list[Equipment] = Field(
+        default_factory=list, description="Kitchen-level: goes into Have"
+    )
+
+
+class QuestionOption(BaseModel):
+    """One tappable answer."""
+
+    label: str
+    patch: Patch
+
+
+class Question(BaseModel):
+    """A quick question whose answer would change the suggestions."""
+
+    id: str
+    about: str | None = Field(None, description="The user's dish it's about; None = kitchen")
+    text: str
+    multi: bool = Field(False, description="Several options may be picked")
+    options: list[QuestionOption]
+    why: str = Field(..., description="Why it's asked, e.g. 'Could change 3 of your suggestions'")
+
+
+class QuestionsRequest(BaseModel):
+    """The kitchen to ask about."""
+
+    repertoire: list[UserDish] = Field(..., min_length=1, max_length=settings.max_kitchen_dishes)
+    diet: Diet = Field(default_factory=Diet)
+    have: Have = Field(default_factory=Have)
+    dismissed: list[str] = Field(
+        default_factory=list, max_length=100, description="Question ids already answered"
+    )
+
+
+class QuestionsResponse(BaseModel):
+    """At most a few questions, most useful first. Often empty."""
+
+    questions: list[Question]

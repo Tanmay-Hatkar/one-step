@@ -51,6 +51,20 @@ def check_parsed_dish(dish: UserDish, expected: dict) -> list[Check]:
         checks.append(
             (f"ingredient:{ingredient}", normalize(ingredient) in names, str(dish.key_ingredients))
         )
+    # Honesty: things they never said must not be recorded as said (guesses are fine).
+    for ingredient in expected.get("not_said", []):
+        checks.append(
+            (
+                f"not_said:{ingredient}",
+                normalize(ingredient) not in names,
+                str(dish.key_ingredients),
+            )
+        )
+    if "has_guesses" in expected:
+        has = bool(dish.assumed_ingredients)
+        checks.append(
+            ("has_guesses", has == expected["has_guesses"], str(dish.assumed_ingredients))
+        )
     if "matched" in expected:
         checks.append(
             (

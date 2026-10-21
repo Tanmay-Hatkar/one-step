@@ -1,4 +1,4 @@
-import { Check, Pencil, X } from "lucide-react";
+import { Check, ListChecks, Pencil, X } from "lucide-react";
 
 import { ShareButton } from "@/components/share-button";
 import { Button } from "@/components/ui/button";
@@ -10,12 +10,15 @@ export function RepertoireSummary({
   dishes,
   cooked,
   onEdit,
+  onReview,
   onRemoveCooked,
   shareable,
 }: {
   dishes: UserDish[];
   cooked: CookedDish[];
   onEdit: () => void;
+  /** Back to "Here's what I heard" to fix guesses and answer questions. */
+  onReview: () => void;
   onRemoveCooked: (id: string) => void;
   /** Everything in the kitchen (own + cooked), for the share link. */
   shareable: UserDish[];
@@ -28,6 +31,10 @@ export function RepertoireSummary({
         </h2>
         <div className="flex items-start gap-1">
           <ShareButton dishes={shareable} />
+          <Button variant="ghost" size="sm" onClick={onReview}>
+            <ListChecks aria-hidden />
+            Check
+          </Button>
           <Button variant="ghost" size="sm" onClick={onEdit}>
             <Pencil aria-hidden />
             Edit

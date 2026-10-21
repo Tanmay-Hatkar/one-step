@@ -48,6 +48,16 @@ class Settings(BaseSettings):
     default_cousin_count: int = Field(default=5)
     max_cousin_count: int = Field(default=8)
 
+    # Kitchen ("what I have") and follow-up questions
+    max_pantry_items: int = Field(default=60, description="Pantry items per request")
+    max_questions: int = Field(default=3, description="Follow-up questions shown at most")
+    question_min_gain: float = Field(
+        default=0.05, description="Ask only if the answer moves suggestions at least this much"
+    )
+    question_top_k: int = Field(
+        default=6, description="Suggestions compared when scoring a question"
+    )
+
     # Map
     map_cousins_per_dish: int = Field(default=8, description="Cousins drawn around each dish")
     map_max_cousins: int = Field(default=40, description="Most cousins on one map")

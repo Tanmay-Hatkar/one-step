@@ -6,7 +6,8 @@ import { DishSheet } from "@/components/dish-sheet";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ApiError, getCousin, getMap } from "@/lib/api";
 import { type MapNode, layoutMap } from "@/lib/map-layout";
-import type { Cousin, Diet, Dish, KitchenMap as MapData, UserDish } from "@/lib/types";
+import { EMPTY_HAVE } from "@/lib/storage";
+import type { Cousin, Diet, Dish, Have, KitchenMap as MapData, UserDish } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 const NODE_RADIUS: Record<MapNode["kind"], number> = {
@@ -24,6 +25,7 @@ const HIT_RADIUS = 20; // tap target, bigger than the mark
 export function KitchenMap({
   repertoire,
   diet,
+  have = EMPTY_HAVE,
   isCooked,
   onCooked,
   whose = "your",
@@ -32,6 +34,7 @@ export function KitchenMap({
   /** "their" on someone else's shared kitchen. */
   whose?: "your" | "their";
   diet: Diet;
+  have?: Have;
   isCooked: (id: string) => boolean;
   /** Omit for a read-only map (a shared kitchen). */
   onCooked?: (dish: Dish) => void;
@@ -43,10 +46,10 @@ export function KitchenMap({
   const [sheetLoading, setSheetLoading] = useState(false);
   const [sheetError, setSheetError] = useState<string | null>(null);
 
-  const key = JSON.stringify([repertoire.map((d) => d.name), diet]);
+  const key = JSON.stringify([repertoire, diet, have]);
   useEffect(() => {
     let live = true;
-    getMap(repertoire, diet)
+    getMap(repertoire, diet, have)
       .then((m) => live && (setData(m), setError(null)))
       .catch((err) => live && setError(err instanceof ApiError ? err.message : "Couldn't draw the map."));
     return () => {
@@ -68,14 +71,14 @@ export function KitchenMap({
       setCousin(null);
       setSheetError(null);
       setSheetLoading(true);
-      getCousin(repertoire, dishId, diet)
+      getCousin(repertoire, dishId, diet, have)
         .then(setCousin)
         .catch((err) =>
           setSheetError(err instanceof ApiError ? err.message : "Couldn't load that dish."),
         )
         .finally(() => setSheetLoading(false));
     },
-    [repertoire, diet],
+    [repertoire, diet, have],
   );
   const close = useCallback(() => setSelected(null), []);
 

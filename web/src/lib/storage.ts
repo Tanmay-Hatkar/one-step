@@ -1,7 +1,7 @@
 // Per-device convenience only: remembers your kitchen on this browser (no accounts yet).
 // Every access is guarded — storage can be blocked, full, or unavailable.
 
-import type { Cousin, Diet, UserDish } from "./types";
+import type { Cousin, Diet, Have, UserDish } from "./types";
 
 const KEY = "one-step:v2";
 const LEGACY_KEY = "one-step:v1";
@@ -18,6 +18,8 @@ export interface Prefs {
   diet: Diet;
   /** Time available tonight in minutes; null means any. */
   minutes: number | null;
+  /** Equipment and pantry beyond what their dishes imply. */
+  have: Have;
 }
 
 export interface SavedKitchen {
@@ -26,17 +28,26 @@ export interface SavedKitchen {
   cooked: CookedDish[];
   prefs: Prefs;
   cousins: Cousin[];
+  /** Follow-up questions already answered, so they aren't asked again. */
+  dismissed: string[];
 }
 
-export const DEFAULT_PREFS: Prefs = { diet: { vegetarian: false, avoid: [] }, minutes: null };
+export const EMPTY_HAVE: Have = { equipment: [], ingredients: [] };
+
+export const DEFAULT_PREFS: Prefs = {
+  diet: { vegetarian: false, avoid: [] },
+  minutes: null,
+  have: EMPTY_HAVE,
+};
 
 export function loadKitchen(): SavedKitchen | null {
   try {
-    const raw = window.localStorage.getItem(KEY);
-    if (raw) return { ...emptyKitchen(), ...(JSON.parse(raw) as Partial<SavedKitchen>) };
-    const legacy = window.localStorage.getItem(LEGACY_KEY);
-    if (legacy) return { ...emptyKitchen(), ...(JSON.parse(legacy) as Partial<SavedKitchen>) };
-    return null;
+    const raw = window.localStorage.getItem(KEY) ?? window.localStorage.getItem(LEGACY_KEY);
+    if (!raw) return null;
+    const saved = JSON.parse(raw) as Partial<SavedKitchen>;
+    // Fill in anything older versions didn't save.
+    const prefs = { ...DEFAULT_PREFS, ...saved.prefs };
+    return { ...emptyKitchen(), ...saved, prefs: { ...prefs, have: { ...EMPTY_HAVE, ...prefs.have } } };
   } catch {
     return null;
   }
@@ -51,5 +62,5 @@ export function saveKitchen(kitchen: SavedKitchen): void {
 }
 
 export function emptyKitchen(): SavedKitchen {
-  return { text: "", dishes: [], cooked: [], prefs: DEFAULT_PREFS, cousins: [] };
+  return { text: "", dishes: [], cooked: [], prefs: DEFAULT_PREFS, cousins: [], dismissed: [] };
 }

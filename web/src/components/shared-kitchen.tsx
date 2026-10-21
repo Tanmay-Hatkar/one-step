@@ -11,7 +11,7 @@ import { LoadingCards } from "@/components/loading-cards";
 import { Button } from "@/components/ui/button";
 import { ApiError, findCousins, getShare } from "@/lib/api";
 import { techniqueLabel } from "@/lib/labels";
-import { emptyKitchen, loadKitchen, saveKitchen } from "@/lib/storage";
+import { EMPTY_HAVE, emptyKitchen, loadKitchen, saveKitchen } from "@/lib/storage";
 import type { Cousin, UserDish } from "@/lib/types";
 
 const NO_DIET = { vegetarian: false, avoid: [] };
@@ -31,7 +31,7 @@ export function SharedKitchenView() {
     getShare(id)
       .then(async (shared) => {
         setDishes(shared.dishes);
-        setCousins(await findCousins(shared.dishes, NO_DIET));
+        setCousins(await findCousins(shared.dishes, NO_DIET, EMPTY_HAVE));
       })
       .catch((err) =>
         setError(err instanceof ApiError ? err.message : "Couldn't open this kitchen."),

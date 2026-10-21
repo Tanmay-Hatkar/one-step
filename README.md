@@ -22,6 +22,10 @@ chicken with broth rice leads you to kabsa, maqluba, arroz con pollo, jambalaya 
      free text               into structured parts       finds cousins           (headline in code)
 ```
 
+- **"Here's what I heard"** — before searching, you see what was understood: what you
+  said (solid chips) and what was guessed from vague phrases like "Indian spices" (dashed,
+  tap to keep or ×). Then at most 3 quick tap questions, picked by code: each answer is
+  simulated on the dish graph and only questions that would change your suggestions are asked.
 - **Say it out loud** — tap the mic and describe your cooking; `gpt-4o-mini-transcribe`
   (with a hint for words like *jeera* and *tadka*) puts it in the box to check before
   sending. About $0.003 a minute, inside the same daily cap. Hidden where recording isn't supported.
@@ -41,8 +45,8 @@ chicken with broth rice leads you to kabsa, maqluba, arroz con pollo, jambalaya 
   diet-safety sweep (every rule over 152 kitchens, across suggestions, tonight and the map).
 - **LLM only for language** — parsing your description, and phrasing each difference.
   Cached, rate-limited, capped per day, with a template fallback ([ADR-0003](docs/adr/0003-code-decides-llm-writes.md)).
-- **Evals** — 20 live cases / 99 checks on parsing, diff grounding and end-to-end
-  relevance, plus the diet-safety sweep (`api/evals/`). Current: **109/109**, published at `/evals`.
+- **Evals** — 21 live cases / 121 checks on parsing, diff grounding and end-to-end
+  relevance, plus the diet-safety sweep (`api/evals/`). Current: **131/131**, published at `/evals`.
 
 ## Run it locally
 
@@ -51,7 +55,7 @@ cp .env.example .env                       # add OPENAI_API_KEY
 
 cd api && uv sync
 uv run uvicorn app.main:app --reload       # http://localhost:8000
-uv run pytest                              # 115 tests, no network
+uv run pytest                              # 129 tests, no network
 uv run python -m evals.run                 # live evals
 
 cd ../web && npm install && npm run dev    # http://localhost:3000
@@ -69,4 +73,5 @@ cd ../web && npm install && npm run dev    # http://localhost:3000
 ## Roadmap
 
 v0.1 cousins as diffs → v0.2 tonight's pick + diet filter + "I cooked this" → v0.3 the map +
-share links + public eval page (this) → v0.4 substitutions → v1.0 real recipe dataset + fine-tuned parser.
+share links + public eval page → v0.4 voice input → v0.5 "what I heard" + smart questions (this)
+→ v0.6 swaps + what I have → v0.7 real recipes + photos → v0.8 fine-tuned parser → v0.9 passkey sign-in → v1.0 launch.

@@ -7,17 +7,26 @@ they usually cook into structured dishes. Capture THEIR version, not a textbook 
 
 Rules:
 - One entry per distinct dish they describe. Ignore anything that isn't a dish.
+  A main and the side they eat it with ("chicken leg with rice", "my rice… I eat it
+  with my chicken leg") are ONE meal: one entry named for both, with the techniques
+  of both. Separate entries only for meals they cook on different occasions.
 - `name`: a short name for their dish in their terms ("Chicken leg with rice").
 - `notes`: one line on how THEY make it, in their words.
-- `key_ingredients`: simple lowercase singular generic names. If they say something
-  vague like "Indian spices", list the spices such a cook would typically use
-  (e.g. turmeric, chili powder, cumin, coriander, garam masala). Use
-  "chicken stock" for broth / stock cube / bouillon. Never include salt, water,
-  oil or black pepper.
-- `techniques`: the methods they actually use. Rice cooked in broth or stock is
-  rice_in_stock — including rice-cooker rice made with a stock or broth cube. Rice
-  cooked only in water is plain_rice. Pick ONE of the two for a given rice, never both. If they
-  marinate, include marinate.
+- `key_ingredients`: ONLY ingredients they actually named, as simple lowercase
+  singular generic names. Use "chicken stock" for broth / stock cube / bouillon.
+  Never include salt, water, oil or black pepper. Never add anything they didn't say.
+- `assumed_ingredients`: when they use a vague phrase ("Indian spices", "a few whole
+  spices", "basic spices", "veggies"), the 2-5 ingredients such a cook most likely
+  means (e.g. "Indian spices" → turmeric, chili powder, cumin, garam masala). These
+  are shown to the cook as guesses to confirm. Empty if nothing was vague. Never
+  repeat a key ingredient here.
+- `flavor`: only flavors their ingredients (said or assumed) really give. No
+  garlic_ginger unless they use garlic or ginger.
+- `techniques`: only the methods they actually describe. Frying onion or garlic is
+  part of cooking, not temper_spices (that is blooming whole spices in hot fat).
+  Rice cooked in broth or stock is rice_in_stock — including rice-cooker rice made
+  with a stock or broth cube. Rice cooked only in water is plain_rice. Pick ONE of the
+  two for a given rice, never both. If they marinate, include marinate.
 - `equipment`: what they use; "electric cooker" / "rice cooker" → rice_cooker.
   Include stovetop and/or oven when implied (roasting implies oven unless they say pan).
 - `matched_dish_id`: ONLY if their dish clearly IS one of the known dishes below

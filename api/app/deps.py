@@ -15,6 +15,7 @@ from app.repositories.share_repository import ShareRepository
 from app.services.cousin_service import CousinService
 from app.services.graph_service import GraphService
 from app.services.llm_gateway import LLMGateway
+from app.services.question_service import QuestionService
 from app.services.repertoire_service import RepertoireService
 from app.services.share_service import ShareService
 from app.services.speech_service import SpeechService
@@ -61,6 +62,11 @@ def get_cousin_service() -> CousinService:
     """Cousin search + diff writing service."""
     graph = GraphService(get_dish_repository().all(), settings)
     return CousinService(graph, get_gateway())
+
+
+def get_question_service() -> QuestionService:
+    """Follow-up questions (no LLM)."""
+    return QuestionService(GraphService(get_dish_repository().all(), settings), settings)
 
 
 @lru_cache

@@ -52,6 +52,18 @@ class UserDish(DishParts):
     """A dish the user already cooks — *their* version, parsed from their own words."""
 
     name: str = Field(..., min_length=2, max_length=80, description="What the user calls it")
+    key_ingredients: list[str] = Field(
+        ...,
+        min_length=1,
+        max_length=16,
+        description="Only ingredients the user actually said (normalized names).",
+    )
+    assumed_ingredients: list[str] = Field(
+        default_factory=list,
+        max_length=8,
+        description="Typical ingredients implied by a vague phrase ('Indian spices') but not said."
+        " Shown to the user as guesses to confirm or remove.",
+    )
     notes: str = Field(
         default="",
         max_length=300,
@@ -64,6 +76,14 @@ class UserDish(DishParts):
         default="described",
         description="'described' = in their own words; 'cooked' = a suggestion they marked cooked",
     )
+
+
+def ingredients_of(dish: UserDish) -> list[str]:
+    """Everything a user dish is taken to contain: what they said plus unconfirmed guesses.
+
+    Guesses count until the user removes them; for diet checks that's the cautious side.
+    """
+    return [*dish.key_ingredients, *dish.assumed_ingredients]
 
 
 class Delta(BaseModel):
