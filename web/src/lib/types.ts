@@ -93,6 +93,23 @@ export interface TechniqueGuide {
   watch_query: string;
 }
 
+export interface Recipe {
+  title: string;
+  source_url: string;
+  revision: number;
+  ingredients: string[];
+  steps: string[];
+  source_name: string;
+  authors: string;
+  license: string;
+  license_url: string;
+}
+
+export interface DishPage {
+  dish: Dish;
+  recipe: Recipe | null;
+}
+
 export interface DiffText {
   headline: string;
   changes: string[];

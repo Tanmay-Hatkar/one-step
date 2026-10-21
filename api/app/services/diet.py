@@ -8,6 +8,7 @@ Pure functions, no I/O.
 """
 
 import re
+from functools import lru_cache
 
 from app.models.dish import Dish, UserDish, ingredients_of
 from app.models.vocab import Allergen
@@ -183,9 +184,15 @@ VEGETARIAN_PROTEINS: frozenset[str] = frozenset(
 )
 
 
+@lru_cache(maxsize=4096)
+def _word_pattern(keyword: str) -> re.Pattern[str]:
+    """Compiled whole-word pattern for a keyword (plural 's'/'es' allowed)."""
+    return re.compile(rf"\b{re.escape(keyword)}(e?s)?\b")
+
+
 def _has_word(text: str, keyword: str) -> bool:
     """True if `keyword` appears in `text` as a whole word (plural 's'/'es' allowed)."""
-    return re.search(rf"\b{re.escape(keyword)}(e?s)?\b", text) is not None
+    return _word_pattern(keyword).search(text) is not None
 
 
 def ingredient_allergens(ingredient: str) -> set[Allergen]:
@@ -195,21 +202,31 @@ def ingredient_allergens(ingredient: str) -> set[Allergen]:
         ingredient: An ingredient name, e.g. 'fish sauce'.
 
     Returns:
-        Allergens found, e.g. {'fish'}.
+        Allergens found, e.g. {'fish'} (a new set; safe to modify).
     """
-    name = ingredient.lower().strip()
+    return set(_allergens_of(ingredient.lower().strip()))
+
+
+@lru_cache(maxsize=16384)
+def _allergens_of(name: str) -> frozenset[Allergen]:
+    """Cached core of `ingredient_allergens` (names repeat across thousands of checks)."""
     found: set[Allergen] = set()
     for allergen, keywords in ALLERGEN_KEYWORDS.items():
         if any(exc in name for exc in ALLERGEN_EXCEPTIONS.get(allergen, ())):
             continue
         if any(_has_word(name, kw) for kw in keywords):
             found.add(allergen)  # type: ignore[arg-type]
-    return found
+    return frozenset(found)
 
 
 def is_meat_ingredient(ingredient: str) -> bool:
     """True if an ingredient is meat, fish or seafood (or made from it, like stock)."""
-    name = ingredient.lower().strip()
+    return _is_meat(ingredient.lower().strip())
+
+
+@lru_cache(maxsize=16384)
+def _is_meat(name: str) -> bool:
+    """Cached core of `is_meat_ingredient`."""
     if "shellfish" in name:
         return True
     return any(_has_word(name, kw) for kw in MEAT_KEYWORDS)

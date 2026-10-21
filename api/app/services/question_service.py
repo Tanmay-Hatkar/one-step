@@ -220,11 +220,8 @@ class QuestionService:
 
     def _signature(self, repertoire: list[UserDish], rule: DietRule, owned: Owned) -> _Signature:
         """Top-k suggestions and the one-step set for this kitchen."""
-        top = self._graph.find_cousins(repertoire, self._settings.question_top_k, rule, owned)
-        return _Signature(
-            top=frozenset(d.id for d, _ in top),
-            one_step=frozenset(self._graph.one_step_ids(repertoire, rule, owned)),
-        )
+        top, one_step = self._graph.overview(repertoire, self._settings.question_top_k, rule, owned)
+        return _Signature(top=frozenset(top), one_step=frozenset(one_step))
 
     def _change(self, before: _Signature, after: _Signature) -> float:
         """0 (nothing moves) to 1 (everything does): half top suggestions, half one-step set."""

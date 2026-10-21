@@ -57,7 +57,8 @@ class RepertoireService:
             NoDishesFound: If nothing in the text is a dish.
             DailyCapExceeded, LLMError: From the gateway.
         """
-        instructions = PARSE_REPERTOIRE_INSTRUCTIONS.format(dish_index=self._dishes.index_lines())
+        shortlist = self._dishes.index_lines(text) or "(none look like a match)"
+        instructions = PARSE_REPERTOIRE_INSTRUCTIONS.format(dish_index=shortlist)
         parsed = await self._gateway.run(
             task="parse_repertoire",
             instructions=instructions,

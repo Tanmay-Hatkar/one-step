@@ -11,6 +11,7 @@ from app.deps import (
     get_dish_repository,
     get_eval_repository,
     get_question_service,
+    get_recipe_repository,
     get_repertoire_service,
     get_share_service,
     get_speech_service,
@@ -23,6 +24,7 @@ from app.models.api import (
     CousinRequest,
     CousinsRequest,
     CousinsResponse,
+    DishPageResponse,
     MapRequest,
     MapResponse,
     ParseRepertoireRequest,
@@ -39,6 +41,7 @@ from app.models.api import (
 from app.models.technique import TechniqueGuide
 from app.repositories.dish_repository import DishRepository
 from app.repositories.eval_repository import EvalResultsRepository
+from app.repositories.recipe_repository import RecipeRepository
 from app.repositories.share_repository import ShareStoreError
 from app.repositories.technique_repository import TechniqueRepository
 from app.services.cousin_service import CousinService
@@ -215,3 +218,22 @@ async def dish_stats(repo: DishRepository = Depends(get_dish_repository)) -> dic
     """How many dishes and regions are in the catalog (for the landing page)."""
     dishes = repo.all()
     return {"dishes": len(dishes), "regions": len({d.region for d in dishes})}
+
+
+@router.get("/recipes", response_model=list[str])
+async def recipe_ids(repo: RecipeRepository = Depends(get_recipe_repository)) -> list[str]:
+    """Ids of dishes that have a full recipe (static; cache freely)."""
+    return repo.ids()
+
+
+@router.get("/dishes/{dish_id}", response_model=DishPageResponse)
+async def dish_page(
+    dish_id: str = Path(..., pattern=r"^[a-z0-9_]+$", max_length=60),
+    dishes: DishRepository = Depends(get_dish_repository),
+    recipes: RecipeRepository = Depends(get_recipe_repository),
+) -> DishPageResponse:
+    """One catalog dish with its recipe, for the dish page."""
+    dish = dishes.get(dish_id)
+    if dish is None:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "We don't know that dish.")
+    return DishPageResponse(dish=dish, recipe=recipes.get(dish_id))

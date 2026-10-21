@@ -6,6 +6,7 @@ from pydantic import BaseModel, Field, StringConstraints
 
 from app.config import settings
 from app.models.dish import Delta, Dish, UserDish
+from app.models.recipe import Recipe
 from app.models.vocab import Allergen, Equipment, Protein, Technique
 
 
@@ -197,3 +198,10 @@ class QuestionsResponse(BaseModel):
     """At most a few questions, most useful first. Often empty."""
 
     questions: list[Question]
+
+
+class DishPageResponse(BaseModel):
+    """A catalog dish and, when there is one, its full recipe."""
+
+    dish: Dish
+    recipe: Recipe | None = None
