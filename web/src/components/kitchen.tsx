@@ -1,23 +1,23 @@
 "use client";
 
-import { ChevronDown, CookingPot, Loader2, X } from "lucide-react";
+import { CookingPot, List, Loader2, Map as MapIcon, SlidersHorizontal, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { AccountCard } from "@/components/account-card";
 import { ConfirmKitchen } from "@/components/confirm-kitchen";
 import { CousinCard } from "@/components/cousin-card";
-import { DietPicker, dietSummary } from "@/components/diet-picker";
+import { Filters, activeFilterCount } from "@/components/filters";
 import { Hero } from "@/components/hero";
 import { KitchenMap } from "@/components/kitchen-map";
 import { LoadingCards } from "@/components/loading-cards";
 import { RepertoireSummary } from "@/components/repertoire-summary";
 import { StartForm } from "@/components/start-form";
 import { Tonight } from "@/components/tonight";
-import { WhatIHave } from "@/components/what-i-have";
 import { Button } from "@/components/ui/button";
 import { getStats } from "@/lib/api";
 import { impliedEquipment, oftenNeeded, repertoireOf } from "@/lib/kitchen";
 import type { DishStats } from "@/lib/types";
+import { useRecipeIds } from "@/lib/use-recipe-ids";
 import { useKitchen } from "@/lib/use-kitchen";
 import { cn } from "@/lib/utils";
 
@@ -25,6 +25,8 @@ export function Kitchen() {
   const k = useKitchen();
   const [stats, setStats] = useState<DishStats | null>(null);
   const [view, setView] = useState<"suggestions" | "map">("suggestions");
+  const [showFilters, setShowFilters] = useState(false);
+  const recipeIds = useRecipeIds();
 
   useEffect(() => {
     getStats()
@@ -37,7 +39,11 @@ export function Kitchen() {
   const tonightIds = new Set(
     [k.tonight?.one_step?.dish.id, k.tonight?.stretch?.dish.id].filter(Boolean),
   );
-  const more = k.cousins.filter((c) => !tonightIds.has(c.dish.id));
+  // Dishes with a full recipe first, so the top of the list never ends in a dead end.
+  const more = k.cousins
+    .filter((c) => !tonightIds.has(c.dish.id))
+    .sort((a, b) => Number(recipeIds.has(b.dish.id)) - Number(recipeIds.has(a.dish.id)));
+  const filterCount = activeFilterCount(k.prefs);
 
   if (k.phase === "confirm") {
     return (
@@ -62,6 +68,8 @@ export function Kitchen() {
           <StartForm
             text={k.text}
             onText={k.setText}
+            picked={k.picked}
+            onToggle={k.togglePicked}
             diet={k.prefs.diet}
             onDiet={(diet) => k.setPrefs({ ...k.prefs, diet })}
             onSubmit={k.submit}
@@ -128,47 +136,14 @@ export function Kitchen() {
         </div>
       )}
 
-      <div className="space-y-4">
-        <RepertoireSummary
-          dishes={k.dishes}
-          cooked={k.cooked}
-          onEdit={k.edit}
-          onReview={k.review}
-          onRemoveCooked={k.removeCooked}
-          shareable={repertoireOf(k.dishes, k.cooked)}
-        />
-        <details className="group rounded-xl border bg-card px-4 py-3">
-          <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-sm">
-            <span>
-              <span className="font-medium">Diet &amp; allergies</span>
-              <span className="text-muted-foreground">
-                {" "}
-                · {dietSummary(k.prefs.diet)}
-              </span>
-            </span>
-            <ChevronDown
-              aria-hidden
-              className="size-4 text-muted-foreground transition-transform group-open:rotate-180"
-            />
-          </summary>
-          <div className="pt-3">
-            <DietPicker
-              diet={k.prefs.diet}
-              onChange={(diet) => k.setPrefs({ ...k.prefs, diet })}
-            />
-          </div>
-        </details>
-        <WhatIHave
-          have={k.prefs.have}
-          implied={impliedEquipment(repertoireOf(k.dishes, k.cooked))}
-          suggested={oftenNeeded(
-            [k.tonight?.one_step, k.tonight?.stretch, ...k.cousins].filter(
-              (c): c is NonNullable<typeof c> => Boolean(c),
-            ),
-          )}
-          onChange={(have) => k.setPrefs({ ...k.prefs, have })}
-        />
-      </div>
+      <RepertoireSummary
+        dishes={k.dishes}
+        cooked={k.cooked}
+        onEdit={k.edit}
+        onReview={k.review}
+        onRemoveCooked={k.removeCooked}
+        shareable={repertoireOf(k.dishes, k.cooked)}
+      />
 
       {k.error && (
         <div
@@ -186,29 +161,43 @@ export function Kitchen() {
         </div>
       )}
 
-      <div
-        role="tablist"
-        aria-label="View"
-        className="grid grid-cols-2 rounded-xl bg-muted p-1"
-      >
-        {(["suggestions", "map"] as const).map((v) => (
-          <button
-            key={v}
-            type="button"
-            role="tab"
-            aria-selected={view === v}
-            onClick={() => setView(v)}
-            className={cn(
-              "h-9 rounded-lg text-sm font-medium transition-colors",
-              "focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none",
-              view === v
-                ? "bg-card text-foreground shadow-sm"
-                : "text-muted-foreground",
-            )}
+      <div className="space-y-3">
+        <div className="flex gap-2">
+          <Button
+            variant="outline"
+            aria-expanded={showFilters}
+            onClick={() => setShowFilters((s) => !s)}
+            className="h-10 flex-1"
           >
-            {v === "suggestions" ? "Suggestions" : "Map"}
-          </button>
-        ))}
+            <SlidersHorizontal aria-hidden />
+            Filters
+            {filterCount > 0 && (
+              <span className="rounded-full bg-primary px-1.5 text-xs text-primary-foreground">
+                {filterCount}
+              </span>
+            )}
+          </Button>
+          <Button
+            variant="outline"
+            onClick={() => setView((v) => (v === "map" ? "suggestions" : "map"))}
+            className="h-10 flex-1"
+          >
+            {view === "map" ? <List aria-hidden /> : <MapIcon aria-hidden />}
+            {view === "map" ? "Show list" : "Show map"}
+          </Button>
+        </div>
+        {showFilters && (
+          <Filters
+            prefs={k.prefs}
+            onPrefs={k.setPrefs}
+            implied={impliedEquipment(repertoireOf(k.dishes, k.cooked))}
+            suggested={oftenNeeded(
+              [k.tonight?.one_step, k.tonight?.stretch, ...k.cousins].filter(
+                (c): c is NonNullable<typeof c> => Boolean(c),
+              ),
+            )}
+          />
+        )}
       </div>
 
       {view === "map" && (
@@ -230,8 +219,6 @@ export function Kitchen() {
       >
         <Tonight
           picks={k.tonight}
-          minutes={k.prefs.minutes}
-          onMinutes={(minutes) => k.setPrefs({ ...k.prefs, minutes })}
           isCooked={isCooked}
           onCooked={k.markCooked}
           onSkip={k.skipTonight}
@@ -243,8 +230,8 @@ export function Kitchen() {
             className="font-heading text-xl font-semibold tracking-tight"
           >
             {more.length
-              ? "More dishes you're close to"
-              : "Nothing else close enough — try describing another dish."}
+              ? "More you could make"
+              : "Nothing else close enough. Add another dish you make."}
           </h2>
           {more.map((cousin, i) => (
             <CousinCard

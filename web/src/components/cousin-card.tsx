@@ -76,8 +76,8 @@ export function CousinCard({
           <DishPhoto
             id={dish.id}
             name=""
-            size={64}
-            className="size-14 shrink-0 rounded-xl sm:size-16"
+            size={96}
+            className="size-20 shrink-0 rounded-xl sm:size-24"
           />
           <div className="min-w-0 flex-1">
             <h3 className="font-heading text-2xl leading-tight font-semibold tracking-tight">
@@ -103,7 +103,7 @@ export function CousinCard({
           {!delta.is_one_step && (
             <Badge variant="secondary" className="ml-1">
               <Mountain aria-hidden />
-              Bigger step
+              A bit of a stretch
             </Badge>
           )}
           {dish.effort === "weekend" && <Badge variant="secondary">Weekend</Badge>}
@@ -124,6 +124,9 @@ export function CousinCard({
 
       {open && (
         <div id={bodyId} className="space-y-3 px-4 pb-4">
+          <p className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
+            What you&apos;d do differently
+          </p>
           <ul className="space-y-2">
             {diff.changes.map((change) => (
               <li key={change} className="flex gap-2.5 text-[15px] leading-snug">
