@@ -96,14 +96,25 @@ export function ConfirmKitchen({
       </div>
 
       <div className="space-y-3">
-        {draft.map((dish, i) => (
-          <DishCheck
-            key={`${dish.name}-${i}`}
-            dish={dish}
-            shown={effective.dishes[i] ?? dish}
-            onChange={(next) => updateDish(i, next)}
-          />
-        ))}
+        {draft.map((dish, i) =>
+          isPicked(dish) ? null : (
+            <DishCheck
+              key={`${dish.name}-${i}`}
+              dish={dish}
+              shown={effective.dishes[i] ?? dish}
+              onChange={(next) => updateDish(i, next)}
+            />
+          ),
+        )}
+        {draft.some(isPicked) && (
+          <p className="text-sm text-muted-foreground">
+            <span className="font-medium text-foreground">Also in your kitchen: </span>
+            {draft
+              .filter(isPicked)
+              .map((d) => d.name)
+              .join(", ")}
+          </p>
+        )}
       </div>
 
       {questions === null ? (
@@ -153,6 +164,11 @@ export function ConfirmKitchen({
       )}
     </section>
   );
+}
+
+/** A tapped photo tile: a catalog dish as-is, so there's nothing to check. */
+function isPicked(dish: UserDish): boolean {
+  return Boolean(dish.matched_dish_id) && !dish.notes && dish.source !== "cooked";
 }
 
 function DishCheck({

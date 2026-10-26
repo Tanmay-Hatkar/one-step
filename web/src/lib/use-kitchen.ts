@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import { ApiError, findCousins, getTonight, parseRepertoire } from "./api";
 import { cookedToUserDish, repertoireOf } from "./kitchen";
+import { pickedToUserDish, startersById } from "./starters";
 import {
   type CookedDish,
   DEFAULT_PREFS,
@@ -41,16 +42,18 @@ export function useKitchen() {
   const [updating, setUpdating] = useState(false);
   const [notice, setNotice] = useState<CookedNotice | null>(null);
   const [dismissed, setDismissed] = useState<string[]>([]);
+  const [picked, setPickedState] = useState<string[]>([]);
 
   // Only the latest request may update the page (preferences can change mid-flight).
   const requestId = useRef(0);
   const debounce = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Answered questions are remembered alongside everything else.
+  // Answered questions and picked tiles are remembered alongside everything else.
   const dismissedRef = useRef<string[]>([]);
+  const pickedRef = useRef<string[]>([]);
   const persist = useCallback(
     (next: { text: string; dishes: UserDish[]; cooked: CookedDish[]; prefs: Prefs; cousins: Cousin[] }) =>
-      saveKitchen({ ...next, dismissed: dismissedRef.current }),
+      saveKitchen({ ...next, dismissed: dismissedRef.current, picked: pickedRef.current }),
     [],
   );
 
@@ -99,6 +102,8 @@ export function useKitchen() {
     setPrefsState(saved.prefs);
     setDismissed(saved.dismissed);
     dismissedRef.current = saved.dismissed;
+    setPickedState(saved.picked);
+    pickedRef.current = saved.picked;
     if (saved.dishes.length && !saved.cousins.length) {
       setPhase("confirm"); // they left while checking what was heard
     } else if (saved.dishes.length) {
@@ -109,23 +114,42 @@ export function useKitchen() {
     /* eslint-enable react-hooks/set-state-in-effect */
   }, [refresh]);
 
+  function togglePicked(id: string) {
+    const next = picked.includes(id) ? picked.filter((p) => p !== id) : [...picked, id];
+    pickedRef.current = next;
+    setPickedState(next);
+    setError(null);
+  }
+
+  /**
+   * Tapped tiles are catalog dishes, so they go straight to results. Anything typed or
+   * said is read by the AI first and shown back ("Here's what I heard") to fix guesses.
+   */
   async function submit() {
     const input = text.trim();
-    if (input.length < 3) {
-      setError("Tell me about a dish or two you cook.");
+    const tiles = startersById(picked).map(pickedToUserDish);
+    if (input.length < 3 && !tiles.length) {
+      setError("Tap a dish you make, or tell me about one.");
       return;
     }
     setError(null);
     setSkip([]);
+    if (input.length < 3) {
+      setText("");
+      await confirmKitchen(tiles, prefs.have, [], "");
+      return;
+    }
     try {
       setPhase("reading");
       const parsed = await parseRepertoire(input);
-      setDishes(parsed);
+      const said = new Set(parsed.map((d) => d.matched_dish_id).filter(Boolean));
+      const all = [...parsed, ...tiles.filter((t) => !said.has(t.matched_dish_id))];
+      setDishes(all);
       setCousins([]);
       setTonight(null);
       // Show what was understood before searching, so guesses can be fixed first.
       setPhase("confirm");
-      persist({ text: input, dishes: parsed, cooked, prefs, cousins: [] });
+      persist({ text: input, dishes: all, cooked, prefs, cousins: [] });
     } catch (err) {
       setError(messageOf(err));
       setPhase("input");
@@ -133,7 +157,12 @@ export function useKitchen() {
   }
 
   /** Accept the checked kitchen (and any answers), then find dishes. */
-  async function confirmKitchen(checked: UserDish[], have: Have, answered: string[]) {
+  async function confirmKitchen(
+    checked: UserDish[],
+    have: Have,
+    answered: string[],
+    t: string = text,
+  ) {
     const nextPrefs = { ...prefs, have };
     const nextDismissed = [...new Set([...dismissed, ...answered])];
     dismissedRef.current = nextDismissed;
@@ -144,14 +173,14 @@ export function useKitchen() {
     setSkip([]);
     setPhase("finding");
     // Save the checked kitchen first, so nothing is lost if the search fails or is slow.
-    persist({ text, dishes: checked, cooked, prefs: nextPrefs, cousins: [] });
+    persist({ text: t, dishes: checked, cooked, prefs: nextPrefs, cousins: [] });
     try {
       const found = await fetchAll(checked, cooked, nextPrefs, []);
       setPhase("results");
-      if (found) persist({ text, dishes: checked, cooked, prefs: nextPrefs, cousins: found });
+      if (found) persist({ text: t, dishes: checked, cooked, prefs: nextPrefs, cousins: found });
     } catch (err) {
       setError(messageOf(err));
-      setPhase("confirm");
+      setPhase(t ? "confirm" : "input");
     }
   }
 
@@ -204,6 +233,8 @@ export function useKitchen() {
     updating,
     notice,
     dismissed,
+    picked,
+    togglePicked,
     dismissNotice: () => setNotice(null),
     submit,
     confirmKitchen,

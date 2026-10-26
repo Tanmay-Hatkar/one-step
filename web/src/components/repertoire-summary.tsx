@@ -2,7 +2,6 @@ import { Check, ListChecks, Pencil, X } from "lucide-react";
 
 import { ShareButton } from "@/components/share-button";
 import { Button } from "@/components/ui/button";
-import { techniqueLabel } from "@/lib/labels";
 import type { CookedDish } from "@/lib/storage";
 import type { UserDish } from "@/lib/types";
 
@@ -31,10 +30,12 @@ export function RepertoireSummary({
         </h2>
         <div className="flex items-start gap-1">
           <ShareButton dishes={shareable} />
-          <Button variant="ghost" size="sm" onClick={onReview}>
-            <ListChecks aria-hidden />
-            Check
-          </Button>
+          {dishes.some((d) => d.notes) && (
+            <Button variant="ghost" size="sm" onClick={onReview}>
+              <ListChecks aria-hidden />
+              What I heard
+            </Button>
+          )}
           <Button variant="ghost" size="sm" onClick={onEdit}>
             <Pencil aria-hidden />
             Edit
@@ -43,17 +44,14 @@ export function RepertoireSummary({
       </div>
       <ul className="flex flex-wrap gap-2">
         {dishes.map((dish) => (
-          <li key={dish.name} className="rounded-xl border bg-card px-3 py-2 text-sm shadow-xs">
-            <span className="font-medium">{dish.name}</span>
-            <span className="block text-xs text-muted-foreground">
-              {dish.techniques.slice(0, 3).map(techniqueLabel).join(" · ")}
-            </span>
+          <li key={dish.name} className="rounded-full border bg-card px-3 py-1 text-sm font-medium shadow-xs">
+            {dish.name}
           </li>
         ))}
         {cooked.map((c) => (
           <li
             key={c.id}
-            className="flex items-center gap-1 rounded-xl border border-primary/30 bg-card py-1 pr-1 pl-3 text-sm shadow-xs"
+            className="flex items-center gap-1 rounded-full border border-primary/30 bg-card py-0.5 pr-1 pl-3 text-sm shadow-xs"
           >
             <Check aria-hidden className="size-3.5 text-primary" />
             <span className="font-medium">{c.name}</span>

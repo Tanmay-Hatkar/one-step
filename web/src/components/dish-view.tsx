@@ -171,14 +171,17 @@ export function DishView() {
         </section>
       ) : (
         <section className="space-y-2 rounded-xl border border-dashed p-4 text-sm">
-          <p>No full recipe for this one here yet.</p>
+          <p>
+            We don&apos;t have a tested recipe for this one yet.
+            {fromYours && " The changes above are enough to cook it from your own version."}
+          </p>
           <a
             href={`https://www.google.com/search?q=${encodeURIComponent(`${dish.name} recipe`)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1 text-primary underline-offset-2 hover:underline"
           >
-            Search for a recipe
+            Or find a full recipe online
             <ExternalLink aria-hidden className="size-3.5" />
           </a>
         </section>

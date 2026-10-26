@@ -31,6 +31,8 @@ export interface SavedKitchen {
   cousins: Cousin[];
   /** Follow-up questions already answered, so they aren't asked again. */
   dismissed: string[];
+  /** Photo tiles tapped on the start page (catalog dish ids). */
+  picked: string[];
 }
 
 export const EMPTY_HAVE: Have = { equipment: [], ingredients: [] };
@@ -77,5 +79,6 @@ export function emptyKitchen(): SavedKitchen {
     prefs: DEFAULT_PREFS,
     cousins: [],
     dismissed: [],
+    picked: [],
   };
 }

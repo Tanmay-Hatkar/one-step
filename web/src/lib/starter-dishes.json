@@ -1,0 +1,510 @@
+[
+ {
+  "family": "lentils_and_beans",
+  "protein": "legumes",
+  "starch": "none",
+  "techniques": [
+   "boil",
+   "simmer",
+   "temper_spices"
+  ],
+  "equipment": [
+   "stovetop"
+  ],
+  "flavor": [
+   "cumin_coriander",
+   "chili_heat",
+   "garlic_ginger",
+   "onion_base",
+   "tomato_base"
+  ],
+  "key_ingredients": [
+   "yellow lentil",
+   "red lentil",
+   "ghee",
+   "cumin",
+   "garlic",
+   "ginger",
+   "onion",
+   "tomato",
+   "green chili",
+   "cilantro"
+  ],
+  "effort": "weeknight",
+  "id": "dal_tadka",
+  "name": "Dal Tadka",
+  "cuisine": "Indian",
+  "region": "South Asia",
+  "time_minutes": 40,
+  "allergens": [
+   "dairy"
+  ],
+  "vegetarian": true,
+  "summary": "Dal tadka is a comforting Indian lentil stew finished with hot spiced ghee."
+ },
+ {
+  "family": "curry_and_stew",
+  "protein": "chicken",
+  "starch": "none",
+  "techniques": [
+   "temper_spices",
+   "sear",
+   "simmer"
+  ],
+  "equipment": [
+   "stovetop"
+  ],
+  "flavor": [
+   "warm_spices",
+   "cumin_coriander",
+   "chili_heat",
+   "garlic_ginger",
+   "onion_base",
+   "tomato_base"
+  ],
+  "key_ingredients": [
+   "chicken thigh",
+   "onion",
+   "tomato",
+   "ginger",
+   "garlic",
+   "cumin",
+   "coriander",
+   "turmeric",
+   "chili powder",
+   "garam masala"
+  ],
+  "effort": "weeknight",
+  "id": "chicken_curry_home_style",
+  "name": "Chicken Curry",
+  "cuisine": "Indian",
+  "region": "South Asia",
+  "time_minutes": 55,
+  "allergens": [],
+  "vegetarian": false,
+  "summary": "Home-style chicken curry is a simple everyday Indian stew of chicken simmered with onions, tomatoes, ginger-garlic, and ground spices."
+ },
+ {
+  "family": "lentils_and_beans",
+  "protein": "legumes",
+  "starch": "none",
+  "techniques": [
+   "temper_spices",
+   "simmer"
+  ],
+  "equipment": [
+   "stovetop",
+   "pressure_cooker"
+  ],
+  "flavor": [
+   "warm_spices",
+   "cumin_coriander",
+   "chili_heat",
+   "garlic_ginger",
+   "onion_base",
+   "tomato_base"
+  ],
+  "key_ingredients": [
+   "kidney bean",
+   "onion",
+   "tomato",
+   "ginger",
+   "garlic",
+   "cumin",
+   "coriander",
+   "garam masala",
+   "bay leaf",
+   "cilantro"
+  ],
+  "effort": "weeknight",
+  "id": "rajma",
+  "name": "Rajma",
+  "cuisine": "Indian",
+  "region": "South Asia",
+  "time_minutes": 60,
+  "allergens": [],
+  "vegetarian": true,
+  "summary": "Rajma is a Punjabi-style kidney bean curry simmered until creamy in a spiced onion-tomato gravy."
+ },
+ {
+  "family": "rice_with_protein",
+  "protein": "chicken",
+  "starch": "rice",
+  "techniques": [
+   "marinate",
+   "temper_spices",
+   "simmer",
+   "layered_dum"
+  ],
+  "equipment": [
+   "stovetop"
+  ],
+  "flavor": [
+   "warm_spices",
+   "cumin_coriander",
+   "chili_heat",
+   "garlic_ginger",
+   "onion_base",
+   "yogurt",
+   "fresh_herbs",
+   "saffron"
+  ],
+  "key_ingredients": [
+   "chicken thigh",
+   "basmati rice",
+   "yogurt",
+   "onion",
+   "ginger",
+   "garlic",
+   "biryani masala",
+   "mint",
+   "cilantro",
+   "saffron"
+  ],
+  "effort": "weekend",
+  "id": "chicken_biryani",
+  "name": "Chicken Biryani",
+  "cuisine": "Indian",
+  "region": "South Asia",
+  "time_minutes": 120,
+  "allergens": [
+   "dairy"
+  ],
+  "vegetarian": false,
+  "summary": "Chicken biryani is a layered rice dish of spiced marinated chicken and basmati rice steamed together until fragrant."
+ },
+ {
+  "family": "curry_and_stew",
+  "protein": "paneer_or_cheese",
+  "starch": "none",
+  "techniques": [
+   "blend_puree",
+   "temper_spices",
+   "simmer"
+  ],
+  "equipment": [
+   "stovetop",
+   "blender"
+  ],
+  "flavor": [
+   "cumin_coriander",
+   "chili_heat",
+   "garlic_ginger",
+   "onion_base",
+   "butter_cream"
+  ],
+  "key_ingredients": [
+   "paneer",
+   "spinach",
+   "onion",
+   "tomato",
+   "ginger",
+   "garlic",
+   "cumin",
+   "garam masala",
+   "cream",
+   "green chili"
+  ],
+  "effort": "weeknight",
+  "id": "palak_paneer",
+  "name": "Palak Paneer",
+  "cuisine": "Indian",
+  "region": "South Asia",
+  "time_minutes": 45,
+  "allergens": [
+   "dairy"
+  ],
+  "vegetarian": true,
+  "summary": "Palak paneer is a North Indian curry of paneer cubes simmered in a spiced spinach puree."
+ },
+ {
+  "family": "egg_dishes",
+  "protein": "egg",
+  "starch": "none",
+  "techniques": [
+   "pan_fry"
+  ],
+  "equipment": [
+   "stovetop"
+  ],
+  "flavor": [
+   "chili_heat",
+   "onion_base",
+   "fresh_herbs",
+   "cumin_coriander"
+  ],
+  "key_ingredients": [
+   "egg",
+   "onion",
+   "green chili",
+   "tomato",
+   "cilantro",
+   "turmeric",
+   "cumin",
+   "coriander"
+  ],
+  "effort": "weeknight",
+  "id": "masala_omelette",
+  "name": "Masala Omelette",
+  "cuisine": "Indian",
+  "region": "South Asia",
+  "time_minutes": 15,
+  "allergens": [
+   "egg"
+  ],
+  "vegetarian": true,
+  "summary": "A quick Indian omelette flavored with chopped onion, chili, cilantro, and ground spices."
+ },
+ {
+  "family": "egg_dishes",
+  "protein": "egg",
+  "starch": "rice",
+  "techniques": [
+   "plain_rice",
+   "stir_fry"
+  ],
+  "equipment": [
+   "stovetop",
+   "wok"
+  ],
+  "flavor": [
+   "soy_umami",
+   "sesame",
+   "onion_base"
+  ],
+  "key_ingredients": [
+   "egg",
+   "long grain rice",
+   "soy sauce",
+   "scallion",
+   "pea",
+   "carrot",
+   "sesame oil"
+  ],
+  "effort": "weeknight",
+  "id": "egg_fried_rice",
+  "name": "Egg Fried Rice",
+  "cuisine": "Chinese",
+  "region": "East Asia",
+  "time_minutes": 25,
+  "allergens": [
+   "egg",
+   "soy",
+   "sesame"
+  ],
+  "vegetarian": true,
+  "summary": "Cooked rice is stir-fried with egg, vegetables, scallions, and soy seasoning."
+ },
+ {
+  "family": "noodles",
+  "protein": "none",
+  "starch": "wheat_noodles",
+  "techniques": [
+   "boil",
+   "stir_fry"
+  ],
+  "equipment": [
+   "stovetop",
+   "wok"
+  ],
+  "flavor": [
+   "soy_umami",
+   "chili_heat",
+   "garlic_ginger",
+   "vinegar_sour",
+   "fresh_herbs"
+  ],
+  "key_ingredients": [
+   "hakka noodle",
+   "cabbage",
+   "carrot",
+   "bell pepper",
+   "spring onion",
+   "garlic",
+   "ginger",
+   "soy sauce",
+   "chili sauce",
+   "vinegar"
+  ],
+  "effort": "weeknight",
+  "id": "hakka_noodles",
+  "name": "Hakka Noodles",
+  "cuisine": "Indo-Chinese",
+  "region": "South Asia",
+  "time_minutes": 35,
+  "allergens": [
+   "gluten",
+   "soy"
+  ],
+  "vegetarian": true,
+  "summary": "Hakka noodles are stir-fried wheat noodles with crisp vegetables, soy sauce, and Indo-Chinese seasonings."
+ },
+ {
+  "family": "noodles",
+  "protein": "beef",
+  "starch": "pasta",
+  "techniques": [
+   "simmer",
+   "sear",
+   "braise",
+   "boil"
+  ],
+  "equipment": [
+   "stovetop"
+  ],
+  "flavor": [
+   "tomato_base",
+   "onion_base"
+  ],
+  "key_ingredients": [
+   "ham",
+   "bacon",
+   "ground beef",
+   "onion",
+   "celery",
+   "carrot",
+   "fennel bulb",
+   "butter",
+   "tomato",
+   "red wine",
+   "beef stock",
+   "tomato paste",
+   "spaghetti pasta",
+   "parmesan cheese"
+  ],
+  "effort": "weekend",
+  "id": "spaghetti_with_bolognese_meat_sauce",
+  "name": "Spaghetti Bolognese",
+  "cuisine": "Italian",
+  "region": "Europe",
+  "time_minutes": 120,
+  "allergens": [
+   "dairy",
+   "gluten"
+  ],
+  "vegetarian": false,
+  "summary": "A slow-cooked meat sauce with spaghetti and Parmesan."
+ },
+ {
+  "family": "noodles",
+  "protein": "paneer_or_cheese",
+  "starch": "pasta",
+  "techniques": [
+   "boil",
+   "simmer",
+   "bake"
+  ],
+  "equipment": [
+   "stovetop"
+  ],
+  "flavor": [
+   "butter_cream",
+   "chili_heat"
+  ],
+  "key_ingredients": [
+   "macaroni",
+   "cream",
+   "fontina cheese",
+   "gruyere cheese",
+   "mascarpone",
+   "cream cheese",
+   "swiss cheese",
+   "butter",
+   "flour",
+   "tabasco sauce"
+  ],
+  "effort": "weeknight",
+  "id": "macaroni_and_cheese",
+  "name": "Mac and Cheese",
+  "cuisine": "American",
+  "region": "North America",
+  "time_minutes": 30,
+  "allergens": [
+   "dairy",
+   "gluten"
+  ],
+  "vegetarian": true,
+  "summary": "Macaroni is folded into a rich multi-cheese sauce finished with a little hot sauce."
+ },
+ {
+  "family": "flatbread_and_wraps",
+  "protein": "chicken",
+  "starch": "flatbread",
+  "techniques": [
+   "sear",
+   "simmer",
+   "wrap_and_roll"
+  ],
+  "equipment": [
+   "stovetop"
+  ],
+  "flavor": [
+   "chili_heat",
+   "cumin_coriander",
+   "garlic_ginger",
+   "tomato_base",
+   "citrus",
+   "fresh_herbs"
+  ],
+  "key_ingredients": [
+   "corn tortilla",
+   "chicken thigh",
+   "onion",
+   "garlic",
+   "tomato",
+   "chili powder",
+   "cumin",
+   "lime",
+   "cilantro",
+   "avocado"
+  ],
+  "effort": "weeknight",
+  "id": "chicken_tacos",
+  "name": "Chicken Tacos",
+  "cuisine": "Mexican",
+  "region": "Latin America",
+  "time_minutes": 35,
+  "allergens": [],
+  "vegetarian": false,
+  "summary": "Chicken tacos are warm corn tortillas filled with seasoned chicken and fresh toppings such as onion, cilantro, lime, and salsa."
+ },
+ {
+  "family": "curry_and_stew",
+  "protein": "beef",
+  "starch": "none",
+  "techniques": [
+   "sear",
+   "simmer"
+  ],
+  "equipment": [
+   "stovetop"
+  ],
+  "flavor": [
+   "chili_heat",
+   "onion_base",
+   "tomato_base",
+   "smoky"
+  ],
+  "key_ingredients": [
+   "ground beef",
+   "kidney bean",
+   "onion",
+   "garlic",
+   "tomato",
+   "chili powder",
+   "cumin",
+   "oregano",
+   "beef stock",
+   "jalape\u00f1o"
+  ],
+  "effort": "weeknight",
+  "id": "chili_con_carne",
+  "name": "Chili con Carne",
+  "cuisine": "Tex-Mex",
+  "region": "North America",
+  "time_minutes": 60,
+  "allergens": [],
+  "vegetarian": false,
+  "summary": "Chili con carne is a hearty Tex-Mex beef and chile stew often made with tomatoes and beans in home kitchens."
+ }
+]
