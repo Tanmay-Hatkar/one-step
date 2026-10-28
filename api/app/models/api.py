@@ -1,6 +1,6 @@
 """Request and response shapes for the HTTP API."""
 
-from typing import Annotated, Any
+from typing import Annotated, Any, Literal
 
 from pydantic import BaseModel, Field, StringConstraints
 
@@ -246,3 +246,46 @@ class KitchenSyncResponse(BaseModel):
 
     kitchen: dict[str, Any] | None
     updated_at: str | None
+
+
+EventName = Literal[
+    "kitchen_built",
+    "dish_opened",
+    "cooked",
+    "saved",
+    "cook_mode",
+    "shopping_shared",
+    "installed",
+]
+
+
+class FeedbackRequest(BaseModel):
+    """A message from the in-app feedback box."""
+
+    message: str = Field(..., min_length=3, max_length=settings.max_feedback_chars)
+    page: str = Field(default="", max_length=200)
+
+
+class UsageEventIn(BaseModel):
+    """One thing the app did. Names are a fixed list, so no free text is ever stored."""
+
+    name: EventName
+    dish_id: str | None = Field(default=None, max_length=80, pattern=r"^[a-z0-9_]+$")
+
+
+class UsageEvents(BaseModel):
+    """A small batch of events from one device."""
+
+    device: str = Field(..., pattern=r"^[A-Za-z0-9-]{8,36}$")
+    events: list[UsageEventIn] = Field(..., min_length=1, max_length=settings.max_events_per_batch)
+
+
+class UsageStats(BaseModel):
+    """Counts for the owner: who uses the app, who comes back, and what they do."""
+
+    days: int
+    devices: int
+    returning_devices: int = Field(..., description="Devices active on 2+ different days")
+    events: dict[str, int]
+    top_dishes: list[tuple[str, int]] = Field(..., description="Most opened dishes")
+    feedback: list[str] = Field(..., description="Newest feedback first")

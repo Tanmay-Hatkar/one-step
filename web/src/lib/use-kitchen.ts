@@ -5,10 +5,12 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { ApiError, findCousins, getTonight, parseRepertoire } from "./api";
 import { cookedToUserDish, repertoireOf } from "./kitchen";
 import { pickedToUserDish, startersById } from "./starters";
+import { track } from "./track";
 import {
   type CookedDish,
   DEFAULT_PREFS,
   type Prefs,
+  emptyKitchen,
   loadKitchen,
   saveKitchen,
 } from "./storage";
@@ -53,7 +55,13 @@ export function useKitchen() {
   const pickedRef = useRef<string[]>([]);
   const persist = useCallback(
     (next: { text: string; dishes: UserDish[]; cooked: CookedDish[]; prefs: Prefs; cousins: Cousin[] }) =>
-      saveKitchen({ ...next, dismissed: dismissedRef.current, picked: pickedRef.current }),
+      // Keep what other pages store in the kitchen too (saved dishes, shopping list).
+      saveKitchen({
+        ...(loadKitchen() ?? emptyKitchen()),
+        ...next,
+        dismissed: dismissedRef.current,
+        picked: pickedRef.current,
+      }),
     [],
   );
 
@@ -177,6 +185,7 @@ export function useKitchen() {
     try {
       const found = await fetchAll(checked, cooked, nextPrefs, []);
       setPhase("results");
+      track("kitchen_built");
       if (found) persist({ text: t, dishes: checked, cooked, prefs: nextPrefs, cousins: found });
     } catch (err) {
       setError(messageOf(err));
@@ -204,6 +213,7 @@ export function useKitchen() {
     ];
     setCooked(next);
     setNotice({ id: dish.id, name: dish.name });
+    track("cooked", dish.id);
     void refresh(dishes, next, prefs, skip, text);
   }
 

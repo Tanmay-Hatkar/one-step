@@ -77,6 +77,14 @@ class Settings(BaseSettings):
     session_days: int = Field(default=180, description="How long a sign-in lasts")
     max_synced_kitchen_bytes: int = Field(default=200_000, description="Largest synced kitchen")
 
+    # Feedback and usage stats
+    feedback_rate_limit: str = Field(default="5/minute", description="Per-IP feedback limit")
+    events_rate_limit: str = Field(default="60/minute", description="Per-IP usage-event limit")
+    max_feedback_chars: int = Field(default=2000)
+    max_events_per_batch: int = Field(default=20)
+    stats_default_days: int = Field(default=28, description="Window for /api/admin/stats")
+    admin_token: str = Field(default="", description="Bearer token for stats; empty = off")
+
     # Evals
     eval_results_path: Path = Field(default=API_ROOT / "evals" / "results" / "latest.json")
 

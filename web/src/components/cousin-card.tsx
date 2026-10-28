@@ -17,6 +17,7 @@ import { useId, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { DishPhoto } from "@/components/dish-photo";
+import { SaveButton } from "@/components/save-button";
 import { TechniqueHelp } from "@/components/technique-help";
 import { Card } from "@/components/ui/card";
 import { BASIC_TECHNIQUES, equipmentLabel, formatTime } from "@/lib/labels";
@@ -185,6 +186,7 @@ export function CousinCard({
               {cooked ? "In your kitchen" : "I cooked this"}
             </Button>
             )}
+            {onCooked && <SaveButton dish={dish} cousin={cousin} />}
             {onSkip && (
               <Button variant="ghost" onClick={onSkip} className="h-9 text-muted-foreground">
                 <X aria-hidden />

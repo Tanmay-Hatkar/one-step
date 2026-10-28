@@ -11,6 +11,7 @@ from app.llm.transcriber import OpenAITranscriber
 from app.repositories.account_repository import AccountRepository
 from app.repositories.dish_repository import DishRepository
 from app.repositories.eval_repository import EvalResultsRepository
+from app.repositories.insight_repository import InsightRepository
 from app.repositories.llm_repository import LLMCacheRepository, LLMUsageRepository
 from app.repositories.recipe_repository import RecipeRepository
 from app.repositories.share_repository import ShareRepository
@@ -19,6 +20,7 @@ from app.repositories.technique_repository import TechniqueRepository
 from app.services.account_service import AccountService
 from app.services.cousin_service import CousinService
 from app.services.graph_service import GraphService
+from app.services.insight_service import InsightService
 from app.services.llm_gateway import LLMGateway
 from app.services.question_service import QuestionService
 from app.services.repertoire_service import RepertoireService
@@ -132,3 +134,9 @@ def get_speech_service() -> SpeechService:
         max_bytes=settings.max_audio_bytes,
         max_chars=settings.max_repertoire_text_chars,
     )
+
+
+@lru_cache
+def get_insight_service() -> InsightService:
+    """Feedback and anonymous usage stats."""
+    return InsightService(InsightRepository(get_session_factory()))

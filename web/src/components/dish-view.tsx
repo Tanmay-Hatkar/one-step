@@ -1,19 +1,22 @@
 "use client";
 
-import { ArrowLeft, Clock, ExternalLink, Leaf } from "lucide-react";
+import { ArrowLeft, ChefHat, Clock, ExternalLink, Leaf } from "lucide-react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
+import { CookMode } from "@/components/cook-mode";
 import { CousinCard } from "@/components/cousin-card";
 import { DishPhoto } from "@/components/dish-photo";
 import { LoadingCards } from "@/components/loading-cards";
+import { SaveButton } from "@/components/save-button";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ApiError, getCousin, getDishPage } from "@/lib/api";
 import { repertoireOf } from "@/lib/kitchen";
 import { ALLERGENS, formatTime } from "@/lib/labels";
 import { loadKitchen } from "@/lib/storage";
+import { track } from "@/lib/track";
 import type { Cousin, DishPage } from "@/lib/types";
 
 /** A catalog dish: photo, how it differs from your kitchen, and the full recipe. */
@@ -22,6 +25,7 @@ export function DishView() {
   const [page, setPage] = useState<DishPage | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [fromYours, setFromYours] = useState<Cousin | null>(null);
+  const [cooking, setCooking] = useState(false);
 
   useEffect(() => {
     let live = true;
@@ -30,6 +34,7 @@ export function DishView() {
         if (!live) return;
         setPage(p);
         document.title = `${p.dish.name} · One Step`;
+        track("dish_opened", p.dish.id);
       })
       .catch((err) => live && setError(err instanceof ApiError ? err.message : "Couldn't load it."));
 
@@ -109,6 +114,21 @@ export function DishView() {
           {allergens.length > 0 && (
             <p className="text-sm text-muted-foreground">Contains {allergens.join(", ").toLowerCase()}.</p>
           )}
+          <div className="flex flex-wrap gap-2 pt-1">
+            {recipe && (
+              <Button
+                className="h-9"
+                onClick={() => {
+                  setCooking(true);
+                  track("cook_mode", dish.id);
+                }}
+              >
+                <ChefHat aria-hidden />
+                Cook mode
+              </Button>
+            )}
+            <SaveButton dish={dish} cousin={fromYours} />
+          </div>
         </div>
       </header>
 
@@ -185,6 +205,9 @@ export function DishView() {
             <ExternalLink aria-hidden className="size-3.5" />
           </a>
         </section>
+      )}
+      {cooking && recipe && (
+        <CookMode name={dish.name} recipe={recipe} onClose={() => setCooking(false)} />
       )}
     </article>
   );

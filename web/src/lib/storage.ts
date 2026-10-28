@@ -2,6 +2,7 @@
 // also synced to your account. Every access is guarded — storage can be blocked or full.
 
 import { queueSync } from "./account";
+import type { SavedDish } from "./saved";
 import type { Cousin, Diet, Have, UserDish } from "./types";
 
 const KEY = "one-step:v2";
@@ -33,6 +34,10 @@ export interface SavedKitchen {
   dismissed: string[];
   /** Photo tiles tapped on the start page (catalog dish ids). */
   picked: string[];
+  /** Dishes saved for later, newest first. */
+  saved: SavedDish[];
+  /** Shopping-list items already bought. */
+  bought: string[];
 }
 
 export const EMPTY_HAVE: Have = { equipment: [], ingredients: [] };
@@ -80,5 +85,7 @@ export function emptyKitchen(): SavedKitchen {
     cousins: [],
     dismissed: [],
     picked: [],
+    saved: [],
+    bought: [],
   };
 }
