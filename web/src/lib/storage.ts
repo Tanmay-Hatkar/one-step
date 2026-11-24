@@ -3,7 +3,7 @@
 
 import { queueSync } from "./account";
 import type { SavedDish } from "./saved";
-import type { Cousin, Diet, Have, UserDish } from "./types";
+import type { Cousin, Diet, Have, Pasted, UserDish } from "./types";
 
 const KEY = "one-step:v2";
 const LEGACY_KEY = "one-step:v1";
@@ -14,6 +14,19 @@ export interface CookedDish {
   name: string;
   cookedAt: string;
   dish: UserDish;
+}
+
+/** A recipe the user pasted from somewhere, with its write-up from their kitchen. */
+export interface PastedEntry extends Pasted {
+  pastedAt: string;
+  /** True when it was read from a screenshot or photo rather than text or a link. */
+  fromPhoto?: boolean;
+}
+
+/** One time the user cooked one of their dishes (by the name it has in their kitchen). */
+export interface CookLogEntry {
+  name: string;
+  at: string;
 }
 
 export interface Prefs {
@@ -38,6 +51,10 @@ export interface SavedKitchen {
   saved: SavedDish[];
   /** Shopping-list items already bought. */
   bought: string[];
+  /** Recipes pasted from elsewhere, newest first. */
+  pasted: PastedEntry[];
+  /** What was cooked and when, newest first. Drives "you haven't made this in a while". */
+  log: CookLogEntry[];
 }
 
 export const EMPTY_HAVE: Have = { equipment: [], ingredients: [] };
@@ -87,5 +104,7 @@ export function emptyKitchen(): SavedKitchen {
     picked: [],
     saved: [],
     bought: [],
+    pasted: [],
+    log: [],
   };
 }

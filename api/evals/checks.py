@@ -2,7 +2,7 @@
 
 import re
 
-from app.models.api import DiffText
+from app.models.api import DiffText, PasteResponse
 from app.models.dish import Delta, Dish, UserDish
 from app.services.ingredients import normalize
 
@@ -106,4 +106,37 @@ def check_diff(diff: DiffText, anchor: UserDish, dish: Dish, delta: Delta) -> li
         if _mentions(b, i) and not any(m in b.lower() for m in SUBSTITUTION_MARKERS)
     ]
     checks.append(("no_foreign_ingredients", not leaks, ", ".join(sorted(set(leaks))) or "ok"))
+    return checks
+
+
+def check_pasted(pasted: PasteResponse, expected: dict) -> list[Check]:
+    """Checks for one pasted recipe: the parts the model read and what code made of them.
+
+    Args:
+        pasted: The service's result.
+        expected: A PASTE_CASES entry.
+
+    Returns:
+        One check per expectation the case states.
+    """
+    dish, delta = pasted.cousin.dish, pasted.cousin.delta
+    checks: list[Check] = []
+    for part in ("family", "starch", "protein"):
+        if part in expected:
+            got = getattr(dish, part)
+            checks.append((part, got == expected[part], got))
+    for technique in expected.get("techniques", []):
+        checks.append((f"has_{technique}", technique in dish.techniques, str(dish.techniques)))
+    for technique in expected.get("not_techniques", []):
+        checks.append((f"no_{technique}", technique not in dish.techniques, str(dish.techniques)))
+    for item in expected.get("equipment", []):
+        checks.append((f"needs_{item}", item in dish.equipment, str(dish.equipment)))
+    for ingredient in expected.get("ingredients", []):
+        found = any(_mentions(i, ingredient) for i in dish.key_ingredients)
+        checks.append((f"ingredient:{ingredient}", found, str(dish.key_ingredients)))
+    for allergen in expected.get("allergens", []):
+        checks.append((f"allergen:{allergen}", allergen in dish.allergens, str(dish.allergens)))
+    if "one_step" in expected:
+        checks.append(("one_step", delta.is_one_step == expected["one_step"], str(delta.score)))
+    checks.append(("has_steps", len(pasted.recipe.steps) >= 2, str(len(pasted.recipe.steps))))
     return checks

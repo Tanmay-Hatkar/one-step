@@ -1,5 +1,6 @@
 """LLM client abstraction. Services depend on the protocol, never on OpenAI directly."""
 
+import base64
 import logging
 import time
 from dataclasses import dataclass
@@ -17,12 +18,26 @@ class LLMError(RuntimeError):
     """The LLM call failed or returned nothing usable."""
 
 
+@dataclass(frozen=True)
+class Image:
+    """A picture for the model to read (a recipe screenshot or photo)."""
+
+    data: bytes
+    media_type: str  # e.g. "image/jpeg"
+
+    def data_url(self) -> str:
+        """The image as a base64 data URL."""
+        return f"data:{self.media_type};base64,{base64.b64encode(self.data).decode()}"
+
+
 class LLMClient(Protocol):
     """Anything that can turn a prompt into a validated Pydantic object."""
 
     model: str
 
-    async def parse(self, *, instructions: str, prompt: str, schema: type[T]) -> T:
+    async def parse(
+        self, *, instructions: str, prompt: str, schema: type[T], image: Image | None = None
+    ) -> T:
         """Return `schema` filled from the model's structured output."""
         ...
 
@@ -51,13 +66,16 @@ class OpenAILLMClient:
             AsyncOpenAI(api_key=api_key, timeout=timeout, max_retries=1) if api_key else None
         )
 
-    async def parse(self, *, instructions: str, prompt: str, schema: type[T]) -> T:
+    async def parse(
+        self, *, instructions: str, prompt: str, schema: type[T], image: Image | None = None
+    ) -> T:
         """Call the model and validate its output.
 
         Args:
             instructions: System-level instructions.
             prompt: The user-level input.
             schema: Pydantic model the output must match.
+            image: Optional picture sent alongside the prompt.
 
         Returns:
             A validated instance of `schema`.
@@ -68,12 +86,19 @@ class OpenAILLMClient:
         if self._client is None:
             raise LLMError("OPENAI_API_KEY is not configured")
         extra = {"reasoning": {"effort": self._effort}} if self._effort else {}
+        content: str | list = prompt
+        if image is not None:
+            parts = [
+                {"type": "input_text", "text": prompt},
+                {"type": "input_image", "image_url": image.data_url()},
+            ]
+            content = [{"role": "user", "content": parts}]
         started = time.perf_counter()
         try:
             response = await self._client.responses.parse(
                 model=self.model,
                 instructions=instructions,
-                input=prompt,
+                input=content,
                 text_format=schema,
                 **extra,
             )

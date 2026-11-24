@@ -21,6 +21,7 @@ import { SaveButton } from "@/components/save-button";
 import { TechniqueHelp } from "@/components/technique-help";
 import { Card } from "@/components/ui/card";
 import { BASIC_TECHNIQUES, equipmentLabel, formatTime } from "@/lib/labels";
+import { isPasted } from "@/lib/pasted";
 import type { Cousin } from "@/lib/types";
 import { useRecipeIds } from "@/lib/use-recipe-ids";
 import { cn } from "@/lib/utils";
@@ -172,7 +173,7 @@ export function CousinCard({
                 className="h-9"
               >
                 <BookOpen aria-hidden />
-                {recipeIds.has(dish.id) ? "Full recipe" : "About this dish"}
+                {recipeIds.has(dish.id) || isPasted(dish.id) ? "Full recipe" : "About this dish"}
               </Button>
             )}
             {onCooked && (

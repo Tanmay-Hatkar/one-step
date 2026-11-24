@@ -1,6 +1,6 @@
 {
   "model": "gpt-5.4-mini",
-  "run_at": "2026-10-21T21:56:09.076404+00:00",
+  "run_at": "2026-11-14T22:01:07.730581+00:00",
   "suites": {
     "parse": {
       "passed": 69,
@@ -840,6 +840,218 @@
         }
       ]
     },
+    "paste": {
+      "passed": 31,
+      "total": 31,
+      "results": [
+        {
+          "id": "jollof_caption",
+          "checks": [
+            {
+              "name": "family",
+              "passed": true,
+              "detail": "rice_with_protein"
+            },
+            {
+              "name": "starch",
+              "passed": true,
+              "detail": "rice"
+            },
+            {
+              "name": "has_rice_in_stock",
+              "passed": true,
+              "detail": "['blend_puree', 'pan_fry', 'simmer', 'rice_in_stock']"
+            },
+            {
+              "name": "no_stir_fry",
+              "passed": true,
+              "detail": "['blend_puree', 'pan_fry', 'simmer', 'rice_in_stock']"
+            },
+            {
+              "name": "no_plain_rice",
+              "passed": true,
+              "detail": "['blend_puree', 'pan_fry', 'simmer', 'rice_in_stock']"
+            },
+            {
+              "name": "no_temper_spices",
+              "passed": true,
+              "detail": "['blend_puree', 'pan_fry', 'simmer', 'rice_in_stock']"
+            },
+            {
+              "name": "ingredient:tomato",
+              "passed": true,
+              "detail": "['tomato', 'red bell pepper', 'scotch bonnet pepper', 'onion', 'tomato paste', 'curry powder', 'thyme', 'bay leaf', 'stock cube', 'long grain parboiled rice']"
+            },
+            {
+              "name": "ingredient:thyme",
+              "passed": true,
+              "detail": "['tomato', 'red bell pepper', 'scotch bonnet pepper', 'onion', 'tomato paste', 'curry powder', 'thyme', 'bay leaf', 'stock cube', 'long grain parboiled rice']"
+            },
+            {
+              "name": "one_step",
+              "passed": true,
+              "detail": "3.8"
+            },
+            {
+              "name": "has_steps",
+              "passed": true,
+              "detail": "8"
+            }
+          ],
+          "sample": {
+            "headline": "Jollof rice: your chicken leg with rice, but…",
+            "changes": [
+              "Blend tomato, red bell pepper, scotch bonnet pepper, onion, and tomato paste into a smooth sauce.",
+              "Pan-fry the sauce with curry powder, thyme, bay leaf, and stock cube until it thickens.",
+              "Add long grain parboiled rice, then cook the rice in stock.",
+              "Simmer gently until the grains absorb the sauce and are tender.",
+              "Skip marinating; this dish starts with the sauce."
+            ],
+            "keep_line": "You still cook the rice in stock."
+          }
+        },
+        {
+          "id": "pad_thai_blog",
+          "checks": [
+            {
+              "name": "family",
+              "passed": true,
+              "detail": "noodles"
+            },
+            {
+              "name": "starch",
+              "passed": true,
+              "detail": "rice_noodles"
+            },
+            {
+              "name": "protein",
+              "passed": true,
+              "detail": "shrimp"
+            },
+            {
+              "name": "has_stir_fry",
+              "passed": true,
+              "detail": "['stir_fry', 'scramble']"
+            },
+            {
+              "name": "needs_wok",
+              "passed": true,
+              "detail": "['stovetop', 'wok']"
+            },
+            {
+              "name": "ingredient:fish sauce",
+              "passed": true,
+              "detail": "['flat rice noodles', 'raw prawns', 'egg', 'fish sauce', 'tamarind paste', 'palm sugar', 'garlic', 'beansprout', 'spring onion', 'roasted peanuts', 'lime']"
+            },
+            {
+              "name": "ingredient:tamarind paste",
+              "passed": true,
+              "detail": "['flat rice noodles', 'raw prawns', 'egg', 'fish sauce', 'tamarind paste', 'palm sugar', 'garlic', 'beansprout', 'spring onion', 'roasted peanuts', 'lime']"
+            },
+            {
+              "name": "allergen:shellfish",
+              "passed": true,
+              "detail": "['egg', 'fish', 'peanut', 'shellfish']"
+            },
+            {
+              "name": "allergen:fish",
+              "passed": true,
+              "detail": "['egg', 'fish', 'peanut', 'shellfish']"
+            },
+            {
+              "name": "allergen:peanut",
+              "passed": true,
+              "detail": "['egg', 'fish', 'peanut', 'shellfish']"
+            },
+            {
+              "name": "allergen:egg",
+              "passed": true,
+              "detail": "['egg', 'fish', 'peanut', 'shellfish']"
+            },
+            {
+              "name": "one_step",
+              "passed": true,
+              "detail": "-10.0"
+            },
+            {
+              "name": "has_steps",
+              "passed": true,
+              "detail": "5"
+            }
+          ],
+          "sample": {
+            "headline": "Pad Thai: your chicken leg with rice, but…",
+            "changes": [
+              "Use flat rice noodles instead of rice, and stir-fry them briefly with garlic.",
+              "Stir-fry raw prawns, then scramble the egg in the pan.",
+              "Add fish sauce, tamarind paste, and palm sugar for the Pad Thai sauce.",
+              "Finish with beansprout, spring onion, roasted peanuts, and lime."
+            ],
+            "keep_line": "Skip marinating and rice-cooker rice; this dish is all about stir-frying."
+          }
+        },
+        {
+          "id": "dal_with_injection",
+          "checks": [
+            {
+              "name": "family",
+              "passed": true,
+              "detail": "lentils_and_beans"
+            },
+            {
+              "name": "protein",
+              "passed": true,
+              "detail": "legumes"
+            },
+            {
+              "name": "has_temper_spices",
+              "passed": true,
+              "detail": "['boil', 'temper_spices']"
+            },
+            {
+              "name": "ingredient:red lentil",
+              "passed": true,
+              "detail": "['red lentils', 'turmeric', 'ghee', 'cumin seeds', 'garlic', 'dried red chili', 'lemon juice', 'coriander']"
+            },
+            {
+              "name": "ingredient:cumin",
+              "passed": true,
+              "detail": "['red lentils', 'turmeric', 'ghee', 'cumin seeds', 'garlic', 'dried red chili', 'lemon juice', 'coriander']"
+            },
+            {
+              "name": "allergen:dairy",
+              "passed": true,
+              "detail": "['dairy']"
+            },
+            {
+              "name": "has_steps",
+              "passed": true,
+              "detail": "6"
+            }
+          ],
+          "sample": {
+            "headline": "Masoor Dal: your dal tadka, but…",
+            "changes": [
+              "Swap toor dal for red lentils; boil with turmeric until very soft.",
+              "Bloom cumin seeds, garlic, and dried red chili in hot ghee.",
+              "Finish with lemon juice and coriander after the tempering.",
+              "Serve it the same way you serve dal tadka, with rice if you like."
+            ],
+            "keep_line": "Keep the pressure-cooker style of cooking and the hot ghee tempering."
+          }
+        },
+        {
+          "id": "not_a_recipe",
+          "checks": [
+            {
+              "name": "is_recipe",
+              "passed": true,
+              "detail": "rejected"
+            }
+          ]
+        }
+      ]
+    },
     "diet": {
       "passed": 10,
       "total": 10,
@@ -947,7 +1159,7 @@
       ]
     }
   },
-  "passed": 131,
-  "total": 131,
+  "passed": 162,
+  "total": 162,
   "pass_rate": 1.0
 }

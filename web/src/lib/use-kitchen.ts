@@ -3,10 +3,12 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { ApiError, findCousins, getTonight, parseRepertoire } from "./api";
+import { MAX_LOG, recentNames } from "./cooklog";
 import { cookedToUserDish, repertoireOf } from "./kitchen";
 import { pickedToUserDish, startersById } from "./starters";
 import { track } from "./track";
 import {
+  type CookLogEntry,
   type CookedDish,
   DEFAULT_PREFS,
   type Prefs,
@@ -21,9 +23,13 @@ export type Phase = "input" | "reading" | "confirm" | "finding" | "results";
 /** Wait this long after the last preference change before asking the API again. */
 const PREFS_DEBOUNCE_MS = 400;
 
+/** A short message after cooking something, with a way to undo it. */
 export interface CookedNotice {
-  id: string;
+  /** Catalog (or pasted) id of a new dish that joined the kitchen; null for one of your own. */
+  id: string | null;
   name: string;
+  /** How many more dishes became one step away because of it. */
+  unlocked: number;
 }
 
 function messageOf(err: unknown): string {
@@ -45,6 +51,8 @@ export function useKitchen() {
   const [notice, setNotice] = useState<CookedNotice | null>(null);
   const [dismissed, setDismissed] = useState<string[]>([]);
   const [picked, setPickedState] = useState<string[]>([]);
+  const [log, setLogState] = useState<CookLogEntry[]>([]);
+  const [reach, setReach] = useState<number | null>(null);
 
   // Only the latest request may update the page (preferences can change mid-flight).
   const requestId = useRef(0);
@@ -53,6 +61,7 @@ export function useKitchen() {
   // Answered questions and picked tiles are remembered alongside everything else.
   const dismissedRef = useRef<string[]>([]);
   const pickedRef = useRef<string[]>([]);
+  const logRef = useRef<CookLogEntry[]>([]);
   const persist = useCallback(
     (next: { text: string; dishes: UserDish[]; cooked: CookedDish[]; prefs: Prefs; cousins: Cousin[] }) =>
       // Keep what other pages store in the kitchen too (saved dishes, shopping list).
@@ -61,23 +70,25 @@ export function useKitchen() {
         ...next,
         dismissed: dismissedRef.current,
         picked: pickedRef.current,
+        log: logRef.current,
       }),
     [],
   );
 
-  /** Fetch cousins and tonight's picks for a kitchen; returns the cousins, or null if stale. */
+  /** Fetch cousins and tonight's picks; returns them with the reach, or null if stale. */
   const fetchAll = useCallback(
     async (own: UserDish[], done: CookedDish[], p: Prefs, skipped: string[]) => {
       const id = ++requestId.current;
       const repertoire = repertoireOf(own, done);
       const [found, picks] = await Promise.all([
         findCousins(repertoire, p.diet, p.have),
-        getTonight(repertoire, p.diet, p.have, p.minutes, skipped),
+        getTonight(repertoire, p.diet, p.have, p.minutes, skipped, recentNames(logRef.current)),
       ]);
       if (id !== requestId.current) return null;
       setCousins(found);
       setTonight(picks);
-      return found;
+      setReach(picks.reach ?? null);
+      return { found, reach: picks.reach ?? null };
     },
     [],
   );
@@ -88,10 +99,14 @@ export function useKitchen() {
       setUpdating(true);
       setError(null);
       try {
-        const found = await fetchAll(own, done, p, skipped);
-        if (found) persist({ text: t, dishes: own, cooked: done, prefs: p, cousins: found });
+        const result = await fetchAll(own, done, p, skipped);
+        if (result) {
+          persist({ text: t, dishes: own, cooked: done, prefs: p, cousins: result.found });
+        }
+        return result;
       } catch (err) {
         setError(messageOf(err));
+        return null;
       } finally {
         setUpdating(false);
       }
@@ -112,6 +127,8 @@ export function useKitchen() {
     dismissedRef.current = saved.dismissed;
     setPickedState(saved.picked);
     pickedRef.current = saved.picked;
+    setLogState(saved.log);
+    logRef.current = saved.log;
     if (saved.dishes.length && !saved.cousins.length) {
       setPhase("confirm"); // they left while checking what was heard
     } else if (saved.dishes.length) {
@@ -121,6 +138,8 @@ export function useKitchen() {
     }
     /* eslint-enable react-hooks/set-state-in-effect */
   }, [refresh]);
+
+  const dismissNotice = useCallback(() => setNotice(null), []);
 
   function togglePicked(id: string) {
     const next = picked.includes(id) ? picked.filter((p) => p !== id) : [...picked, id];
@@ -183,10 +202,12 @@ export function useKitchen() {
     // Save the checked kitchen first, so nothing is lost if the search fails or is slow.
     persist({ text: t, dishes: checked, cooked, prefs: nextPrefs, cousins: [] });
     try {
-      const found = await fetchAll(checked, cooked, nextPrefs, []);
+      const result = await fetchAll(checked, cooked, nextPrefs, []);
       setPhase("results");
       track("kitchen_built");
-      if (found) persist({ text: t, dishes: checked, cooked, prefs: nextPrefs, cousins: found });
+      if (result) {
+        persist({ text: t, dishes: checked, cooked, prefs: nextPrefs, cousins: result.found });
+      }
     } catch (err) {
       setError(messageOf(err));
       setPhase(t ? "confirm" : "input");
@@ -205,23 +226,53 @@ export function useKitchen() {
     }, PREFS_DEBOUNCE_MS);
   }
 
-  function markCooked(dish: Dish) {
+  function setLog(next: CookLogEntry[]) {
+    logRef.current = next.slice(0, MAX_LOG);
+    setLogState(logRef.current);
+  }
+
+  /** A new dish was cooked: it joins the kitchen, and the kitchen's reach grows. */
+  async function markCooked(dish: Dish) {
     if (cooked.some((c) => c.id === dish.id)) return;
-    const next = [
-      ...cooked,
-      { id: dish.id, name: dish.name, cookedAt: new Date().toISOString(), dish: cookedToUserDish(dish) },
-    ];
+    const at = new Date().toISOString();
+    const next = [...cooked, { id: dish.id, name: dish.name, cookedAt: at, dish: cookedToUserDish(dish) }];
+    // The dish itself stops being "one step away" once cooked, so don't count its exit.
+    const shown = [tonight?.one_step, tonight?.stretch, ...cousins].find((c) => c?.dish.id === dish.id);
+    const before = reach === null ? null : reach - (shown?.delta.is_one_step ? 1 : 0);
     setCooked(next);
-    setNotice({ id: dish.id, name: dish.name });
+    setLog([{ name: dish.name, at }, ...logRef.current]);
+    setNotice({ id: dish.id, name: dish.name, unlocked: 0 });
     track("cooked", dish.id);
-    void refresh(dishes, next, prefs, skip, text);
+    const result = await refresh(dishes, next, prefs, skip, text);
+    const gained = result?.reach != null && before != null ? result.reach - before : 0;
+    if (gained > 0) {
+      setNotice((n) => (n?.id === dish.id ? { ...n, unlocked: gained } : n));
+    }
   }
 
   function removeCooked(id: string) {
+    const gone = cooked.find((c) => c.id === id);
     const next = cooked.filter((c) => c.id !== id);
     setCooked(next);
+    if (gone) setLog(logRef.current.filter((e) => !(e.name === gone.name && e.at === gone.cookedAt)));
     setNotice((n) => (n?.id === id ? null : n));
     void refresh(dishes, next, prefs, skip, text);
+  }
+
+  /** One of your own dishes was cooked tonight: remember when, so it rests for a while. */
+  function madeIt(name: string) {
+    setLog([{ name, at: new Date().toISOString() }, ...logRef.current]);
+    setNotice({ id: null, name, unlocked: 0 });
+    track("cooked");
+    persist({ text, dishes, cooked, prefs, cousins });
+  }
+
+  /** Take back the latest "I made this" for one of your own dishes. */
+  function undoMadeIt(name: string) {
+    const i = logRef.current.findIndex((e) => e.name === name);
+    if (i >= 0) setLog(logRef.current.filter((_, j) => j !== i));
+    setNotice(null);
+    persist({ text, dishes, cooked, prefs, cousins });
   }
 
   function skipTonight(key: string) {
@@ -242,10 +293,14 @@ export function useKitchen() {
     error,
     updating,
     notice,
+    log,
+    reach,
+    madeIt,
+    undoMadeIt,
     dismissed,
     picked,
     togglePicked,
-    dismissNotice: () => setNotice(null),
+    dismissNotice,
     submit,
     confirmKitchen,
     review: () => setPhase("confirm"),

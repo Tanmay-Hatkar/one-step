@@ -92,6 +92,11 @@ class TonightRequest(BaseModel):
         max_length=settings.max_skip_ids,
         description="Catalog ids or the user's dish names they said 'not tonight' to",
     )
+    recent: list[str] = Field(
+        default_factory=list,
+        max_length=settings.max_recent_cooked,
+        description="Names of the user's dishes they cooked lately, most recent first",
+    )
 
 
 class TonightResponse(BaseModel):
@@ -100,6 +105,7 @@ class TonightResponse(BaseModel):
     familiar: UserDish | None = Field(None, description="One of the user's own dishes")
     one_step: Cousin | None = Field(None, description="A close new dish")
     stretch: Cousin | None = Field(None, description="A bigger leap, no new equipment")
+    reach: int = Field(0, description="Catalog dishes one step from the kitchen, under the diet")
 
 
 class MapRequest(BaseModel):
@@ -133,6 +139,42 @@ class CousinRequest(BaseModel):
     dish_id: str = Field(..., pattern=r"^[a-z0-9_]+$", max_length=60)
     diet: Diet = Field(default_factory=Diet)
     have: Have = Field(default_factory=Have)
+
+
+class PasteRequest(BaseModel):
+    """A recipe from anywhere (a link or its text) and the kitchen to rewrite it from."""
+
+    text: str = Field(..., min_length=8, max_length=settings.max_paste_chars)
+    repertoire: list[UserDish] = Field(..., min_length=1, max_length=settings.max_kitchen_dishes)
+    diet: Diet = Field(default_factory=Diet)
+    have: Have = Field(default_factory=Have)
+
+
+class PhotoKitchen(BaseModel):
+    """The kitchen sent alongside a recipe photo (as a JSON form field)."""
+
+    repertoire: list[UserDish] = Field(..., min_length=1, max_length=settings.max_kitchen_dishes)
+    diet: Diet = Field(default_factory=Diet)
+    have: Have = Field(default_factory=Have)
+
+
+class PastedRecipe(BaseModel):
+    """The recipe as read from the paste: kept on the user's device, never stored here."""
+
+    ingredients: list[str]
+    steps: list[str]
+    source_url: str | None = Field(None, description="The link it came from, if it was a link")
+
+
+class PasteResponse(BaseModel):
+    """A pasted recipe as a step from the user's kitchen."""
+
+    cousin: Cousin
+    recipe: PastedRecipe
+    breaks_diet: list[str] = Field(
+        default_factory=list,
+        description="Diet rules it breaks, worked out in code: allergen ids and/or 'vegetarian'",
+    )
 
 
 class ShareRequest(BaseModel):
@@ -256,6 +298,7 @@ EventName = Literal[
     "cook_mode",
     "shopping_shared",
     "installed",
+    "pasted",
 ]
 
 

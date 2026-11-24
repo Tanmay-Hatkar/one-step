@@ -7,15 +7,32 @@ import { useState } from "react";
 import { DishPhoto } from "@/components/dish-photo";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { clearBought, shoppingList, toggleBought, toggleSaved, useSaved } from "@/lib/saved";
+import {
+  clearBought,
+  shoppingList,
+  toggleBought,
+  toggleSaved,
+  useSaved,
+  type SavedDish,
+  type ShoppingItem,
+} from "@/lib/saved";
 import { track } from "@/lib/track";
 import { STARTER_DISHES } from "@/lib/starters";
 import type { Dish } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 /** The list as plain text, for WhatsApp, notes or a message. */
-function listText(items: string[]): string {
-  return `Shopping list (One Step)\n${items.map((i) => `• ${i}`).join("\n")}`;
+function listText(items: ShoppingItem[]): string {
+  const lines = items.map((i) => `• ${i.item}${i.use ? ` (optional, or use ${i.use})` : ""}`);
+  return `Shopping list (One Step)\n${lines.join("\n")}`;
+}
+
+/** One line under a saved dish: what to buy, or that stand-ins cover it. */
+function needsLine(s: SavedDish): string {
+  if (s.toBuy.length) return `Needs ${s.toBuy.slice(0, 3).join(", ")}${s.toBuy.length > 3 ? "…" : ""}`;
+  const n = s.optional?.length ?? 0;
+  if (n) return `Nothing new to buy · ${n} optional`;
+  return "Nothing new to buy";
 }
 
 /** Saved dishes, and one shopping list for all of them. */
@@ -23,7 +40,7 @@ export function SavedView() {
   const { saved, bought } = useSaved();
   const [copied, setCopied] = useState(false);
   const items = shoppingList(saved);
-  const toGet = items.filter((i) => !bought.includes(i.item)).map((i) => i.item);
+  const toGet = items.filter((i) => !bought.includes(i.item));
 
   async function share() {
     const text = listText(toGet);
@@ -81,7 +98,7 @@ export function SavedView() {
                     <Link href={`/dish/${s.id}`} className="min-w-0 flex-1">
                       <p className="truncate font-medium">{s.name}</p>
                       <p className="truncate text-xs text-muted-foreground">
-                        {s.toBuy.length ? `Needs ${s.toBuy.slice(0, 3).join(", ")}${s.toBuy.length > 3 ? "…" : ""}` : "Nothing new to buy"}
+                        {needsLine(s)}
                       </p>
                     </Link>
                     <Button
@@ -117,7 +134,7 @@ export function SavedView() {
             ) : (
               <>
                 <ul className="divide-y rounded-xl border bg-card">
-                  {items.map(({ item, for: dishes }) => {
+                  {items.map(({ item, for: dishes, use }) => {
                     const done = bought.includes(item);
                     return (
                       <li key={item}>
@@ -142,7 +159,7 @@ export function SavedView() {
                               {item}
                             </span>
                             <span className="block truncate text-xs text-muted-foreground">
-                              for {dishes.join(", ")}
+                              {use ? `Optional, or use your ${use} · ` : ""}for {dishes.join(", ")}
                             </span>
                           </span>
                         </button>

@@ -14,9 +14,10 @@ export type EventName =
   | "saved"
   | "cook_mode"
   | "shopping_shared"
-  | "installed";
+  | "installed"
+  | "pasted";
 
-let queue: { name: EventName; dish_id?: string }[] = [];
+const queue: { name: EventName; dish_id?: string }[] = [];
 let timer: ReturnType<typeof setTimeout> | null = null;
 
 function deviceId(): string | null {

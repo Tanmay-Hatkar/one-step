@@ -13,6 +13,7 @@ from app.repositories.dish_repository import DishRepository
 from app.repositories.eval_repository import EvalResultsRepository
 from app.repositories.insight_repository import InsightRepository
 from app.repositories.llm_repository import LLMCacheRepository, LLMUsageRepository
+from app.repositories.page_repository import PageRepository
 from app.repositories.recipe_repository import RecipeRepository
 from app.repositories.share_repository import ShareRepository
 from app.repositories.substitution_repository import SubstitutionRepository
@@ -23,6 +24,7 @@ from app.services.graph_service import GraphService
 from app.services.insight_service import InsightService
 from app.services.llm_gateway import LLMGateway
 from app.services.question_service import QuestionService
+from app.services.recipe_import_service import RecipeImportService
 from app.services.repertoire_service import RepertoireService
 from app.services.share_service import ShareService
 from app.services.speech_service import SpeechService
@@ -96,6 +98,31 @@ def get_repertoire_service() -> RepertoireService:
 def get_cousin_service() -> CousinService:
     """Cousin search + diff writing service."""
     return CousinService(get_graph(), get_gateway())
+
+
+@lru_cache
+def get_page_repository() -> PageRepository:
+    """Reader for pasted recipe links (public pages only)."""
+    return PageRepository(
+        timeout=settings.page_timeout_seconds,
+        max_bytes=settings.max_page_bytes,
+        max_redirects=settings.max_page_redirects,
+        user_agent=settings.page_user_agent,
+        unreadable_hosts=settings.unreadable_host_list,
+    )
+
+
+def get_recipe_import_service() -> RecipeImportService:
+    """Paste a recipe: read it, then write it up from the user's kitchen."""
+    return RecipeImportService(
+        get_gateway(),
+        get_graph(),
+        get_cousin_service(),
+        get_page_repository(),
+        max_chars=settings.max_paste_chars,
+        link_note_max_chars=settings.link_note_max_chars,
+        max_photo_bytes=settings.max_photo_bytes,
+    )
 
 
 def get_question_service() -> QuestionService:

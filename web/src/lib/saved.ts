@@ -15,12 +15,16 @@ export interface SavedDish {
   savedAt: string;
   /** What you'd need to buy for it (from your kitchen at the time, or the dish itself). */
   toBuy: string[];
+  /** New ingredients you can stand in from your own kitchen (older saves lack this). */
+  optional?: { item: string; use: string }[];
 }
 
 export interface ShoppingItem {
   item: string;
   /** Saved dishes that need it. */
   for: string[];
+  /** Set when every dish can do without it: what you have that stands in. */
+  use?: string;
 }
 
 /** What a dish needs that you don't have: the diff's new ingredients minus swaps. */
@@ -28,6 +32,11 @@ export function toBuyFor(dish: Dish, cousin: Cousin | null): string[] {
   if (!cousin) return dish.key_ingredients;
   const swapped = new Set((cousin.delta.swaps ?? []).map((s) => s.need));
   return cousin.delta.new_ingredients.filter((i) => !swapped.has(i));
+}
+
+/** The real ingredients a swap stands in for, worth buying to cook the dish as written. */
+export function optionalFor(cousin: Cousin | null): { item: string; use: string }[] {
+  return (cousin?.delta.swaps ?? []).map((s) => ({ item: s.need, use: s.use }));
 }
 
 function update(change: (k: ReturnType<typeof emptyKitchen>) => void) {
@@ -44,7 +53,9 @@ export function toggleSaved(dish: Dish, cousin: Cousin | null): void {
       k.saved = k.saved.filter((s) => s.id !== dish.id);
     } else {
       k.saved = [
-        { id: dish.id, name: dish.name, savedAt: new Date().toISOString(), toBuy: toBuyFor(dish, cousin) },
+        { id: dish.id, name: dish.name, savedAt: new Date().toISOString(), toBuy: toBuyFor(dish, cousin),
+          optional: optionalFor(cousin),
+        },
         ...k.saved,
       ];
       track("saved", dish.id);
@@ -65,16 +76,30 @@ export function clearBought(): void {
   });
 }
 
-/** Every item the saved dishes need, once each, with the dishes that need it. */
+/**
+ * Every item the saved dishes need, once each, with the dishes that need it. Items you can
+ * stand in for come last, marked optional, unless another saved dish needs them for real.
+ */
 export function shoppingList(saved: SavedDish[]): ShoppingItem[] {
-  const items = new Map<string, string[]>();
+  const needed = new Map<string, string[]>();
+  const optional = new Map<string, { for: string[]; use: string }>();
   for (const dish of saved) {
     for (const raw of dish.toBuy) {
       const item = raw.toLowerCase();
-      items.set(item, [...(items.get(item) ?? []), dish.name]);
+      needed.set(item, [...(needed.get(item) ?? []), dish.name]);
+    }
+    for (const { item: raw, use } of dish.optional ?? []) {
+      const item = raw.toLowerCase();
+      const seen = optional.get(item);
+      optional.set(item, { for: [...(seen?.for ?? []), dish.name], use: seen?.use ?? use });
     }
   }
-  return [...items.entries()].map(([item, dishes]) => ({ item, for: dishes }));
+  return [
+    ...[...needed.entries()].map(([item, dishes]) => ({ item, for: dishes })),
+    ...[...optional.entries()]
+      .filter(([item]) => !needed.has(item))
+      .map(([item, o]) => ({ item, for: o.for, use: o.use })),
+  ];
 }
 
 /** Saved dishes and bought items, kept in step across the page. */

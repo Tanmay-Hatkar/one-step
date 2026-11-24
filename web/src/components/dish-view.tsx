@@ -15,11 +15,15 @@ import { Button } from "@/components/ui/button";
 import { ApiError, getCousin, getDishPage } from "@/lib/api";
 import { repertoireOf } from "@/lib/kitchen";
 import { ALLERGENS, formatTime } from "@/lib/labels";
+import { findPasted, isPasted, pastedAsRecipe } from "@/lib/pasted";
 import { loadKitchen } from "@/lib/storage";
 import { track } from "@/lib/track";
 import type { Cousin, DishPage } from "@/lib/types";
 
-/** A catalog dish: photo, how it differs from your kitchen, and the full recipe. */
+const PASTED_ELSEWHERE =
+  "That recipe was pasted on another device, so it isn't here. Paste it again to see it.";
+
+/** A dish: photo, how it differs from your kitchen, and the full recipe. */
 export function DishView() {
   const { id } = useParams<{ id: string }>();
   const [page, setPage] = useState<DishPage | null>(null);
@@ -27,7 +31,23 @@ export function DishView() {
   const [fromYours, setFromYours] = useState<Cousin | null>(null);
   const [cooking, setCooking] = useState(false);
 
+  const pasted = isPasted(id);
+
   useEffect(() => {
+    if (pasted) {
+      // A recipe the user brought lives on this device, not in the catalog.
+      const entry = findPasted(id);
+      /* eslint-disable react-hooks/set-state-in-effect */
+      if (!entry) {
+        setError(PASTED_ELSEWHERE);
+        return;
+      }
+      setPage({ dish: entry.cousin.dish, recipe: pastedAsRecipe(entry) });
+      setFromYours(entry.cousin);
+      /* eslint-enable react-hooks/set-state-in-effect */
+      document.title = `${entry.cousin.dish.name} · One Step`;
+      return;
+    }
     let live = true;
     getDishPage(id)
       .then((p) => {
@@ -48,7 +68,7 @@ export function DishView() {
     return () => {
       live = false;
     };
-  }, [id]);
+  }, [id, pasted]);
 
   if (error) {
     return (
@@ -79,6 +99,7 @@ export function DishView() {
       </Link>
 
       <header className="space-y-4">
+        {!pasted && (
         <figure className="space-y-1.5">
           <DishPhoto
             id={dish.id}
@@ -91,6 +112,7 @@ export function DishView() {
             Illustration (AI-generated), not a photo of this recipe.
           </figcaption>
         </figure>
+        )}
         <div className="space-y-2">
           <h1 className="font-heading text-4xl leading-tight font-semibold tracking-tight">
             {dish.name}
@@ -177,6 +199,26 @@ export function DishView() {
               ))}
             </ol>
           </div>
+          {pasted ? (
+            <p className="border-t pt-3 text-xs text-muted-foreground">
+              Shortened from the recipe you pasted
+              {recipe.source_url && (
+                <>
+                  {" "}
+                  from{" "}
+                  <a
+                    href={recipe.source_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline underline-offset-2"
+                  >
+                    the original page
+                  </a>
+                </>
+              )}
+              . Kept on this device only. Check the original for anything that looks off.
+            </p>
+          ) : (
           <p className="border-t pt-3 text-xs text-muted-foreground">
             Recipe: &ldquo;
             <a href={recipe.source_url} className="underline underline-offset-2" rel="noopener">
@@ -188,6 +230,7 @@ export function DishView() {
             </a>
             . Lightly reformatted.
           </p>
+          )}
         </section>
       ) : (
         <section className="space-y-2 rounded-xl border border-dashed p-4 text-sm">

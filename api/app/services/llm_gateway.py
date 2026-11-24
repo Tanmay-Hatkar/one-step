@@ -7,7 +7,7 @@ from typing import TypeVar
 from pydantic import BaseModel, ValidationError
 from sqlalchemy.exc import SQLAlchemyError
 
-from app.llm.client import LLMClient
+from app.llm.client import Image, LLMClient
 from app.repositories.llm_repository import LLMCacheRepository, LLMUsageRepository
 
 logger = logging.getLogger(__name__)
@@ -35,7 +35,15 @@ class LLMGateway:
         self._usage = usage
         self._daily_cap = daily_cap
 
-    async def run(self, *, task: str, instructions: str, prompt: str, schema: type[T]) -> T:
+    async def run(
+        self,
+        *,
+        task: str,
+        instructions: str,
+        prompt: str,
+        schema: type[T],
+        image: Image | None = None,
+    ) -> T:
         """Return a cached or fresh structured response.
 
         Args:
@@ -43,6 +51,7 @@ class LLMGateway:
             instructions: System instructions.
             prompt: User-level input.
             schema: Output model.
+            image: Optional picture for the model to read; part of the cache key.
 
         Returns:
             A validated `schema` instance.
@@ -51,7 +60,7 @@ class LLMGateway:
             DailyCapExceeded: If today's budget is spent (or usage can't be read).
             LLMError: If the model call fails.
         """
-        key = self._key(task, instructions, prompt)
+        key = self._key(task, instructions, prompt, image)
         cached = self._cache.get(key)
         if cached is not None:
             try:
@@ -60,7 +69,9 @@ class LLMGateway:
                 logger.warning("Stale cache entry for %s; refreshing", task)
 
         self.check_cap()
-        result = await self._client.parse(instructions=instructions, prompt=prompt, schema=schema)
+        result = await self._client.parse(
+            instructions=instructions, prompt=prompt, schema=schema, image=image
+        )
         self.record_call()
         self._cache.put(key, task, self._client.model, result.model_dump_json())
         return result
@@ -85,7 +96,8 @@ class LLMGateway:
         """Count one paid call against today's budget."""
         self._usage.record_call()
 
-    def _key(self, task: str, instructions: str, prompt: str) -> str:
+    def _key(self, task: str, instructions: str, prompt: str, image: Image | None = None) -> str:
         """Stable cache key over everything that affects the output."""
-        material = "\x1f".join([self._client.model, task, instructions, prompt])
+        picture = hashlib.sha256(image.data).hexdigest() if image else ""
+        material = "\x1f".join([self._client.model, task, instructions, prompt, picture])
         return hashlib.sha256(material.encode()).hexdigest()

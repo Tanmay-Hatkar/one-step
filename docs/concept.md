@@ -29,6 +29,19 @@ biryani on weekends.
 4. **Substitutions by ingredient role** — acid for acid, binder for binder. *(v0.4)*
 5. **A map that grows through dinner** — cook a cousin, unlock its cousins. *(v0.3 ✓)*
 
+## Direction (Nov 2026)
+
+The catalog was the narrow part: 718 dishes we chose. The asset is the **repertoire**,
+the user's own dishes in their words. So the product widens along that, not into a
+generic recipe box:
+
+1. **Any recipe as a difference** (v1.3). Paste a link or text, or use a screenshot; the same
+   pipeline reads it into parts, compares it with your kitchen in code, and writes only
+   what changes. See [ADR-0004](adr/0004-paste-a-recipe.md).
+2. **Tonight from your own kitchen** (v1.4). Most nights the answer is a dish you already
+   make; the app should say which, and offer one new step beside it.
+3. **Not building**: meal-plan calendars, pantry inventory, nutrition tracking, social feeds.
+
 ## Why it's different
 
 Taste-profile apps (TasteOS, Mori, Vianda) match by flavor. One Step connects dishes
@@ -46,4 +59,8 @@ your repertoire and writes full recipes from scratch.
 | v0.5 | "Here's what I heard": said vs guessed, questions picked by expected change ✓ |
 | v0.6 | Substitutions by role, "what I have" chips, technique how-tos ✓ |
 | v1.0 | Real recipe dataset, fine-tuned parser model, eval dashboard, accounts, launch. |
-| Later | Nutrition balance, native mobile, voice cook mode, fridge photos. |
+| v1.1 | Simple mode: tap dishes, results first, plain words. ✓ |
+| v1.2 | Saved + shopping list, cook mode, feedback, usage stats. |
+| v1.3 | **Bring a recipe**: any link, recipe text, screenshot or photo, rewritten as changes to your own dish. Share-to-app. |
+| v1.4 | **Tonight from your own kitchen**: four tabs (Tonight, Explore, Bring, Kitchen). Tonight answers "what do I cook?" with the dish you haven't made for longest, plus one new step. Cook log; "N dishes one step away" grows as you cook. |
+| Later | Reminders, voice cook mode, fridge photos, reading video links directly. |

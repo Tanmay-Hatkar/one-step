@@ -122,6 +122,22 @@ export interface Cousin {
   diff: DiffText;
 }
 
+/** A recipe the user pasted, as read by the API. Kept on this device only. */
+export interface PastedRecipe {
+  ingredients: string[];
+  steps: string[];
+  /** The link it came from, if it was a link. */
+  source_url: string | null;
+}
+
+/** A pasted recipe written as a step from the user's kitchen. */
+export interface Pasted {
+  cousin: Cousin;
+  recipe: PastedRecipe;
+  /** Diet rules it breaks: allergen ids and/or "vegetarian". Worked out in code. */
+  breaks_diet: string[];
+}
+
 export interface DishStats {
   dishes: number;
   regions: number;
@@ -147,6 +163,8 @@ export interface TonightPicks {
   familiar: UserDish | null;
   one_step: Cousin | null;
   stretch: Cousin | null;
+  /** Catalog dishes one step from the kitchen (under the diet). */
+  reach?: number;
 }
 
 export interface MapCousin {
