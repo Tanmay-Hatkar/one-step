@@ -19,6 +19,7 @@ from pydantic import ValidationError
 from app.config import settings
 from app.deps import (
     get_cousin_service,
+    get_dish_page_service,
     get_dish_repository,
     get_eval_repository,
     get_question_service,
@@ -36,6 +37,7 @@ from app.models.api import (
     CousinRequest,
     CousinsRequest,
     CousinsResponse,
+    DishIndexEntry,
     DishPageResponse,
     MapRequest,
     MapResponse,
@@ -61,6 +63,7 @@ from app.repositories.recipe_repository import RecipeRepository
 from app.repositories.share_repository import ShareStoreError
 from app.repositories.technique_repository import TechniqueRepository
 from app.services.cousin_service import CousinService
+from app.services.dish_page_service import DishPageService
 from app.services.llm_gateway import DailyCapExceeded
 from app.services.question_service import QuestionService
 from app.services.recipe_import_service import NotARecipe, PhotoRejected, RecipeImportService
@@ -309,14 +312,21 @@ async def recipe_ids(repo: RecipeRepository = Depends(get_recipe_repository)) ->
     return repo.ids()
 
 
+@router.get("/dishes", response_model=list[DishIndexEntry])
+async def dish_index(
+    pages: DishPageService = Depends(get_dish_page_service),
+) -> list[DishIndexEntry]:
+    """Every catalog dish (static; cache freely). Feeds the sitemap and dish directory."""
+    return pages.index()
+
+
 @router.get("/dishes/{dish_id}", response_model=DishPageResponse)
 async def dish_page(
     dish_id: str = Path(..., pattern=r"^[a-z0-9_]+$", max_length=60),
-    dishes: DishRepository = Depends(get_dish_repository),
-    recipes: RecipeRepository = Depends(get_recipe_repository),
+    pages: DishPageService = Depends(get_dish_page_service),
 ) -> DishPageResponse:
-    """One catalog dish with its recipe, for the dish page."""
-    dish = dishes.get(dish_id)
-    if dish is None:
+    """One catalog dish with its recipe and the dishes one step from it."""
+    page = pages.page(dish_id)
+    if page is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "We don't know that dish.")
-    return DishPageResponse(dish=dish, recipe=recipes.get(dish_id))
+    return page

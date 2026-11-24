@@ -83,6 +83,12 @@ class Settings(BaseSettings):
     map_cousins_per_dish: int = Field(default=8, description="Cousins drawn around each dish")
     map_max_cousins: int = Field(default=40, description="Most cousins on one map")
 
+    # Public dish pages (SEO)
+    related_dish_count: int = Field(default=6, description="'One step from here' on a dish page")
+    related_max_new_ingredients: int = Field(
+        default=5, description="New ingredients listed per related dish on a dish page"
+    )
+
     # Sharing
     share_rate_limit: str = Field(default="10/minute", description="Per-IP limit on new links")
     share_id_bytes: int = Field(default=6, description="Random bytes in a share id (8 chars)")

@@ -23,10 +23,14 @@ import type { Cousin, DishPage } from "@/lib/types";
 const PASTED_ELSEWHERE =
   "That recipe was pasted on another device, so it isn't here. Paste it again to see it.";
 
-/** A dish: photo, how it differs from your kitchen, and the full recipe. */
-export function DishView() {
+/**
+ * A dish: photo, how it differs from your kitchen, and the full recipe.
+ * `initial` is the server-rendered catalog dish (so search engines see it); without it,
+ * the dish loads in the browser (pasted recipes, or the API was unreachable at render).
+ */
+export function DishView({ initial = null }: { initial?: DishPage | null }) {
   const { id } = useParams<{ id: string }>();
-  const [page, setPage] = useState<DishPage | null>(null);
+  const [page, setPage] = useState<DishPage | null>(initial);
   const [error, setError] = useState<string | null>(null);
   const [fromYours, setFromYours] = useState<Cousin | null>(null);
   const [cooking, setCooking] = useState(false);
@@ -49,14 +53,18 @@ export function DishView() {
       return;
     }
     let live = true;
-    getDishPage(id)
-      .then((p) => {
-        if (!live) return;
-        setPage(p);
-        document.title = `${p.dish.name} · One Step`;
-        track("dish_opened", p.dish.id);
-      })
-      .catch((err) => live && setError(err instanceof ApiError ? err.message : "Couldn't load it."));
+    if (initial) {
+      track("dish_opened", initial.dish.id);
+    } else {
+      getDishPage(id)
+        .then((p) => {
+          if (!live) return;
+          setPage(p);
+          document.title = `${p.dish.name} · One Step`;
+          track("dish_opened", p.dish.id);
+        })
+        .catch((err) => live && setError(err instanceof ApiError ? err.message : "Couldn't load it."));
+    }
 
     // If they have a kitchen on this device, show this dish as a diff from it too.
     const saved = loadKitchen();
@@ -68,7 +76,7 @@ export function DishView() {
     return () => {
       live = false;
     };
-  }, [id, pasted]);
+  }, [id, pasted, initial]);
 
   if (error) {
     return (

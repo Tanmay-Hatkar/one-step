@@ -105,9 +105,29 @@ export interface Recipe {
   license_url: string;
 }
 
+/** A catalog dish one step from another, with what changes (computed by code). */
+export interface RelatedDish {
+  id: string;
+  name: string;
+  cuisine: string;
+  summary: string;
+  new_techniques: string[];
+  new_ingredients: string[];
+}
+
 export interface DishPage {
   dish: Dish;
   recipe: Recipe | null;
+  /** Catalog dishes only; absent for pasted recipes. */
+  related?: RelatedDish[];
+}
+
+/** One line of the public dish index. */
+export interface DishIndexEntry {
+  id: string;
+  name: string;
+  cuisine: string;
+  region: string;
 }
 
 export interface DiffText {
