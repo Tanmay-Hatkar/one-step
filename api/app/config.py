@@ -114,6 +114,11 @@ class Settings(BaseSettings):
         default=2, description="A 'stretch' pick may add at most this many new skills"
     )
 
+    # Error tracking (Sentry). Empty DSN = off.
+    sentry_dsn: str = Field(default="", description="Sentry project DSN; empty turns it off")
+    app_env: str = Field(default="development", description="development | production")
+    app_version: str = Field(default="1.2.0", description="Reported with errors")
+
     # HTTP
     cors_origins: str = Field(default="http://localhost:3000", description="Comma-separated")
     log_level: str = Field(default="INFO")
