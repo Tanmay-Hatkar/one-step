@@ -167,7 +167,12 @@ def get_speech_service() -> SpeechService:
 @lru_cache
 def get_insight_service() -> InsightService:
     """Feedback and anonymous usage stats."""
-    return InsightService(InsightRepository(get_session_factory()))
+    return InsightService(
+        InsightRepository(get_session_factory()),
+        LLMUsageRepository(get_session_factory()),
+        settings.llm_input_usd_per_million,
+        settings.llm_output_usd_per_million,
+    )
 
 
 @lru_cache

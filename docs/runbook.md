@@ -46,7 +46,7 @@ Live: https://one-step-six-brown.vercel.app · API health: `<railway-url>/health
 | "Couldn't reach the kitchen brain" | Railway logs for `OpenAI call failed` | 401 → key revoked/expired, rotate. 429 → OpenAI quota/billing |
 | Everything LLM fails after many users | Logs for `Daily LLM cap reached` | Cap reached (resets 00:00 UTC). Raise `DAILY_LLM_CALL_CAP` only if spend is OK |
 | Web loads, every request fails | Browser console: CORS error? | Add the web origin to `CORS_ORIGINS` |
-| OpenAI bill jumps | OpenAI usage page; `/api/admin/stats` | Lower `DAILY_LLM_CALL_CAP`, tighten `RATE_LIMIT`; set a hard monthly limit in OpenAI billing |
+| OpenAI bill jumps | OpenAI usage page; `/api/admin/stats` (`llm_cost_usd`, `llm_cost_per_device_usd`) | Lower `DAILY_LLM_CALL_CAP`, tighten `RATE_LIMIT`; set a hard monthly limit in OpenAI billing |
 | Errors you didn't see | Sentry (once DSN is set) | |
 
 ## Costs to watch

@@ -73,6 +73,7 @@ class LLMGateway:
             instructions=instructions, prompt=prompt, schema=schema, image=image
         )
         self.record_call()
+        self._usage.record_tokens(*getattr(self._client, "last_tokens", (0, 0)))
         self._cache.put(key, task, self._client.model, result.model_dump_json())
         return result
 
