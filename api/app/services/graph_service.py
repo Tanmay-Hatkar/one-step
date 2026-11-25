@@ -12,7 +12,7 @@ from dataclasses import dataclass, field
 from datetime import date
 
 from app.config import Settings
-from app.models.dish import Delta, Dish, Swap, UserDish, ingredients_of
+from app.models.dish import Delta, Dish, DishParts, Swap, UserDish, ingredients_of
 from app.models.substitution import Substitute
 from app.services.diet import allows, ingredient_allergens, is_meat_ingredient, user_dish_allows
 from app.services.ingredients import missing_ingredients, normalize, pantry_of
@@ -398,6 +398,40 @@ class GraphService:
             raise ValueError("A kitchen needs at least one dish")
         pantry, equipment = self._resources(repertoire, owned)
         return self._best_delta(repertoire, dish, pantry, equipment, diet or DietRule())
+
+    def related(self, dish_id: str) -> list[tuple[Dish, Delta]]:
+        """Catalog dishes one step from a catalog dish, as if you cooked that dish.
+
+        Same rule as for a user's kitchen: the page dish is the anchor and its own
+        ingredients and equipment are the pantry. Diversified by region.
+
+        Args:
+            dish_id: Catalog id.
+
+        Returns:
+            Up to `related_dish_count` (dish, delta) pairs, closest first; empty if unknown.
+        """
+        source = next((d for d in self._dishes if d.id == dish_id), None)
+        if source is None:
+            return []
+        anchor = UserDish(
+            **source.model_dump(include=set(DishParts.model_fields)),
+            name=source.name,
+            matched_dish_id=source.id,
+        )
+        pantry = pantry_of([source.key_ingredients])
+        equipment = set(source.equipment)
+        scored = [
+            (dish, self.compute_delta(anchor, dish, pantry, equipment))
+            for dish in self._dishes
+            if dish.id != source.id
+        ]
+        one_step = sorted(
+            ((d, delta) for d, delta in scored if delta.is_one_step),
+            key=lambda pair: pair[1].score,
+            reverse=True,
+        )
+        return self._diversify(one_step, self._settings.related_dish_count)
 
     def _best_delta(
         self,

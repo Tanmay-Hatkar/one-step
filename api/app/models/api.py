@@ -242,11 +242,32 @@ class QuestionsResponse(BaseModel):
     questions: list[Question]
 
 
+class RelatedDish(BaseModel):
+    """A catalog dish one step from the page's dish, with what changes (computed by code)."""
+
+    id: str
+    name: str
+    cuisine: str
+    summary: str
+    new_techniques: list[str]
+    new_ingredients: list[str]
+
+
 class DishPageResponse(BaseModel):
-    """A catalog dish and, when there is one, its full recipe."""
+    """A catalog dish, its full recipe when there is one, and dishes one step away."""
 
     dish: Dish
     recipe: Recipe | None = None
+    related: list[RelatedDish] = Field(default_factory=list)
+
+
+class DishIndexEntry(BaseModel):
+    """One line of the public dish index (for the sitemap and the dish directory)."""
+
+    id: str
+    name: str
+    cuisine: str
+    region: str
 
 
 class PasskeyOptions(BaseModel):

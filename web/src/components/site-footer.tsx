@@ -11,6 +11,9 @@ export function SiteFooter() {
     <footer className="mt-16 space-y-3 text-xs text-muted-foreground">
       <InstallApp />
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+        <Link href="/dishes" className={LINK}>
+          Every dish
+        </Link>
         <Link href="/saved" className={LINK}>
           Saved
         </Link>

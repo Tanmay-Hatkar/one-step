@@ -20,6 +20,7 @@ from app.repositories.substitution_repository import SubstitutionRepository
 from app.repositories.technique_repository import TechniqueRepository
 from app.services.account_service import AccountService
 from app.services.cousin_service import CousinService
+from app.services.dish_page_service import DishPageService
 from app.services.graph_service import GraphService
 from app.services.insight_service import InsightService
 from app.services.llm_gateway import LLMGateway
@@ -167,3 +168,9 @@ def get_speech_service() -> SpeechService:
 def get_insight_service() -> InsightService:
     """Feedback and anonymous usage stats."""
     return InsightService(InsightRepository(get_session_factory()))
+
+
+@lru_cache
+def get_dish_page_service() -> DishPageService:
+    """The public dish-page builder (catalog + recipes + graph)."""
+    return DishPageService(get_dish_repository(), get_recipe_repository(), get_graph(), settings)
