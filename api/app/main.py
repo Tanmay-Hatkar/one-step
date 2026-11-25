@@ -12,6 +12,7 @@ from slowapi.errors import RateLimitExceeded
 from app.config import settings
 from app.deps import get_dish_repository, get_session_factory
 from app.limiter import limiter
+from app.observability import init_error_tracking
 from app.routes.account import router as account_router
 from app.routes.api import router
 from app.routes.insights import router as insights_router
@@ -33,8 +34,9 @@ async def lifespan(_: FastAPI) -> AsyncIterator[None]:
 
 
 def create_app() -> FastAPI:
-    """Build the app: CORS, rate limiting, routes."""
-    app = FastAPI(title="One Step API", version="1.2.0", lifespan=lifespan)
+    """Build the app: error tracking, CORS, rate limiting, routes."""
+    init_error_tracking(settings.sentry_dsn, settings.app_env, settings.app_version)
+    app = FastAPI(title="One Step API", version=settings.app_version, lifespan=lifespan)
     app.state.limiter = limiter
     app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
     app.add_middleware(

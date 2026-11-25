@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Fraunces, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
+import { ErrorTracking } from "@/components/error-tracking";
 import { SITE_URL } from "@/lib/site";
 
 const geistSans = Geist({ variable: "--font-sans", subsets: ["latin"] });
@@ -43,6 +44,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-background font-sans text-foreground">
+        <ErrorTracking />
         {children}
       </body>
     </html>
