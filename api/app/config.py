@@ -51,6 +51,24 @@ class Settings(BaseSettings):
     default_cousin_count: int = Field(default=5)
     max_cousin_count: int = Field(default=8)
 
+    # Paste a recipe (v1.3): a link or recipe text, rewritten from the user's kitchen
+    max_paste_chars: int = Field(default=8000, description="Pasted text, or text kept from a page")
+    paste_rate_limit: str = Field(default="10/minute", description="Per-IP limit on pastes")
+    link_note_max_chars: int = Field(
+        default=200, description="Words allowed around a link before it counts as recipe text"
+    )
+    max_photo_bytes: int = Field(default=4_000_000, description="Largest recipe photo accepted")
+    photo_rate_limit: str = Field(default="6/minute", description="Per-IP limit on photo pastes")
+    max_recent_cooked: int = Field(default=40, description="Recently cooked names per request")
+    page_timeout_seconds: float = Field(default=8.0, description="Fetching a pasted link")
+    max_page_bytes: int = Field(default=1_500_000, description="Most of a page that is read")
+    max_page_redirects: int = Field(default=3)
+    page_user_agent: str = Field(default="OneStepBot/1.0 (recipe link reader)")
+    unreadable_hosts: str = Field(
+        default="instagram.com,tiktok.com,facebook.com,fb.watch,youtube.com,youtu.be,x.com",
+        description="Comma-separated sites that need a login or are video only",
+    )
+
     # Kitchen ("what I have") and follow-up questions
     max_pantry_items: int = Field(default=60, description="Pantry items per request")
     max_questions: int = Field(default=3, description="Follow-up questions shown at most")
@@ -77,6 +95,14 @@ class Settings(BaseSettings):
     session_days: int = Field(default=180, description="How long a sign-in lasts")
     max_synced_kitchen_bytes: int = Field(default=200_000, description="Largest synced kitchen")
 
+    # Feedback and usage stats
+    feedback_rate_limit: str = Field(default="5/minute", description="Per-IP feedback limit")
+    events_rate_limit: str = Field(default="60/minute", description="Per-IP usage-event limit")
+    max_feedback_chars: int = Field(default=2000)
+    max_events_per_batch: int = Field(default=20)
+    stats_default_days: int = Field(default=28, description="Window for /api/admin/stats")
+    admin_token: str = Field(default="", description="Bearer token for stats; empty = off")
+
     # Evals
     eval_results_path: Path = Field(default=API_ROOT / "evals" / "results" / "latest.json")
 
@@ -91,6 +117,11 @@ class Settings(BaseSettings):
     # HTTP
     cors_origins: str = Field(default="http://localhost:3000", description="Comma-separated")
     log_level: str = Field(default="INFO")
+
+    @property
+    def unreadable_host_list(self) -> list[str]:
+        """Return the sites whose links can't be read, as a list."""
+        return [h.strip().lower() for h in self.unreadable_hosts.split(",") if h.strip()]
 
     @property
     def cors_origin_list(self) -> list[str]:

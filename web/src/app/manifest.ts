@@ -10,6 +10,12 @@ export default function manifest(): MetadataRoute.Manifest {
     start_url: "/",
     categories: ["food", "lifestyle"],
     display: "standalone",
+    // Sharing a recipe link or text to the installed app opens it in the paste box.
+    share_target: {
+      action: "/",
+      method: "GET",
+      params: { title: "title", text: "text", url: "url" },
+    },
     background_color: "#fbf8f3",
     theme_color: "#fbf8f3",
     icons: [

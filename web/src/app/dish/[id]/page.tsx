@@ -3,6 +3,7 @@ import { Suspense } from "react";
 
 import { DishView } from "@/components/dish-view";
 import { LoadingCards } from "@/components/loading-cards";
+import { SiteFooter } from "@/components/site-footer";
 
 import { API_URL } from "@/lib/site";
 
@@ -60,6 +61,7 @@ export default function DishPage() {
       <Suspense fallback={<LoadingCards label="Opening the dish…" />}>
         <DishView />
       </Suspense>
+      <SiteFooter />
     </main>
   );
 }

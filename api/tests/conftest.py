@@ -188,9 +188,13 @@ class FakeLLMClient:
         self.responder = responder
         self.calls = 0
         self.fail = False
+        self.images: list[Any] = []
 
-    async def parse(self, *, instructions: str, prompt: str, schema: type[T]) -> T:
+    async def parse(
+        self, *, instructions: str, prompt: str, schema: type[T], image: Any = None
+    ) -> T:
         self.calls += 1
+        self.images.append(image)
         if self.fail:
             raise LLMError("boom")
         result = self.responder(schema, prompt)

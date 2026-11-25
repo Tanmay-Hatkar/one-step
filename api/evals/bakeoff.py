@@ -45,7 +45,7 @@ async def evaluate(model: str, effort: str, price_in: float, price_out: float) -
     """Run parse, diff and e2e on one model; return its row for the report."""
     client = OpenAILLMClient(settings.openai_api_key, model, effort, settings.llm_timeout_seconds)
     # Fresh cache so every model pays for its own calls and the costs compare fairly.
-    repertoire, cousins, graph, dishes = build_services(
+    repertoire, cousins, graph, dishes, _ = build_services(
         client, cache_url=f"sqlite:///{mkdtemp()}/cache.db"
     )
     suites = {

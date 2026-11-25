@@ -111,6 +111,32 @@ class SyncedKitchen(Base):
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
 
 
+class Feedback(Base):
+    """A message someone sent from the app's feedback box. Anonymous."""
+
+    __tablename__ = "feedback"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    message: Mapped[str] = mapped_column(Text)
+    page: Mapped[str] = mapped_column(String(200), default="")
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
+
+
+class UsageEvent(Base):
+    """One thing a device did ("cooked", "saved"…), keyed by a random id the app makes.
+
+    No IP, no account, no free text: enough to count returning users and what gets used.
+    """
+
+    __tablename__ = "usage_events"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    device: Mapped[str] = mapped_column(String(36), index=True)
+    name: Mapped[str] = mapped_column(String(40), index=True)
+    dish_id: Mapped[str | None] = mapped_column(String(80), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now, index=True)
+
+
 def make_engine(database_url: str) -> Engine:
     """Create an engine; normalizes Railway-style postgres:// URLs to psycopg.
 

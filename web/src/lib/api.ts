@@ -6,6 +6,7 @@ import type {
   EvalResults,
   Have,
   KitchenMap,
+  Pasted,
   Question,
   TechniqueGuide,
   SharedKitchen,
@@ -105,6 +106,7 @@ export async function getTonight(
   have: Have,
   maxMinutes: number | null,
   skip: string[],
+  recent: string[] = [],
 ): Promise<TonightPicks> {
   return request<TonightPicks>("/api/tonight", {
     method: "POST",
@@ -114,6 +116,7 @@ export async function getTonight(
       have,
       max_minutes: maxMinutes,
       skip,
+      recent,
     }),
   });
 }
@@ -146,6 +149,32 @@ export async function getCousin(
     method: "POST",
     body: JSON.stringify({ repertoire, dish_id: dishId, diet, have }),
   });
+}
+
+/** A recipe from anywhere (a link or its text), written as a step from your kitchen. */
+export async function pasteRecipe(
+  text: string,
+  repertoire: UserDish[],
+  diet: Diet,
+  have: Have,
+): Promise<Pasted> {
+  return request<Pasted>("/api/paste", {
+    method: "POST",
+    body: JSON.stringify({ text, repertoire, diet, have }),
+  });
+}
+
+/** A screenshot or photo of a recipe, written as a step from your kitchen. */
+export async function pastePhoto(
+  photo: Blob,
+  repertoire: UserDish[],
+  diet: Diet,
+  have: Have,
+): Promise<Pasted> {
+  const form = new FormData();
+  form.append("photo", photo, "recipe");
+  form.append("kitchen", JSON.stringify({ repertoire, diet, have }));
+  return request<Pasted>("/api/paste/photo", { method: "POST", body: form });
 }
 
 /** A few quick questions whose answers would change the suggestions (often none). */

@@ -33,6 +33,12 @@ const SUITES: { id: string; title: string; what: string; usesAI: boolean }[] = [
     usesAI: true,
   },
   {
+    id: "paste",
+    title: "Reading a recipe you bring",
+    what: "A pasted recipe or caption: is it read into the right kind of dish, techniques and ingredients, are allergens found in code, are non-recipes turned away, and is an instruction hidden in the text ignored?",
+    usesAI: true,
+  },
+  {
     id: "diet",
     title: "Diet safety",
     what: "Every diet rule (vegetarian and 9 allergens), swept over 152 kitchens across suggestions, tonight's picks and the map: no dish shown may break it, by its tags or by any ingredient.",

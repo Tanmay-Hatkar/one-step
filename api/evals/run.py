@@ -2,7 +2,7 @@
 
 Usage:
     uv run python -m evals.run            # all suites
-    uv run python -m evals.run parse      # one suite: parse | diff | e2e | diet
+    uv run python -m evals.run parse      # one suite: parse | diff | e2e | paste | diet
 
 Responses are cached in evals/.cache.db, keyed by prompt, so re-runs are free until a
 prompt or model changes. Exits non-zero if the overall pass rate is below threshold.
@@ -21,15 +21,17 @@ from app.llm.client import LLMError, OpenAILLMClient
 from app.models.dish import UserDish
 from app.repositories.dish_repository import DishRepository
 from app.repositories.llm_repository import LLMCacheRepository, LLMUsageRepository
+from app.repositories.page_repository import PageRepository
 from app.repositories.substitution_repository import SubstitutionRepository
 from app.services.cousin_service import CousinService
 from app.services.diet import ALLERGEN_KEYWORDS, ingredient_allergens, is_meat_ingredient
 from app.services.graph_service import DietRule, GraphService
 from app.services.ingredients import pantry_of
 from app.services.llm_gateway import LLMGateway
+from app.services.recipe_import_service import NotARecipe, RecipeImportService
 from app.services.repertoire_service import RepertoireService
-from evals.cases import ANCHORS, DIFF_CASES, END_TO_END_CASES, PARSE_CASES
-from evals.checks import Check, check_diff, check_parsed_dish
+from evals.cases import ANCHORS, DIFF_CASES, END_TO_END_CASES, PARSE_CASES, PASTE_CASES
+from evals.checks import Check, check_diff, check_parsed_dish, check_pasted
 
 logger = logging.getLogger("evals")
 
@@ -40,7 +42,7 @@ PASS_THRESHOLD = 0.85
 
 def build_services(
     client: OpenAILLMClient | None = None, cache_url: str = f"sqlite:///{EVALS_DIR / '.cache.db'}"
-) -> tuple[RepertoireService, CousinService, GraphService, DishRepository]:
+) -> tuple[RepertoireService, CousinService, GraphService, DishRepository, RecipeImportService]:
     """Real services with a dedicated eval cache and a generous cap.
 
     Args:
@@ -62,11 +64,23 @@ def build_services(
     dishes = DishRepository(settings.dishes_path)
     swaps = SubstitutionRepository(settings.substitutions_path).usable()
     graph = GraphService(dishes.all(), settings, substitutes=swaps)
+    cousins = CousinService(graph, gateway)
+    pages = PageRepository(
+        settings.page_timeout_seconds,
+        settings.max_page_bytes,
+        settings.max_page_redirects,
+        settings.page_user_agent,
+        settings.unreadable_host_list,
+    )
+    importer = RecipeImportService(
+        gateway, graph, cousins, pages, settings.max_paste_chars, settings.link_note_max_chars
+    )
     return (
         RepertoireService(gateway, dishes, settings.max_repertoire_dishes),
-        CousinService(graph, gateway),
+        cousins,
         graph,
         dishes,
+        importer,
     )
 
 
@@ -136,6 +150,30 @@ async def run_e2e(repertoire: RepertoireService, graph: GraphService) -> list[di
         }
 
     return await asyncio.gather(*(one(c) for c in END_TO_END_CASES))
+
+
+async def run_paste(importer: RecipeImportService) -> list[dict]:
+    """Paste suite: a recipe from anywhere, read and compared with a fixed kitchen."""
+
+    async def one(case: dict) -> dict:
+        kitchen = [UserDish.model_validate(ANCHORS[case["anchor"]])]
+        try:
+            pasted = await importer.paste(case["text"], kitchen)
+        except NotARecipe:
+            rejected = bool(case.get("rejected"))
+            return {"id": case["id"], "checks": [("is_recipe", rejected, "rejected")]}
+        except LLMError as exc:
+            return {"id": case["id"], "checks": [("llm_call", False, str(exc))]}
+        if case.get("rejected"):
+            name = pasted.cousin.dish.name
+            return {"id": case["id"], "checks": [("is_recipe", False, f"read as {name}")]}
+        return {
+            "id": case["id"],
+            "checks": check_pasted(pasted, case),
+            "sample": pasted.cousin.diff.model_dump(),
+        }
+
+    return await asyncio.gather(*(one(c) for c in PASTE_CASES))
 
 
 def run_diet(graph: GraphService, dishes: DishRepository) -> list[dict]:
@@ -232,8 +270,8 @@ async def main() -> int:
     """Run the requested suites, write results, return the exit code."""
     logging.basicConfig(level=logging.INFO, format="%(message)s")
     logging.getLogger("httpx").setLevel(logging.WARNING)
-    wanted = set(sys.argv[1:]) or {"parse", "diff", "e2e", "diet"}
-    repertoire, cousins, graph, dishes = build_services()
+    wanted = set(sys.argv[1:]) or {"parse", "diff", "e2e", "paste", "diet"}
+    repertoire, cousins, graph, dishes, importer = build_services()
     suites: dict[str, list[dict]] = {}
     if "parse" in wanted:
         suites["parse"] = await run_parse(repertoire)
@@ -241,6 +279,8 @@ async def main() -> int:
         suites["diff"] = await run_diff(cousins, graph, dishes)
     if "e2e" in wanted:
         suites["e2e"] = await run_e2e(repertoire, graph)
+    if "paste" in wanted:
+        suites["paste"] = await run_paste(importer)
     if "diet" in wanted:
         suites["diet"] = run_diet(graph, dishes)
     report = summarize(suites)

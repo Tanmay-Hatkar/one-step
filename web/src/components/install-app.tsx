@@ -3,6 +3,8 @@
 import { Download } from "lucide-react";
 import { useEffect, useState } from "react";
 
+import { track } from "@/lib/track";
+
 /** Chrome/Edge/Android's install event (not in the DOM typings yet). */
 interface InstallPrompt extends Event {
   prompt: () => Promise<void>;
@@ -33,7 +35,8 @@ export function InstallApp() {
       type="button"
       onClick={async () => {
         await prompt.prompt();
-        await prompt.userChoice;
+        const { outcome } = await prompt.userChoice;
+        if (outcome === "accepted") track("installed");
         setPrompt(null);
       }}
       className="mb-3 flex w-fit items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm text-foreground hover:bg-muted"

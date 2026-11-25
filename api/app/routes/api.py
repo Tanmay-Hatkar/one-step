@@ -3,7 +3,18 @@
 import logging
 from typing import Annotated, Any
 
-from fastapi import APIRouter, Depends, File, HTTPException, Path, Request, UploadFile, status
+from fastapi import (
+    APIRouter,
+    Depends,
+    File,
+    Form,
+    HTTPException,
+    Path,
+    Request,
+    UploadFile,
+    status,
+)
+from pydantic import ValidationError
 
 from app.config import settings
 from app.deps import (
@@ -11,6 +22,7 @@ from app.deps import (
     get_dish_repository,
     get_eval_repository,
     get_question_service,
+    get_recipe_import_service,
     get_recipe_repository,
     get_repertoire_service,
     get_share_service,
@@ -29,6 +41,9 @@ from app.models.api import (
     MapResponse,
     ParseRepertoireRequest,
     ParseRepertoireResponse,
+    PasteRequest,
+    PasteResponse,
+    PhotoKitchen,
     QuestionsRequest,
     QuestionsResponse,
     SharedKitchenResponse,
@@ -41,12 +56,14 @@ from app.models.api import (
 from app.models.technique import TechniqueGuide
 from app.repositories.dish_repository import DishRepository
 from app.repositories.eval_repository import EvalResultsRepository
+from app.repositories.page_repository import LinkNotSupported, PageUnreadable
 from app.repositories.recipe_repository import RecipeRepository
 from app.repositories.share_repository import ShareStoreError
 from app.repositories.technique_repository import TechniqueRepository
 from app.services.cousin_service import CousinService
 from app.services.llm_gateway import DailyCapExceeded
 from app.services.question_service import QuestionService
+from app.services.recipe_import_service import NotARecipe, PhotoRejected, RecipeImportService
 from app.services.repertoire_service import NoDishesFound, RepertoireService
 from app.services.share_service import ShareService
 from app.services.speech_service import AudioRejected, NothingHeard, SpeechService
@@ -58,6 +75,15 @@ BUSY_MESSAGE = "One Step is resting for today — too many people cooking. Try a
 LLM_DOWN_MESSAGE = "Couldn't reach the kitchen brain just now. Please try again."
 NOTHING_HEARD_MESSAGE = "I didn't catch any words. Try again a little closer to the mic."
 BAD_AUDIO_MESSAGE = "That recording didn't work. Try again, or type it instead."
+NOT_A_RECIPE_MESSAGE = "I couldn't find a recipe in that. Paste the ingredients and steps."
+PAGE_UNREADABLE_MESSAGE = "I couldn't open that link. Copy the recipe text and paste it instead."
+LINK_NOT_SUPPORTED_MESSAGE = (
+    "I can't open links from that site yet. Copy the caption or recipe text and paste it here."
+)
+BAD_PHOTO_MESSAGE = "That picture didn't work. Try a screenshot or a clear photo of the recipe."
+NO_RECIPE_IN_PHOTO_MESSAGE = (
+    "I couldn't read a recipe in that picture. Make sure the ingredients are in the shot."
+)
 SHARE_DOWN_MESSAGE = "Couldn't save or open shared kitchens just now. Please try again."
 
 
@@ -137,7 +163,9 @@ async def tonight(
     service: CousinService = Depends(get_cousin_service),
 ) -> TonightResponse:
     """A familiar dish, a one-step dish and a stretch that fit tonight's time and diet."""
-    return await service.tonight(body.repertoire, body.diet, body.max_minutes, body.skip, body.have)
+    return await service.tonight(
+        body.repertoire, body.diet, body.max_minutes, body.skip, body.have, body.recent
+    )
 
 
 @router.post("/map", response_model=MapResponse)
@@ -163,6 +191,61 @@ async def one_cousin(
     if cousin is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "That dish isn't available for you.")
     return cousin
+
+
+@router.post("/paste", response_model=PasteResponse)
+@limiter.limit(settings.paste_rate_limit)
+async def paste_recipe(
+    request: Request,
+    body: PasteRequest,
+    service: RecipeImportService = Depends(get_recipe_import_service),
+) -> PasteResponse:
+    """A recipe from anywhere (link or text), written as a step from the user's kitchen."""
+    try:
+        return await service.paste(body.text, body.repertoire, body.diet, body.have)
+    except LinkNotSupported as exc:
+        raise HTTPException(
+            status.HTTP_422_UNPROCESSABLE_CONTENT, LINK_NOT_SUPPORTED_MESSAGE
+        ) from exc
+    except PageUnreadable as exc:
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, PAGE_UNREADABLE_MESSAGE) from exc
+    except NotARecipe as exc:
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, NOT_A_RECIPE_MESSAGE) from exc
+    except DailyCapExceeded as exc:
+        raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, BUSY_MESSAGE) from exc
+    except LLMError as exc:
+        raise HTTPException(status.HTTP_502_BAD_GATEWAY, LLM_DOWN_MESSAGE) from exc
+
+
+@router.post("/paste/photo", response_model=PasteResponse)
+@limiter.limit(settings.photo_rate_limit)
+async def paste_photo(
+    request: Request,
+    photo: Annotated[UploadFile, File()],
+    kitchen: Annotated[str, Form(max_length=settings.max_synced_kitchen_bytes)],
+    service: RecipeImportService = Depends(get_recipe_import_service),
+) -> PasteResponse:
+    """A screenshot or photo of a recipe, written as a step from the user's kitchen."""
+    try:
+        who = PhotoKitchen.model_validate_json(kitchen)
+    except ValidationError as exc:
+        raise HTTPException(
+            status.HTTP_422_UNPROCESSABLE_CONTENT, "Tell me a dish you cook first."
+        ) from exc
+    try:
+        # One byte past the limit, so an oversized picture is rejected without buffering it.
+        data = await photo.read(settings.max_photo_bytes + 1)
+        return await service.paste_photo(data, who.repertoire, who.diet, who.have)
+    except PhotoRejected as exc:
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, BAD_PHOTO_MESSAGE) from exc
+    except NotARecipe as exc:
+        raise HTTPException(
+            status.HTTP_422_UNPROCESSABLE_CONTENT, NO_RECIPE_IN_PHOTO_MESSAGE
+        ) from exc
+    except DailyCapExceeded as exc:
+        raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, BUSY_MESSAGE) from exc
+    except LLMError as exc:
+        raise HTTPException(status.HTTP_502_BAD_GATEWAY, LLM_DOWN_MESSAGE) from exc
 
 
 @router.post("/shares", response_model=ShareResponse, status_code=status.HTTP_201_CREATED)

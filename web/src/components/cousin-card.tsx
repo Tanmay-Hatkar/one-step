@@ -17,9 +17,11 @@ import { useId, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { DishPhoto } from "@/components/dish-photo";
+import { SaveButton } from "@/components/save-button";
 import { TechniqueHelp } from "@/components/technique-help";
 import { Card } from "@/components/ui/card";
 import { BASIC_TECHNIQUES, equipmentLabel, formatTime } from "@/lib/labels";
+import { isPasted } from "@/lib/pasted";
 import type { Cousin } from "@/lib/types";
 import { useRecipeIds } from "@/lib/use-recipe-ids";
 import { cn } from "@/lib/utils";
@@ -171,7 +173,7 @@ export function CousinCard({
                 className="h-9"
               >
                 <BookOpen aria-hidden />
-                {recipeIds.has(dish.id) ? "Full recipe" : "About this dish"}
+                {recipeIds.has(dish.id) || isPasted(dish.id) ? "Full recipe" : "About this dish"}
               </Button>
             )}
             {onCooked && (
@@ -185,6 +187,7 @@ export function CousinCard({
               {cooked ? "In your kitchen" : "I cooked this"}
             </Button>
             )}
+            {onCooked && <SaveButton dish={dish} cousin={cousin} />}
             {onSkip && (
               <Button variant="ghost" onClick={onSkip} className="h-9 text-muted-foreground">
                 <X aria-hidden />

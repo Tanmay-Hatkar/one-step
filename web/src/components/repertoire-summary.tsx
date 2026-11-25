@@ -26,7 +26,7 @@ export function RepertoireSummary({
     <section aria-labelledby="your-kitchen" className="space-y-3">
       <div className="flex items-center justify-between gap-3">
         <h2 id="your-kitchen" className="text-sm font-medium text-muted-foreground">
-          Your kitchen
+          Dishes you cook
         </h2>
         <div className="flex items-start gap-1">
           <ShareButton dishes={shareable} />

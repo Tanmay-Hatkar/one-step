@@ -56,6 +56,7 @@ class TonightPicks:
     familiar: UserDish | None
     one_step: tuple[Dish, Delta] | None
     stretch: tuple[Dish, Delta] | None
+    reach: int = 0  # catalog dishes one step from the kitchen (ignores time and skips)
 
 
 @dataclass(frozen=True)
@@ -229,6 +230,7 @@ class GraphService:
         skip: frozenset[str] = frozenset(),
         today: date | None = None,
         owned: Owned = NOTHING_EXTRA,
+        recent: tuple[str, ...] = (),
     ) -> TonightPicks:
         """Pick a familiar dish, a one-step dish and a stretch for tonight.
 
@@ -239,14 +241,17 @@ class GraphService:
             skip: Catalog ids and user dish names the user said 'not tonight' to.
             today: Used to rotate the familiar pick day by day (defaults to today).
             owned: Extra equipment and pantry items the user has.
+            recent: Names of the user's dishes cooked lately, most recent first. The
+                familiar pick is the one they haven't made for longest.
 
         Returns:
             The three picks; any is None when nothing fits.
         """
         diet = diet or DietRule()
+        ranked = self._ranked(repertoire, diet, owned)
         fits = [
             (dish, delta)
-            for dish, delta in self._ranked(repertoire, diet, owned)
+            for dish, delta in ranked
             if dish.id not in skip and (max_minutes is None or dish.time_minutes <= max_minutes)
         ]
         one_step = next(((d, x) for d, x in fits if x.is_one_step), None)
@@ -262,8 +267,11 @@ class GraphService:
             other = [p for p in stretch_pool if p[0].region != one_step[0].region]
             stretch_pool = other or stretch_pool
         stretch = stretch_pool[0] if stretch_pool else None
-        familiar = self._familiar(repertoire, diet, max_minutes, skip, today or date.today())
-        return TonightPicks(familiar=familiar, one_step=one_step, stretch=stretch)
+        familiar = self._familiar(
+            repertoire, diet, max_minutes, skip, today or date.today(), recent
+        )
+        reach = sum(1 for _, delta in ranked if delta.is_one_step)
+        return TonightPicks(familiar=familiar, one_step=one_step, stretch=stretch, reach=reach)
 
     def one_step_ids(
         self, repertoire: list[UserDish], diet: DietRule | None = None, owned: Owned = NOTHING_EXTRA
@@ -365,6 +373,32 @@ class GraphService:
         pantry, equipment = self._resources(repertoire, owned)
         return dish, self._best_delta(repertoire, dish, pantry, equipment, diet)
 
+    def delta_for(
+        self,
+        repertoire: list[UserDish],
+        dish: Dish,
+        diet: DietRule | None = None,
+        owned: Owned = NOTHING_EXTRA,
+    ) -> Delta:
+        """A dish from outside the catalog (a pasted recipe) relative to the user's kitchen.
+
+        Args:
+            repertoire: The user's dishes (at least one).
+            dish: Any dish broken into parts.
+            diet: Swaps are only offered if the stand-in fits this rule.
+            owned: Extra equipment and pantry items the user has.
+
+        Returns:
+            The delta against whichever of the user's dishes it is closest to.
+
+        Raises:
+            ValueError: If the repertoire is empty.
+        """
+        if not repertoire:
+            raise ValueError("A kitchen needs at least one dish")
+        pantry, equipment = self._resources(repertoire, owned)
+        return self._best_delta(repertoire, dish, pantry, equipment, diet or DietRule())
+
     def _best_delta(
         self,
         repertoire: list[UserDish],
@@ -400,8 +434,13 @@ class GraphService:
         max_minutes: int | None,
         skip: frozenset[str],
         today: date,
+        recent: tuple[str, ...] = (),
     ) -> UserDish | None:
-        """One of the user's own dishes, rotating daily; quick ones on short nights."""
+        """One of the user's own dishes: the one not made for longest; quick on short nights.
+
+        Dishes with no cooking on record come first (rotating daily so the pick isn't
+        stuck); once everything has been cooked, the one cooked longest ago wins.
+        """
         options = [
             d
             for d in repertoire
@@ -411,7 +450,11 @@ class GraphService:
             options = [d for d in options if d.effort == "weeknight"] or options
         if not options:
             return None
-        return options[today.toordinal() % len(options)]
+        order = {name.lower(): i for i, name in reversed(list(enumerate(recent)))}
+        unlogged = [d for d in options if d.name.lower() not in order]
+        if unlogged:
+            return unlogged[today.toordinal() % len(unlogged)]
+        return max(options, key=lambda d: order[d.name.lower()])
 
     @staticmethod
     def _new_skills(delta: Delta) -> list[str]:

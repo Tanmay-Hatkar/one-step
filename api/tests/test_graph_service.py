@@ -229,3 +229,34 @@ def test_cousin_for_returns_one_dish_or_none(catalog, chicken_and_rice, settings
         is None
     )
     assert graph.cousin_for([], "kabsa") is None
+
+
+def test_tonight_familiar_is_the_dish_not_made_for_longest(
+    catalog: list[Dish], settings: Settings, chicken_and_rice: UserDish
+) -> None:
+    graph = GraphService(catalog, settings)
+    biryani = chicken_and_rice.model_copy(update={"name": "Biryani", "effort": "weekend"})
+    dal = chicken_and_rice.model_copy(update={"name": "Dal"})
+    kitchen = [chicken_and_rice, biryani, dal]
+    # Dal has never been logged, so it comes before anything cooked lately.
+    picks = graph.pick_tonight(kitchen, recent=("Biryani", "chicken leg with rice"))
+    assert picks.familiar.name == "Dal"
+    # Everything logged: the one cooked longest ago (last in the list) wins.
+    picks = graph.pick_tonight(kitchen, recent=("dal", "Biryani", "Chicken leg with rice", "dal"))
+    assert picks.familiar.name == "Chicken leg with rice"
+    # A skip still applies.
+    picks = graph.pick_tonight(
+        kitchen,
+        recent=("dal", "Biryani", "Chicken leg with rice"),
+        skip=frozenset({"Chicken leg with rice"}),
+    )
+    assert picks.familiar.name == "Biryani"
+
+
+def test_tonight_reports_how_many_dishes_are_one_step_away(
+    catalog: list[Dish], settings: Settings, chicken_and_rice: UserDish
+) -> None:
+    graph = GraphService(catalog, settings)
+    picks = graph.pick_tonight([chicken_and_rice], max_minutes=10)
+    assert picks.one_step is None  # nothing that quick…
+    assert picks.reach == len(graph.one_step_ids([chicken_and_rice])) > 0  # …but reach is whole

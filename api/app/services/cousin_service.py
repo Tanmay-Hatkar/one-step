@@ -117,6 +117,7 @@ class CousinService:
         max_minutes: int | None = None,
         skip: list[str] | None = None,
         have: Have | None = None,
+        recent: list[str] | None = None,
     ) -> TonightResponse:
         """Pick tonight's familiar, one-step and stretch dishes, with diffs for the new ones.
 
@@ -126,13 +127,19 @@ class CousinService:
             max_minutes: Time available; None means any.
             skip: Ids or names the user said 'not tonight' to.
             have: Extra equipment and pantry items.
+            recent: The user's dishes cooked lately, most recent first.
 
         Returns:
-            The three picks; any may be None.
+            The three picks (any may be None) and how many dishes are one step away.
         """
         diet = diet or Diet()
         picks = self._graph.pick_tonight(
-            repertoire, to_rule(diet), max_minutes, frozenset(skip or []), owned=to_owned(have)
+            repertoire,
+            to_rule(diet),
+            max_minutes,
+            frozenset(skip or []),
+            owned=to_owned(have),
+            recent=tuple(recent or ()),
         )
         pairs = [p for p in (picks.one_step, picks.stretch) if p is not None]
         written = iter(await self._write_all(repertoire, pairs, diet))
@@ -140,6 +147,7 @@ class CousinService:
             familiar=picks.familiar,
             one_step=next(written) if picks.one_step else None,
             stretch=next(written) if picks.stretch else None,
+            reach=picks.reach,
         )
 
     def map(

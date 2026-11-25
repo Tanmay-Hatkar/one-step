@@ -29,14 +29,18 @@ export function Filters({
   onPrefs,
   implied,
   suggested,
+  showTime = true,
 }: {
   prefs: Prefs;
   onPrefs: (prefs: Prefs) => void;
   implied: string[];
   suggested: string[];
+  /** Off where the time is chosen elsewhere (the Tonight tab). */
+  showTime?: boolean;
 }) {
   return (
     <div className="space-y-5 rounded-xl border bg-card p-4">
+      {showTime && (
       <div className="space-y-2">
         <p className="text-sm font-medium">Time you have</p>
         <div role="group" aria-label="Time you have" className="flex flex-wrap gap-2">
@@ -51,6 +55,7 @@ export function Filters({
           ))}
         </div>
       </div>
+      )}
       <div className="space-y-2">
         <p className="text-sm font-medium">Diet &amp; allergies</p>
         <DietPicker diet={prefs.diet} onChange={(diet) => onPrefs({ ...prefs, diet })} />
