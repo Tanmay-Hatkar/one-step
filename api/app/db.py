@@ -37,6 +37,19 @@ class LLMUsageDay(Base):
     calls: Mapped[int] = mapped_column(Integer, default=0)
 
 
+class LLMTokenDay(Base):
+    """Tokens used by real (uncached) LLM calls on one UTC day, for cost reports.
+
+    A separate table from `llm_usage` so existing databases get it from `create_all`.
+    """
+
+    __tablename__ = "llm_tokens"
+
+    day: Mapped[date] = mapped_column(Date, primary_key=True)
+    input_tokens: Mapped[int] = mapped_column(Integer, default=0)
+    output_tokens: Mapped[int] = mapped_column(Integer, default=0)
+
+
 class SharedKitchen(Base):
     """A read-only snapshot of someone's kitchen, opened by a short link."""
 

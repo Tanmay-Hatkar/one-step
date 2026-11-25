@@ -30,6 +30,10 @@ class Settings(BaseSettings):
     min_audio_bytes: int = Field(default=1_000, description="Smaller clips are empty")
     voice_rate_limit: str = Field(default="10/minute", description="Per-IP limit on voice")
 
+    # Cost reporting (USD per 1M tokens, runtime model; check OpenAI's pricing page)
+    llm_input_usd_per_million: float = Field(default=0.75, description="gpt-5.4-mini input")
+    llm_output_usd_per_million: float = Field(default=4.50, description="gpt-5.4-mini output")
+
     # Cost safety
     daily_llm_call_cap: int = Field(default=2000, description="Max LLM calls per UTC day")
     rate_limit: str = Field(default="40/minute", description="Per-IP limit on LLM endpoints")

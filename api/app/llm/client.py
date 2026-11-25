@@ -61,6 +61,8 @@ class OpenAILLMClient:
         self.model = model
         self._effort = reasoning_effort
         self.usage = Usage()
+        # Tokens of the most recent call; read right after `parse` returns (no await between).
+        self.last_tokens: tuple[int, int] = (0, 0)
         # No key → no client; calls fail with a clean LLMError instead of crashing the app.
         self._client = (
             AsyncOpenAI(api_key=api_key, timeout=timeout, max_retries=1) if api_key else None
@@ -107,9 +109,11 @@ class OpenAILLMClient:
             raise LLMError(str(exc)) from exc
         self.usage.calls += 1
         self.usage.seconds += time.perf_counter() - started
+        self.last_tokens = (0, 0)
         if response.usage:
             self.usage.input_tokens += response.usage.input_tokens
             self.usage.output_tokens += response.usage.output_tokens
+            self.last_tokens = (response.usage.input_tokens, response.usage.output_tokens)
         parsed = response.output_parsed
         if parsed is None:
             raise LLMError("Model returned no structured output")
