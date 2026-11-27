@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { AccountCard } from "@/components/account-card";
+import { Burst } from "@/components/burst";
 import { ConfirmKitchen } from "@/components/confirm-kitchen";
 import { CousinCard } from "@/components/cousin-card";
 import { Hero } from "@/components/hero";
@@ -81,6 +82,11 @@ export function Kitchen() {
   }
 
   const busy = k.phase === "reading" || k.phase === "finding";
+
+  // The progress shows at the top; bring it into view from wherever they tapped.
+  useEffect(() => {
+    if (busy) window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [busy]);
   const isCooked = (id: string) => k.cooked.some((c) => c.id === id);
   const repertoire = repertoireOf(k.dishes, k.cooked);
   // Dishes with a full recipe first, so the top of the list never ends in a dead end.
@@ -117,29 +123,44 @@ export function Kitchen() {
               how it differs from yours.
             </p>
           )}
-          <StartForm
-            text={k.text}
-            onText={k.setText}
-            picked={k.picked}
-            onToggle={k.togglePicked}
-            diet={k.prefs.diet}
-            onDiet={(diet) => k.setPrefs({ ...k.prefs, diet })}
-            onSubmit={k.submit}
-            busy={busy}
-            error={k.error}
-          />
-          {stats && !busy && (
-            <p className="text-xs text-muted-foreground">
-              {stats.dishes} home dishes from {stats.regions} regions, connected
-              by how they&apos;re cooked.
-            </p>
+          {/* While it works, show only the progress, at the top where it's seen. */}
+          {!busy && (
+            <>
+              <StartForm
+                text={k.text}
+                onText={k.setText}
+                picked={k.picked}
+                onToggle={k.togglePicked}
+                diet={k.prefs.diet}
+                onDiet={(diet) => k.setPrefs({ ...k.prefs, diet })}
+                onSubmit={k.submit}
+                busy={busy}
+                error={k.error}
+              />
+              {stats && (
+                <p className="text-xs text-muted-foreground">
+                  {stats.dishes} home dishes from {stats.regions} regions, connected by how
+                  they&apos;re cooked.
+                </p>
+              )}
+              <AccountCard variant="start" />
+            </>
           )}
-          {!busy && <AccountCard variant="start" />}
           {k.phase === "reading" && (
-            <LoadingCards label="Reading your kitchen…" />
+            <LoadingCards
+              label="Reading your kitchen…"
+              steps={["Reading how you cook", "Picking out your ingredients and methods"]}
+            />
           )}
           {k.phase === "finding" && (
-            <LoadingCards label="Finding dishes one step away…" />
+            <LoadingCards
+              label="Finding dishes one step away…"
+              steps={[
+                "Reading your dishes",
+                `Walking ${stats?.dishes ?? "hundreds of"} dishes by how they're cooked`,
+                "Writing just what's different for you",
+              ]}
+            />
           )}
         </div>
         <SiteFooter />
@@ -183,7 +204,10 @@ export function Kitchen() {
           role="status"
           className="fixed inset-x-0 bottom-[calc(4.75rem+env(safe-area-inset-bottom))] z-40 mx-auto flex w-[calc(100%-2rem)] max-w-[34rem] items-start gap-3 rounded-xl bg-accent px-4 py-3 text-sm text-accent-foreground shadow-lg ring-1 ring-foreground/5 animate-in fade-in slide-in-from-bottom-2"
         >
-          <CookingPot aria-hidden className="mt-0.5 size-4 shrink-0" />
+          <span className="relative mt-0.5 shrink-0">
+            <CookingPot aria-hidden className="size-4" />
+            {k.notice.id && <Burst key={`${k.notice.id}-${k.notice.name}`} />}
+          </span>
           <p className="flex-1">
             {k.notice.id ? (
               <>

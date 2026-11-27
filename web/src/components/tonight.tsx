@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 
 import { CousinCard } from "@/components/cousin-card";
+import { Greeting } from "@/components/greeting";
 import { OwnDishCard } from "@/components/own-dish-card";
 import { ToggleChip } from "@/components/toggle-chip";
 import { cookedToday, lastCooked } from "@/lib/cooklog";
@@ -46,14 +47,36 @@ export function Tonight({
   const today = cookedToday(log);
   const familiar = picks?.familiar ?? null;
   const madeFamiliar = familiar ? today.some((e) => e.name === familiar.name) : false;
+  // Until they've logged a dinner, lead with something new: that's what they came for.
+  const newFirst = log.length === 0;
+
+  const ownDish = familiar && (
+    <section
+      aria-labelledby={newFirst ? "your-usual" : undefined}
+      aria-label={newFirst ? undefined : "From your kitchen"}
+      className="space-y-3"
+    >
+      {newFirst && (
+        <h2 id="your-usual" className="font-heading text-xl font-semibold tracking-tight">
+          Or keep it easy
+        </h2>
+      )}
+      <OwnDishCard
+        key={familiar.name}
+        dish={familiar}
+        last={madeFamiliar ? null : lastCooked(log, familiar.name)}
+        madeToday={madeFamiliar}
+        onMade={() => onMade(familiar.name)}
+        onSkip={() => onSkip(familiar.name)}
+      />
+    </section>
+  );
 
   return (
     <div className="space-y-8">
       <div className="space-y-3">
-        <h1 className="font-heading text-4xl leading-tight font-semibold tracking-tight">
-          Tonight
-        </h1>
-        <div role="group" aria-label="Time you have" className="flex flex-wrap gap-2">
+        <Greeting subtitle="Here's what you could cook tonight." />
+        <div role="group" aria-label="Time you have" className="flex flex-wrap gap-2 pt-2">
           {TIME_OPTIONS.map((o) => (
             <ToggleChip key={o.label} pressed={minutes === o.minutes} onClick={() => onMinutes(o.minutes)}>
               {o.label}
@@ -64,22 +87,11 @@ export function Tonight({
 
       {!picks && <p className="text-sm text-muted-foreground">Picking something for tonight…</p>}
 
-      {familiar && (
-        <section aria-label="From your kitchen">
-          <OwnDishCard
-            key={familiar.name}
-            dish={familiar}
-            last={madeFamiliar ? null : lastCooked(log, familiar.name)}
-            madeToday={madeFamiliar}
-            onMade={() => onMade(familiar.name)}
-            onSkip={() => onSkip(familiar.name)}
-          />
-        </section>
-      )}
+      {!newFirst && ownDish}
 
       <section aria-labelledby="one-step" className="space-y-3">
         <h2 id="one-step" className="font-heading text-xl font-semibold tracking-tight">
-          {familiar ? "Or take one step" : "Take one step"}
+          {familiar && !newFirst ? "Or take one step" : "Something new, one step away"}
         </h2>
         {nothingNew && (
           <p className="text-sm text-muted-foreground">
@@ -109,6 +121,8 @@ export function Tonight({
           />
         )}
       </section>
+
+      {newFirst && ownDish}
 
       {reach !== null && reach > 0 && (
         <button

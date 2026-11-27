@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import { ApiError, findCousins, getTonight, parseRepertoire } from "./api";
 import { MAX_LOG, recentNames } from "./cooklog";
+import { buzz } from "./haptics";
 import { cookedToUserDish, repertoireOf } from "./kitchen";
 import { pickedToUserDish, startersById } from "./starters";
 import { track } from "./track";
@@ -233,6 +234,7 @@ export function useKitchen() {
 
   /** A new dish was cooked: it joins the kitchen, and the kitchen's reach grows. */
   async function markCooked(dish: Dish) {
+    buzz("success");
     if (cooked.some((c) => c.id === dish.id)) return;
     const at = new Date().toISOString();
     const next = [...cooked, { id: dish.id, name: dish.name, cookedAt: at, dish: cookedToUserDish(dish) }];
@@ -261,6 +263,7 @@ export function useKitchen() {
 
   /** One of your own dishes was cooked tonight: remember when, so it rests for a while. */
   function madeIt(name: string) {
+    buzz("success");
     setLog([{ name, at: new Date().toISOString() }, ...logRef.current]);
     setNotice({ id: null, name, unlocked: 0 });
     track("cooked");

@@ -18,6 +18,12 @@ Live: https://one-step-six-brown.vercel.app · API health: `<railway-url>/health
 3. **Web**: `cd web && vercel --prod`.
 4. Smoke test on a phone: pick 3 dishes → Tonight shows → Bring a recipe works → `/evals` loads.
 
+**Railway config:** the API's start command and health check live in `api/railway.toml`,
+which Railway reads from each `railway up` upload. Railway is retiring config files
+(warning says Dec 1, 2026). Before then, copy them into Railway → service → Settings → Deploy:
+start command `uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000} --proxy-headers --forwarded-allow-ips=*`
+(without `--proxy-headers`, every user shares one rate limit) and health check path `/health`.
+
 ## Roll back
 
 - **Web:** `vercel ls one-step`, then `vercel promote <previous-deployment-url>` (or
