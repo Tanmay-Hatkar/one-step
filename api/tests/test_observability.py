@@ -55,3 +55,10 @@ def test_release_prefers_commit_sha() -> None:
 
     assert Settings(RAILWAY_GIT_COMMIT_SHA="abc123", app_version="9.9").release == "abc123"
     assert Settings(RAILWAY_GIT_COMMIT_SHA="", app_version="9.9").release == "9.9"
+
+
+def test_tests_never_report_to_sentry() -> None:
+    """A developer's .env DSN must not leak into the test run."""
+    from app.config import settings
+
+    assert settings.sentry_dsn == ""
