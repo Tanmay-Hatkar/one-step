@@ -37,7 +37,20 @@ Live: https://one-step-six-brown.vercel.app · API health: `<railway-url>/health
 | `DAILY_LLM_CALL_CAP` | Railway | Default 2000/day. Lower it if spend spikes |
 | `SENTRY_DSN`, `APP_ENV=production` | Railway | Error tracking; empty = off |
 | `NEXT_PUBLIC_API_URL` | Vercel | The Railway API URL. Baked in at build: redeploy web after changing |
-| `NEXT_PUBLIC_SENTRY_DSN`, `NEXT_PUBLIC_APP_ENV` | Vercel | Browser error tracking; empty = off |
+| `NEXT_PUBLIC_SENTRY_DSN` | Vercel (Production) | Browser error tracking; empty = off. Baked in at build. Environment and release come from Vercel automatically |
+
+## Turn on error tracking (Sentry)
+
+Org `onestep-i3`, projects `onestep-api` and `onestep-web` (free tier). Nothing is sent
+until a DSN is set; users' recipes, prompts, IPs, cookies and SQL parameters never are.
+
+1. DSNs: `sentry dsn list onestep-i3/onestep-api` and `.../onestep-web`.
+2. Railway → api service → Variables: `SENTRY_DSN=<api dsn>`, `APP_ENV=production`. Redeploy.
+   Logs should say `Error tracking on (production)`.
+3. Vercel: `vercel env add NEXT_PUBLIC_SENTRY_DSN production` (web DSN), then `vercel --prod`.
+4. Check it works: in the live site's browser console run
+   `setTimeout(() => { throw new Error("sentry smoke test") })`, then
+   `sentry issue list onestep-i3/onestep-web`. Resolve the test issue afterwards.
 
 ## When something's wrong
 
@@ -47,7 +60,7 @@ Live: https://one-step-six-brown.vercel.app · API health: `<railway-url>/health
 | Everything LLM fails after many users | Logs for `Daily LLM cap reached` | Cap reached (resets 00:00 UTC). Raise `DAILY_LLM_CALL_CAP` only if spend is OK |
 | Web loads, every request fails | Browser console: CORS error? | Add the web origin to `CORS_ORIGINS` |
 | OpenAI bill jumps | OpenAI usage page; `/api/admin/stats` (`llm_cost_usd`, `llm_cost_per_device_usd`) | Lower `DAILY_LLM_CALL_CAP`, tighten `RATE_LIMIT`; set a hard monthly limit in OpenAI billing |
-| Errors you didn't see | Sentry (once DSN is set) | |
+| Errors you didn't see | `sentry issue list onestep-i3/onestep-api` (and `onestep-web`) | Each issue is tagged with the release (commit SHA or version) it came from |
 
 ## Costs to watch
 

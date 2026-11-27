@@ -127,7 +127,12 @@ class Settings(BaseSettings):
     # Error tracking (Sentry). Empty DSN = off.
     sentry_dsn: str = Field(default="", description="Sentry project DSN; empty turns it off")
     app_env: str = Field(default="development", description="development | production")
-    app_version: str = Field(default="1.2.0", description="Reported with errors")
+    app_version: str = Field(default="1.5.0", description="Release when no git SHA is known")
+    git_commit_sha: str = Field(
+        default="",
+        validation_alias="RAILWAY_GIT_COMMIT_SHA",
+        description="Set by Railway on git deploys; tags errors with the exact commit",
+    )
 
     # HTTP
     cors_origins: str = Field(default="http://localhost:3000", description="Comma-separated")
@@ -137,6 +142,11 @@ class Settings(BaseSettings):
     def unreadable_host_list(self) -> list[str]:
         """Return the sites whose links can't be read, as a list."""
         return [h.strip().lower() for h in self.unreadable_hosts.split(",") if h.strip()]
+
+    @property
+    def release(self) -> str:
+        """Return the release errors are grouped under: the commit if known, else the version."""
+        return self.git_commit_sha or self.app_version
 
     @property
     def cors_origin_list(self) -> list[str]:

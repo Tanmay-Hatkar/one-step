@@ -33,3 +33,25 @@ def test_real_init_accepts_private_options() -> None:
 
     assert init_error_tracking("https://k@o0.ingest.sentry.io/1", "test", "1.0")
     sentry_sdk.init()  # reset to a no-op client
+
+
+def test_db_errors_never_carry_user_text() -> None:
+    """SQL errors (which reach logs and error reports) must not echo bound parameters."""
+    import pytest
+    from sqlalchemy import text
+    from sqlalchemy.exc import SQLAlchemyError
+
+    from app.db import make_engine
+
+    engine = make_engine("sqlite://")
+    secret = "my grandmother's secret biryani"
+    with pytest.raises(SQLAlchemyError) as err, engine.connect() as conn:
+        conn.execute(text("INSERT INTO missing_table VALUES (:v)"), {"v": secret})
+    assert secret not in str(err.value)
+
+
+def test_release_prefers_commit_sha() -> None:
+    from app.config import Settings
+
+    assert Settings(RAILWAY_GIT_COMMIT_SHA="abc123", app_version="9.9").release == "abc123"
+    assert Settings(RAILWAY_GIT_COMMIT_SHA="", app_version="9.9").release == "9.9"
