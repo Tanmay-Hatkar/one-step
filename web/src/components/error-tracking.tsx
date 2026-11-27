@@ -35,3 +35,16 @@ export function ErrorTracking() {
   }, []);
   return null;
 }
+
+/**
+ * Report an error React caught (error boundaries swallow them, so the global handler
+ * never sees them). Does nothing when error tracking is off.
+ */
+export function reportError(error: unknown): void {
+  if (!DSN) return;
+  import("@sentry/browser")
+    .then((Sentry) => Sentry.captureException(error))
+    .catch(() => {
+      // Best-effort, like the rest of error tracking.
+    });
+}
