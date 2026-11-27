@@ -6,6 +6,7 @@ import tempfile
 # Isolate tests from the developer's .env and local database. Environment variables
 # take precedence over .env in pydantic-settings, and must be set before app imports.
 os.environ["OPENAI_API_KEY"] = ""
+os.environ["SENTRY_DSN"] = ""  # test failures must never reach the real Sentry project
 os.environ["DATABASE_URL"] = f"sqlite:///{tempfile.mkdtemp()}/test.db"
 
 from collections.abc import Callable
