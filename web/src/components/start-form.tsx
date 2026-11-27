@@ -52,18 +52,20 @@ export function StartForm({
   return (
     <section aria-labelledby="ask" className="space-y-5">
       <div className="space-y-1">
-        <h2 id="ask" className="text-lg font-semibold">
-          What do you cook often?
+        <h2 id="ask" className="font-heading text-2xl font-semibold tracking-tight">
+          What do you cook a lot?
         </h2>
-        <p className="text-sm text-muted-foreground">Tap the ones you make. Pick two or three.</p>
+        <p className="text-sm text-muted-foreground">
+          Tap two or three. No sign-up, nothing to install.
+        </p>
       </div>
 
       <DishPicker dishes={STARTER_DISHES} picked={picked} onToggle={onToggle} disabled={busy} />
 
-      <div className="space-y-3 rounded-xl border bg-card p-4">
+      <div className="space-y-3 pt-1">
         <p className="text-sm">
-          <span className="font-medium">Not here, or you make it your own way?</span>{" "}
-          <span className="text-muted-foreground">Tell me how you make it.</span>
+          <span className="font-medium">Cook something else, or your own way?</span>{" "}
+          <span className="text-muted-foreground">Just tell me, like you&apos;d tell a friend.</span>
         </p>
         <VoiceInput onText={addSpoken} disabled={busy} />
         {showText ? (
@@ -90,7 +92,7 @@ export function StartForm({
         )}
       </div>
 
-      <details className="group rounded-xl border bg-card px-4 py-3">
+      <details className="group rounded-xl bg-muted/70 px-4 py-3">
         <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-sm">
           <span>
             <span className="font-medium">Diet &amp; allergies</span>
@@ -110,11 +112,13 @@ export function StartForm({
         <Button
           size="lg"
           onClick={onSubmit}
-          disabled={busy}
-          className="h-12 w-full text-base shadow-lg sm:w-auto sm:px-6"
+          disabled={busy || count === 0}
+          className="h-12 w-full rounded-xl text-base shadow-lg sm:w-auto sm:px-6"
         >
-          {count ? `Show me new dishes (${count})` : "Show me new dishes"}
-          <ArrowRight aria-hidden />
+          {count === 0
+            ? "Tap a dish you make"
+            : `Show me new dishes (${count})`}
+          {count > 0 && <ArrowRight aria-hidden />}
         </Button>
         {error && (
           <p role="alert" className="rounded-lg bg-background/95 px-1 text-sm text-destructive">

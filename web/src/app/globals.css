@@ -2,7 +2,17 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-@custom-variant dark (@media (prefers-color-scheme: dark));
+/* Dark when the person picked it, or when their system is dark and they didn't pick light. */
+@custom-variant dark {
+  &:where([data-theme="dark"], [data-theme="dark"] *) {
+    @slot;
+  }
+  @media (prefers-color-scheme: dark) {
+    &:where(:root:not([data-theme="light"]), :root:not([data-theme="light"]) *) {
+      @slot;
+    }
+  }
+}
 
 @theme inline {
   --color-background: var(--background);
@@ -50,6 +60,7 @@
 }
 
 :root {
+  color-scheme: light;
   --background: oklch(0.985 0.008 75);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0.004 75);
@@ -87,40 +98,55 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
+/* The same dark tokens twice: once for "dark" picked by hand, once for a dark system
+   when the person hasn't picked light. Keep the two blocks identical. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  /* Warm charcoal, not near-black: easier on the eyes and the food photos. */
+  --background: oklch(0.25 0.012 55);
+  --foreground: oklch(0.97 0.005 75);
+  --card: oklch(0.295 0.014 55);
+  --card-foreground: oklch(0.97 0.005 75);
+  --popover: oklch(0.295 0.014 55);
+  --popover-foreground: oklch(0.97 0.005 75);
+  --primary: oklch(0.74 0.15 52);
+  --primary-foreground: oklch(0.22 0.012 55);
+  --secondary: oklch(0.33 0.014 55);
+  --secondary-foreground: oklch(0.97 0.005 75);
+  --muted: oklch(0.33 0.014 55);
+  --muted-foreground: oklch(0.78 0.02 70);
+  --accent: oklch(0.37 0.045 55);
+  --accent-foreground: oklch(0.94 0.03 75);
+  --destructive: oklch(0.72 0.18 22);
+  --border: oklch(1 0 0 / 14%);
+  --input: oklch(1 0 0 / 18%);
+  --ring: oklch(0.74 0.15 52);
+  --map-far: oklch(0.6 0.02 70);
+}
+
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: oklch(0.17 0.012 55);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.21 0.014 55);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.205 0 0);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.72 0.15 52);
-    --primary-foreground: oklch(0.17 0.012 55);
-    --secondary: oklch(0.25 0.014 55);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.25 0.014 55);
-    --muted-foreground: oklch(0.72 0.02 70);
-    --accent: oklch(0.3 0.04 55);
-    --accent-foreground: oklch(0.92 0.03 75);
-    --destructive: oklch(0.704 0.191 22.216);
-    --border: oklch(1 0 0 / 12%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.72 0.15 52);
-    --map-far: oklch(0.55 0.02 70);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.556 0 0);
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    /* Warm charcoal, not near-black: easier on the eyes and the food photos. */
+    --background: oklch(0.25 0.012 55);
+    --foreground: oklch(0.97 0.005 75);
+    --card: oklch(0.295 0.014 55);
+    --card-foreground: oklch(0.97 0.005 75);
+    --popover: oklch(0.295 0.014 55);
+    --popover-foreground: oklch(0.97 0.005 75);
+    --primary: oklch(0.74 0.15 52);
+    --primary-foreground: oklch(0.22 0.012 55);
+    --secondary: oklch(0.33 0.014 55);
+    --secondary-foreground: oklch(0.97 0.005 75);
+    --muted: oklch(0.33 0.014 55);
+    --muted-foreground: oklch(0.78 0.02 70);
+    --accent: oklch(0.37 0.045 55);
+    --accent-foreground: oklch(0.94 0.03 75);
+    --destructive: oklch(0.72 0.18 22);
+    --border: oklch(1 0 0 / 14%);
+    --input: oklch(1 0 0 / 18%);
+    --ring: oklch(0.74 0.15 52);
+    --map-far: oklch(0.6 0.02 70);
   }
 }
 
@@ -133,5 +159,23 @@
   }
   html {
     @apply font-sans;
+  }
+}
+
+/* A small burst when you cook something new. Off for people who ask for less motion. */
+@keyframes burst {
+  0% {
+    transform: rotate(var(--angle)) translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(var(--angle)) translateY(-34px) scale(0.4);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .burst-dot {
+    display: none;
   }
 }

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { AccountCard } from "@/components/account-card";
 import { Filters } from "@/components/filters";
 import { RepertoireSummary } from "@/components/repertoire-summary";
+import { YouSettings } from "@/components/you-settings";
 import { agoLabel } from "@/lib/cooklog";
 import type { CookLogEntry, CookedDish, Prefs } from "@/lib/storage";
 import type { UserDish } from "@/lib/types";
@@ -115,6 +116,8 @@ export function MyKitchen({
         </h2>
         <Filters prefs={prefs} onPrefs={onPrefs} implied={implied} suggested={suggested} showTime={false} />
       </section>
+
+      <YouSettings />
 
       <AccountCard variant="results" />
     </div>

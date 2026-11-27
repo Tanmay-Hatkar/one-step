@@ -3,6 +3,7 @@
 import { Check } from "lucide-react";
 
 import { DishPhoto } from "@/components/dish-photo";
+import { buzz } from "@/lib/haptics";
 import type { Dish } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -27,7 +28,10 @@ export function DishPicker({
             <button
               type="button"
               aria-pressed={on}
-              onClick={() => onToggle(dish.id)}
+              onClick={() => {
+                buzz();
+                onToggle(dish.id);
+              }}
               disabled={disabled}
               className={cn(
                 "group relative flex h-full w-full flex-col justify-start overflow-hidden rounded-xl border-2 bg-card text-left transition-colors",
