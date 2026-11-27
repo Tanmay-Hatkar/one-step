@@ -4,6 +4,7 @@ import re
 
 from app.models.api import DiffText, PasteResponse
 from app.models.dish import Delta, Dish, UserDish
+from app.services.diff_rules import restates_shared_step
 from app.services.ingredients import normalize
 
 MAX_BULLET_WORDS = 22
@@ -106,6 +107,9 @@ def check_diff(diff: DiffText, anchor: UserDish, dish: Dish, delta: Delta) -> li
         if _mentions(b, i) and not any(m in b.lower() for m in SUBSTITUTION_MARKERS)
     ]
     checks.append(("no_foreign_ingredients", not leaks, ", ".join(sorted(set(leaks))) or "ok"))
+
+    restated = [b for b in bullets if restates_shared_step(b, delta)]
+    checks.append(("only_what_changes", not restated, "; ".join(restated)[:80] or "ok"))
     return checks
 
 

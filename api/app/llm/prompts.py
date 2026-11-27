@@ -83,6 +83,9 @@ Rules:
   only (a) as a stand-in for a missing one ("No kabsa spice? Mix your cumin,
   coriander and turmeric.") or (b) as something that stays. Never add the cook's
   own spices to a dish that doesn't use them. Never invent ingredients.
+- Never spend a bullet on a technique that stays the same ("Techniques that stay the
+  same"), unless something about it changes (an ingredient, the time, the texture).
+  Those go in `keep_line` only.
 - Write techniques in plain words exactly as given; never use code-like names.
 - `keep_line`: one sentence, at most 18 words, naming what stays the same.
 - Plain, warm, no hype, no emoji."""
