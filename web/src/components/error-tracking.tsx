@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 const DSN = process.env.NEXT_PUBLIC_SENTRY_DSN ?? "";
 const ENVIRONMENT = process.env.NEXT_PUBLIC_APP_ENV ?? "development";
+const RELEASE = process.env.NEXT_PUBLIC_RELEASE ?? "dev";
 
 /**
  * Starts browser error reporting when NEXT_PUBLIC_SENTRY_DSN is set.
@@ -17,6 +18,7 @@ export function ErrorTracking() {
         Sentry.init({
           dsn: DSN,
           environment: ENVIRONMENT,
+          release: RELEASE,
           dataCollection: {
             userInfo: false,
             cookies: false,

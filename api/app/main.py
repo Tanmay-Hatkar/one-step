@@ -35,7 +35,7 @@ async def lifespan(_: FastAPI) -> AsyncIterator[None]:
 
 def create_app() -> FastAPI:
     """Build the app: error tracking, CORS, rate limiting, routes."""
-    init_error_tracking(settings.sentry_dsn, settings.app_env, settings.app_version)
+    init_error_tracking(settings.sentry_dsn, settings.app_env, settings.release)
     app = FastAPI(title="One Step API", version=settings.app_version, lifespan=lifespan)
     app.state.limiter = limiter
     app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)

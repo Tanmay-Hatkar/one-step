@@ -165,7 +165,9 @@ def make_engine(database_url: str) -> Engine:
     elif url.startswith("postgresql://"):
         url = "postgresql+psycopg://" + url[len("postgresql://") :]
     connect_args = {"check_same_thread": False} if url.startswith("sqlite") else {}
-    return create_engine(url, connect_args=connect_args, pool_pre_ping=True)
+    # hide_parameters keeps user text (kitchens, pasted recipes) out of error messages,
+    # which end up in logs and error reports.
+    return create_engine(url, connect_args=connect_args, pool_pre_ping=True, hide_parameters=True)
 
 
 def init_db(engine: Engine) -> None:
