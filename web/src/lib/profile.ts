@@ -3,6 +3,8 @@
 
 import { useCallback, useSyncExternalStore } from "react";
 
+import { track } from "./track";
+
 const NAME_KEY = "one-step:name";
 const EVENT = "one-step:name";
 export const MAX_NAME_CHARS = 30;
@@ -35,6 +37,7 @@ export function useName(): [string, (name: string) => void] {
   const setName = useCallback((next: string) => {
     try {
       const clean = cleanName(next);
+      if (clean && !read()) track("name_set"); // only that a name was given, never the name
       if (clean) window.localStorage.setItem(NAME_KEY, clean);
       else window.localStorage.removeItem(NAME_KEY);
     } catch {

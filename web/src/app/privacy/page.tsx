@@ -57,11 +57,20 @@ export default function PrivacyPage() {
       <section>
         <h2>Anonymous usage counts</h2>
         <p>
-          We count a few actions (a kitchen built, a dish opened, cooked or saved, a recipe pasted,
-          cook mode used,
-          the app installed) against a random id made in your browser. It doesn&apos;t include
-          anything you type and isn&apos;t linked to an account. Your IP address is used briefly
+          We count a few actions (a visit, a kitchen built, results shown, a dish opened, cooked
+          or saved, a recipe pasted, cook mode used, the app installed, and whether you added a
+          name, never the name itself) against a random id made in your browser. It
+          doesn&apos;t include anything you type and isn&apos;t linked to an account. Your IP address is used briefly
           to stop abuse and isn&apos;t stored with these counts.
+        </p>
+      </section>
+
+      <section>
+        <h2>Error reports</h2>
+        <p>
+          When something breaks, a report of the error (what failed, on which page, browser and
+          app version) goes to our error tracker, Sentry. It doesn&apos;t include anything you
+          type, your recipes, cookies or your IP address.
         </p>
       </section>
 

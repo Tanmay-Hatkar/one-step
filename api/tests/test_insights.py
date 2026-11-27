@@ -128,3 +128,22 @@ async def test_gateway_records_tokens_of_real_calls_only(session_factory, make_g
     await gateway.run(task="t", instructions="i", prompt="p", schema=Out)  # cached: no tokens
     totals = LLMUsageRepository(session_factory).totals_since(datetime.now(UTC).date())
     assert totals == (1, 120, 30)
+
+
+def test_funnel_counts_devices_per_step(service) -> None:
+    """Three visitors: one only looks, one gets results, one cooks. Each counted once."""
+    visits = {
+        "aaaaaaaa-1": ["landed", "landed"],
+        "bbbbbbbb-2": ["landed", "kitchen_built", "results_shown"],
+        "cccccccc-3": ["landed", "kitchen_built", "results_shown", "dish_opened", "cooked"],
+    }
+    for device, names in visits.items():
+        service.record(UsageEvents(device=device, events=[UsageEventIn(name=n) for n in names]))
+    assert dict(service.stats(7).funnel) == {
+        "visited": 3,
+        "built a kitchen": 2,
+        "saw results": 2,
+        "opened a dish": 1,
+        "saved or cooked": 1,
+        "came back": 0,
+    }

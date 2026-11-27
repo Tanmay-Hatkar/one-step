@@ -312,7 +312,10 @@ class KitchenSyncResponse(BaseModel):
 
 
 EventName = Literal[
+    "landed",
     "kitchen_built",
+    "results_shown",
+    "name_set",
     "dish_opened",
     "cooked",
     "saved",
@@ -353,6 +356,10 @@ class UsageStats(BaseModel):
     events: dict[str, int]
     top_dishes: list[tuple[str, int]] = Field(..., description="Most opened dishes")
     feedback: list[str] = Field(..., description="Newest feedback first")
+    funnel: list[tuple[str, int]] = Field(
+        default_factory=list,
+        description="Devices that reached each step, in order: visited → … → came back",
+    )
     llm_calls: int = Field(default=0, description="Real (uncached) LLM calls in the window")
     llm_input_tokens: int = 0
     llm_output_tokens: int = 0

@@ -16,6 +16,39 @@ TOP_DISHES = 10
 FEEDBACK_SHOWN = 50
 TOKENS_PER_MILLION = 1_000_000
 
+# The path a visitor takes, as (label, events that count). A device reaches a step if it
+# sent any of those events in the window. "came back" is computed from active days.
+FUNNEL_STEPS: list[tuple[str, frozenset[str]]] = [
+    ("visited", frozenset({"landed"})),
+    ("built a kitchen", frozenset({"kitchen_built"})),
+    ("saw results", frozenset({"results_shown"})),
+    ("opened a dish", frozenset({"dish_opened", "cook_mode"})),
+    ("saved or cooked", frozenset({"saved", "cooked"})),
+]
+CAME_BACK = "came back"
+
+
+def funnel_of(rows: list[tuple[str, str, str | None, datetime]]) -> list[tuple[str, int]]:
+    """Count devices at each funnel step.
+
+    Args:
+        rows: (device, event name, dish id, time) for the window.
+
+    Returns:
+        (step label, devices) in funnel order, ending with devices active on 2+ days.
+    """
+    by_event: dict[str, set[str]] = {}
+    days: dict[str, set] = {}
+    for device, name, _, at in rows:
+        by_event.setdefault(name, set()).add(device)
+        days.setdefault(device, set()).add(at.date())
+    steps = [
+        (label, len(set().union(*(by_event.get(n, set()) for n in names))))
+        for label, names in FUNNEL_STEPS
+    ]
+    steps.append((CAME_BACK, sum(1 for d in days.values() if len(d) > 1)))
+    return steps
+
 
 class InsightService:
     """Records feedback and events, and sums them up."""
@@ -80,6 +113,7 @@ class InsightService:
             events=dict(Counter(name for _, name, _, _ in rows)),
             top_dishes=opened.most_common(TOP_DISHES),
             feedback=self._repo.recent_feedback(since, FEEDBACK_SHOWN),
+            funnel=funnel_of(rows),
             llm_calls=calls,
             llm_input_tokens=tokens_in,
             llm_output_tokens=tokens_out,
