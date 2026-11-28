@@ -54,6 +54,8 @@ export function useKitchen() {
   const [picked, setPickedState] = useState<string[]>([]);
   const [log, setLogState] = useState<CookLogEntry[]>([]);
   const [reach, setReach] = useState<number | null>(null);
+  // Tonight shows first; the longer Explore list can still be on its way.
+  const [exploring, setExploring] = useState(false);
 
   // Only the latest request may update the page (preferences can change mid-flight).
   const requestId = useRef(0);
@@ -76,20 +78,39 @@ export function useKitchen() {
     [],
   );
 
-  /** Fetch cousins and tonight's picks; returns them with the reach, or null if stale. */
+  /**
+   * Fetch tonight's picks and the cousins. Tonight's picks are fewer and come back first:
+   * `onPicks` fires as soon as they're in, so the page can show them while Explore loads.
+   * Returns the cousins with the reach, or null if a newer request took over.
+   */
   const fetchAll = useCallback(
-    async (own: UserDish[], done: CookedDish[], p: Prefs, skipped: string[]) => {
+    async (
+      own: UserDish[],
+      done: CookedDish[],
+      p: Prefs,
+      skipped: string[],
+      onPicks?: () => void,
+    ) => {
       const id = ++requestId.current;
       const repertoire = repertoireOf(own, done);
-      const [found, picks] = await Promise.all([
-        findCousins(repertoire, p.diet, p.have),
-        getTonight(repertoire, p.diet, p.have, p.minutes, skipped, recentNames(logRef.current)),
-      ]);
-      if (id !== requestId.current) return null;
-      setCousins(found);
-      setTonight(picks);
-      setReach(picks.reach ?? null);
-      return { found, reach: picks.reach ?? null };
+      const cousinsSoon = findCousins(repertoire, p.diet, p.have);
+      cousinsSoon.catch(() => {}); // handled when awaited below; avoids an unhandled warning
+      setExploring(true);
+      try {
+        const picks = await getTonight(
+          repertoire, p.diet, p.have, p.minutes, skipped, recentNames(logRef.current),
+        );
+        if (id !== requestId.current) return null;
+        setTonight(picks);
+        setReach(picks.reach ?? null);
+        onPicks?.();
+        const found = await cousinsSoon;
+        if (id !== requestId.current) return null;
+        setCousins(found);
+        return { found, reach: picks.reach ?? null };
+      } finally {
+        if (id === requestId.current) setExploring(false);
+      }
     },
     [],
   );
@@ -100,7 +121,8 @@ export function useKitchen() {
       setUpdating(true);
       setError(null);
       try {
-        const result = await fetchAll(own, done, p, skipped);
+        // Tonight stops looking busy as soon as its picks are in.
+        const result = await fetchAll(own, done, p, skipped, () => setUpdating(false));
         if (result) {
           persist({ text: t, dishes: own, cooked: done, prefs: p, cousins: result.found });
         }
@@ -202,16 +224,20 @@ export function useKitchen() {
     setPhase("finding");
     // Save the checked kitchen first, so nothing is lost if the search fails or is slow.
     persist({ text: t, dishes: checked, cooked, prefs: nextPrefs, cousins: [] });
+    let shown = false;
     try {
-      const result = await fetchAll(checked, cooked, nextPrefs, []);
-      setPhase("results");
-      track("kitchen_built");
+      const result = await fetchAll(checked, cooked, nextPrefs, [], () => {
+        shown = true;
+        setPhase("results");
+        track("kitchen_built");
+      });
       if (result) {
         persist({ text: t, dishes: checked, cooked, prefs: nextPrefs, cousins: result.found });
       }
     } catch (err) {
       setError(messageOf(err));
-      setPhase(t ? "confirm" : "input");
+      // Once Tonight is showing, a failed Explore list shouldn't send them back to the start.
+      if (!shown) setPhase(t ? "confirm" : "input");
     }
   }
 
@@ -286,6 +312,7 @@ export function useKitchen() {
 
   return {
     phase,
+    exploring,
     text,
     setText,
     dishes,

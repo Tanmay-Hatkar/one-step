@@ -1,5 +1,7 @@
 """Gateway (cache + cap), repertoire parsing, and cousin diff writing — with a fake LLM."""
 
+import asyncio
+
 import pytest
 from pydantic import BaseModel
 
@@ -46,6 +48,47 @@ async def test_gateway_propagates_llm_errors(make_gateway) -> None:
     client.fail = True
     with pytest.raises(LLMError):
         await make_gateway(client).run(task="t", instructions="i", prompt="x", schema=Echo)
+
+
+class SlowClient(FakeLLMClient):
+    """Takes a moment to answer, so concurrent requests really overlap."""
+
+    async def parse(self, **kwargs):
+        await asyncio.sleep(0.01)
+        return await super().parse(**kwargs)
+
+
+async def test_gateway_shares_one_call_between_identical_concurrent_requests(
+    make_gateway,
+) -> None:
+    client = SlowClient(echo_responder)
+    gateway = make_gateway(client)
+    same = dict(task="t", instructions="i", prompt="kabsa", schema=Echo)
+    results = await asyncio.gather(*(gateway.run(**same) for _ in range(3)))
+    assert results == [Echo(value="kabsa")] * 3
+    assert client.calls == 1
+
+
+async def test_gateway_concurrent_waiters_see_the_same_failure(make_gateway) -> None:
+    client = SlowClient(echo_responder)
+    client.fail = True
+    gateway = make_gateway(client)
+    same = dict(task="t", instructions="i", prompt="x", schema=Echo)
+    results = await asyncio.gather(*(gateway.run(**same) for _ in range(2)), return_exceptions=True)
+    assert all(isinstance(r, LLMError) for r in results)
+    assert client.calls == 1
+    client.fail = False  # a later request tries again rather than reusing the failure
+    assert await gateway.run(**same) == Echo(value="x")
+
+
+async def test_gateway_different_requests_are_not_shared(make_gateway) -> None:
+    client = SlowClient(echo_responder)
+    gateway = make_gateway(client)
+    await asyncio.gather(
+        gateway.run(task="t", instructions="i", prompt="a", schema=Echo),
+        gateway.run(task="t", instructions="i", prompt="b", schema=Echo),
+    )
+    assert client.calls == 2
 
 
 @pytest.fixture
