@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { CookMode } from "@/components/cook-mode";
 import { CousinCard } from "@/components/cousin-card";
 import { DishPhoto } from "@/components/dish-photo";
+import { TryInvite } from "@/components/try-invite";
 import { LoadingCards } from "@/components/loading-cards";
 import { SaveButton } from "@/components/save-button";
 import { Badge } from "@/components/ui/badge";
@@ -34,6 +35,8 @@ export function DishView({ initial = null }: { initial?: DishPage | null }) {
   const [error, setError] = useState<string | null>(null);
   const [fromYours, setFromYours] = useState<Cousin | null>(null);
   const [cooking, setCooking] = useState(false);
+  // null until known (after hydration): only then decide whether to invite them in.
+  const [hasKitchen, setHasKitchen] = useState<boolean | null>(null);
 
   const pasted = isPasted(id);
 
@@ -68,6 +71,7 @@ export function DishView({ initial = null }: { initial?: DishPage | null }) {
 
     // If they have a kitchen on this device, show this dish as a diff from it too.
     const saved = loadKitchen();
+    setHasKitchen(Boolean(saved?.dishes.length));
     if (saved?.dishes.length) {
       getCousin(repertoireOf(saved.dishes, saved.cooked), id, saved.prefs.diet, saved.prefs.have)
         .then((c) => live && setFromYours(c))
@@ -114,7 +118,7 @@ export function DishView({ initial = null }: { initial?: DishPage | null }) {
             name={dish.name}
             size={512}
             priority
-            className="aspect-square w-full rounded-2xl"
+            className="aspect-[16/10] w-full rounded-2xl sm:aspect-[4/3]"
           />
           <figcaption className="text-xs text-muted-foreground">
             Illustration (AI-generated), not a photo of this recipe.
@@ -161,6 +165,8 @@ export function DishView({ initial = null }: { initial?: DishPage | null }) {
           </div>
         </div>
       </header>
+
+      {hasKitchen === false && !pasted && <TryInvite dishName={dish.name} />}
 
       {fromYours && (
         <section aria-labelledby="from-yours" className="space-y-3">
