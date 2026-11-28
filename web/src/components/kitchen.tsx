@@ -319,12 +319,15 @@ export function Kitchen() {
               onCooked={k.markCooked}
             />
           ) : (
-            <section aria-label="Dishes you could make" className={cn("space-y-3 transition-opacity", k.updating && "opacity-60")}>
-              {explore.length === 0 && (
-                <p className="text-sm text-muted-foreground">
-                  Nothing close enough yet. Add another dish you make in the Kitchen tab.
-                </p>
-              )}
+            <section aria-label="Dishes you could make" className={cn("space-y-3 transition-opacity", (k.updating || k.exploring) && explore.length > 0 && "opacity-60")}>
+              {explore.length === 0 &&
+                (k.exploring ? (
+                  <LoadingCards label="Finding more dishes one step away…" />
+                ) : (
+                  <p className="text-sm text-muted-foreground">
+                    Nothing close enough yet. Add another dish you make in the Kitchen tab.
+                  </p>
+                ))}
               {explore.map((cousin, i) => (
                 <CousinCard
                   key={cousin.dish.id}

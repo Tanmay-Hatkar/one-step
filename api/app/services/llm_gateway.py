@@ -1,5 +1,6 @@
 """Every LLM call goes through here: cache first, then the daily cap, then the model."""
 
+import asyncio
 import hashlib
 import logging
 from typing import TypeVar
@@ -20,7 +21,11 @@ class DailyCapExceeded(RuntimeError):
 
 
 class LLMGateway:
-    """Caches identical requests and enforces a per-day call cap (cost safety)."""
+    """Caches identical requests and enforces a per-day call cap (cost safety).
+
+    Identical requests that arrive while one is already running (e.g. the same dish
+    written for Tonight and for Explore at once) wait for it instead of paying twice.
+    """
 
     def __init__(
         self,
@@ -34,6 +39,8 @@ class LLMGateway:
         self._cache = cache
         self._usage = usage
         self._daily_cap = daily_cap
+        # Cache key → the JSON result of the call already running for it.
+        self._inflight: dict[str, asyncio.Future[str]] = {}
 
     async def run(
         self,
@@ -68,6 +75,36 @@ class LLMGateway:
             except ValidationError:
                 logger.warning("Stale cache entry for %s; refreshing", task)
 
+        running = self._inflight.get(key)
+        if running is not None:
+            return schema.model_validate_json(await asyncio.shield(running))
+
+        shared: asyncio.Future[str] = asyncio.get_running_loop().create_future()
+        self._inflight[key] = shared
+        try:
+            result = await self._call(key, task, instructions, prompt, schema, image)
+        except asyncio.CancelledError:
+            shared.cancel()
+            raise
+        except Exception as exc:
+            shared.set_exception(exc)
+            shared.exception()  # mark seen: there may be no one else waiting
+            raise
+        finally:
+            self._inflight.pop(key, None)
+        shared.set_result(result.model_dump_json())
+        return result
+
+    async def _call(
+        self,
+        key: str,
+        task: str,
+        instructions: str,
+        prompt: str,
+        schema: type[T],
+        image: Image | None,
+    ) -> T:
+        """One real, paid call: check the cap, call the model, count it, cache it."""
         self.check_cap()
         result = await self._client.parse(
             instructions=instructions, prompt=prompt, schema=schema, image=image
