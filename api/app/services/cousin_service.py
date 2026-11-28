@@ -256,10 +256,9 @@ class CousinService:
             logger.warning("Diff for %s mentioned an avoided allergen; using template", dish.id)
             return fallback_diff(anchor, dish, delta)
         changes = drop_restated(body.changes, delta)
-        if len(changes) < len(body.changes):
-            logger.info(
-                "Dropped %d restated step(s) from %s", len(body.changes) - len(changes), dish.id
-            )
+        for dropped in (b for b in body.changes if b not in changes):
+            # Model text, not user text: logged so false positives can be reviewed and tuned.
+            logger.info("Dropped restated step from %s: %s", dish.id, dropped)
         if len(changes) < min(MIN_BULLETS, len(body.changes)):
             # Dropping left too little: top up with plain facts, not a one-line note.
             extra = [c for c in fallback_diff(anchor, dish, delta).changes if c not in changes]
