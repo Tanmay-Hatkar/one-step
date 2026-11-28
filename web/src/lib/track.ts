@@ -8,7 +8,10 @@ const FLUSH_MS = 2000;
 const MAX_BATCH = 20;
 
 export type EventName =
+  | "landed"
   | "kitchen_built"
+  | "results_shown"
+  | "name_set"
   | "dish_opened"
   | "cooked"
   | "saved"
@@ -51,6 +54,19 @@ export function track(name: EventName, dishId?: string): void {
   if (typeof window === "undefined") return;
   queue.push(dishId ? { name, dish_id: dishId } : { name });
   if (!timer) timer = setTimeout(flush, FLUSH_MS);
+}
+
+/** Count something at most once per browser session (e.g. a visit, not every page). */
+export function trackOnce(name: EventName): void {
+  if (typeof window === "undefined") return;
+  const key = `one-step:once:${name}`;
+  try {
+    if (window.sessionStorage.getItem(key)) return;
+    window.sessionStorage.setItem(key, "1");
+  } catch {
+    return; // storage blocked: can't tell repeats apart, so don't count
+  }
+  track(name);
 }
 
 /** Send a message from the feedback box. */

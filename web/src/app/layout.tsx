@@ -3,6 +3,7 @@ import { Fraunces, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 import { ErrorTracking } from "@/components/error-tracking";
+import { PageView } from "@/components/page-view";
 import { SITE_URL } from "@/lib/site";
 import { THEME_SCRIPT } from "@/lib/theme-script";
 
@@ -51,6 +52,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       </head>
       <body className="min-h-full bg-background font-sans text-foreground">
         <ErrorTracking />
+        <PageView />
         {children}
       </body>
     </html>

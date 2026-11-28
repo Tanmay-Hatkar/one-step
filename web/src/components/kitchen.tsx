@@ -23,6 +23,7 @@ import { impliedEquipment, oftenNeeded, repertoireOf } from "@/lib/kitchen";
 import { captureShared } from "@/lib/pasted";
 import { useSaved } from "@/lib/saved";
 import type { DishStats } from "@/lib/types";
+import { trackOnce } from "@/lib/track";
 import { useKitchen } from "@/lib/use-kitchen";
 import { useRecipeIds } from "@/lib/use-recipe-ids";
 import { cn } from "@/lib/utils";
@@ -82,6 +83,12 @@ export function Kitchen() {
   }
 
   const busy = k.phase === "reading" || k.phase === "finding";
+
+  // Counted once per visit: the moment someone sees their picks.
+  const shown = k.phase === "results" && Boolean(k.tonight);
+  useEffect(() => {
+    if (shown) trackOnce("results_shown");
+  }, [shown]);
 
   // The progress shows at the top; bring it into view from wherever they tapped.
   useEffect(() => {
