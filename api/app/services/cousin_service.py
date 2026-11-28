@@ -19,6 +19,7 @@ from app.models.api import (
 from app.models.dish import Delta, Dish, UserDish, ingredients_of
 from app.models.labels import technique_label
 from app.services.diet import text_mentions_allergen
+from app.services.diff_rules import MIN_BULLETS, drop_restated
 from app.services.graph_service import DietRule, GraphService, Owned
 from app.services.llm_gateway import DailyCapExceeded, LLMGateway
 
@@ -254,6 +255,14 @@ class CousinService:
         if avoid and text_mentions_allergen(" ".join([*body.changes, body.keep_line]), avoid):
             logger.warning("Diff for %s mentioned an avoided allergen; using template", dish.id)
             return fallback_diff(anchor, dish, delta)
+        changes = drop_restated(body.changes, delta)
+        for dropped in (b for b in body.changes if b not in changes):
+            # Model text, not user text: logged so false positives can be reviewed and tuned.
+            logger.info("Dropped restated step from %s: %s", dish.id, dropped)
+        if len(changes) < min(MIN_BULLETS, len(body.changes)):
+            # Dropping left too little: top up with plain facts, not a one-line note.
+            extra = [c for c in fallback_diff(anchor, dish, delta).changes if c not in changes]
+            changes = [*changes, *extra][: max(MIN_BULLETS, len(changes))]
         return DiffText(
-            headline=headline_for(anchor, dish), changes=body.changes[:5], keep_line=body.keep_line
+            headline=headline_for(anchor, dish), changes=changes[:5], keep_line=body.keep_line
         )

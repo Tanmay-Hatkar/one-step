@@ -166,6 +166,34 @@ async def test_diff_mentioning_avoided_allergen_falls_back(
     assert unguarded.changes == ["Finish with crushed peanuts."]
 
 
+async def test_diff_that_only_restates_steps_is_topped_up(
+    catalog, chicken_and_rice, settings, make_gateway
+) -> None:
+    def responder(schema, prompt):
+        return schema(
+            changes=["Boil the rice as usual.", "Simmer the chicken gently.", "Add baharat."],
+            keep_line="Keep the rice cooker.",
+        )
+
+    service = CousinService(GraphService(catalog, settings), make_gateway(FakeLLMClient(responder)))
+    kabsa = next(d for d in catalog if d.id == "kabsa")
+    delta = GraphService(catalog, settings).compute_delta(
+        chicken_and_rice, kabsa, set(chicken_and_rice.key_ingredients), {"rice_cooker"}
+    )
+    delta = delta.model_copy(
+        update={
+            "shared_techniques": ["boil", "simmer"],
+            "new_techniques": ["sear"],
+            "dropped_techniques": [],
+            "new_ingredients": ["baharat"],
+            "swaps": [],
+        }
+    )
+    diff = await service.write_diff(chicken_and_rice, kabsa, delta)
+    # Both restatements dropped; the top-up adds a real fact, not a duplicate.
+    assert diff.changes == ["Add baharat.", "Try searing."]
+
+
 async def test_tonight_writes_diffs_for_new_dishes(
     catalog, chicken_and_rice, settings, make_gateway
 ) -> None:
