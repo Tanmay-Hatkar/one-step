@@ -13,6 +13,7 @@ import { KitchenMap } from "@/components/kitchen-map";
 import { LoadingCards } from "@/components/loading-cards";
 import { MyKitchen } from "@/components/my-kitchen";
 import { PasteRecipe } from "@/components/paste-recipe";
+import { ShareCooked } from "@/components/share-cooked";
 import { SiteFooter } from "@/components/site-footer";
 import { StartForm } from "@/components/start-form";
 import { TabBar, type Tab } from "@/components/tab-bar";
@@ -227,6 +228,8 @@ export function Kitchen() {
                 ) : (
                   "New dishes grow from it."
                 )}
+                <br />
+                <ShareCooked id={k.notice.id} name={k.notice.name} />
               </>
             ) : (
               <>
