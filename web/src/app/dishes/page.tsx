@@ -31,7 +31,7 @@ export default async function DishesPage() {
         <p className="text-muted-foreground">
           {dishes.length > 0 ? `${dishes.length} home dishes` : "Home dishes"} from around the world.
           Open one to see the dishes it&apos;s one step from, or{" "}
-          <Link href="/" className="text-primary underline-offset-2 hover:underline">
+          <Link href="/" className="text-primary underline underline-offset-2">
             tell One Step what you cook
           </Link>{" "}
           to see them as changes to your own cooking.
